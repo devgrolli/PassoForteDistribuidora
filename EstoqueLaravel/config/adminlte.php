@@ -244,13 +244,161 @@ return [
         [
             'text' => 'Clientes',
             'url'  => 'clientes',
-            'icon' => 'fas fal fa-user-plus',
+            'icon' => 'fas fal fa-users',
+            // 'submenu' => [
+            //     [
+            //         'text' => 'Cadastrar',
+            //         'url'  => 'clientes/create',
+            //         'icon' => 'fas fal  fa-plus',
+            //     ],
+            //     [
+            //         'text' => 'Listagem de Clientes',
+            //         'url'  => 'clientes',
+            //         'icon' => 'fas fal fa-bars',
+            //     ],
+            //     [
+            //         'text' => 'Tipos de Clientes',
+            //         'url'  => 'tipo_clientes',
+            //         'icon' => 'fas fal fa-user-plus',
+            //     ],
+            // ],
         ], 
+        [
+            'text' => 'Fornecedores',
+            'url'  => 'fornecedores',
+            'icon' => 'fas fa-fw fal fa-truck',
+        ],
         [
             'text' => 'Produtos',
             'url'  => 'produtos',
             'icon' => 'fas fa-fw fal fa-barcode',
         ],
+        [
+            'text' => 'Entradas',
+            'url'  => 'entradas',
+            'icon' => 'fas fa-fw fal  fa-shopping-cart',
+            // 'submenu' => [
+            //     [
+            //         'text' => 'Listagem',
+            //         'url'  => 'entradas',
+            //     ],
+            //     [
+            //         'text' => 'Tipos de Entradas',
+            //         'url'  => 'tipo_entradas',
+            //     ],
+            // ],
+        ],
+        [
+            'text' => 'Saídas',
+            'url'  => 'saidas',
+            'icon' => 'fas fa-fw fal fa-reply',
+            // 'submenu' => [
+            //     [
+            //         'text' => 'Cadastrar',
+            //         'url'  => 'tipo_saidas',
+            //     ],
+            // ],
+        ],
+        [
+            'text' => 'Registro de Tipos',
+            'url'  => 'tipos',
+            'icon' => 'fas fa-fw fal fa-align-justify',
+            'submenu' => [
+                [
+                    'text' => 'Tipo de Entradas',
+                    'url'  => 'tipo_entradas',
+                ],
+                [
+                    'text' => 'Tipo de Saídas',
+                    'url'  => 'tipo_saidas',
+                ],
+                [
+                    'text' => 'Tipo de Clientes',
+                    'url'  => 'tipo_clientes',
+                ],
+            ],
+        ],
+        
+    
+        // [
+        //     'text' => 'search',
+        //     'search' => true,
+        //     'topnav' => true,
+        // ],
+        // [
+        //     'text' => 'blog',
+        //     'url'  => 'admin/blog',
+        //     'can'  => 'manage-blog',
+        // ],
+        // [
+        //     'text'        => 'pages',
+        //     'url'         => 'admin/pages',
+        //     'icon'        => 'far fa-fw fa-file',
+        //     'label'       => 4,
+        //     'label_color' => 'success',
+        // ],
+        // ['header' => 'account_settings'],
+        // [
+        //     'text' => 'profile',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-user',
+        // ],
+        // [
+        //     'text' => 'change_password',
+        //     'url'  => 'admin/settings',
+        //     'icon' => 'fas fa-fw fa-lock',
+        // ],
+        // [
+        //     'text'    => 'multilevel',
+        //     'icon'    => 'fas fa-fw fa-share',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text'    => 'level_one',
+        //             'url'     => '#',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'level_two',
+        //                     'url'  => '#',
+        //                 ],
+        //                 [
+        //                     'text'    => 'level_two',
+        //                     'url'     => '#',
+        //                     'submenu' => [
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url'  => '#',
+        //                         ],
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url'  => '#',
+        //                         ],
+        //                     ],
+        //                 ],
+        //             ],
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //     ],
+        // ],
+        // ['header' => 'labels'],
+        // [
+        //     'text'       => 'important',
+        //     'icon_color' => 'red',
+        // ],
+        // [
+        //     'text'       => 'warning',
+        //     'icon_color' => 'yellow',
+        // ],
+        // [
+        //     'text'       => 'information',
+        //     'icon_color' => 'aqua',
+        // ],
     ],
 
 

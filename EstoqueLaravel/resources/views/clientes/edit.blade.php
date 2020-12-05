@@ -34,6 +34,12 @@
         </div>
 
         <div class="form-group">
+          {!! Form::label('tipo_cliente_id', 'Tipo de Cliente') !!}
+          {!! Form::select('tipo_cliente_id', \App\TipoCliente::orderBy('nome')->pluck('nome', 'id')->toArray(), 
+                                                $cliente->tipo_cliente_id, ['class'=>'form-control', 'required']) !!}
+        </div>
+
+        <div class="form-group">
           {!! Form::submit('Editar', ['class'=>'btn btn-primary']) !!}
           {!! Form::reset('Limpar', ['class'=>'btn btn-success']) !!}
           <a href="{{ route('clientes', []) }}" class="btn btn-danger">Voltar</a>
