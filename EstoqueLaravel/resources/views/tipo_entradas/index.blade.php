@@ -14,7 +14,7 @@
             <td>{{ $tipo_entrada->nome }}</td>
             <td>{{ $tipo_entrada->descricao }}</td>          
             <td>
-              <a href="{{ route('tipo_entradas.edit', ['id'=>$tipo_entrada->id]) }}" class="btn-sm btn-success">Editar</a>
+              <a href="{{ route('tipo_entradas.edit', ['id'=>\Crypt::encrypt($tipo_entrada->id)]) }}" class="btn-sm btn-success">Editar</a>
               <a href="{{ route('tipo_entradas.destroy', ['id'=>$tipo_entrada->id]) }}" class="btn-sm btn-danger">Remover</a>
             </td>
             </tr>

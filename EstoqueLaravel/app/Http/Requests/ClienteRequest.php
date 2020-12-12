@@ -25,7 +25,6 @@ class ClienteRequest extends FormRequest
             'nome' => 'required|min:5',
             'email' => 'required',
             'telefone' => 'required',
-            'descricao' => 'required',
             'tipo_cliente_id' => 'required',
         ];
     }

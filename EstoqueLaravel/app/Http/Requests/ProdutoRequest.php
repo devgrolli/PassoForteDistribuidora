@@ -26,7 +26,6 @@ class ProdutoRequest extends FormRequest
         return [
             'nome' => 'required|min:5',
             'preco_un' => 'required', 
-            'quantidade' => 'required',
             'marca' => 'required',
         ];
     }

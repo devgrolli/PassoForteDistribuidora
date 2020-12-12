@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFornecedoresTable extends Migration{
+class CreateFornecedoresTable extends Migration
+{
     /**
      * Run the migrations.
      *

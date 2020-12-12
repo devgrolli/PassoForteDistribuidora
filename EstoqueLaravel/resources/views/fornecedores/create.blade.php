@@ -1,8 +1,6 @@
 @extends('adminlte::page')
 
 @section('content')
-    <h3> Novo Fornecedor</h3>
-
     @if($errors->any()) <!-- existe algum erro neste array? -->
     <ul class="alert alert-danger"> 
       @foreach($errors-all() as $error)
@@ -10,10 +8,17 @@
       @endforeach
     </ul>
    @endif
-    {!! Form::open(['route'=>'fornecedores.store']) !!}
+
+   <div class="card">
+    <div class="card-header" style="background: lightgrey">
+        <h3>Cadastro Saída de Produtos</h3>
+    </div>
+
+    <div class="card-body">
+      {!! Form::open(['route'=>'fornecedores.store']) !!}
         <div class="form-group">
           {!! Form::label('cnpj', 'CNPJ') !!}
-          {!! Form::text('cnpj', null, ['class'=>'form-control', 'required']) !!}
+          {!! Form::text('cnpj', null, ['class'=>'form-control', 'id'=>'cnpj', 'required']) !!}
         </div>
 
         <div class="form-group">
@@ -72,10 +77,12 @@
           </div>
         </div>
 
-      </br><div class="form-group">
+        </br><div class="form-group">
           {!! Form::submit('Cadastrar', ['class'=>'btn btn-primary']) !!}
           {!! Form::reset('Limpar campos', ['class'=>'btn btn-success']) !!}
           <a href="{{ route('fornecedores', []) }}" class="btn btn-danger">Voltar</a>
         </div>
-    {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' --> 
+      {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' --> 
+    </div>
+  </div>
 @stop

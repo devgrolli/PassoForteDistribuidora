@@ -27,8 +27,8 @@ class TipoSaidasController extends Controller{
         return redirect()->route('tipo_saidas');
     }
 
-    public function edit($id){
-        $tipo_saida = TipoSaida::find($id);
+    public function edit(Request $request){
+        $tipo_saida = TipoSaida::find(\Crypt::decrypt($request->get('id')));
         return view('tipo_saidas.edit', compact('tipo_saida'));
     }
 

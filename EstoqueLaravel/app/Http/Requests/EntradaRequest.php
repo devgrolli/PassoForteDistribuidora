@@ -24,7 +24,7 @@ class EntradaRequest extends FormRequest
     public function rules(){
         return [
             'produto_id' => 'required',
-            'quantidade' => 'required|min:5',
+            'quantidade' => 'required',
             'preco_un' => 'required',
             'fornecedor_id' => 'required',
             'tipo_entrada_id' => 'required',

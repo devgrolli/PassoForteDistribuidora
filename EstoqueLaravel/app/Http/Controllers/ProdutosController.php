@@ -7,6 +7,7 @@ use App\Produto;
 use App\Http\Requests\ProdutoRequest;
 
 class ProdutosController extends Controller{
+    
     public function index(Request $filtro) {
         $filtragem = $filtro->get('desc_filtro');
         if ($filtragem == null)
@@ -41,8 +42,8 @@ class ProdutosController extends Controller{
         return $ret; 
     }
 
-    public function edit($id){
-        $produtos = Produto::find($id);
+    public function edit(Request $request){
+        $produto = Produto::find(\Crypt::decrypt($request->get('id')));
         return view('produtos.edit', compact('produto'));
     }
 

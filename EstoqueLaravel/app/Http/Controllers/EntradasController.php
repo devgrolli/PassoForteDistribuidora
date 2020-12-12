@@ -3,20 +3,14 @@
 namespace App\Http\Controllers;
 use App\Entrada;
 use App\Http\Requests\EntradaRequest;
+use App\Produto;
 use Illuminate\Http\Request;
 
 class EntradasController extends Controller{
-    public function index(Request $filtro) {
-        $filtragem = $filtro->get('desc_filtro');
-        if ($filtragem == null)
-            $entradas = Entrada::orderBy('nome')->paginate(10);
-        else
-            $entradas = Entrada::where('nome', 'like', '%'.$filtragem.'%')
-            ->orderBy("nome")
-            ->paginate(10)
-            ->setpath('entradas?desc_filtro='+$filtragem); 
-        return view('entradas.index', ['entradas'=>$entradas]);
-    }
+    public function index() {
+		$entradas = Entrada::orderBy('id')->paginate(5);
+		return view('entradas.index', ['entradas'=>$entradas]);
+	}
 
     public function create(){ 
         return view('entradas.create');
@@ -25,6 +19,9 @@ class EntradasController extends Controller{
     public function store(EntradaRequest $request){ 
         $nova_entrada = $request->all(); 
         Entrada::create($nova_entrada);
+        $busca_produto = Produto::find($request->produto_id);
+        $busca_produto->quantidade = $busca_produto->quantidade + $request->quantidade;
+        $busca_produto->save();
         return redirect()->route('entradas');
     }
 
@@ -40,13 +37,18 @@ class EntradasController extends Controller{
         return $ret; 
     }
 
-    public function edit($id){
-        $entradas = Entrada::find($id);
+    public function edit(Request $request){
+        $entrada = Entrada::find(\Crypt::decrypt($request->get('id')));
         return view('entradas.edit', compact('entrada'));
     }
 
     public function update(EntradaRequest $request, $id){
         Entrada::find($id)->update($request->all());
+        $busca_produto = Produto::find($request->produto_id);
+        if ($busca_produto->quantidade != 0){ 
+            $busca_produto->quantidade = $busca_produto->quantidade + $request->quantidade;
+            $busca_produto->save();
+        }
         return redirect()->route('entradas');
     }
 }

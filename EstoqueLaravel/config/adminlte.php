@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Gerenciamento de Estoque',
+    'title' => 'LaraEstoque',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,11 +45,12 @@ return [
     |
     */
 
-    'logo' => '<b>Estoque</b>',
+    'logo' => '<b>Admin</b>LTE',
+    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Gerenciamento de Estoque',
+    'logo_img_alt' => 'AdminLTE',
 
     /*
     |--------------------------------------------------------------------------
@@ -228,7 +229,6 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/#8-menu-configuration
     |
     */
-
     'menu' => [
         [
             'text' => 'search',

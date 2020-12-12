@@ -24,9 +24,8 @@
         </div>
 
         <div class="form-group">
-          {!! Form::submit('Editar', ['class'=>'btn btn-primary']) !!}
-          {!! Form::reset('Limpar', ['class'=>'btn btn-success']) !!}
-          <a href="{{ route('tipo_saidas', []) }}" class="btn btn-danger">Voltar</a>
+          {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
+          <a href="{{ route('tipo_saidas', []) }}" class="btn btn-danger">Cancelar</a>
         </div>
         
     {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' --> 

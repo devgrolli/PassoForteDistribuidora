@@ -10,7 +10,7 @@
       @endforeach
     </ul>
    @endif
-    {!! Form::open(['route'=>'tipo_cliente.store']) !!}
+    {!! Form::open(['route'=> ["tipo_clientes.update", 'id'=>$tipo_cliente->id], 'method'=>'put']) !!}
         <div class="form-group">
           {!! Form::label('nome', 'Nome') !!}
           {!! Form::text('nome', $tipo_cliente->nome, ['class'=>'form-control', 'required']) !!}
@@ -22,9 +22,8 @@
         </div>
 
         <div class="form-group">
-          {!! Form::submit('Editar', ['class'=>'btn btn-primary']) !!}
-          {!! Form::reset('Limpar campos', ['class'=>'btn btn-success']) !!}
-          <a href="{{ route('tipo_cliente', []) }}" class="btn btn-danger">Voltar</a>
+          {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
+          <a href="{{ route('tipo_clientes', []) }}" class="btn btn-danger">Cancelar</a>
         </div>
 
     {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' --> 

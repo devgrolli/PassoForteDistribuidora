@@ -27,8 +27,8 @@ class FornecedoresController extends Controller{
         return redirect()->route('fornecedores');
     }
 
-    public function edit($id){
-        $fornecedor = Fornecedor::find($id);
+    public function edit(Request $request){
+        $fornecedor = Fornecedor::find(\Crypt::decrypt($request->get('id')));
         return view('fornecedores.edit', compact('fornecedor'));
     }
 

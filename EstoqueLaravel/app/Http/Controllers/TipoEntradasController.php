@@ -41,8 +41,8 @@ class TipoEntradasController extends Controller{
         return $ret; 
     }
 
-    public function edit($id){
-        $tipo_entradas = TipoEntrada::find($id);
+    public function edit(Request $request){
+        $tipo_entradas = TipoEntrada::find(\Crypt::decrypt($request->get('id')));
         return view('tipo_entradas.edit', compact('tipo_entrada'));
     }
 

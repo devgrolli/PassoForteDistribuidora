@@ -28,7 +28,6 @@ class SaidaRequest extends FormRequest
             'quantidade' => 'required',
             'preco_un' => 'required',
             'data_saida' => 'date',
-            'observacoes' => 'required',
         ];
     }
 }

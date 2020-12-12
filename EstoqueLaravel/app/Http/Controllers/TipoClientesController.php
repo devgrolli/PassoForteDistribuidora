@@ -27,8 +27,8 @@ class TipoClientesController extends Controller{
         return redirect()->route('tipo_clientes');
     }
 
-    public function edit($id){
-        $tipo_cliente = TipoCliente::find($id);
+    public function edit(Request $request){
+        $tipo_cliente = TipoCliente::find(\Crypt::decrypt($request->get('id')));
         return view('tipo_clientes.edit', compact('tipo_cliente'));
     }
 

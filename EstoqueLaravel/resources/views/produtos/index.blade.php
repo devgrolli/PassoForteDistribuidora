@@ -2,7 +2,7 @@
     @section('content')
     <h1>Produtos</h1>
     
-    <div class="float-sm-left">
+    {{-- <div class="float-sm-left">
       {!! Form::open(['name'=>'form_name', 'route'=>'produtos']) !!}
         <div calss="sidebar-form">
           <div class="input-group">
@@ -13,7 +13,7 @@
           </div>
         </div>
       {!! Form::close() !!}
-    </div>
+    </div> --}}
 
     <div class="float-sm-left">
       <a href="{{ route('produtos.create', []) }}" class="btn btn-primary">Cadastrar</a><br></br>
@@ -22,8 +22,8 @@
     <table class="table table-stripe table-bordered table-hover">
         <thead> 
           <th>Nome</th>
+          <th>Estoque</th>
           <th>Preço Unitário</th>
-          <th>Quantidade</th>
           <th>Marca</th>
         </thead>
 
@@ -31,12 +31,18 @@
           @foreach ($produtos as $produto)
             <tr>
             <td>{{ $produto->nome }}</td>
-            <td>{{ $produto->preco_un }}</td>
-            <td>{{ $produto->quantidade }}</td>
+            @if ($produto->quantidade > 0 )
+              <td><span class='badge badge-success'>{{ $produto->quantidade }} </span></td>
+            @else
+              <td><span class='badge badge-danger'>{{ "SEM ESTOQUE" }}</span></td>
+            @endif
+            <td>R$ {{$produto->preco_un }}</td>
             <td>{{ $produto->marca }}</td>
+
             <td>
-              <a href="{{ route('produtos.edit', ['id'=>$produto->id]) }}" class="btn-sm btn-success">Editar</a>
+              <a href="{{ route('produtos.edit', ['id'=>\Crypt::encrypt($produto->id)]) }}" class="btn-sm btn-success">Editar</a>
               <a href="{{ route('produtos.destroy', ['id'=>$produto->id]) }}" class="btn-sm btn-danger">Remover</a>
+
             </td>
             </tr>
           @endforeach    
@@ -48,4 +54,3 @@
  @section('table-delete')
   "produtos"
  @endsection
- 

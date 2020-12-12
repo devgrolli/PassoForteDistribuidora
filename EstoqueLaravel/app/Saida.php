@@ -8,7 +8,7 @@ class Saida extends Model{
     protected $table = "saidas"; 
     protected $fillable = [
         'produto_id', 
-        'tipo_saida_id',
+        'tipo_saidas_id',
         'quantidade', 
         'preco_un', 
         'data_saida', 

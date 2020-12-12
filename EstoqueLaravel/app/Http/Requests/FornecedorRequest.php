@@ -29,7 +29,6 @@ class FornecedorRequest extends FormRequest
             'cep' => 'required',
             'endereco' => 'required',
             'numero' => 'required',
-            'complemento' => 'required',
             'bairro' => 'required',
             'cidade' => 'required', 
             'estado' => 'required', 
