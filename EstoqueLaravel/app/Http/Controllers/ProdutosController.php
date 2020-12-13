@@ -15,8 +15,8 @@ class ProdutosController extends Controller{
         else
             $produtos = Produto::where('nome', 'like', '%'.$filtragem.'%')
             ->orderBy("nome")
-            ->paginate(10)
-            ->setpath('produtos?desc_filtro='+$filtragem); 
+            ->paginate(5);
+                // ->setpath('produtos?desc_filtro='+$filtragem); 
         return view('produtos.index', ['produtos'=>$produtos]);
     }
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Entrada;
-use App\Http\Requests\EntradaRequest;
 use App\Produto;
+use App\Http\Requests\EntradaRequest;
 use Illuminate\Http\Request;
 
 class EntradasController extends Controller{
@@ -45,10 +45,8 @@ class EntradasController extends Controller{
     public function update(EntradaRequest $request, $id){
         Entrada::find($id)->update($request->all());
         $busca_produto = Produto::find($request->produto_id);
-        if ($busca_produto->quantidade != 0){ 
-            $busca_produto->quantidade = $busca_produto->quantidade + $request->quantidade;
-            $busca_produto->save();
-        }
+        $busca_produto->quantidade = $busca_produto->quantidade + $request->quantidade;
+        $busca_produto->save();
         return redirect()->route('entradas');
     }
 }

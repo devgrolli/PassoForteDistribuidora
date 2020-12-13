@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.default')
 
 @section('content')
     @if($errors->any()) <!-- existe algum erro neste array? -->
@@ -11,24 +11,27 @@
 
    <div class="card">
     <div class="card-header" style="background: lightgrey">
-        <h3>Cadastro Saída de Produtos</h3>
+        <h3><strong>Cadastro Saída de Produtos</strong></h3>
     </div>
 
     <div class="card-body">
       {!! Form::open(['route'=>'fornecedores.store']) !!}
-        <div class="form-group">
-          {!! Form::label('cnpj', 'CNPJ') !!}
-          {!! Form::text('cnpj', null, ['class'=>'form-control', 'id'=>'cnpj', 'required']) !!}
-        </div>
 
-        <div class="form-group">
-          {!! Form::label('razao_social', 'Nome Fantasia/Razão Social') !!}
-          {!! Form::text('razao_social', null, ['class'=>'form-control', 'required']) !!}
-        </div>
+        <div class="form-row">
+          <div class="col">
+            {!! Form::label('cnpj', 'CNPJ') !!}
+            {!! Form::text('cnpj', null, ['class'=>'form-control', 'id'=>'cnpj', 'required']) !!}
+          </div>
+
+          <div class="col">
+            {!! Form::label('razao_social', 'Nome Fantasia/Razão Social') !!}
+            {!! Form::text('razao_social', null, ['class'=>'form-control', 'required']) !!}
+          </div>
         
-        <div class="form-group">
-          {!! Form::label('email', 'E-mail') !!}
-          {!! Form::text('email', null, ['class'=>'form-control', 'required']) !!}
+          <div class="col">
+            {!! Form::label('email', 'E-mail') !!}
+            {!! Form::email('email', null, ['class'=>'form-control', 'required']) !!}
+          </div>
         </div>
 
         <div class="form-row">

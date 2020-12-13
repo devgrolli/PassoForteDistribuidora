@@ -1,5 +1,4 @@
-@extends('adminlte::page')
-
+@extends('layouts.default')
 @section('content')
     @if($errors->any()) <!-- existe algum erro neste array? -->
       <ul class="alert alert-danger"> 
@@ -11,7 +10,7 @@
 
     <div class="card">
       <div class="card-header" style="background: lightgrey">
-          <h3>Cadastro Saída de Produtos</h3>
+          <h3><strong>Cadastro Saída de Produtos</strong></h3>
       </div>
   
       <div class="card-body">

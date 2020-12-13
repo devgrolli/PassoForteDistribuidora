@@ -11,7 +11,7 @@
 
    <div class="card">
     <div class="card-header" style="background: lightgrey">
-        <h3>Cadastro Produtos</h3>
+        <h3><strong>Cadastro Produtos</strong></h3>
     </div>
 
     <div class="card-body">
@@ -28,7 +28,7 @@
 
         <div class="form-group">
             {!! Form::label('quantidade', 'Quantidade') !!}
-            {!! Form::text('quantidade', null, ['class'=>'form-control', 'required']) !!}
+            {!! Form::text('quantidade', 0, ['class'=>'form-control', 'required']) !!}
         </div>
 
         <div class="form-group">

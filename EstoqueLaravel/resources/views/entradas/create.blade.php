@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.default')
 
 @section('content')
     @if($errors->any()) <!-- existe algum erro neste array? -->
@@ -11,7 +11,7 @@
 
     <div class="card">
       <div class="card-header" style="background: lightgrey">
-          <h3>Cadastro Entrada de Produtos</h3>
+          <h3><strong>Cadastro Entrada de Produtos</strong></h3>
       </div>
   
       <div class="card-body">
@@ -53,7 +53,7 @@
 
           <div class="form-group">
             {!! Form::label('observacoes', 'Observações') !!}
-            {!! Form::textarea('observacoes', null, ['class'=>'form-control']) !!}
+            {!! Form::textarea('observacoes', null, ['class'=>'form-control', 'required']) !!}
           </div>
 
           <div class="form-group">

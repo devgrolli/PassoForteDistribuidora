@@ -16,8 +16,8 @@ class ClientesController extends Controller{
         else
             $clientes = Cliente::where('nome', 'like', '%'.$filtragem.'%')
             ->orderBy("nome")
-            ->paginate(10)
-            ->setpath('clientes?desc_filtro='+$filtragem); 
+            ->paginate(5);
+            // ->setpath('clientes?desc_filtro='+$filtragem); 
         return view('clientes.index', ['clientes'=>$clientes]);
     }
 
@@ -32,8 +32,15 @@ class ClientesController extends Controller{
     }
 
     public function destroy($id){
-        Cliente::find($id)->delete();
-        return redirect()->route('clientes');
+        try {
+            Cliente::find($id)->delete();
+            $ret = array('status'=>200, 'msg'=>"null");
+        }catch(\Illuminate\Database\QueryException $e){
+            $ret = array('status'=>500, 'msg'=>$e->getMessage());
+        }catch(\PDOException $e){
+            $ret = array('status'=>500, 'msg'=>$e->getMessage());
+        }
+        return $ret; 
     }
 
     public function edit(Request $request){

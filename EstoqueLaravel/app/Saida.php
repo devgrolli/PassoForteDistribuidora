@@ -8,11 +8,12 @@ class Saida extends Model{
     protected $table = "saidas"; 
     protected $fillable = [
         'produto_id', 
-        'tipo_saidas_id',
         'quantidade', 
         'preco_un', 
         'data_saida', 
-        'observacoes']; 
+        'observacoes',
+        'tipo_saidas_id'
+    ]; 
 
     public function produto(){
         return $this->belongsTo("App\Produto"); 

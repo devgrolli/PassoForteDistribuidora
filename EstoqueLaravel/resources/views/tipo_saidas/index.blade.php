@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.default')
     @section('content')
     <h1>Tipo de Saídas</h1>
     <a href="{{ route('tipo_saidas.create', []) }}" class="btn btn-primary">Cadastrar</a><br></br>
@@ -15,7 +15,7 @@
             <td>{{ $tipo_saida->descricao }}</td>          
             <td>
               <a href="{{ route('tipo_saidas.edit', ['id'=>\Crypt::encrypt($tipo_saida->id)]) }}" class="btn-sm btn-success">Editar</a>
-              <a href="{{ route('tipo_saidas.destroy', ['id'=>$tipo_saida->id]) }}" class="btn-sm btn-danger">Remover</a>
+              <a href="#" onclick="return ConfirmaExclusao({{$tipo_saida->id}})" class="btn-sm btn-danger">Remover</a>
             </td>
             </tr>
           @endforeach    

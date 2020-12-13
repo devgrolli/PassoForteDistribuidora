@@ -24,10 +24,10 @@ class SaidaRequest extends FormRequest
     public function rules(){
         return [
             'produto_id' => 'required',
-            'tipo_saida_id' => 'required',
             'quantidade' => 'required',
             'preco_un' => 'required',
             'data_saida' => 'date',
+            'tipo_saidas_id' => 'required',
         ];
     }
 }

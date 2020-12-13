@@ -1,4 +1,4 @@
-@extends('adminlte::page')
+@extends('layouts.default')
 
 @section('content')
     @if($errors->any()) <!-- existe algum erro neste array? -->
@@ -11,7 +11,7 @@
 
     <div class="card">
       <div class="card-header" style="background: lightgrey">
-          <h3>Editando cliente -  {{ $cliente->nome }}</h3>
+          <h3><strong>Editando: </strong>{{ $cliente->nome }}</h3>
       </div>
   
       <div class="card-body">

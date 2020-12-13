@@ -11,7 +11,7 @@
 
     <div class="card">
       <div class="card-header" style="background: lightgrey">
-          <h3>Cadastro Produtos</h3>
+          <h3><strong>Cadastro Produtos</strong></h3>
       </div>
   
       <div class="card-body">

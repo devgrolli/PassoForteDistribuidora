@@ -1,33 +1,27 @@
-@extends('adminlte::page')
+@extends('layouts.default') 
 
 @section('content')
     @if($errors->any()) <!-- existe algum erro neste array? -->
       <ul class="alert alert-danger"> 
         @foreach($errors-all() as $error)
-          <li>{{ dd($error) }}</li>
+          <li>{{ $error }}</li>
         @endforeach
       </ul>
     @endif
 
     <div class="card">
 	    <div class="card-header" style="background: lightgrey">
-	        <h3>Cadastro Saída de Produtos</h3>
+	        <h3><strong>Cadastro Saída de Produtos</strong></h3>
 	    </div>
 
       <div class="card-body">
         {!! Form::open(['route'=>'saidas.store']) !!}
 
-          <div class="form-group">
+          <div class="form-row">
+            <div class="col">
             {!! Form::label('produto_id', 'Produto') !!}
             {!! Form::select('produto_id', \App\Produto::orderBy('nome')->pluck('nome', 'id')->toArray(),
                                                   null, ['class'=>'form-control', 'required']) !!}
-          </div>
-
-          <div class="form-row">
-            <div class="col">
-              {!! Form::label('tipo_saidas_id', 'Tipo de saída') !!}
-              {!! Form::select('tipo_saidas_id', \App\TipoSaida::orderBy('nome')->pluck('nome', 'id')->toArray(), 
-                                                    null, ['class'=>'form-control', 'required']) !!}
             </div>
             <div class="col">
               {!! Form::label('quantidade', 'Quantidade') !!}
@@ -49,6 +43,12 @@
           <div class="form-group">
             {!! Form::label('observacoes', 'Observações') !!}
             {!! Form::textarea('observacoes', null, ['class'=>'form-control']) !!}
+          </div>
+
+          <div class="form-group">
+            {!! Form::label('tipo_saidas_id', 'Tipo de saída') !!}
+            {!! Form::select('tipo_saidas_id', \App\TipoSaida::orderBy('nome')->pluck('nome', 'id')->toArray(), 
+                                                  null, ['class'=>'form-control', 'required']) !!}
           </div>
 
           <div class="form-group">

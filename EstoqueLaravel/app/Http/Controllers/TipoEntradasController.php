@@ -42,7 +42,7 @@ class TipoEntradasController extends Controller{
     }
 
     public function edit(Request $request){
-        $tipo_entradas = TipoEntrada::find(\Crypt::decrypt($request->get('id')));
+        $tipo_entrada = TipoEntrada::find(\Crypt::decrypt($request->get('id')));
         return view('tipo_entradas.edit', compact('tipo_entrada'));
     }
 
