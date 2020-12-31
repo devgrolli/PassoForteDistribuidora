@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-          {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!}
+          {!! Form::submit('Salvar', ['class'=>'btn btn-primary']) !!} ConfirmaEdicao
           <a href="{{ route('tipo_clientes', []) }}" class="btn btn-danger">Cancelar</a>
         </div>
 

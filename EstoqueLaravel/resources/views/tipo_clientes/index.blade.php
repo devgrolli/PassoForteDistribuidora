@@ -2,10 +2,11 @@
     @section('content')
     <h1>Tipos de Clientes</h1>
     <a href="{{ route('tipo_clientes.create', []) }}" class="btn btn-primary">Cadastrar</a><br></br>
-    <table class="table table-stripe table-bordered table-hover">
+    <table class="table table-hover">
         <thead> 
           <th>Nome</th>
           <th>Descrição</th>
+          <td></td>     
         </thead>
 
         <tbody>

@@ -23,13 +23,14 @@
       </div>
     </div>
 
-    <table class="table table-stripe table-bordered table-hover">
+    <table class="table table-hover">
         <thead> 
           <th>Nome</th>
           <th>E-mail</th>
           <th>Endereço</th>
           <th>Bairro</th>
           <th>Telefone</th>
+          <td></td>     
         </thead>
 
         <tbody>

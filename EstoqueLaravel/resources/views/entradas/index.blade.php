@@ -7,7 +7,7 @@
       <a href="{{ route('tipo_entradas.create', []) }}" type="button" class="btn btn-success">Cadastrar Tipo de Entrada</a>
     </div><br><br>  
 
-    <table class="table table-stripe table-bordered table-hover">
+    <table class="table table-hover">
         <thead> 
           <th>Produto</th>
           <th>Quantidade</th>
@@ -16,6 +16,7 @@
           <th>Data Entrada</th>
           <th>Tipo de Entrada</th>
           <th>Total compra</th>
+          <td></td>     
         </thead>
 
         <tbody>

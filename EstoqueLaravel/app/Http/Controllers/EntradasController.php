@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class EntradasController extends Controller{
     public function index() {
-		$entradas = Entrada::orderBy('id')->paginate(5);
+		$entradas = Entrada::orderBy('id')->paginate(10);
 		return view('entradas.index', ['entradas'=>$entradas]);
 	}
 
@@ -18,11 +18,15 @@ class EntradasController extends Controller{
 
     public function store(EntradaRequest $request){ 
         $nova_entrada = $request->all(); 
-        Entrada::create($nova_entrada);
-        $busca_produto = Produto::find($request->produto_id);
-        $busca_produto->quantidade = $busca_produto->quantidade + $request->quantidade;
-        $busca_produto->save();
-        return redirect()->route('entradas');
+        $estoque_produto = Produto::find($request->produto_id);
+        if ($request->quantidade == 0) {
+            return redirect()->back()->withInput()->with('error', 'Quantidade da entrada deve ser maior que zero');
+        }else{
+            Entrada::create($nova_entrada);
+            $estoque_produto->quantidade = $estoque_produto->quantidade + $request->quantidade;
+            $estoque_produto->save();
+            return redirect()->route('entradas');
+        }    
     }
 
     public function destroy($id){

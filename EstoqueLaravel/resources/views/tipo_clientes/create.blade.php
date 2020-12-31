@@ -28,8 +28,7 @@
 
         <div class="form-group">
           {!! Form::submit('Cadastrar', ['class'=>'btn btn-primary']) !!}
-          {!! Form::reset('Limpar campos', ['class'=>'btn btn-success']) !!}
-          <a href="{{ route('tipo_clientes', []) }}" class="btn btn-danger">Voltar</a>
+          <a href="{{ route('tipo_clientes', []) }}" class="btn btn-danger">Cancelar</a>
         </div>
       {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' --> 
 

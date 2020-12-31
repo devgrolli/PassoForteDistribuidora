@@ -8,20 +8,28 @@
       <a href="{{ route('tipo_saidas.create', []) }}" type="button" class="btn btn-success">Cadastrar Tipo de Saídas</a>
     </div><br><br>  
 
-    <table class="table table-stripe table-bordered table-hover">
+    @include('layouts.alerts')
+
+    <table class="table table-hover">
         <thead> 
           <th>Produto</th>
           <th>Quantidade</th>
           <th>Valor</th>
           <th>Data da saída</th>
-          {{-- <th>Tipo de Saída</th> --}}
+          <th></th>
         </thead>
 
         <tbody>
           @foreach ($saidas as $saida)
             <tr>
             <td>{{ $saida->produto->nome}}</td>
-            <td>{{ $saida->quantidade}}</td>
+              @if ($saida->quantidade < 5)
+                <td><span class='badge badge-warning'>{{ $saida->quantidade }} </span></td>
+              @elseif($saida->quantidade == 0)
+                <td><span class='badge badge-danger'>{{ "ZERO" }}</span></td>
+              @else
+                <td><span class='badge badge-primary'>{{ $saida->quantidade }} </span></td>
+              @endif
             <td>{{ $saida->preco_un}}</td>
             <td>{{ Carbon\Carbon::parse($saida->data_saida)->format('d/m/Y') }}</td>
             {{-- <td>{{ $s->tipo_saidas->nome}}</td> --}}

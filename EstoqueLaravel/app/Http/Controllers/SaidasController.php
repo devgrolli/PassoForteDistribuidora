@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class SaidasController extends Controller{
     public function index() {
-		$saidas = Saida::orderBy('id')->paginate(5);
+		$saidas = Saida::orderBy('id')->paginate(10);
 		return view('saidas.index', ['saidas'=>$saidas]);
 	}
 
@@ -18,14 +18,19 @@ class SaidasController extends Controller{
 
     public function store(SaidaRequest $request){ 
         $nova_saida = $request->all(); 
-        Saida::create($nova_saida);
-        $busca_produto = Produto::find($request->produto_id);
-        $busca_produto->quantidade = $busca_produto->quantidade - $request->quantidade;
-        $busca_produto->save();
-        return redirect()->route('saidas');
+        $estoque_produto = Produto::find($request->produto_id);
+        if ($request->quantidade > $estoque_produto->quantidade) {
+            return redirect()->back()->withInput()->with('error', "Desculpe, há somente $request->quantidade produtos em estoque");
+        }else{
+            Saida::create($nova_saida);
+            $estoque_produto->quantidade = $estoque_produto->quantidade - $request->quantidade;
+            $estoque_produto->save();
+            return redirect()->route('saidas')->with('success', "Saída cadastrada com sucesso!");;
+        }  
     }
 
     public function destroy($id){
+        dd($id);
         try {
             Saida::find($id)->delete();
             $ret = array('status'=>200, 'msg'=>"null");

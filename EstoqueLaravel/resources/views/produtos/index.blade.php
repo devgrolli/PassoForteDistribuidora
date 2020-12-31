@@ -23,23 +23,24 @@
       </div>
     </div>
 
-    <table class="table table-stripe table-bordered table-hover">
+    <table class="table table-hover">
         <thead> 
           <th>Nome</th>
           <th>Estoque</th>
           <th>Preço Unitário</th>
           <th>Marca</th>
+          <td></td>     
         </thead>
 
         <tbody>
           @foreach ($produtos as $produto)
             <tr>
             <td>{{ $produto->nome }}</td>
-            @if ($produto->quantidade > 0 )
-              <td><span class='badge badge-success'>{{ $produto->quantidade }} </span></td>
-            @else
-              <td><span class='badge badge-danger'>{{ "SEM ESTOQUE" }}</span></td>
-            @endif
+              @if ($produto->quantidade > 0 )
+                <td><span class='badge badge-success'>{{ $produto->quantidade }} </span></td>
+              @else
+                <td><span class='badge badge-danger'>{{ "SEM ESTOQUE" }}</span></td>
+              @endif
             <td>R$ {{$produto->preco_un }}</td>
             <td>{{ $produto->marca }}</td>
 

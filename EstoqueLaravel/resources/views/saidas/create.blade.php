@@ -1,14 +1,7 @@
 @extends('layouts.default') 
 
 @section('content')
-    @if($errors->any()) <!-- existe algum erro neste array? -->
-      <ul class="alert alert-danger"> 
-        @foreach($errors-all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    @endif
-
+  @include('layouts.alerts')
     <div class="card">
 	    <div class="card-header" style="background: lightgrey">
 	        <h3><strong>Cadastro Saída de Produtos</strong></h3>
@@ -53,7 +46,6 @@
 
           <div class="form-group">
             {!! Form::submit('Cadastrar', ['class'=>'btn btn-primary']) !!}
-            {!! Form::reset('Limpar campos', ['class'=>'btn btn-success']) !!}
             <a href="{{ route('saidas', []) }}" class="btn btn-danger">Cancelar</a>
           </div>
       {!! Form::close() !!} 

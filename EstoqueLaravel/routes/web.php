@@ -7,6 +7,7 @@ use App\Http\Controllers\FornecedoresController;
 use App\Http\Controllers\ClientessController;
 use App\Http\Controllers\TipoEntradasController;
 use App\Http\Controllers\TipoSaidasController;
+use App\Http\Controllers\CepController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +19,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::group(['prefix'=>'testes', 'where'=>['id'=>'[0-9]+']], function() {
+        Route::get('getIndex',       ['as'=>'teste.getIndex',  'uses'=>'CepController@create' ]);
+    });
 
     Route::group(['prefix'=>'clientes', 'where'=>['id'=>'[0-9]+']], function() {
         Route::any('',             ['as'=>'clientes',         'uses'=>'ClientesController@index'  ]);
