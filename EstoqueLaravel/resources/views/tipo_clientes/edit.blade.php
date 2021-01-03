@@ -9,8 +9,8 @@
    @endif
 
   <div class="card">
-    <div class="card-header" style="background: lightgrey">
-        <h3><strong>Editando tipo de Cliente</strong></h3>
+    <div class="card-header" style="background: rgb(52, 58, 64)">
+      <h3 style="color:rgb(255, 255, 255)"><strong>Editando Tipos de Cliente</strong></h3>
     </div>
 
     <div class="card-body"> 

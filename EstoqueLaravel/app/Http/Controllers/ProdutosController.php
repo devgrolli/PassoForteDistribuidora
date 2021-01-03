@@ -26,8 +26,21 @@ class ProdutosController extends Controller{
 
     public function store(ProdutoRequest $request){ 
         $novo_produto = $request->all(); 
-        Produto::create($novo_produto);
-        return redirect()->route('produtos');
+        $valor = ProdutosController::formataMoeda($request->preco_un);  
+        $novo_produto['preco_un'] = $valor;
+        if ($request->quantidade != 0){
+            return redirect()->back()->withInput()->with('error', 'Quantidade deve ser igual a ZERO, insira o valor corretamente');
+        }else{
+            Produto::create($novo_produto);
+            return redirect()->route('produtos');
+        }
+    }
+
+    public static function formataMoeda($get_valor) {
+        $source = array('.', ',');
+        $replace = array('', '.');
+        $valor = str_replace($source, $replace, $get_valor); //remove os pontos e substitui a virgula pelo ponto
+        return $valor; //retorna o valor formatado para gravar no banco
     }
 
     public function destroy($id){

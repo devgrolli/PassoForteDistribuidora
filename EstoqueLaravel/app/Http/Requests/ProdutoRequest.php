@@ -21,12 +21,20 @@ class ProdutoRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             'nome' => 'required|min:5',
-            'preco_un' => 'required', 
+            'preco_un' => 'required|between:0,99.99', 
             'marca' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nome.required' => 'Nome do produto deve ser preenchido.',
+            'preco_un.required' => 'Preço do produto deve ser preenchido.',
+            'marca.required' => 'Marca deve ser preenchida.',
         ];
     }
 }

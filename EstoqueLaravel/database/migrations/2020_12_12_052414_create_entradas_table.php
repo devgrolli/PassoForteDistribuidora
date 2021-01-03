@@ -18,7 +18,7 @@ class CreateEntradasTable extends Migration
             $table->bigInteger('produto_id')->unsigned()->nullable();
             $table->foreign('produto_id')->references('id')->on('produtos');
             $table->integer('quantidade');
-            $table->decimal('preco_un', 19,2); 
+            $table->double('preco_un', 8, 2); 
             $table->date('data_entrada');
             $table->string('observacoes', 4000);
             $table->timestamps();

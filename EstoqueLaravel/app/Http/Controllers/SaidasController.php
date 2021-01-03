@@ -20,17 +20,19 @@ class SaidasController extends Controller{
         $nova_saida = $request->all(); 
         $estoque_produto = Produto::find($request->produto_id);
         if ($request->quantidade > $estoque_produto->quantidade) {
-            return redirect()->back()->withInput()->with('error', "Desculpe, há somente $request->quantidade produtos em estoque");
+            $msg = "Produto selecionado possui $estoque_produto->quantidade unidade(s) em estoque, tente novamente :(";
+            return redirect()->back()->withInput()->with('error', $msg);
         }else{
+            $valor = ProdutosController::formataMoeda($request->preco_un);
+            $nova_saida['preco_un'] = $valor;
             Saida::create($nova_saida);
             $estoque_produto->quantidade = $estoque_produto->quantidade - $request->quantidade;
             $estoque_produto->save();
-            return redirect()->route('saidas')->with('success', "Saída cadastrada com sucesso!");;
+            return redirect()->route('saidas')->with('success', "Saída cadastrada com sucesso!");
         }  
     }
 
     public function destroy($id){
-        dd($id);
         try {
             Saida::find($id)->delete();
             $ret = array('status'=>200, 'msg'=>"null");
@@ -48,9 +50,10 @@ class SaidasController extends Controller{
     }
 
     public function update(SaidaRequest $request, $id){
+        $request['preco_un'] = ProdutosController::formataMoeda($request->preco_un);
         Saida::find($id)->update($request->all());
         $busca_produto = Produto::find($request->produto_id);
-        if ($busca_produto->quantidade != 0){ 
+        if ($busca_produto->quantidade != 0){  
             $busca_produto->quantidade = $busca_produto->quantidade - $request->quantidade;
             $busca_produto->save();
         }

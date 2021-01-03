@@ -22,10 +22,12 @@ class EntradasController extends Controller{
         if ($request->quantidade == 0) {
             return redirect()->back()->withInput()->with('error', 'Quantidade da entrada deve ser maior que zero');
         }else{
+            $valor = ProdutosController::formataMoeda($request->preco_un);
+            $nova_entrada['preco_un'] = $valor;
             Entrada::create($nova_entrada);
             $estoque_produto->quantidade = $estoque_produto->quantidade + $request->quantidade;
             $estoque_produto->save();
-            return redirect()->route('entradas');
+            return redirect()->route('entradas')->with('success', "Entrada cadastrada com sucesso!");
         }    
     }
 
@@ -51,6 +53,6 @@ class EntradasController extends Controller{
         $busca_produto = Produto::find($request->produto_id);
         $busca_produto->quantidade = $busca_produto->quantidade + $request->quantidade;
         $busca_produto->save();
-        return redirect()->route('entradas');
+        return redirect()->route('entradas')->with('success', "Entrada editada com sucesso!");
     }
 }
