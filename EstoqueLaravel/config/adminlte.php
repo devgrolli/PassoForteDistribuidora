@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'LaravelEstoque',
+    'title' => 'Passo Forte',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Laravel</b>Estoque',
+    'logo' => '<b>Passo Forte </b>',
     'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -240,11 +240,18 @@ return [
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+
+
         ['header' => ''],
+        [
+            'text' => 'Dashboard',
+            'url'  => 'dashboard',
+            'icon' => 'fas fa-fw fal fa-chart-pie',
+        ],
         [
             'text' => 'Clientes',
             'url'  => 'clientes',
-            'icon' => 'fas fal fa-users',
+            'icon' => 'fas fas fal fa-users',
             // 'submenu' => [
             //     [
             //         'text' => 'Cadastrar',
@@ -291,7 +298,7 @@ return [
         [
             'text' => 'Saídas',
             'url'  => 'saidas',
-            'icon' => 'fas fa-fw fal fa-reply',
+            'icon' => 'fas fa-fw fal fa fa-share',
             // 'submenu' => [
             //     [
             //         'text' => 'Cadastrar',

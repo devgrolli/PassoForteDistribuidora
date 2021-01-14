@@ -12,7 +12,7 @@
                 <p>Para continuar acesse os menus a sua esquerda, caso contrário, clique no botão abaixo para saber mais ou visualize o dashboard.</p>
                 <p class="lead">
                   <a class="btn btn btn-padrao1 btn-lg" href="#" role="button">Saiba mais</a>
-                  <a class="btn btn btn-padrao2 btn-lg" href="#" role="button">Dashboard</a>
+                  <a href="{{ route('dashboard', []) }}" class="btn btn btn-padrao2 btn-lg" role="button">Dashboard</a>
                 </p>
               </div>
         </div>

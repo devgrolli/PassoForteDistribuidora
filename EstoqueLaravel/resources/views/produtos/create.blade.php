@@ -3,6 +3,7 @@
 @section('content')
    @include('layouts.alerts')
 
+   
    <div class="card">
     <div class="card-header" style="background: rgb(52, 58, 64)">
         <h3 style="color:rgb(255, 255, 255)"><strong>Cadastro Produtos</strong></h3>
@@ -13,18 +14,13 @@
 
           <div class="col">
             {!! Form::label('nome', 'Nome') !!}
-            {!! Form::text('nome', null, ['class'=>'form-control', 'required']) !!}
+            {!! Form::text('nome', null, ['class'=>'form-control']) !!}
           </div>
           
         <div class="form-row">
           <div class="col">
             {!! Form::label('preco_un', 'Preço unitário') !!}
             {!! Form::text('preco_un', null, ['class'=>'form-control', 'id'=>'valor', 'step' => 'any', 'onkeyup'=>"formatarMoeda()", 'placeholder'=>'R$', 'required']) !!}
-          </div>
-
-          <div class="col">
-              {!! Form::label('quantidade', 'Quantidade') !!}
-              {!! Form::text('quantidade', 0, ['class'=>'form-control', 'required']) !!}
           </div>
 
           <div class="col">

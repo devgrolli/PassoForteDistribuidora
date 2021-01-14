@@ -17,7 +17,7 @@ class CreateProdutosTable extends Migration
             $table->bigIncrements('id');
             $table->string('nome', 100);
             $table->decimal('preco_un', 10, 2);
-            $table->string('quantidade', 10000);
+            $table->integer('quantidade')->default('0');
             $table->string('marca', 4000);
             $table->timestamps();
         });

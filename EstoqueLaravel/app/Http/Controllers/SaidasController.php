@@ -13,7 +13,8 @@ class SaidasController extends Controller{
 	}
 
     public function create(){ 
-        return view('saidas.create');
+        $products = Produto::all();
+        return view('saidas.create', compact('products'));
     }
 
     public function store(SaidaRequest $request){ 

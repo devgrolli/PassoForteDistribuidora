@@ -7,6 +7,38 @@
         <h3 style="color:rgb(255, 255, 255)"><strong>Cadastro Saída de Produtos</strong></h3>
       </div>
 
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Produtos em Estoque</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+      
+            <div class="modal-body">
+              <table class="table table-hover" id="table">
+                <thead>
+                    <th>Nome</th>
+                    <th>Estoque</th>
+                </thead>
+        
+                <tbody>
+                    @foreach ($products as $product)
+                      <tr>
+                        <td>{{ $product->nome }}</td>
+                        <td>{{ $product->quantidade }}</td>
+                      </tr>
+                    @endforeach
+                </tbody>
+              </table>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+
       <div class="card-body">
         {!! Form::open(['route'=>'saidas.store']) !!}
 

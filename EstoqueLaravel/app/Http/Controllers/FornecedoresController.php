@@ -18,8 +18,8 @@ class FornecedoresController extends Controller{
 
     public function store(FornecedorRequest $request){ // Responsável por gravar um novo registro 
         $novo_fornecedor = $request->all();
-        $telefone_formatado = preg_replace("/[^0-9]/", "", $request->telefone);
-        $novo_fornecedor['telefone'] = $telefone_formatado;
+        // $telefone_formatado = preg_replace("/[^0-9]/", "", $request->telefone);
+        // $novo_fornecedor['telefone'] = $telefone_formatado;
         Fornecedor::create($novo_fornecedor);
         return redirect()->route('fornecedores');
     }

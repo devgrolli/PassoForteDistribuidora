@@ -1,13 +1,9 @@
 @extends('layouts.default')
 
+
 @section('content')
-    @if($errors->any()) <!-- existe algum erro neste array? -->
-    <ul class="alert alert-danger"> 
-      @foreach($errors-all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-    </ul>
-   @endif
+  
+  @include('layouts.alerts')
 
   <div class="card">
     <div class="card-header" style="background: rgb(52, 58, 64)">

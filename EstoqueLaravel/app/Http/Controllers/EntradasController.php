@@ -13,7 +13,8 @@ class EntradasController extends Controller{
 	}
 
     public function create(){ 
-        return view('entradas.create');
+        $products = Produto::all();
+        return view('entradas.create', compact('products'));
     }
 
     public function store(EntradaRequest $request){ 

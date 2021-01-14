@@ -95,4 +95,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('{id}/update',  ['as'=>'tipo_clientes.update',  'uses'=>'TipoClientesController@update' ]);
         Route::post('store',       ['as'=>'tipo_clientes.store',   'uses'=>'TipoClientesController@store'  ]);
     });
+
+    Route::group(['prefix'=>'dashboard', 'where'=>['id'=>'[0-9]+']], function() {
+        Route::any('',             ['as'=>'dashboard',         'uses'=>'DashboardController@index'  ]);
+        Route::post('store',       ['as'=>'dashboard.store',   'uses'=>'DashboardController@store'  ]);
+    });
 });
