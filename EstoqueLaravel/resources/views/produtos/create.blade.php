@@ -31,8 +31,8 @@
         <br>
         
         <div class="form-group">
-          {!! Form::submit('Cadastrar', ['class'=>'btn btn-primary']) !!}
-          <a href="{{ route('produtos', []) }}" class="btn btn-danger">Cancelar</a>
+          {!! Form::submit('Cadastrar', ['class'=>'btn btn-padrao1']) !!}
+          <a href="{{ route('produtos', []) }}" class="btn btn-padrao2">Cancelar</a>
         </div>
       {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' --> 
     </div>

@@ -1,100 +1,63 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
 
-        <title>PassoForte</title>
+Name       : Embellished 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20140207
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
+-->
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" xmlns="http://www.w3.org/1999/xhtml">
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="http://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link href="css/page-welcome.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="fonts/page-welcome/welcome-fonts.css" rel="stylesheet" type="text/css" media="all" />
 
-            .full-height {
-                height: 100vh;
-            }
+    <!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+</head>
 
-            .position-ref {
-                position: relative;
-            }
+<body>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+    <div id="wrapper1">
+        <div id="header-wrapper">
+            <div id="header" class="container">
+                <div id="logo"> <span class="icon icon-cogs"></span>
+                    <h1>Passo Forte Distribuidora</h1>
+                    <span>Gerenciamento de Estoque</span>
                 </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Gerenciamento de Estoque
+                <div id="menu">
+                    <ul>
+                        <li class="current_page_item"><a href="{{ route('login') }}" accesskey="2" title="">Entrar</a>
+                        </li>
+                        <li class="current_page_item"><a href="{{ route('register') }}" accesskey="3"
+                                title="">Cadastrar-se</a></li>
+                    </ul>
                 </div>
-
-                {{-- <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div> --}}
             </div>
         </div>
-    </body>
+        <div id="wrapper2">
+            <div id="welcome" class="container">
+                <div class="title">
+                    <h2>Seja bem-vindo</h2>
+                </div>
+                <p>Essa é a <strong>Passo Forte</strong> um software de gerenciamento de estoque para empresa que deseja
+                    crescimento</a>. Nele você poderá administrar gastos, movimentações e claro, o controle do estoque
+                    de produtos de sua empresa. Crie um cadastro e conheça um pouco melhor sobre este maravilhoso
+                    software</a></p>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
 </html>

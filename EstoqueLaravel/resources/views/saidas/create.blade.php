@@ -3,27 +3,28 @@
 @section('content')
   @include('layouts.alerts')
     <div class="card">
+      <link rel="stylesheet" type="text/css" href="css/default-template.css">
       <div class="card-header" style="background: rgb(52, 58, 64)">
         <h3 style="color:rgb(255, 255, 255)"><strong>Cadastro Saída de Produtos</strong></h3>
       </div>
 
+      <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Produtos em Estoque</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Produtos em Cadastrados</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-      
+
             <div class="modal-body">
               <table class="table table-hover" id="table">
                 <thead>
                     <th>Nome</th>
                     <th>Estoque</th>
                 </thead>
-        
                 <tbody>
                     @foreach ($products as $product)
                       <tr>
@@ -41,7 +42,9 @@
 
       <div class="card-body">
         {!! Form::open(['route'=>'saidas.store']) !!}
-
+          <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            Visualizar Produtos
+          </button>
           <div class="form-row">
             <div class="col">
             {!! Form::label('produto_id', 'Produto') !!}
@@ -77,8 +80,8 @@
           </div>
 
           <div class="form-group">
-            {!! Form::submit('Cadastrar', ['class'=>'btn btn-primary']) !!}
-            <a href="{{ route('saidas', []) }}" class="btn btn-danger">Cancelar</a>
+            {!! Form::submit('Cadastrar', ['class'=>'btn btn-padrao1']) !!}
+            <a href="{{ route('saidas', []) }}" class="btn btn-padrao2">Cancelar</a>
           </div>
       {!! Form::close() !!} 
     </div>
