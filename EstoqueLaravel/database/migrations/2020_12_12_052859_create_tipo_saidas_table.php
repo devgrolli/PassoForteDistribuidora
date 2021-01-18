@@ -16,7 +16,7 @@ class CreateTipoSaidasTable extends Migration
         Schema::create('tipo_saidas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome', 60);            
-            $table->string('descricao', 200);
+            $table->string('descricao', 200)->nullable();;
             $table->timestamps();
         });
     }

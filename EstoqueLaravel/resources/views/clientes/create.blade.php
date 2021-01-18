@@ -16,7 +16,6 @@
             {!! Form::text('nome', null, ['class'=>'form-control', 'required']) !!}
           
           </div>
-        
           <div class="col">
             {!! Form::label('email', 'E-mail') !!}
             {!! Form::email('email', null, ['class'=>'form-control', 'required']) !!}
@@ -28,17 +27,25 @@
           </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-row">
+          <div class="col">
+            {!! Form::label('endereco', 'Endereço') !!}
+            {!! Form::text('endereco', null, ['class'=>'form-control', 'required']) !!}
+          </div>
+
+          <div class="col">
+            {!! Form::label('tipo_cliente_id', 'Tipo do Cliente') !!}
+            {!! Form::select('tipo_cliente_id', \App\TipoCliente::orderBy('nome')->pluck('nome', 'id')->toArray(), 
+                                                  null, ['class'=>'form-control', 'required']) !!}
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
             {!! Form::label('descricao', 'Descrição') !!}
-            {!! Form::textarea('descricao', null, ['class'=>'form-control', 'required']) !!}
-        </div>
-
-        <div class="form-group">
-          {!! Form::label('tipo_cliente_id', 'Tipo do Cliente') !!}
-          {!! Form::select('tipo_cliente_id', \App\TipoCliente::orderBy('nome')->pluck('nome', 'id')->toArray(), 
-                                                null, ['class'=>'form-control', 'required']) !!}
-        </div>
-
+            {!! Form::textarea('descricao', null, ['class'=>'form-control']) !!}
+          </div>
+        </div><br>
         <div class="form-group">
           {!! Form::submit('Cadastrar', ['class'=>'btn btn-padrao1']) !!}
           <a href="{{ route('clientes', []) }}" class="btn btn-padrao2">Cancelar</a>

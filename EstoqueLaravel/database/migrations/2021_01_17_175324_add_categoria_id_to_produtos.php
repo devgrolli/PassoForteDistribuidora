@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTipoClientesTable extends Migration
+class AddCategoriaIdToProdutos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateTipoClientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_clientes', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nome', 60);            
-            $table->string('descricao', 200)->nullable();;
-            $table->timestamps();
+        Schema::table('produtos', function (Blueprint $table) {
+            $table->bigInteger('categorias_id')->unsigned()->nullable();
+            $table->foreign('categorias_id')->references('id')->on('categorias');
         });
     }
 
@@ -28,6 +26,8 @@ class CreateTipoClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_clientes');
+        Schema::table('produtos', function (Blueprint $table) {
+            //
+        });
     }
 }

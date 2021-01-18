@@ -1,10 +1,11 @@
 <?php
-use App\Http\Controllers\ClientesController;
+
 use App\Http\Controllers\ProdutosController;
 use App\Http\Controllers\EntradasController;
 use App\Http\Controllers\SaidasController;
 use App\Http\Controllers\FornecedoresController;
-use App\Http\Controllers\ClientessController;
+use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\TipoEntradasController;
 use App\Http\Controllers\TipoSaidasController;
 use App\Http\Controllers\CepController;
@@ -20,8 +21,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::group(['prefix'=>'testes', 'where'=>['id'=>'[0-9]+']], function() {
-        Route::get('getIndex',       ['as'=>'teste.getIndex',  'uses'=>'CepController@create' ]);
+    // Route::group(['prefix'=>'csv_file', 'where'=>['id'=>'[0-9]+']], function() {
+    //     Route::get('csv_file',       ['as'=>'csv_file.index',  'uses'=>'CsvFileController@index' ]);
+    // });
+
+    Route::group(['prefix'=>'dashboard', 'where'=>['id'=>'[0-9]+']], function() {
+        Route::any('',             ['as'=>'dashboard',        'uses'=>'DashboardController@index' ]);
+        Route::get('store',        ['as'=>'dashboard.store',  'uses'=>'DashboardController@store' ]);
     });
 
     Route::group(['prefix'=>'clientes', 'where'=>['id'=>'[0-9]+']], function() {
@@ -31,6 +37,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit',         ['as'=>'clientes.edit',    'uses'=>'ClientesController@edit'   ]);
         Route::put('{id}/update',  ['as'=>'clientes.update',  'uses'=>'ClientesController@update' ]);
         Route::post('store',       ['as'=>'clientes.store',   'uses'=>'ClientesController@store'  ]);
+    });
+
+    Route::group(['prefix'=>'categorias', 'where'=>['id'=>'[0-9]+']], function() {
+        Route::any('',             ['as'=>'categorias',         'uses'=>'CategoriasController@index'  ]);
+        Route::get('create',       ['as'=>'categorias.create',  'uses'=>'CategoriasController@create' ]);
+        Route::get('{id}/destroy', ['as'=>'categorias.destroy', 'uses'=>'CategoriasController@destroy']);
+        Route::get('edit',         ['as'=>'categorias.edit',    'uses'=>'CategoriasController@edit'   ]);
+        Route::put('{id}/update',  ['as'=>'categorias.update',  'uses'=>'CategoriasController@update' ]);
+        Route::post('store',       ['as'=>'categorias.store',   'uses'=>'CategoriasController@store'  ]);
     });
 
     Route::group(['prefix'=>'produtos', 'where'=>['id'=>'[0-9]+']], function() {
@@ -94,10 +109,5 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit',         ['as'=>'tipo_clientes.edit',    'uses'=>'TipoClientesController@edit'   ]);
         Route::put('{id}/update',  ['as'=>'tipo_clientes.update',  'uses'=>'TipoClientesController@update' ]);
         Route::post('store',       ['as'=>'tipo_clientes.store',   'uses'=>'TipoClientesController@store'  ]);
-    });
-
-    Route::group(['prefix'=>'dashboard', 'where'=>['id'=>'[0-9]+']], function() {
-        Route::any('',             ['as'=>'dashboard',         'uses'=>'DashboardController@index'  ]);
-        Route::post('store',       ['as'=>'dashboard.store',   'uses'=>'DashboardController@store'  ]);
     });
 });

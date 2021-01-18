@@ -20,7 +20,7 @@ class CreateSaidasTable extends Migration
             $table->integer('quantidade');
             $table->double('preco_un', 8, 2); 
             $table->date('data_saida');
-            $table->string('observacoes', 4000);
+            $table->string('observacoes', 4000)->nullable();;
             $table->timestamps();
         });
     }

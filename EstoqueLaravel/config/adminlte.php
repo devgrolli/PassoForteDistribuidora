@@ -230,11 +230,11 @@ return [
     |
     */
     'menu' => [
-        [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
-        ],
+        // [
+        //     'text' => 'search',
+        //     'search' => true,
+        //     'topnav' => true,
+        // ],
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
@@ -311,6 +311,10 @@ return [
             'url'  => 'tipos',
             'icon' => 'fas fa-fw fal fa-align-justify',
             'submenu' => [
+                [
+                    'text' => 'Categorias',
+                    'url'  => 'categorias',
+                ],
                 [
                     'text' => 'Tipo de Entradas',
                     'url'  => 'tipo_entradas',

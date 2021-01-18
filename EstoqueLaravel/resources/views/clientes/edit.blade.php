@@ -9,32 +9,42 @@
   
       <div class="card-body">
         {!! Form::open(['route'=> ["clientes.update", 'id'=>$cliente->id], 'method'=>'put']) !!}
-
-          <div class="form-group">
-            {!! Form::label('nome', 'Nome') !!}
-            {!! Form::text('nome', $cliente->nome, ['class'=>'form-control', 'required']) !!}
-          </div>
-
-          <div class="form-group">
+          <div class="form-row">
+            <div class="col">
+              {!! Form::label('nome', 'Nome') !!}
+              {!! Form::text('nome', $cliente->nome, ['class'=>'form-control', 'required']) !!}
+            
+            </div>
+            <div class="col">
+              {!! Form::label('email', 'E-mail') !!}
+              {!! Form::email('email', $cliente->email, ['class'=>'form-control', 'required']) !!}
+            </div>
+  
+            <div class="col">
               {!! Form::label('telefone', 'Telefone') !!}
-              {!! Form::text('telefone', $cliente->telefone, ['class'=>'form-control', 'required']) !!}
+              {!! Form::text('telefone', $cliente->telefone, ['class'=>'form-control', 'id'=>'telefone', 'maxlength' => 15, 'required']) !!}
+            </div>
           </div>
-
-          <div class="form-group">
-            {!! Form::label('email', 'E-mail') !!}
-            {!! Form::text('email', $cliente->email, ['class'=>'form-control', 'required']) !!}
+  
+          <div class="form-row">
+            <div class="col">
+              {!! Form::label('endereco', 'Endereço') !!}
+              {!! Form::text('endereco', $cliente->endereco, ['class'=>'form-control', 'required']) !!}
+            </div>
+  
+            <div class="col">
+              {!! Form::label('tipo_cliente_id', 'Tipo do Cliente') !!}
+              {!! Form::select('tipo_cliente_id', \App\TipoCliente::orderBy('nome')->pluck('nome', 'id')->toArray(), 
+                                                    $cliente->tipo_cliente_id, ['class'=>'form-control', 'required']) !!}
+            </div>
           </div>
-
-          <div class="form-group">
+  
+          <div class="form-row">
+            <div class="col">
               {!! Form::label('descricao', 'Descrição') !!}
-              {!! Form::text('descricao', $cliente->descricao, ['class'=>'form-control', 'required']) !!}
-          </div>
-
-          <div class="form-group">
-            {!! Form::label('tipo_cliente_id', 'Tipo de Cliente') !!}
-            {!! Form::select('tipo_cliente_id', \App\TipoCliente::orderBy('nome')->pluck('nome', 'id')->toArray(), 
-                                                  $cliente->tipo_cliente_id, ['class'=>'form-control', 'required']) !!}
-          </div>
+              {!! Form::textarea('descricao', null, ['class'=>'form-control']) !!}
+            </div>
+          </div><br>
 
           <div class="form-group">
             {!! Form::submit('Salvar', ['class'=>'btn btn-padrao1']) !!}

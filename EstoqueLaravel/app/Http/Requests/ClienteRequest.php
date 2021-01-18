@@ -25,7 +25,16 @@ class ClienteRequest extends FormRequest
             'nome' => 'required|min:5',
             'email' => 'required',
             'telefone' => 'required',
+            'endereco' => 'required',
             'tipo_cliente_id' => 'required',
+        ];
+    }
+
+    public function messages()    {
+        return [
+            'nome.required' => 'Nome do cliente deve ser preenchido.',
+            'email.required' => 'E-mail deve ser preenchido.',
+            'telefone.required' => 'Telefone deve ser preenchido.',
         ];
     }
 }

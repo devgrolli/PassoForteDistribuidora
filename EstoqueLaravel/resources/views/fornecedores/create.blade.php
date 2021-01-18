@@ -46,7 +46,7 @@
         <div class="form-row">
           <div class="col">
             {!! Form::label('complemento', 'Complemento') !!}
-            {!! Form::text('complemento', null, ['class'=>'form-control', 'required']) !!}
+            {!! Form::text('complemento', null, ['class'=>'form-control']) !!}
           </div>
 
           <div class="col">

@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="col main pt-5 mt-3">
         <h5 class="display-4 dashtext d-none d-sm-block">
-            Dashboard Finanças
+            Dashboard
         </h5>
 
         <div class="row mb-3">
@@ -14,9 +14,9 @@
                         <div class="rotate">
                             <a href="{{ route('clientes', []) }}" ><i class="fas fal fa-users fa-4x"></i></a>
                         </div>
-                        <h6 class="text-uppercase">Clientes</h6><br>
+                        <h6 class="text-uppercase">Total de Clientes</h6><br>
                         <hr>
-                        <h1 class="display-4">{{ $var1}}</h1>    
+                        <h1 class="display-4">{{ $total_clientes}}</h1>    
                     </div>
                 </div>
             </div>
@@ -26,9 +26,9 @@
                         <div class="rotate">
                             <a href="{{ route('produtos', []) }}" ><i class="fas fa-fw fal fa-barcode fa-4x"></i></a>
                         </div>
-                        <h6 class="text-uppercase">Produtos</h6><br>
+                        <h6 class="text-uppercase">Produtos Cadastrados</h6><br>
                         <hr>
-                        <h1 class="display-4">{{ $var2}}</h1>
+                        <h1 class="display-4">{{ $total_produtos}}</h1>
                     </div>
                 </div>
             </div>
@@ -38,10 +38,10 @@
                         <div class="rotate">
                             <a href="{{ route('entradas', []) }}" ><i class="fas fa-fw fal  fa-shopping-cart fa-4x"></i></a>
                         </div>
-                        <h6 class="text-uppercase">Entradas</h6>
+                        <h6 class="text-uppercase">Total de Entradas</h6>
                         <h6 class="text-uppercase">R$ {{ number_format($saldo_entrada, 2, ',', '.') }}</h6>
                         <hr>
-                        <h1 class="display-4">{{ $var3 }}</h1>
+                        <h1 class="display-4">{{ $total_entradas }}</h1>
                     </div>
                 </div>
             </div>
@@ -52,10 +52,10 @@
                             <a href="{{ route('saidas', []) }}" ><i class="fa fa-share fa-4x"></i></a>
                         </div>
              
-                        <h6 class="text-uppercase">Saídas</h6>
+                        <h6 class="text-uppercase">Total de Saídas</h6>
                         <h6 class="text-uppercase">R$ {{ number_format($saldo_saida, 2, ',', '.') }}</h6>
                         <hr>
-                        <h1 class="display-4">{{ $var4 }}</h1>
+                        <h1 class="display-4">{{ $total_saidas }}</h1>
                     </div>
                 </div>
             </div>
@@ -66,13 +66,61 @@
                         <div class="rotate">
                             <i class="fas fal fa-chart-line fa-4x"></i>
                         </div>
-                        <h6 class="text-uppercase">Caixa</h6><br>
+                        <h6 class="text-uppercase">Total de Caixa</h6><br>
                         <hr>
                         <h1 class="display-4">R$ {{ number_format($caixa, 2, ',', '.') }}</h1>
                     </div>
                 </div>
             </div>
+            <div class="col-xl-3 col-sm-6 py-2">
+                <div class="card bg_6 h-100">
+                    <div class="card-body ">
+                        <div class="rotate">
+                            <a href="{{ route('entradas', []) }}" ><i class="fas fa-fw fal fa-exclamation-triangle fa-4x"></i></a>
+                        </div>
+                        <h6 class="text-uppercase">Produtos com estoque baixo</h6>
+                        <button class="btn btn-padrao2" type="button" data-toggle="modal" data-target="#exampleModal">
+                            Visualizar produtos <i class="fa fa-window-restore"></i></button> 
+                        <hr>
+                        <h1 class="display-4">{{ $qtd_estoque_baixo }}</h1>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+        <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Estoque baixo 
+                <a href="{{ route('entradas.create', []) }}" class="btn btn-padrao1">Cadastrar entradas</a>
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <table class="table table-hover" id="table">
+                <thead>
+                  <th>Nome</th>
+                  <th>Estoque</th>
+                </thead>
+                <tbody>
+                  @foreach ($estoque_baixo as $eb)
+                    <tr>
+                      <td>{{ $eb->nome }}</td>
+                      <td>{{ $eb->quantidade }}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>          
+            </div>     
+          </div>
+        </div>
+      </div>
         
         <!--/row-->
 

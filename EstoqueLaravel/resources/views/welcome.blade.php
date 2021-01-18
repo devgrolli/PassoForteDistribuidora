@@ -30,7 +30,7 @@ Released   : 20140207
     <div id="wrapper1">
         <div id="header-wrapper">
             <div id="header" class="container">
-                <div id="logo"> <span class="icon icon-cogs"></span>
+                <div id="logo"> <span class="icon icon-truck"></span>
                     <h1>Passo Forte Distribuidora</h1>
                     <span>Gerenciamento de Estoque</span>
                 </div>

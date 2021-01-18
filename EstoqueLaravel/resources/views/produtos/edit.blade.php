@@ -11,25 +11,26 @@
       <div class="card-body">
         {!! Form::open(['route'=> ["produtos.update", 'id'=>$produto->id], 'method'=>'put']) !!}
 
-          <div class="form-group">
+        <div class="form-row">
+          <div class="col">
             {!! Form::label('nome', 'Nome') !!}
             {!! Form::text('nome', $produto->nome, ['class'=>'form-control', 'required']) !!}
           </div>
 
-          <div class="form-group">
-            {!! Form::label('preco_un', 'Preço unitário') !!}
-            {!! Form::text('preco_un', $produto->preco_un, ['class'=>'form-control', 'required']) !!}
-          </div>
-
-          <div class="form-group">
-              {!! Form::label('quantidade', 'Estoque') !!}
-              {!! Form::text('quantidade', $produto->quantidade, ['class'=>'form-control', 'disabled']) !!}
-          </div>
-
-          <div class="form-group">
+          <div class="col">
               {!! Form::label('marca', 'Marca') !!}
               {!! Form::text('marca', $produto->marca, ['class'=>'form-control', 'required']) !!}
           </div>
+        </div>
+
+        <div class="form-row">
+          <div class="col">
+            {!! Form::label('categorias_id', 'Categorias') !!}
+            {!! Form::select('categorias_id', \App\Categoria::orderBy('nome')->pluck('nome', 'id')->toArray(), 
+                                                  $produto->categorias_id, ['class'=>'form-control', 'required']) !!}
+          </div>
+        </div>
+        <br>
 
           <div class="form-group">
             {!! Form::submit('Salvar', ['class'=>'btn btn-padrao1']) !!}

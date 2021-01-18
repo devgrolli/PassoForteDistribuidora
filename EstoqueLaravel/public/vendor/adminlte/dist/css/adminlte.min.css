@@ -10615,7 +10615,7 @@ a.text-dark:hover {
         page-break-inside: avoid
     }
     thead {
-        display: table-header-group
+        display: table-header-group,
     }
     img,
     tr {

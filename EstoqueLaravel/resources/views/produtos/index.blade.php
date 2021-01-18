@@ -27,8 +27,8 @@
         <thead>
             <th>Nome</th>
             <th>Estoque</th>
-            <th>Preço Unitário</th>
             <th>Marca</th>
+            <th>Categoria</th></th>
             <td></td>
         </thead>
 
@@ -41,8 +41,8 @@
                     @else
                         <td><span class='badge badge-pill badge-danger'>{{ 'SEM ESTOQUE' }}</span></td>
                     @endif
-                    <td>R$ {{ number_format($produto->preco_un, 2, ',', '.') }}</td>
                     <td>{{ $produto->marca }}</td>
+                    <td>{{ $produto->categorias->nome }}</td>
                     <td>
                         <a href="{{ route('produtos.edit', ['id' => \Crypt::encrypt($produto->id)]) }}"
                             class="btn btn-padrao1-icons">

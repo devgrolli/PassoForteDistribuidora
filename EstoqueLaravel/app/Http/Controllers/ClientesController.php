@@ -8,9 +8,7 @@ use App\Http\Requests\ClienteRequest;
 
 class ClientesController extends Controller{
     public function index(Request $filtro) {
-        
         $filtragem = $filtro->get('desc_filtro');
-
         if ($filtragem == null)
             $clientes = Cliente::orderBy('nome')->paginate(10);
         else
@@ -26,7 +24,7 @@ class ClientesController extends Controller{
     }
 
     public function store(ClienteRequest $request){ 
-        $novo_cliente = $request->all(); 
+        $novo_cliente = $request->all();
         Cliente::create($novo_cliente);
         return redirect()->route('clientes');
     }

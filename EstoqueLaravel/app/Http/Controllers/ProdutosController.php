@@ -26,8 +26,8 @@ class ProdutosController extends Controller{
 
     public function store(ProdutoRequest $request){ 
         $novo_produto = $request->all(); 
-        $valor = ProdutosController::formataMoeda($request->preco_un);  
-        $novo_produto['preco_un'] = $valor;
+        // $valor = ProdutosController::formataMoeda($request->preco_un);  
+        // $novo_produto['preco_un'] = $valor;
         if ($request->quantidade != 0){
             return redirect()->back()->withInput()->with('error', 'Quantidade deve ser igual a ZERO, insira o valor corretamente');
         }else{

@@ -17,45 +17,48 @@
 
     <div class="card-body">
       {!! Form::open(['route'=> ["entradas.update", 'id'=>$entrada->id], 'method'=>'put']) !!}
-        <div class="form-group">
-          {!! Form::label('produto_id', 'Produto') !!}
-          {!! Form::select('produto_id', \App\Produto::orderBy('nome')->pluck('nome', 'id')->toArray(),
-                                                $entrada->produto_id, ['class'=>'form-control', 'required']) !!}
-        </div>
-
         <div class="form-row">
           <div class="col">
-            {!! Form::label('quantidade', 'Quantidade') !!}
-            {!! Form::text('quantidade', $entrada->quantidade, ['class'=>'form-control', 'required']) !!}
+            {!! Form::label('produto_id', 'Produto') !!}
+            {!! Form::select('produto_id', \App\Produto::orderBy('nome')->pluck('nome', 'id')->toArray(),
+                                                  $entrada->produto_id, ['class'=>'form-control', 'required']) !!}
+                                                  
+            </div>
+            <div class="col">
+              {!! Form::label('quantidade', 'Quantidade') !!}
+              {!! Form::number('quantidade', $entrada->quantidade, ['class'=>'form-control', 'required']) !!}          
+           </div>
           </div>
-          <div class="col">
-            {!! Form::label('preco_un', 'Preço') !!}
-            {!! Form::text('preco_un', $entrada->preco_un, ['class'=>'form-control', 'id'=>'valor', 'onkeyup'=>"formatarMoeda()", 'placeholder'=>'R$','required']) !!}
-          </div>
-        </div>
 
-        <div class="form-row">
-          <div class="col">
-            {!! Form::label('fornecedor_id', 'Fornecedor') !!}
-            {!! Form::select('fornecedor_id', \App\Fornecedor::orderBy('razao_social')->pluck('razao_social', 'id')->toArray(), 
-                                                $entrada->fornecedor_id, ['class'=>'form-control', 'required']) !!}
+          <div class="form-row">
+            <div class="col">
+              {!! Form::label('preco_un', 'Preço Unitário') !!}
+              {!! Form::text('preco_un', $entrada->preco_un, ['class'=>'form-control', 'id'=>'valor', 'onkeyup'=>"formatarMoeda()", 'placeholder'=>'R$', 'required']) !!}
+            </div>
+            <div class="col">
+              {!! Form::label('data_entrada', 'Data de Entrada') !!}
+              {!! Form::date('data_entrada', $entrada->data_entrada, ['class'=>'form-control', 'required']) !!}
+            </div>
           </div>
-          <div class="col">
-            {!! Form::label('tipo_entrada_id', 'Tipo de entrada') !!}
-            {!! Form::select('tipo_entrada_id', \App\TipoEntrada::orderBy('nome')->pluck('nome', 'id')->toArray(), 
-                                                  $entrada->tipo_entrada_id, ['class'=>'form-control', 'required']) !!}
+
+          <div class="form-row">
+            <div class="col">
+              {!! Form::label('fornecedor_id', 'Fornecedor') !!}
+              {!! Form::select('fornecedor_id', \App\Fornecedor::orderBy('razao_social')->pluck('razao_social', 'id')->toArray(), 
+                                                  $entrada->fornecedor_id, ['class'=>'form-control', 'required']) !!}
+            </div>
+            <div class="col">
+              {!! Form::label('tipo_entrada_id', 'Tipo de entrada') !!}
+              {!! Form::select('tipo_entrada_id', \App\TipoEntrada::orderBy('nome')->pluck('nome', 'id')->toArray(), 
+                                                    $entrada->tipo_entrada_id, ['class'=>'form-control', 'required']) !!}
+            </div>
+            
           </div>
-        </div>
 
-        <div class="form-group">
-          {!! Form::label('data_entrada', 'Data de Entrada') !!}
-          {!! Form::date('data_entrada', $entrada->data_entrada, ['class'=>'form-control', 'required']) !!}
-        </div>
-
-        <div class="form-group">
-          {!! Form::label('observacoes', 'Observações') !!}
-          {!! Form::textarea('observacoes', $entrada->observacoes, ['class'=>'form-control', 'required']) !!}
-        </div>
+          <div class="form-group">
+            {!! Form::label('observacoes', 'Observações') !!}
+            {!! Form::textarea('observacoes', $entrada->observacoes, ['class'=>'form-control']) !!}
+          </div>
 
         <div class="form-group">
           {!! Form::submit('Salvar', ['class'=>'btn btn-padrao1']) !!}

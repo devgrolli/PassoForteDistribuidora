@@ -16,6 +16,7 @@ class AddTipoClienteIdToClientes extends Migration
         Schema::table('clientes', function (Blueprint $table) {
             $table->bigInteger('tipo_cliente_id')->unsigned()->nullable();
             $table->foreign('tipo_cliente_id')->references('id')->on('tipo_clientes');
+            $table->string('descricao', 4000)->nullable();
         });
     }
 

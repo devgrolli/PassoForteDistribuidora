@@ -50,8 +50,9 @@
             <th>Nome</th>
             <th>Telefone</th>
             <th>E-mail</th>
-            <th>Descrição</th>
+            <th>Endereço</th>
             <th>Tipo de Cliente</th>
+            <th>Descrição</th>
             <td></td>
         </thead>
 
@@ -61,8 +62,9 @@
                     <td>{{ $cliente->nome }}</td>
                     <td>{{ $cliente->telefone }}</td>
                     <td>{{ $cliente->email }}</td>
-                    <td>{{ $cliente->descricao }}</td>
+                    <td>{{ $cliente->endereco }}</td>
                     <td>{{ $cliente->tipo_cliente->nome }}</td>
+                    <td>{{ $cliente->descricao }}</td> 
                     <td>
                         <a href="{{ route('clientes.edit', ['id' => \Crypt::encrypt($cliente->id)]) }}"class="btn btn-padrao1-icons">
                             <i class="bi bi-pencil-square"></i>

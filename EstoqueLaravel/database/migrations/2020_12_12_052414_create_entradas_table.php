@@ -20,7 +20,6 @@ class CreateEntradasTable extends Migration
             $table->integer('quantidade');
             $table->double('preco_un', 8, 2); 
             $table->date('data_entrada');
-            $table->string('observacoes', 4000);
             $table->timestamps();
         });
     }
