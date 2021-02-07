@@ -19,7 +19,7 @@ class TipoSaidasController extends Controller{
     public function store(TipoSaidaRequest $request) { // Responsável por gravar um novo registro 
         $novo_tipo_saida = $request->all();
         TipoSaida::create($novo_tipo_saida);
-        return redirect()->route('tipo_saidas');
+        return redirect()->route('tipo_saidas')->with('success', "Tipo de saída cadastrada com sucesso!");;
     }
 
     public function destroy($id){

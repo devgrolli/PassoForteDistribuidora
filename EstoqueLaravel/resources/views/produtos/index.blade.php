@@ -6,7 +6,7 @@
     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar com grupos de botões">
         <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
             <div class="float-sm-left">
-                <a href="{{ route('produtos.create', []) }}" class="btn btn-padrao1">Cadastrar</a><br></br>
+                <a href="{{ route('produtos.create', []) }}" class="btn btn-padrao1">Cadastrar <i class="fa fa-plus" aria-hidden="true"></i></a><br></br>
             </div>
         </div>
 
@@ -26,7 +26,6 @@
     <table class="table table-hover" id="table">
         <thead>
             <th>Nome</th>
-            <th>Estoque</th>
             <th>Marca</th>
             <th>Categoria</th></th>
             <td></td>
@@ -36,11 +35,6 @@
             @foreach ($produtos as $produto)
                 <tr>
                     <td>{{ $produto->nome }}</td>
-                    @if ($produto->quantidade > 0)
-                        <td><span class='badge badge-pill badge-success'>{{ $produto->quantidade }} </span></td>
-                    @else
-                        <td><span class='badge badge-pill badge-danger'>{{ 'SEM ESTOQUE' }}</span></td>
-                    @endif
                     <td>{{ $produto->marca }}</td>
                     <td>{{ $produto->categorias->nome }}</td>
                     <td>

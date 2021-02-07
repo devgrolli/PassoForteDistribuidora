@@ -12,7 +12,6 @@ class Entrada extends Model{
         'preco_un', 
         'fornecedor_id', 
         'tipo_entrada_id', 
-        'data_entrada', 
         'observacoes']; 
 
     public function produto(){

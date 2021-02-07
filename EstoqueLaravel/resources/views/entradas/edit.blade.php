@@ -27,20 +27,12 @@
             <div class="col">
               {!! Form::label('quantidade', 'Quantidade') !!}
               {!! Form::number('quantidade', $entrada->quantidade, ['class'=>'form-control', 'required']) !!}          
-           </div>
-          </div>
-
-          <div class="form-row">
+            </div>
             <div class="col">
               {!! Form::label('preco_un', 'Preço Unitário') !!}
               {!! Form::text('preco_un', $entrada->preco_un, ['class'=>'form-control', 'id'=>'valor', 'onkeyup'=>"formatarMoeda()", 'placeholder'=>'R$', 'required']) !!}
             </div>
-            <div class="col">
-              {!! Form::label('data_entrada', 'Data de Entrada') !!}
-              {!! Form::date('data_entrada', $entrada->data_entrada, ['class'=>'form-control', 'required']) !!}
-            </div>
           </div>
-
           <div class="form-row">
             <div class="col">
               {!! Form::label('fornecedor_id', 'Fornecedor') !!}
@@ -52,7 +44,6 @@
               {!! Form::select('tipo_entrada_id', \App\TipoEntrada::orderBy('nome')->pluck('nome', 'id')->toArray(), 
                                                     $entrada->tipo_entrada_id, ['class'=>'form-control', 'required']) !!}
             </div>
-            
           </div>
 
           <div class="form-group">

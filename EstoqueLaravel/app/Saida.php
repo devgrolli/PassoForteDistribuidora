@@ -10,9 +10,8 @@ class Saida extends Model{
         'produto_id', 
         'quantidade', 
         'preco_un', 
-        'data_saida', 
-        'observacoes',
-        'tipo_saidas_id'
+        'tipo_saidas_id',
+        'observacoes'
     ]; 
 
     public function produto(){

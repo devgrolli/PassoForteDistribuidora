@@ -6,9 +6,9 @@
     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar com grupos de botões">
         <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
             <div class="btn-group float-sm-left" role="group" aria-label="Exemplo básico">
-                <a href="{{ route('clientes.create', []) }}" type="button" class="btn btn-padrao1">Cadastrar</a>
+                <a href="{{ route('clientes.create', []) }}" type="button" class="btn btn-padrao1">Cadastrar <i class="fa fa-user-plus" aria-hidden="true"></i></a>
                 <a href="{{ route('tipo_clientes.create', []) }}" type="button" class="btn btn-padrao2">Cadastrar Tipo de
-                    Cliente</a>
+                    Cliente <i class="fa fa-plus" aria-hidden="true"></i></a>
             </div>
         </div>
 

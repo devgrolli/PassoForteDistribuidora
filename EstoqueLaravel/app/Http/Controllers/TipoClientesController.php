@@ -19,7 +19,7 @@ class TipoClientesController extends Controller{
     public function store(TipoClienteRequest $request) { // Responsável por gravar um novo registro 
         $novo_tipo_cliente = $request->all();
         TipoCliente::create($novo_tipo_cliente);
-        return redirect()->route('tipo_clientes');
+        return redirect()->route('tipo_clientes')->with('success', "Tipo de cliente cadastrado com sucesso!");;
     }
 
     public function destroy($id){

@@ -1,18 +1,17 @@
 <!-- blade: sistema de template simples -->
 @extends('layouts.default')
 @section('content')
-    <h1>Fornecedores</h1>
+    <h1>Pedidos</h1>
 
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar com grupos de botões">
         <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
             <div class="btn-group float-sm-left" role="group" aria-label="Exemplo básico">
-                <a href="{{ route('fornecedores.create', []) }}" class="btn btn-padrao1">Cadastrar <i class="fa fa-plus" aria-hidden="true"></i></a>
-                <a href="{{ route('pedidos', []) }}" type="button" class="btn btn-padrao2">Pedido fornecedor  <i class="fa fa-table" aria-hidden="true"></i></a>
+                <a href="{{ route('pedidos.create', []) }}" class="btn btn-padrao1">Cadastrar <i class="fa fa-plus" aria-hidden="true"></i></a>
             </div>
         </div>
 
-        {!! Form::open(['name' => 'form_name', 'route' => 'fornecedores']) !!}
+        {!! Form::open(['name' => 'form_name', 'route' => 'pedidos']) !!}
         <div class="input-group mb-3">
             <input type="text" class="form-control-padrao1" aria-describedby="basic-addon2">
             <div class="input-group-append">
@@ -28,24 +27,24 @@
 
     <table class="table table-hover" id="table">
         <thead>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>Endereço</th>
-            <th>Bairro</th>
-            <th>Telefone</th>
+            <th>Código</th>
+            <th>Produto</th>
+            <th>Quantidades</th>
+            <th>Data do pedido</th>
+            <th>Fornecedor</th>
             <td></td>
         </thead>
 
         <tbody>
-            @foreach ($fornecedores as $fornecedor)
+            @foreach ($pedidos as $pedido)
                 <tr>
-                    <td>{{ $fornecedor->razao_social }}</td>
-                    <td>{{ $fornecedor->email }}</td>
-                    <td>{{ $fornecedor->endereco }}</td>
-                    <td>{{ $fornecedor->bairro }}</td>
-                    <td>{{ $fornecedor->telefone }}</td>
+                    <td>{{ $pedido->id }}</td>
+                    <td>{{ $pedido->produto }}</td>
+                    <td>{{ $pedido->quantidade }}</td>
+                    <td>{{ Carbon\Carbon::parse($pedido->data_pedido)->format('d/m/Y') }}</td>
+                    <td>{{ $pedido->fornecedor->razao_social }}</td>
                     <td>
-                        <a href="{{ route('fornecedores.edit', ['id' => \Crypt::encrypt($fornecedor->id)]) }}"
+                        <a href="{{ route('pedidos.edit', ['id' => \Crypt::encrypt($pedido->id)]) }}"
                             class="btn btn-padrao1-icons">
                             <i class="bi bi-pencil-square"></i>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -57,7 +56,7 @@
                             </svg>
 
                         </a>
-                        <a href="#" onclick="return ConfirmaExclusao({{ $fornecedor->id }})" class="btn btn-padrao2-icons">
+                        <a href="#" onclick="return ConfirmaExclusao({{ $pedido->id }})" class="btn btn-padrao2-icons">
                             <i class="bi bi-archive">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-archive" viewBox="0 0 16 16">
@@ -71,9 +70,9 @@
             @endforeach
         </tbody>
     </table>
-    {{ $fornecedores->links() }}
+    {{ $pedidos->links() }}
 
 @stop
 @section('table-delete')
-    "fornecedores"
+    "pedidos"
 @endsection

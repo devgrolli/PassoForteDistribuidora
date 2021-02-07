@@ -32,7 +32,7 @@ class ProdutosController extends Controller{
             return redirect()->back()->withInput()->with('error', 'Quantidade deve ser igual a ZERO, insira o valor corretamente');
         }else{
             Produto::create($novo_produto);
-            return redirect()->route('produtos');
+            return redirect()->route('produtos')->with('success', "Produto cadastrado com sucesso!");
         }
     }
 

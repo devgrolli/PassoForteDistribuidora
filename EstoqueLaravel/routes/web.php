@@ -30,6 +30,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('store',        ['as'=>'dashboard.store',  'uses'=>'DashboardController@store' ]);
     });
 
+    Route::group(['prefix'=>'estoque', 'where'=>['id'=>'[0-9]+']], function() {
+        Route::any('',             ['as'=>'estoque',        'uses'=>'EstoqueController@index' ]);
+        Route::get('store',        ['as'=>'estoque.store',  'uses'=>'EstoqueController@store' ]);
+    });
+
     Route::group(['prefix'=>'clientes', 'where'=>['id'=>'[0-9]+']], function() {
         Route::any('',             ['as'=>'clientes',         'uses'=>'ClientesController@index'  ]);
         Route::get('create',       ['as'=>'clientes.create',  'uses'=>'ClientesController@create' ]);
@@ -82,6 +87,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit',         ['as'=>'fornecedores.edit',    'uses'=>'FornecedoresController@edit'   ]);
         Route::put('{id}/update',  ['as'=>'fornecedores.update',  'uses'=>'FornecedoresController@update' ]);
         Route::post('store',       ['as'=>'fornecedores.store',   'uses'=>'FornecedoresController@store'  ]);
+    });
+
+    Route::group(['prefix'=>'pedidos', 'where'=>['id'=>'[0-9]+']], function() {
+        Route::any('',             ['as'=>'pedidos',         'uses'=>'PedidosController@index'  ]);
+        Route::get('create',       ['as'=>'pedidos.create',  'uses'=>'PedidosController@create' ]);
+        Route::get('{id}/destroy', ['as'=>'pedidos.destroy', 'uses'=>'PedidosController@destroy']);
+        Route::get('edit',         ['as'=>'pedidos.edit',    'uses'=>'PedidosController@edit'   ]);
+        Route::put('{id}/update',  ['as'=>'pedidos.update',  'uses'=>'PedidosController@update' ]);
+        Route::post('store',       ['as'=>'pedidos.store',   'uses'=>'PedidosController@store'  ]);
     });
 
     Route::group(['prefix'=>'tipo_entradas', 'where'=>['id'=>'[0-9]+']], function() {

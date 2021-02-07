@@ -4,20 +4,22 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSaidasTable extends Migration
+class CreatePedidosTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up(){
-        Schema::create('saidas', function (Blueprint $table) {
+    public function up()
+    {
+        Schema::create('pedidos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('produto_id')->unsigned()->nullable();
-            $table->foreign('produto_id')->references('id')->on('produtos');
+            $table->string('produto');
             $table->integer('quantidade');
-            $table->double('preco_un', 8, 2); 
+            $table->date('data_pedido');
+            $table->bigInteger('fornecedor_id')->unsigned()->nullable();
+            $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ class CreateSaidasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('saidas');
+        Schema::dropIfExists('pedidos');
     }
 }

@@ -26,7 +26,7 @@ class ClientesController extends Controller{
     public function store(ClienteRequest $request){ 
         $novo_cliente = $request->all();
         Cliente::create($novo_cliente);
-        return redirect()->route('clientes');
+        return redirect()->route('clientes')->with('success', "Cliente cadastrado com sucesso!");;
     }
 
     public function destroy($id){

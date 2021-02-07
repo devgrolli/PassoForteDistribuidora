@@ -16,11 +16,9 @@ class DashboardController extends Controller{
         $total_entradas = DB::table('entradas')->count();
         $total_saidas = DB::table('saidas')->count();
 
-
         #Calcula o Estoque baixo 
         $estoque_baixo = DB::table('produtos')->where('quantidade', '<', 5)->get();
         $qtd_estoque_baixo = $estoque_baixo->count();
-
 
         #Calcula o valor total de entradas
         $produtos = DB::table('entradas')->select('quantidade', 'preco_un')->get();
@@ -47,16 +45,6 @@ class DashboardController extends Controller{
                         'estoque_baixo',
                         'qtd_estoque_baixo', 
                         'caixa'));
-
-        // return view('dashboard.index')
-        //     ->with('var1', $var1->count())
-        //     ->with('var2', $var2->count())
-        //     ->with('saldo_entrada', $saldo_entrada)
-        //     ->with('saldo_saida', $saldo_saida)
-        //     ->with('var3', $var3->count())
-        //     ->with('var4', $var4->count())
-        //     ->with('caixa', $caixa)
-        //     ->with('estoque_baixo', $estoque_baixo);
 	}
 }
 

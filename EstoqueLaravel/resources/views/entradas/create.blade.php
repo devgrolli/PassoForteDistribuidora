@@ -13,7 +13,7 @@
 
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Estoque</h5>
@@ -55,17 +55,10 @@
             <div class="col">
               {!! Form::label('quantidade', 'Quantidade') !!}
               {!! Form::number('quantidade', null, ['class'=>'form-control', 'required']) !!}          
-           </div>
-          </div>
-
-          <div class="form-row">
+            </div>
             <div class="col">
               {!! Form::label('preco_un', 'Preço Unitário') !!}
               {!! Form::text('preco_un', null, ['class'=>'form-control', 'id'=>'valor', 'onkeyup'=>"formatarMoeda()", 'placeholder'=>'R$', 'required']) !!}
-            </div>
-            <div class="col">
-              {!! Form::label('data_entrada', 'Data de Entrada') !!}
-              {!! Form::date('data_entrada', null, ['class'=>'form-control', 'required']) !!}
             </div>
           </div>
 
@@ -80,9 +73,8 @@
               {!! Form::select('tipo_entrada_id', \App\TipoEntrada::orderBy('nome')->pluck('nome', 'id')->toArray(), 
                                                     null, ['class'=>'form-control', 'required']) !!}
             </div>
-            
           </div>
-
+          
           <div class="form-group">
             {!! Form::label('observacoes', 'Observações') !!}
             {!! Form::textarea('observacoes', null, ['class'=>'form-control']) !!}

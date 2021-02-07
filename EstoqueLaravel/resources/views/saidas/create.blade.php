@@ -10,7 +10,7 @@
 
       <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Produtos em Cadastrados</h5>
@@ -22,16 +22,16 @@
             <div class="modal-body">
               <table class="table table-hover" id="table">
                 <thead>
-                    <th>Nome</th>
-                    <th>Estoque</th>
+                  <th>Nome</th>
+                  <th>Estoque</th>
                 </thead>
                 <tbody>
-                    @foreach ($products as $product)
-                      <tr>
-                        <td>{{ $product->nome }}</td>
-                        <td>{{ $product->quantidade }}</td>
-                      </tr>
-                    @endforeach
+                  @foreach ($products as $product)
+                    <tr>
+                      <td>{{ $product->nome }}</td>
+                      <td>{{ $product->quantidade }}</td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -43,7 +43,7 @@
       <div class="card-body">
         {!! Form::open(['route'=>'saidas.store']) !!}
           <button  type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Visualizar Produtos
+            Visualizar estoque
           </button>
           <div class="form-row">
             <div class="col">
@@ -55,17 +55,15 @@
               {!! Form::label('quantidade', 'Quantidade') !!}
               {!! Form::text('quantidade', null, ['class'=>'form-control', 'required']) !!}
             </div>
-          </div>
-
-          <div class="form-row">
             <div class="col">
               {!! Form::label('preco_un', 'Preço') !!}
               {!! Form::text('preco_un', null, ['class'=>'form-control', 'id'=>'valor', 'onkeyup'=>"formatarMoeda()", 'placeholder'=>'R$', 'required']) !!}
             </div>
-            <div class="col">
-              {!! Form::label('data_saida', 'Data da Saída') !!}
-              {!! Form::date('data_saida', null, ['class'=>'form-control', 'required']) !!}
-            </div>
+          </div>
+          <div class="form-group">
+            {!! Form::label('tipo_saidas_id', 'Tipo de saída') !!}
+            {!! Form::select('tipo_saidas_id', \App\TipoSaida::orderBy('nome')->pluck('nome', 'id')->toArray(), 
+                                                  null, ['class'=>'form-control', 'required']) !!}
           </div>
 
           <div class="form-group">
@@ -73,11 +71,7 @@
             {!! Form::textarea('observacoes', null, ['class'=>'form-control']) !!}
           </div>
 
-          <div class="form-group">
-            {!! Form::label('tipo_saidas_id', 'Tipo de saída') !!}
-            {!! Form::select('tipo_saidas_id', \App\TipoSaida::orderBy('nome')->pluck('nome', 'id')->toArray(), 
-                                                  null, ['class'=>'form-control', 'required']) !!}
-          </div>
+          
 
           <div class="form-group">
             {!! Form::submit('Cadastrar', ['class'=>'btn btn-padrao1']) !!}

@@ -2,11 +2,10 @@
 @section('content')
 
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
-    <div class="col main pt-5 mt-3">
-        <h5 class="display-4 dashtext d-none d-sm-block">
-            Dashboard
-        </h5>
-
+    <h7 class="display-4 dashtext d-none d-sm-block ">
+        Dashboard
+    </h7>
+    <div class="col main pt-2 mt-3"  >
         <div class="row mb-3">
             <div class="col-xl-3 col-sm-6 py-2" >
                 <div class="card text-white bg_1 h-100">
@@ -80,7 +79,7 @@
                         </div>
                         <h6 class="text-uppercase">Produtos com estoque baixo</h6>
                         <button class="btn btn-padrao2" type="button" data-toggle="modal" data-target="#exampleModal">
-                            Visualizar produtos <i class="fa fa-window-restore"></i></button> 
+                            Visualizar <i class="fa fa-window-restore"></i></button> 
                         <hr>
                         <h1 class="display-4">{{ $qtd_estoque_baixo }}</h1>
                     </div>
@@ -91,11 +90,11 @@
 
         <!-- Modal -->
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Estoque baixo 
-                <a href="{{ route('entradas.create', []) }}" class="btn btn-padrao1">Cadastrar entradas</a>
+                <a href="{{ route('entradas.create', []) }}" class="btn btn-padrao1" >Cadastrar entradas</a>
               </h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
