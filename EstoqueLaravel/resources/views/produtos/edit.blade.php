@@ -13,16 +13,22 @@
 
         <div class="form-row">
           <div class="col">
+            {!! Form::label('id', 'Código') !!}
+            {!! Form::text('id', $produto->id, ['class'=>'form-control', 'disabled']) !!}
+          </div>
+          <div class="col">
             {!! Form::label('nome', 'Nome') !!}
             {!! Form::text('nome', $produto->nome, ['class'=>'form-control', 'required']) !!}
           </div>
-
+          <div class="col">
+            {!! Form::label('unidade', 'Unidade') !!}
+            {!! Form::text('unidade', $produto->unidade, ['class'=>'form-control', 'required']) !!}
+          </div>
           <div class="col">
               {!! Form::label('marca', 'Marca') !!}
               {!! Form::text('marca', $produto->marca, ['class'=>'form-control', 'required']) !!}
           </div>
         </div>
-
         <div class="form-row">
           <div class="col">
             {!! Form::label('categorias_id', 'Categorias') !!}
@@ -31,7 +37,6 @@
           </div>
         </div>
         <br>
-
           <div class="form-group">
             {!! Form::submit('Salvar', ['class'=>'btn btn-padrao1']) !!}
             <a href="{{ route('produtos', []) }}" class="btn btn-padrao2">Cancelar</a>

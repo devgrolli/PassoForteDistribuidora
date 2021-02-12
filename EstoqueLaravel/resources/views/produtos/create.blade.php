@@ -10,10 +10,19 @@
     <div class="card-body">
       {!! Form::open(['route'=>'produtos.store']) !!}
       <div class="form-row">
+        <div class="col">
+          {!! Form::label('id', 'Código do produto') !!}
+          {!! Form::text('id', null, ['class'=>'form-control']) !!}
+        </div>
           <div class="col">
             {!! Form::label('nome', 'Nome') !!}
             {!! Form::text('nome', null, ['class'=>'form-control']) !!}
           </div>
+          <div class="col">
+            {!! Form::label('unidade', 'Unidade') !!}
+            {!! Form::text('unidade', null, ['class'=>'form-control']) !!}
+          </div>
+
           <div class="col">
             {!! Form::label('marca', 'Marca') !!}
             {!! Form::text('marca', null, ['class'=>'form-control', 'required']) !!}

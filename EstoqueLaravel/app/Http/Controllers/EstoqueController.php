@@ -9,12 +9,12 @@ class EstoqueController extends Controller{
     public function index(Request $filtro) {
         $filtragem = $filtro->get('desc_filtro');
         if ($filtragem == null)
-            $estoque = Produto::orderBy('nome')->paginate(10);
+            $estoque = Produto::orderBy('quantidade', 'desc')->paginate(10);
         else
             $estoque = Produto::where('nome', 'like', '%'.$filtragem.'%')
-            ->orderBy("nome")
+            ->orderBy('quantidade', 'desc')
             ->paginate(5);
-                // ->setpath('produtos?desc_filtro='+$filtragem); 
+                // ->setpath('produtos?desc_filtro='+$filtragem);            
         return view('estoque.index', ['estoque'=>$estoque]);
     }
 

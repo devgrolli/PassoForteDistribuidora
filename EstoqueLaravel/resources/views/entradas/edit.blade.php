@@ -35,6 +35,10 @@
           </div>
           <div class="form-row">
             <div class="col">
+              {!! Form::label('validade', 'Validade') !!}
+              {!! Form::date('validade', $entrada->validade, ['class'=>'form-control', 'required']) !!}
+            </div>
+            <div class="col">
               {!! Form::label('fornecedor_id', 'Fornecedor') !!}
               {!! Form::select('fornecedor_id', \App\Fornecedor::orderBy('razao_social')->pluck('razao_social', 'id')->toArray(), 
                                                   $entrada->fornecedor_id, ['class'=>'form-control', 'required']) !!}

@@ -9,7 +9,8 @@ class Entrada extends Model{
     protected $fillable = [
         'produto_id', 
         'quantidade', 
-        'preco_un', 
+        'preco_un',
+        'validade', 
         'fornecedor_id', 
         'tipo_entrada_id', 
         'observacoes']; 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produto extends Model{
     protected $table = "produtos"; 
-    protected $fillable = ['nome', 'quantidade'=> 0, 'marca', 'categorias_id']; 
+    protected $fillable = ['id', 'nome', 'unidade', 'quantidade'=> 0, 'marca', 'categorias_id']; 
 
     public function entradas(){
         return $this->hasMany("App\Entrada");

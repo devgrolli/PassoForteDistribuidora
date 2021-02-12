@@ -81,7 +81,7 @@
                         <button class="btn btn-padrao2" type="button" data-toggle="modal" data-target="#exampleModal">
                             Visualizar <i class="fa fa-window-restore"></i></button> 
                         <hr>
-                        <h1 class="display-4">{{ $qtd_estoque_baixo }}</h1>
+                        <h1 class="display-4">{{ $estoque_baixo[1] }}</h1>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
                   <th>Estoque</th>
                 </thead>
                 <tbody>
-                  @foreach ($estoque_baixo as $eb)
+                  @foreach ($estoque_baixo[0] as $eb)
                     <tr>
                       <td>{{ $eb->nome }}</td>
                       <td>{{ $eb->quantidade }}</td>

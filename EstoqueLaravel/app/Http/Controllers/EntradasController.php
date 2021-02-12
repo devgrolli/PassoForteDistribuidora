@@ -52,7 +52,7 @@ class EntradasController extends Controller{
     public function update(EntradaRequest $request, $id){
         Entrada::find($id)->update($request->all());
         $busca_produto = Produto::find($request->produto_id);
-        $busca_produto->quantidade = $busca_produto->quantidade + $request->quantidade;
+        $busca_produto->quantidade = $request->quantidade;
         $busca_produto->save();
         return redirect()->route('entradas')->with('success', "Entrada editada com sucesso!");
     }

@@ -25,7 +25,9 @@
 
     <table class="table table-hover" id="table">
         <thead>
+            <th >Código</th>
             <th>Nome</th>
+            <th>Unidade</th>
             <th>Marca</th>
             <th>Categoria</th></th>
             <td></td>
@@ -34,7 +36,9 @@
         <tbody>
             @foreach ($produtos as $produto)
                 <tr>
+                    <td>{{ $produto->id }}</td>
                     <td>{{ $produto->nome }}</td>
+                    <td>{{ $produto->unidade }}</td>
                     <td>{{ $produto->marca }}</td>
                     <td>{{ $produto->categorias->nome }}</td>
                     <td>

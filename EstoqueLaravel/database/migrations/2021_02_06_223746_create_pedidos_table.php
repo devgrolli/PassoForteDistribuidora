@@ -17,7 +17,6 @@ class CreatePedidosTable extends Migration
             $table->bigIncrements('id');
             $table->string('produto');
             $table->integer('quantidade');
-            $table->date('data_pedido');
             $table->bigInteger('fornecedor_id')->unsigned()->nullable();
             $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
             $table->timestamps();
@@ -33,4 +32,9 @@ class CreatePedidosTable extends Migration
     {
         Schema::dropIfExists('pedidos');
     }
+
+    /**
+     * DROP SCHEMA public CASCADE;
+       CREATE SCHEMA public;
+     */
 }

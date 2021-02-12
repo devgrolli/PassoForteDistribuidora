@@ -22,6 +22,7 @@
             <th>Produto</th>
             <th>Quantidade</th>
             <th>Preço UN</th>
+            <th>Validade</th>
             <th>Fornecedor</th>
             <th>Data Entrada</th>
             <th>Tipo de Entrada</th>
@@ -34,6 +35,7 @@
                     <td>{{ $entrada->produto->nome }}</td>
                     <td> {{ $entrada->quantidade }}</td>
                     <td>R$ {{ number_format($entrada->preco_un, 2, ',', '.') }}</td>
+                    <td>{{ Carbon\Carbon::parse($entrada->validade)->format('d/m/Y') }}</td>
                     <td>{{ $entrada->fornecedor->razao_social }}</td>
                     <td>{{ Carbon\Carbon::parse($entrada->created_at)->format('d/m/Y - H:i:s') }}</td>
                     <td>{{ $entrada->tipo_entrada->nome }}</td>
