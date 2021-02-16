@@ -9,6 +9,7 @@ use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\TipoEntradasController;
 use App\Http\Controllers\TipoSaidasController;
 use App\Http\Controllers\CepController;
+use App\Http\Controllers\UsuariosController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,9 +22,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    // Route::group(['prefix'=>'csv_file', 'where'=>['id'=>'[0-9]+']], function() {
-    //     Route::get('csv_file',       ['as'=>'csv_file.index',  'uses'=>'CsvFileController@index' ]);
-    // });
 
     Route::group(['prefix'=>'dashboard', 'where'=>['id'=>'[0-9]+']], function() {
         Route::any('',             ['as'=>'dashboard',        'uses'=>'DashboardController@index' ]);
@@ -33,6 +31,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix'=>'estoque', 'where'=>['id'=>'[0-9]+']], function() {
         Route::any('',             ['as'=>'estoque',        'uses'=>'EstoqueController@index' ]);
         Route::get('store',        ['as'=>'estoque.store',  'uses'=>'EstoqueController@store' ]);
+    });
+
+    Route::group(['prefix'=>'usuarios', 'where'=>['id'=>'[0-9]+']], function() {
+        Route::any('',             ['as'=>'usuarios',        'uses'=>'UsuariosController@index' ]);
+        Route::get('create',       ['as'=>'usuarios.create',  'uses'=>'UsuariosController@create' ]);
+        Route::get('{id}/destroy', ['as'=>'usuarios.destroy', 'uses'=>'UsuariosController@destroy']);
+        Route::get('edit',         ['as'=>'usuarios.edit',    'uses'=>'UsuariosController@edit'   ]);
+        Route::put('{id}/update',  ['as'=>'usuarios.update',  'uses'=>'UsuariosController@update' ]);
+        Route::post('store',       ['as'=>'usuarios.store',   'uses'=>'UsuariosController@store'  ]);
     });
 
     Route::group(['prefix'=>'clientes', 'where'=>['id'=>'[0-9]+']], function() {

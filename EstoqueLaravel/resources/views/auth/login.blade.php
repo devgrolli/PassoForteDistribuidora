@@ -85,13 +85,13 @@
                             <button class="login100-form-btn" type="submit"> {{ __('Entrar') }}</button>
                             @if (Route::has('login'))
                                 <div class="top-right links">
-                                @auth
-                                    <a href="{{ url('/home') }}">Home</a>
-                                @else 
+                                {{-- @auth --}}
+                                    <a href="{{ url('') }}" class="cadastro100-form-btn" >voltar</a>
+                                {{-- @else 
                                      @if (Route::has('register'))
                                         <a href="{{ route('register') }}" class="cadastro100-form-btn" >Cadastre-se</a>
                                     @endif
-                                @endauth
+                                @endauth --}}
                                 </div>
                              @endif 
                         </div>

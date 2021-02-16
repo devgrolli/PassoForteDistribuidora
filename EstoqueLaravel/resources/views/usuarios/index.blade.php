@@ -6,8 +6,10 @@
             <div class="card-body h-100 d-flex flex-column justify-content-center py-5 py-xl-4">
                 <div class="col-xl-8 col-xxl-12">
                     <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
-                        <h1 class="text-primary"> Tipo de Clientes</h1>
-                        <p class="text-gray-700 mb-0"> Lista de todos os tipos de clientes para descrever!</p>
+                        <h1 class="text-primary">Usuários</h1>
+                        <p class="text-gray-700 mb-0">
+                            Lista de todos os usuários!
+                        </p>
                     </div>
                 </div>
             </div>
@@ -23,33 +25,51 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_length">
-                                <a href="{{ route('tipo_clientes.create', []) }}"
-                                    class="btn btn-padrao1">Cadastrar</a><br></br>
+                                <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar com grupos de botões">
+                                    <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
+                                        <div class="float-sm-left">
+                                            <a href="{{ route('usuarios.create', []) }}" class="btn btn-padrao1">Cadastrar
+                                                <i class="fa fa-plus" aria-hidden="true"></i></a><br></br>
+                                        </div>
+                                    </div>
+
+                                    {!! Form::open(['name' => 'form_name', 'route' => 'usuarios']) !!}
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control-padrao1" name="desc_filtro"
+                                            aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-padrao1" type="submit" name="search" type="button"
+                                                id="search-btn"><i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                    {!! Form::close() !!}
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_filter"> </div>
                         </div>
-
                     </div>
 
                     <table class="table table-hover" id="table">
                         <thead class="letra" id="thead_colors">
                             <th></th>
+                            <th>Código</th>
                             <th>Nome</th>
-                            <th>Descrição</th>
-                            <td></td>
+                            <th>E-mail</th>
+                            <th></th>
                         </thead>
 
                         <tbody>
-                            @foreach ($tipo_clientes as $tipo_cliente)
+                            @foreach ($usuarios as $usuario)
                                 <tr>
                                     <td></td>
-                                    <td>{{ $tipo_cliente->nome }}</td>
-                                    <td>{{ $tipo_cliente->descricao }}</td>
+                                    <td>{{ $usuario->id }}</td>
+                                    <td>{{ $usuario->name }}</td>
+                                    <td>{{ $usuario->email }}</td>
                                     <td>
-                                        <a href="{{ route('tipo_clientes.edit', ['id' => \Crypt::encrypt($tipo_cliente->id)]) }}"
+                                        <a href="{{ route('usuarios.edit', ['id' => \Crypt::encrypt($usuario->id)]) }}"
                                             class="btn btn-padrao1-icons">
                                             <i class="bi bi-pencil-square"></i>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -61,7 +81,7 @@
                                             </svg>
 
                                         </a>
-                                        <a href="#" onclick="return ConfirmaExclusao({{ $tipo_cliente->id }})"
+                                        <a href="#" onclick="return ConfirmaExclusao({{ $usuario->id }})"
                                             class="btn btn-padrao2-icons">
                                             <i class="bi bi-archive">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -76,12 +96,13 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $tipo_clientes->links() }}
+                    {{ $usuarios->links() }}
                 </div>
             </div>
         </div>
     </div>
+
 @stop
 @section('table-delete')
-    "tipo_clientes"
+    "usuarios"
 @endsection

@@ -1,4 +1,4 @@
-<head>
+{{-- <head>
     <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
@@ -113,4 +113,4 @@
     <script src="js/main.js"></script>
 
     </body>
-</html>
+</html> --}}

@@ -40,7 +40,7 @@
 </tbody>
 @stop
 
-<script>
+{{-- <script>
 $(document).ready(function(){
   var count =1;
   dynamic_field(count);
@@ -95,4 +95,4 @@ $(document).ready(function(){
   
 });
 
-</script>
+</script> --}}

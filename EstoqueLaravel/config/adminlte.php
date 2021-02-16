@@ -194,7 +194,7 @@ return [
 
     'login_url' => 'login',
 
-    'register_url' => 'register',
+    // 'register_url' => 'register',
 
     'password_reset_url' => 'password/reset',
 
@@ -274,12 +274,12 @@ return [
             //         'icon' => 'fas fal fa-user-plus',
             //     ],
             // ],
-        ], 
-        [
-            'text' => 'Fornecedores',
-            'url'  => 'fornecedores',
-            'icon' => 'fas fa-fw fal fa-truck',
-        ],
+        ],         
+        // [
+        //     'text' => 'Fornecedores',
+        //     'url'  => 'fornecedores',
+        //     'icon' => 'fas fa-fw fal fa-truck',
+        // ],
         [
             'text' => 'Produtos',
             'url'  => 'produtos',
@@ -312,10 +312,29 @@ return [
             // ],
         ],
         [
+            'text' => 'Fornecedores',
+            'url'  => 'fornecedores',
+            'icon' => 'fas fa-fw fal fa-truck',
+            'submenu' => [
+                [
+                    'text' => 'Listagem',
+                    'url'  => 'fornecedores',
+                ],
+                [
+                    'text' => 'Pedidos',
+                    'url'  => 'pedidos',
+                ],
+            ],
+        ],
+        [
             'text' => 'Configurações',
             'url'  => 'tipos',
             'icon' => 'fas fa-fw fal fa-align-justify',
             'submenu' => [
+                [
+                    'text' => 'Registro de Usuários',
+                    'url'  => 'usuarios',
+                ],
                 [
                     'text' => 'Categorias',
                     'url'  => 'categorias',

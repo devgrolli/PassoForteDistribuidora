@@ -1,60 +1,60 @@
 @extends('layouts.default')
 @section('content')
-    <h1>Estoque</h1>
-
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
-    <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar com grupos de botões">
-
-        {!! Form::open(['name' => 'form_name', 'route' => 'estoque']) !!}
-        <div class="input-group mb-3">
-            <input type="text" class="form-control-padrao1" name="desc_filtro" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-padrao1" type="submit" name="search" type="button" id="search-btn"><i
-                        class="fa fa-search"></i></button>
+    <div class="col-xxl-4 col-xl-12 mb-4">
+        <div class="card h-100">
+            <div class="card-body h-100 d-flex flex-column justify-content-center py-5 py-xl-4">
+                <div class="col-xl-8 col-xxl-12">
+                    <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
+                        <h1 class="text-primary">Estoque</h1>
+                        <p class="text-gray-700 mb-0">
+                            {{-- Lista de todos as entradas de produto do estoque! --}}
+                        </p>
+                    </div>
+                </div>
             </div>
-
         </div>
-        {!! Form::close() !!}
     </div>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <div class="datatable">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <table class="table table-hover" id="table">
+                            <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
+                                <th></th>
+                                <th>Código</th>
+                                <th>Produto</th>
+                                <th>Validade</th>
+                                <th>Quantidade em Estoque</th>
+                            </thead>
 
-    @include('layouts.alerts')
-
-    <table class="table table-hover" id="table">
-        <thead>
-            <th>Código</th>
-            <th>Produto</th>
-            <th>Validade</th>
-            <th>Quantidade em Estoque</th>
-        </thead>
-
-        <tbody>
-            @foreach ($estoque as $e)
-                <tr>
-                    <td>{{ $e->id }}</td>
-                    <td>{{ $e->nome }}</td>
-                    <td>{{ Carbon\Carbon::parse($e->validade)->format('d/m/Y') }}</td>
-                    @if ($e->quantidade > 0)
-                        <td><span class='badge badge-pill badge-success w-25 p-3'>{{ $e->quantidade }} </span></td>
-                    @else
-                        <td><span class='badge badge-pill badge-danger w-25 p-3'>{{ 'SEM ESTOQUE' }}</span></td>
-                    @endif
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    {{ $estoque->links() }}
-
-@stop
-@section('table-delete')
-    "estoques"
-@endsection
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-
-<script>
-    $("#table > tbody > tr").on("click", function (e) {
-    $(this).siblings().removeClass("ativo");
-    $(this).toggleClass("ativo");
-});
-
-</script>
+                            <tbody align="center" style="margin: 0px auto;">
+                                @foreach ($estoque as $e)
+                                    <tr>
+                                        <td></td>
+                                        <td>{{ $e->id }}</td>
+                                        <td>{{ $e->nome }}</td>
+                                        <td>{{ Carbon\Carbon::parse($e->validade)->format('d/m/Y') }}</td>
+                                        @if ($e->quantidade > 0)
+                                            <td><span class='badge badge-pill badge-success w-25 p-3'>{{ $e->quantidade }}
+                                                </span></td>
+                                        @else
+                                            <td><span
+                                                    class='badge badge-pill badge-danger w-25 p-3'>{{ 'SEM ESTOQUE' }}</span>
+                                            </td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{ $estoque->links() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    @stop
+    @section('table-delete')
+        "estoques"
+    @endsection

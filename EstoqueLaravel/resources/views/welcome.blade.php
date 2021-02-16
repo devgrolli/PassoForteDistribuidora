@@ -38,8 +38,8 @@ Released   : 20140207
                     <ul>
                         <li class="current_page_item"><a href="{{ route('login') }}" accesskey="2" title="">Entrar</a>
                         </li>
-                        <li class="current_page_item"><a href="{{ route('register') }}" accesskey="3"
-                                title="">Cadastrar-se</a></li>
+                        {{-- <li class="current_page_item"><a href="{{ route('register') }}" accesskey="3"
+                                title="">Cadastrar-se</a></li> --}}
                     </ul>
                 </div>
             </div>

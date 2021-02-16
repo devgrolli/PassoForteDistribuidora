@@ -11,8 +11,7 @@ class CreatePedidosTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('produto');

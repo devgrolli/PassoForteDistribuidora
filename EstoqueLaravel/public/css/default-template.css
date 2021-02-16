@@ -13,8 +13,8 @@
 .badge-warning,
 .alert-warning,
 .btn-padrao2-icons {
-    background-color: #ff7300;
-    border-color: #ff7300;
+    background-color: #FF5E32;
+    border-color: #FF5E32;
     color: #ffffff;
     height: 40px;
     border-radius: 25px;
@@ -50,7 +50,7 @@
 
 .form-control-padrao1:focus {
     outline: none;
-    border: 1px solid #e76800;
+    border: 1px solid #FF5E32;
     color: #000000;
 }
 
@@ -79,9 +79,25 @@ a:hover {
 
 thead {
     color: #ffffff;
-    background: #035c77;
+    background: #ffffff;
     border-radius: 10px;
-    border: 4px solid #035c77;
+    border: 3px solid #ffffff;
+}
+
+.letra {
+    color: #006f88;
+}
+
+.card-header {
+    font-size: 40px;
+    font-family: Poppins-Regular;
+}
+
+#thead_colors {
+    font-size: 20px;
+    display: table-header-group;
+    vertical-align: middle;
+    border-bottom-color: inherit;
 }
 
 #table {

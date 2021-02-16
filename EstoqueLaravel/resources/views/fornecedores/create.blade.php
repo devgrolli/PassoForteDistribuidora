@@ -74,6 +74,16 @@
                 </div>
             </div>
 
+            {{-- <div class="form-group row">
+                <label class="col-form-label-lg text-sm-right form-label col-form-label col-sm-2    ">
+                    Large label
+                </label>
+                <div class="col-sm-10">
+                    <input class="form-control form-control-lg"> 
+                </div>
+
+            </div> --}}
+
             </br>
             <div class="form-group">
                 {!! Form::submit('Cadastrar', ['class' => 'btn btn-padrao1']) !!}
