@@ -1,10 +1,5 @@
 @extends('layouts.default')
-
-
 @section('content')
-  
-  @include('layouts.alerts')
-
   <div class="card">
     <div class="card-header" style="background: rgb(52, 58, 64)">
       <h3 style="color:rgb(255, 255, 255)"><strong>Tipos de Cliente</strong></h3>
@@ -27,7 +22,7 @@
           <a href="{{ route('tipo_clientes', []) }}" class="btn btn-padrao2">Cancelar</a>
         </div>
       {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' --> 
-
     </div>
   </div>
+  @include('sweetalert::alert')
 @stop

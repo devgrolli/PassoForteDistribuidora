@@ -19,6 +19,7 @@ class CreateClientesTable extends Migration
             $table->string('email', 30);
             $table->string('telefone', 15);
             $table->string('endereco', 200);
+            $table->string('categoria_cliente')->default('1');
             $table->timestamps();
         });
     }

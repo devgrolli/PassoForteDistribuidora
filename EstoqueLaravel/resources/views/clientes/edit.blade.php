@@ -1,7 +1,6 @@
 @extends('layouts.default')
 
 @section('content')
-  @include('layouts.alerts')
     <div class="card">
       <div class="card-header" style="background: rgb(52, 58, 64)">
         <h3 style="color:rgb(255, 255, 255)"><strong>Editando: </strong>{{ $cliente->nome }}</h3>
@@ -53,4 +52,5 @@
         {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' --> 
       </div>
     </div>
+    @include('sweetalert::alert')
 @stop

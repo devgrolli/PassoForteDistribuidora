@@ -48,6 +48,6 @@ class PedidosController extends Controller{
 
     public function update(PedidoRequest $request, $id) {
         Pedido::find($id)->update($request->all());
-        return redirect()->route('pedidos');
+        return redirect()->route('pedidos')->with('success', "Pedido alterador com sucesso!");
     }
 }

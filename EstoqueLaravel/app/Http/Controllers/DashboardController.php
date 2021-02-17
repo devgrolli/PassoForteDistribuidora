@@ -22,7 +22,7 @@ class DashboardController extends Controller{
         $saldo_saida = DashboardController::totalSaidas();
 
         #Total do caixa
-        $caixa = $saldo_entrada - $saldo_saida;
+        $caixa = $saldo_saida - $saldo_entrada;
 
         return view('dashboard.index', compact(
             'total_clientes', 

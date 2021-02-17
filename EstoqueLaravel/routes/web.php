@@ -10,6 +10,7 @@ use App\Http\Controllers\TipoEntradasController;
 use App\Http\Controllers\TipoSaidasController;
 use App\Http\Controllers\CepController;
 use App\Http\Controllers\UsuariosController;
+use App\Http\Controllers\ExportContorller;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,15 +19,13 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::get('clientes/export/', 'ExportContorller@export')->name('excel');
 
-    Route::group(['prefix'=>'dashboard', 'where'=>['id'=>'[0-9]+']], function() {
-        Route::any('',             ['as'=>'dashboard',        'uses'=>'DashboardController@index' ]);
-        Route::get('store',        ['as'=>'dashboard.store',  'uses'=>'DashboardController@store' ]);
-    });
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
 
     Route::group(['prefix'=>'estoque', 'where'=>['id'=>'[0-9]+']], function() {
         Route::any('',             ['as'=>'estoque',        'uses'=>'EstoqueController@index' ]);

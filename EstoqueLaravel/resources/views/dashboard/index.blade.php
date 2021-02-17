@@ -102,11 +102,11 @@
             </div>
 
             <div class="modal-body">
-              <table class="table table-hover" id="table">
-                <thead>
-                  <th>Nome</th>
-                  <th>Estoque</th>
-                </thead>
+                <table class="table table-hover" id="table">
+                    <thead class="letra" id="thead_colors"  >
+                        <th>Nome</th>
+                        <th>Estoque</th>
+                    </thead>
                 <tbody>
                   @foreach ($estoque_baixo[0] as $eb)
                     <tr>

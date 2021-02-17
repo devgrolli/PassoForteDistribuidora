@@ -12,7 +12,7 @@
 
   <div class="card">
     <div class="card-header div-header-form" style="background: rgb(52, 58, 64)">
-      <h3 style="color:rgb(255, 255, 255)"><strong>Editando Entrada de Produtos</strong></h3>
+      <h3 style="color:rgb(255, 255, 255)"><strong>Editando entrada de produto</strong></h3>
     </div>
 
     <div class="card-body">
@@ -62,7 +62,7 @@
       {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' -->
     </div>
   </div>
-
+  @include('sweetalert::alert')
 @stop
 
 

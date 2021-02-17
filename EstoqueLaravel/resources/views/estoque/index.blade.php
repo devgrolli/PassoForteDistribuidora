@@ -38,12 +38,9 @@
                                         <td>{{ $e->nome }}</td>
                                         <td>{{ Carbon\Carbon::parse($e->validade)->format('d/m/Y') }}</td>
                                         @if ($e->quantidade > 0)
-                                            <td><span class='badge badge-pill badge-success w-25 p-3'>{{ $e->quantidade }}
-                                                </span></td>
+                                            <td><span class='badge badge-pill badge-success w-25 p-3'>{{ $e->quantidade }} </span></td>
                                         @else
-                                            <td><span
-                                                    class='badge badge-pill badge-danger w-25 p-3'>{{ 'SEM ESTOQUE' }}</span>
-                                            </td>
+                                            <td><span class='badge badge-pill badge-danger w-25 p-3'>{{ 'SEM ESTOQUE' }}</span></td>
                                         @endif
                                     </tr>
                                 @endforeach

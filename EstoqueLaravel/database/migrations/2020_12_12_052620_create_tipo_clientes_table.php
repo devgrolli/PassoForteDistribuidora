@@ -16,7 +16,7 @@ class CreateTipoClientesTable extends Migration
         Schema::create('tipo_clientes', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nome', 60);            
-            $table->string('descricao', 200)->nullable();;
+            $table->string('descricao', 200)->nullable();
             $table->timestamps();
         });
     }

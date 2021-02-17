@@ -1,7 +1,6 @@
 @extends('layouts.default')
 
 @section('content')
-  @include('layouts.alerts')
     <div class="card">
       <link rel="stylesheet" type="text/css" href="css/default-template.css">
       <div class="card-header" style="background: rgb(52, 58, 64)">
@@ -24,7 +23,7 @@
 
             <div class="modal-body">
               <table class="table table-hover" id="table">
-                <thead>
+                <thead class="letra" id="thead_colors">
                   <th>Nome</th>
                   <th>Estoque</th>
                 </thead>
@@ -91,6 +90,7 @@
         {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' -->
       </div>
     </div> 
+    @include('sweetalert::alert')
 @stop
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

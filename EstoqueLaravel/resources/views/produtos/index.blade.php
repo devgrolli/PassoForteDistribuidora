@@ -16,8 +16,6 @@
         </div>
     </div>
 
-    @include('layouts.alerts')
-
     <div class="card mb-4">
         <div class="card-body">
             <div class="datatable">
@@ -106,7 +104,7 @@
             </div>
         </div>
     </div>
-
+    @include('sweetalert::alert')
 @stop
 @section('table-delete')
     "produtos"

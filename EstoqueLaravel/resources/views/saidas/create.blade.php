@@ -1,9 +1,8 @@
 @extends('layouts.default') 
 
 @section('content')
-  @include('layouts.alerts')
+<link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="card">
-      <link rel="stylesheet" type="text/css" href="css/default-template.css">
       <div class="card-header" style="background: rgb(52, 58, 64)">
         <h3 style="color:rgb(255, 255, 255)"><strong>Cadastro Saída de Produtos</strong></h3>
       </div>
@@ -13,7 +12,7 @@
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Produtos em Cadastrados</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Estoque</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -80,7 +79,9 @@
       {!! Form::close() !!} 
     </div>
 	</div>
+  @include('sweetalert::alert')
 @stop
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>

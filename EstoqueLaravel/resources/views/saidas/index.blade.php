@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    @include('layouts.alerts')
+    {{-- @include('layouts.alerts') --}}
 
     <div class="card mb-4">
         <div class="card-body">
@@ -80,6 +80,7 @@
 
                                         </a>
                                         <a href="#" onclick="return ConfirmaExclusao({{ $saida->id }})"
+                                            {{-- <a href="{{ route('saidas.destroy', ['id' => $saida->id]) }}"> --}}
                                             class="btn btn-padrao2-icons">
                                             <i class="bi bi-archive">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -99,7 +100,7 @@
             </div>
         </div>
     </div>
-
+    @include('sweetalert::alert')
 @stop
 @section('table-delete')
     "saidas"

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use App\Cliente;
+use App\TipoCliente;
 use App\Http\Requests\ClienteRequest;
 
 class ClientesController extends Controller{
@@ -16,6 +18,38 @@ class ClientesController extends Controller{
             ->orderBy("nome")
             ->paginate(5);
             // ->setpath('clientes?desc_filtro='+$filtragem); 
+
+            // $update_product = TipoCliente::all();
+            // dd($update_product);
+            // $retoma_valor = Saida::find($tipo_cliente_id);
+
+            // $users = DB::table('clientes')
+            // ->select('tipo_cliente_id')
+            // ->join('tipo_clientes', 'tipo_clientes.id', '=', 'clientes.tipo_cliente_id')
+            // ->get();
+
+
+        $users = Cliente::all();
+        foreach ($users as $user) {
+            $nome_tipo = $user->tipo_cliente->nome;
+            switch ($nome_tipo) {
+                case "Bom comprador":
+                    $numero = 1;
+                    break;
+                case "Mal comprador":
+                    $numero = 2;
+                    break;    
+                case "Cancelado":
+                case "Devedor":
+                    $numero = 3;
+                    break; 
+                case "Positivar":
+                    $numero = 4;
+                    break;                     
+            }
+            $user->categoria_cliente = $numero;
+            $user->save();
+        }
         return view('clientes.index', ['clientes'=>$clientes]);
     }
 
@@ -48,6 +82,6 @@ class ClientesController extends Controller{
 
     public function update(ClienteRequest $request, $id){
         Cliente::find($id)->update($request->all());
-        return redirect()->route('clientes');
+        return redirect()->route('clientes')->with('success', "Cliente alterado com sucesso!");
     }
 }

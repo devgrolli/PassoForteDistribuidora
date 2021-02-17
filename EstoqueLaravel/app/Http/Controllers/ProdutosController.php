@@ -26,14 +26,8 @@ class ProdutosController extends Controller{
 
     public function store(ProdutoRequest $request){ 
         $novo_produto = $request->all(); 
-        // $valor = ProdutosController::formataMoeda($request->preco_un);  
-        // $novo_produto['preco_un'] = $valor;
-        if ($request->quantidade != 0){
-            return redirect()->back()->withInput()->with('error', 'Quantidade deve ser igual a ZERO, insira o valor corretamente');
-        }else{
-            Produto::create($novo_produto);
-            return redirect()->route('produtos')->with('success', "Produto cadastrado com sucesso!");
-        }
+        Produto::create($novo_produto);
+        return redirect()->route('produtos')->with('success', "Produto cadastrado com sucesso!");
     }
 
     public static function formataMoeda($get_valor) {
@@ -62,6 +56,6 @@ class ProdutosController extends Controller{
 
     public function update(ProdutoRequest $request, $id){
         Produto::find($id)->update($request->all());
-        return redirect()->route('produtos');
+        return redirect()->route('produtos')->with('success', "Produto alterado com sucesso!");;
     }
 }

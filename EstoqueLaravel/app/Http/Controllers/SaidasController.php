@@ -5,6 +5,8 @@ use App\Saida;
 use App\Produto;
 use App\Http\Requests\SaidaRequest;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class SaidasController extends Controller{
     public function index() {
@@ -21,15 +23,24 @@ class SaidasController extends Controller{
         $nova_saida = $request->all(); 
         $estoque_produto = Produto::find($request->produto_id);
         if ($request->quantidade > $estoque_produto->quantidade) {
-            $msg = "Produto selecionado possui $estoque_produto->quantidade unidade(s) em estoque, tente novamente :(";
-            return redirect()->back()->withInput()->with('error', $msg);
+            Alert::error("Quantidade em estoque: $estoque_produto->quantidade" , 'Quantidade da saída do produto é maior que a quantidade em estoque!');
+            return redirect()->back()->withInput();
+
+        }else if ($request->quantidade == 0){
+            Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada');
+            return redirect()->back()->withInput();
+         
+        }else if ($estoque_produto->quantidade == 0){  
+            Alert::error('Produto sem estoque', "Tente outro produto");
+            return redirect()->back()->withInput();
+
         }else{
             $valor = ProdutosController::formataMoeda($request->preco_un);
             $nova_saida['preco_un'] = $valor;
             Saida::create($nova_saida);
             $estoque_produto->quantidade = $estoque_produto->quantidade - $request->quantidade;
             $estoque_produto->save();
-            return redirect()->route('saidas')->with('success', "Saída cadastrada com sucesso!");
+            return redirect()->route('saidas')->with('success', 'Saída cadastrada com sucesso!');
         }  
     }
 
@@ -45,19 +56,40 @@ class SaidasController extends Controller{
         return $ret; 
     }
 
+    public function atualizaEstoque($id){
+        dd($id);
+        $update_product = Produto::all();
+        $retoma_valor = Saida::find($id)->quantidade;
+        $update_product->quantidade = $retoma_valor; #retoma o valor do produto de entrada
+        $update_product->save();
+    }
+
     public function edit(Request $request){
+        $products = Produto::all();
         $saida = Saida::find(\Crypt::decrypt($request->get('id')));
-        return view('saidas.edit', compact('saida'));
+        return view('saidas.edit', compact('saida', 'products'));
     }
 
     public function update(SaidaRequest $request, $id){
         $request['preco_un'] = ProdutosController::formataMoeda($request->preco_un);
-        Saida::find($id)->update($request->all());
         $busca_produto = Produto::find($request->produto_id);
-        if ($busca_produto->quantidade != 0){  
+        if ($request->quantidade > $busca_produto->quantidade) {
+            Alert::error("Quantidade em estoque: $busca_produto->quantidade" , 'Quantidade da saída do produto é maior que a quantidade em estoque!');
+            return redirect()->back()->withInput();
+
+        }else if ($request->quantidade == 0){
+            Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada');
+            return redirect()->back()->withInput();
+         
+        }else if ($busca_produto->quantidade == 0){  
+            Alert::error('Produto sem estoque', "Tente outro produto");
+            return redirect()->back()->withInput();
+        
+        }else{
+            Saida::find($id)->update($request->all());
             $busca_produto->quantidade = $busca_produto->quantidade - $request->quantidade;
             $busca_produto->save();
+            return redirect()->route('saidas')->with('success', "Saída alterada com sucesso!");
         }
-        return redirect()->route('saidas');
     }
 }
