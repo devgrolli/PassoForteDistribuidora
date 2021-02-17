@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UsuarioRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UsuariosController extends Controller{
     public function index(Request $filtro) {
@@ -16,6 +17,9 @@ class UsuariosController extends Controller{
             $usuarios = User::where('name', 'like', '%'.$filtragem.'%')
             ->orderBy("name")
             ->paginate(5);
+
+        $teste = auth()->user();
+     
         return view('usuarios.index', ['usuarios'=>$usuarios]);
     }
 
@@ -24,10 +28,12 @@ class UsuariosController extends Controller{
     }
 
     public function store(UsuarioRequest $request){ 
+        $teste = auth()->user();
+        dd($teste);
         $senha_criptografada = Hash::make($request->password);
         $request->merge(['password' => $senha_criptografada]);
         User::create($request->all());
-        return redirect()->route('usuarios')->with('success', "Usuário novo cadastrado com sucesso!");;
+        return redirect()->route('usuarios')->with('success', "Usuário novo cadastrado com sucesso!");
     }
 
     public function destroy($id){
@@ -48,11 +54,37 @@ class UsuariosController extends Controller{
     }
 
     public function update(UsuarioRequest $request, $id){
+        $data = $request->all();
+        $compara_db = Auth::user()->all();
 
-        $alterada = Hash::make($request->password);
-        $request->merge(['password' => $alterada]);
-        $c = User::find($id)->update($request->all());
-        return redirect()->route('usuarios');
+        if ($data['password'] != null){
+            $data['password'] = bcrypt($data['password']); 
+        }
+            
+        foreach($compara_db as $db){
+            if ($data['email'] == $db->email){
+                Alert::error('E-mail utilizado', 'Esse e-mail já está sendo utilizado, tente novamente');
+                return redirect()->back()->withInput();
+            }else{
+                $update = auth()->user()->update($data);
+                if($update == true){
+                    return redirect()->route('usuarios')->with('success', "Usuário alterado cadastrado com sucesso");
+                }else{
+                    Alert::error('Erro', 'Falha ao alterar usuário, tente novamente!');
+                    return redirect()->back()->withInput();
+                }
+            }  
+        }
+        
+            
+            // $update = User::find($id)->update($request->all());
+        
+
+
+        // $alterada = Hash::make($request->password);
+        // $request->merge(['password' => $alterada]);
+        // $c = User::find($id)->update($request->all());
+        // return redirect()->route('usuarios');
     }
 }
 

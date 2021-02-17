@@ -195,3 +195,10 @@ h5 {
     background-color: #fffef9;
     color: #000000;
 }
+
+#icon_positivo,
+#icon_negativo,
+#icon_normal,
+#icon_melhorar {
+    font-size: 20px;
+}

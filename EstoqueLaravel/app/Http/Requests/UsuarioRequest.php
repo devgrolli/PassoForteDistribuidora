@@ -21,9 +21,9 @@ class UsuarioRequest extends FormRequest{
      */
     public function rules() {
         return [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
+            // 'name' => 'required',
+            // 'email' => 'required',
+            // 'password' => 'required',
         ];
     }
 }
