@@ -23,6 +23,11 @@ class UserSeeder extends Seeder {
                 'name' => 'João Maria de Oliveira',
                 'email' => 'joaomaria@gmail.com',
                 'password' => 'C0nnect123'
+            ],
+            [
+                'name' => 'Administrador',
+                'email' => 'admin@admin.com',
+                'password' => 'C0nnect123'
             ]
         ];
 

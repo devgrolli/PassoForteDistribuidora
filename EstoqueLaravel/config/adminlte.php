@@ -334,22 +334,27 @@ return [
                 [
                     'text' => 'Registro de Usuários',
                     'url'  => 'usuarios',
+                    'icon' => '',
                 ],
                 [
                     'text' => 'Categorias',
                     'url'  => 'categorias',
+                    'icon' => ''
                 ],
                 [
                     'text' => 'Tipo de Entradas',
                     'url'  => 'tipo_entradas',
+                    'icon' => ''
                 ],
                 [
                     'text' => 'Tipo de Saídas',
                     'url'  => 'tipo_saidas',
+                    'icon' => ''
                 ],
                 [
                     'text' => 'Tipo de Clientes',
                     'url'  => 'tipo_clientes',
+                    'icon' => ''
                 ],
             ],
         ],
