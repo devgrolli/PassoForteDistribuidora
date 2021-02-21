@@ -1,12 +1,15 @@
 @extends('adminlte::page')
-
 @section('content')
-    <div class="card">
-      <div class="card-header" style="background: rgb(52, 58, 64)">
-        <h3 style="color:rgb(255, 255, 255)"><strong>Editando Produtos</strong></h3>
-      </div>
-  
-      <div class="card-body">
+    <link rel="stylesheet" type="text/css" href="../css/default-template.css">
+    <div id="div_create">
+      <div class="card">
+       <div class="card-header">
+         <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
+           <h1 class="text-create"><strong>Cadastro Produtos</strong></h1> 
+         </div>
+       </div>
+   
+       <div class="card-body" id="card_crud">
         {!! Form::open(['route'=> ["produtos.update", 'id'=>$produto->id], 'method'=>'put']) !!}
 
         <div class="form-row">
@@ -36,11 +39,12 @@
         </div>
         <br>
           <div class="form-group">
-            {!! Form::submit('Salvar', ['class'=>'btn btn-padrao1']) !!}
-            <a href="{{ route('produtos', []) }}" class="btn btn-padrao2">Cancelar</a>
+            {!! Form::button('Salvar <i class="far fa-save"></i>',['class'=>'btn btn-padrao1', 'type'=>'submit']) !!}
+            <a href="{{ route('produtos', []) }}" class="btn btn-padrao2">Cancelar <i class="fas fa-ban"></i></a>
           </div>
         {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' --> 
       </div>
     </div>
+  </div>
     @include('sweetalert::alert')
 @stop

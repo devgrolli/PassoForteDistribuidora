@@ -25,9 +25,18 @@
                             <a href="{{ route('produtos.create', []) }}" type="button" class="btn btn-padrao1-div_table">Cadastrar
                                 <i class="fa fa-plus" aria-hidden="true"></i></a>
                             </a>
-                            <a href="{{ route('produtos.export', ['type' => 'produtos']) }}" type="button" class="btn btn-padrao2-div_table"> 
-                                Exportar Excel <i class="fas fa-file-export"></i>
-                            </a>
+                            <button class="btn dropdown-toggle btn-padrao2-div_table" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Documentos 
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">PDF <i class="fas fa-file-pdf iten-icon-pdf"></i></a>
+                                <a class="dropdown-item" href="{{ route('produtos.export', ['type' => 'produtos']) }}"> 
+                                    Exportar excel  <i class="fas fa-file-export iten-icon-excel"></i> 
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                   Importar excel <i class="fas fa-file-import iten-icon-excel"></i>
+                                </a>
+                            </div>
                         </div>
                 
                         <div class="col-sm-12 col-md-4">

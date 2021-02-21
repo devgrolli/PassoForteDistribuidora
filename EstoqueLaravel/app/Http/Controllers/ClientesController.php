@@ -74,4 +74,5 @@ class ClientesController extends Controller{
         Cliente::find($id)->update($request->all());
         return redirect()->route('clientes')->with('success', "Cliente alterado com sucesso!");
     }
+    
 }

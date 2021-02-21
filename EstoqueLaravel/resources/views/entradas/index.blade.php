@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
-    <link rel="stylesheet" type="text/css" href="css/default-template.css">
+    <link rel="stylesheet" type="text/css" href="../css/default-template.css">
     <div class="col-xxl-4 col-xl-12 mb-4">
         <div class="card h-100">
             <div class="card-body h-100 d-flex flex-column justify-content-center py-5 py-xl-4">

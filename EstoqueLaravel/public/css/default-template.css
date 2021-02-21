@@ -77,8 +77,6 @@ a:hover {
     padding-left: 50px;
 }
 
-.display-4 {}
-
 
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
@@ -104,9 +102,22 @@ thead {
     color: #006f88;
 }
 
+.iten-icon-pdf {
+    color: #ff0000;
+}
+
+.iten-icon-excel {
+    color: #148631;
+}
+
 .card-header {
     font-size: 40px;
     font-family: Poppins-Regular;
+    background-color: rgb(52, 58, 64);
+}
+
+.text-create {
+    color: #ffffff;
 }
 
 #thead_colors {
@@ -140,6 +151,18 @@ thead {
     font-size: 16px;
 }
 
+#card_crud {
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 30px;
+}
+
+#div_create {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 5px;
+}
+
 .dashtext {
     font-family: Poppins-Regular;
     font-size: 50px;
@@ -162,6 +185,13 @@ h5 {
     font-family: Poppins-Regular;
     font-weight: bold;
     padding-top: 0px;
+}
+
+a,
+td,
+.p-div-text {
+    font-family: Poppins-Regular;
+    font-size: 15px;
 }
 
 .bg_1,
@@ -213,11 +243,4 @@ h5 {
 .bg_6 {
     background-color: #fffef9;
     color: #000000;
-}
-
-#icon_positivo,
-#icon_negativo,
-#icon_normal,
-#icon_melhorar {
-    font-size: 20px;
 }

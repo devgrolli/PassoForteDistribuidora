@@ -1,13 +1,13 @@
 @extends('layouts.default')
 @section('content')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
-    <div class="col-xxl-4 col-xl-12 mb-4">
+    <div class="col-xxl-4 col-xl-12 mb-4" >
         <div class="card h-100">
             <div class="card-body h-100 d-flex flex-column justify-content-center py-5 py-xl-4">
                 <div class="col-xl-8 col-xxl-12">
                     <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
                         <h1 class="text-primary">Clientes <i class="fas fal fa-users"> </i></h1> 
-                        <p class="text-gray-700 mb-0">
+                        <p class="text-gray-700 mb-0 p-div-text">
                             Lista de todos os clientes!
                         </p>
                     </div>
@@ -29,10 +29,11 @@
                                     </a>
                                     <a href="{{ route('tipo_clientes.create', []) }}" type="button" class="btn btn-padrao2-div_table">
                                         Cadastrar Tipo de Cliente <i class="fa fa-plus" aria-hidden="true"></i>
-                                    </a>
+                                    </a>                                   
                                     <a href="{{ route('clientes.export', ['type' => 'clientes']) }}" type="button" class="btn btn-padrao1-div_table"> 
                                         Exportar Excel <i class="fas fa-file-export"></i>
-                                    </a>    
+                                    </a>
+                        
                                 </div>
                             </div>
                         </div>

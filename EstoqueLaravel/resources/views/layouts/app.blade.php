@@ -1,6 +1,9 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+
+    <link rel="stylesheet" href="{{ asset('css/default-template.css') }}">
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -61,8 +64,6 @@
                                         {{ __('Logout') }}
                                     </a>
                                     
-                                    
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -77,7 +78,6 @@
 
         <main class="py-4">
             @yield('content')
-            
         </main>
     </div>
 </body>
