@@ -18,7 +18,6 @@ class NotificationController extends Controller{
         $notification_entradas = DB::table('entradas')->count();
         $notification_saidas = DB::table('saidas')->count();
 
-
         return compact(
             'total_clientes', 
             'total_produtos', 

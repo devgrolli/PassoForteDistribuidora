@@ -15,12 +15,9 @@
                         <div class="col-sm-12 col-md-6">
                             <div class="dataTables_length">
                                 <a href="{{ route('tipo_entradas.create', []) }}"
-                                    class="btn btn-padrao1">Cadastrar</a><br></br>
+                                    class="btn btn-padrao1-div_table">Cadastrar
+                                    <i class="fa fa-plus" aria-hidden="true"></i></a><br></br>
                             </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_filter"> </div>
                         </div>
                     </div>
 

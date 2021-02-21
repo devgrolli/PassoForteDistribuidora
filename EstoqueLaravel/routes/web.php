@@ -19,13 +19,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
-
-
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('clientes/export/', 'ExportContorller@export')->name('excel');
+    #Exportar excel
+    Route::get('{type}/clientes/export', ['as'=>'clientes.export',  'uses'=>'ExportContorller@export']);
+    Route::get('{type}/produtos/export', ['as'=>'produtos.export',  'uses'=>'ExportContorller@export']);
+    Route::get('{type}/entradas/export', ['as'=>'entradas.export',  'uses'=>'ExportContorller@export']);
+    Route::get('{type}/saidas/export',   ['as'=>'saidas.export',    'uses'=>'ExportContorller@export']);
 
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/ajuda',    'AjudaController@index')->name('ajuda');
 
     Route::group(['prefix'=>'estoque', 'where'=>['id'=>'[0-9]+']], function() {
         Route::any('',             ['as'=>'estoque',        'uses'=>'EstoqueController@index' ]);
@@ -33,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['prefix'=>'usuarios', 'where'=>['id'=>'[0-9]+']], function() {
-        Route::any('',             ['as'=>'usuarios',        'uses'=>'UsuariosController@index' ]);
+        Route::any('',             ['as'=>'usuarios',         'uses'=>'UsuariosController@index'  ]);
         Route::get('create',       ['as'=>'usuarios.create',  'uses'=>'UsuariosController@create' ]);
         Route::get('{id}/destroy', ['as'=>'usuarios.destroy', 'uses'=>'UsuariosController@destroy']);
         Route::get('edit',         ['as'=>'usuarios.edit',    'uses'=>'UsuariosController@edit'   ]);

@@ -21,34 +21,29 @@
             <div class="datatable">
                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_length">
-                                <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar com grupos de botões">
-                                    <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
-                                        <div class="float-sm-left">
-                                            <a href="{{ route('produtos.create', []) }}" class="btn btn-padrao1">Cadastrar
-                                                <i class="fa fa-plus" aria-hidden="true"></i></a><br></br>
-                                        </div>
-                                    </div>
-
-                                    {!! Form::open(['name' => 'form_name', 'route' => 'produtos']) !!}
-                                    <div class="input-group mb-3">
-                                        <input type="text" class="form-control-padrao1" name="desc_filtro"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-padrao1" type="submit" name="search" type="button"
-                                                id="search-btn"><i class="fa fa-search"></i></button>
-                                        </div>
-                                    </div>
-                                    {!! Form::close() !!}
+                        <div class="btn-group" role="group" aria-label="Exemplo básico">
+                            <a href="{{ route('produtos.create', []) }}" type="button" class="btn btn-padrao1-div_table">Cadastrar
+                                <i class="fa fa-plus" aria-hidden="true"></i></a>
+                            </a>
+                            <a href="{{ route('produtos.export', ['type' => 'produtos']) }}" type="button" class="btn btn-padrao2-div_table"> 
+                                Exportar Excel <i class="fas fa-file-export"></i>
+                            </a>
+                        </div>
+                
+                        <div class="col-sm-12 col-md-4">
+                            {!! Form::open(['name' => 'form_name', 'route' => 'produtos']) !!}
+                            <div class="input-group mb-8">
+                                <input type="text" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-padrao1-div_table" type="submit" name="search"
+                                        type="button" id="search-btn"><i class="fa fa-search"></i>
+                                    </button>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_filter"> </div>
+                            {!! Form::close() !!}
                         </div>
                     </div>
+                    <br>
 
                     <table class="table table-hover" id="table">
                         <thead class="letra" id="thead_colors">

@@ -26,24 +26,34 @@
                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
-                            <div class="btn-group" role="group" aria-label="Exemplo básico">
-                                <a href="{{ route('saidas.create', []) }}" type="button" class="btn btn-padrao1">Cadastrar
-                                    <i class="bi bi-cart-dash-fill"></i>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                        class="bi bi-cart-dash-fill" viewBox="0 0 20 20">
-                                        <path
-                                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM6.5 7h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1 0-1z" />
-                                    </svg>
-                                </a>
-                                <a href="{{ route('tipo_saidas.create', []) }}" type="button"
-                                    class="btn btn-padrao2">Cadastrar Tipo de Saídas
-                                    <i class="fa fa-plus" aria-hidden="true"></i>
-                                </a>
-                            </div><br><br>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_filter"> </div>
+                            <div class="dataTables_length">
+                                <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar com grupos de botões">
+                                    <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
+                                        <div class="btn-toolbar mb-3" role="toolbar"
+                                            aria-label="Toolbar com grupos de botões">
+                                            <div class="btn-group" role="group" aria-label="Exemplo básico">
+                                                <a href="{{ route('saidas.create', []) }}" type="button"
+                                                    class="btn btn-padrao1-div_table">Cadastrar
+                                                    <i class="bi bi-cart-plus-fill"></i>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                                        fill="currentColor" class="bi bi-cart-plus-fill"
+                                                        viewBox="0 0 20 20">
+                                                        <path
+                                                            d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                                                    </svg>
+                                                </a>
+                                                <a href="{{ route('tipo_saidas.create', []) }}" type="button"
+                                                    class="btn btn-padrao2-div_table">Cadastrar Tipo de Saída
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                </a>
+                                                <a href="{{ route('saidas.export', ['type' => 'saidas']) }}" type="button" class="btn btn-padrao1-div_table"> 
+                                                    Exportar Excel <i class="fas fa-file-export"></i>
+                                                </a>
+                                            </div><br><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

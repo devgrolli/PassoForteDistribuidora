@@ -22,10 +22,11 @@ class DashboardController extends Controller{
         $saldo_saida = DashboardController::totalSaidas();
 
         #Total do caixa
-        if ($saldo_entrada > $saldo_saida)
+        if ($saldo_entrada > $saldo_saida){
             $caixa = 0;
-        else
+        }else{
             $caixa = $saldo_saida - $saldo_entrada;
+        }
 
         return view('dashboard.index', compact(
             'total_clientes', 

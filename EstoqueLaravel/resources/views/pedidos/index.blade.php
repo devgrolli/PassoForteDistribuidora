@@ -27,17 +27,17 @@
                                 <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar com grupos de botões">
                                     <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
                                         <div class="float-sm-left">
-                                            <a href="{{ route('pedidos.create', []) }}" class="btn btn-padrao1">Cadastrar
+                                            <a href="{{ route('pedidos.create', []) }}" class="btn btn-padrao1-div_table">Cadastrar
                                                 <i class="fa fa-plus" aria-hidden="true"></i></a><br></br>
                                         </div>
                                     </div>
 
                                     {!! Form::open(['name' => 'form_name', 'route' => 'pedidos']) !!}
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control-padrao1" name="desc_filtro"
+                                        <input type="text" class="form-control-padrao1-div_table" name="desc_filtro"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn btn-padrao1" type="submit" name="search" type="button"
+                                            <button class="btn btn-padrao1-div_table" type="submit" name="search" type="button"
                                                 id="search-btn"><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>

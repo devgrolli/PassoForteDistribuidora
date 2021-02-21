@@ -57,7 +57,6 @@ class SaidasController extends Controller{
     }
 
     public function atualizaEstoque($id){
-        dd($id);
         $update_product = Produto::all();
         $retoma_valor = Saida::find($id)->quantidade;
         $update_product->quantidade = $retoma_valor; #retoma o valor do produto de entrada

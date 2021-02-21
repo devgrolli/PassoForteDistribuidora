@@ -29,7 +29,7 @@
                                             aria-label="Toolbar com grupos de botões">
                                             <div class="btn-group" role="group" aria-label="Exemplo básico">
                                                 <a href="{{ route('entradas.create', []) }}" type="button"
-                                                    class="btn btn-padrao1">Cadastrar
+                                                    class="btn btn-padrao1-div_table">Cadastrar
                                                     <i class="bi bi-cart-plus-fill"></i>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cart-plus-fill"
@@ -39,17 +39,16 @@
                                                     </svg>
                                                 </a>
                                                 <a href="{{ route('tipo_entradas.create', []) }}" type="button"
-                                                    class="btn btn-padrao2">Cadastrar Tipo de Entrada
+                                                    class="btn btn-padrao2-div_table">Cadastrar Tipo de Entrada
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
+                                                </a>
+                                                <a href="{{ route('entradas.export', ['type' => 'entradas']) }}" type="button" class="btn btn-padrao1-div_table"> 
+                                                    Exportar Excel <i class="fas fa-file-export"></i>
                                                 </a>
                                             </div><br><br>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="col-sm-12 col-md-6">
-                                <div class="dataTables_filter"> </div>
                             </div>
                         </div>
 

@@ -21,30 +21,27 @@
             <div class="datatable">
                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_length">
-                                <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar com grupos de botões">
-                                    <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">               
-                                        <div class="form-group col-12">
-                                            <div class="btn-group float-sm-left" role="group" aria-label="Exemplo básico">
-                                                <a href="{{ route('clientes.create', []) }}" type="button" class="btn btn-padrao1">
-                                                    Cadastrar <i class="fa fa-user-plus" aria-hidden="true"></i>
-                                                </a>
-                                                <a href="{{ route('tipo_clientes.create', []) }}" type="button" class="btn btn-padrao2">Cadastrar Tipo de Cliente <i class="fa fa-plus" aria-hidden="true"></i></a>
-                                                    <a href="{{ route('excel') }}" type="button" class="btn btn-padrao1"> Exportar PDF <i class="fas fa-file-export"></i>
-                                                </a>    
-                                            </div>
-                                        </div>      
-                                    </div>
+                        <div class="btn-group mr-2">               
+                            <div class="form-group col-12">
+                                <div class="btn-group float-sm-left" role="group" aria-label="Exemplo básico">
+                                    <a href="{{ route('clientes.create', []) }}" type="button" class="btn btn-padrao1-div_table">
+                                        Cadastrar <i class="fa fa-user-plus" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="{{ route('tipo_clientes.create', []) }}" type="button" class="btn btn-padrao2-div_table">
+                                        Cadastrar Tipo de Cliente <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </a>
+                                    <a href="{{ route('clientes.export', ['type' => 'clientes']) }}" type="button" class="btn btn-padrao1-div_table"> 
+                                        Exportar Excel <i class="fas fa-file-export"></i>
+                                    </a>    
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-4">
                             {!! Form::open(['name' => 'form_name', 'route' => 'fornecedores']) !!}
                             <div class="input-group mb-8">
-                                <input type="text" class="form-control-padrao1" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
                                 <div class="input-group-append">
-                                    <button class="btn btn-padrao1" type="submit" name="search"
+                                    <button class="btn btn-padrao1-div_table" type="submit" name="search"
                                         type="button" id="search-btn"><i class="fa fa-search"></i>
                                     </button>
                                 </div>
