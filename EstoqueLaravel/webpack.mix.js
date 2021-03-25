@@ -16,3 +16,7 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.js("resources/js/loading.js", "public/js")
     .sass("resources/sass/loading.scss", "public/css");
+
+
+mix.js("resources/js/spinner.js", "public/js")
+    .sass("resources/sass/spinner.scss", "public/css");

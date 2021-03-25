@@ -82,7 +82,7 @@
                     <table class="table table-hover" id="table">
                         <thead class="letra" id="thead_colors">
                             <th>Nome</th>
-                            <th>Estoque</th>
+                            <th>Quantidade</th>
                         </thead>
                         <tbody>
                             @foreach ($products as $product)

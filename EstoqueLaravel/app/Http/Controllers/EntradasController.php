@@ -35,6 +35,7 @@ class EntradasController extends Controller{
     }
 
     public function destroy($id){
+
         try {
             Entrada::find($id)->delete();
             $ret = array('status'=>200, 'msg'=>"null");

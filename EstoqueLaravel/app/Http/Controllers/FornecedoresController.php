@@ -21,7 +21,7 @@ class FornecedoresController extends Controller{
         // $telefone_formatado = preg_replace("/[^0-9]/", "", $request->telefone);
         // $novo_fornecedor['telefone'] = $telefone_formatado;
         Fornecedor::create($novo_fornecedor);
-        return redirect()->route('fornecedores')->with('success', "Fornecedor cadastrado com sucesso!");;
+        return redirect()->route('fornecedores')->with('success', "Fornecedor cadastrado com sucesso!");
     }
 
     public function destroy($id){
@@ -43,6 +43,6 @@ class FornecedoresController extends Controller{
 
     public function update(FornecedorRequest $request, $id) {
         Fornecedor::find($id)->update($request->all());
-        return redirect()->route('fornecedores');
+        return redirect()->route('fornecedores')->with('success', "Fornecedor editado com sucesso!");
     }
 }

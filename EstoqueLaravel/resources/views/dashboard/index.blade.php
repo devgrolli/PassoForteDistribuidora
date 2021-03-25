@@ -5,10 +5,120 @@
     <h7 class="display-4 dashtext d-none d-sm-block ">
         Dashboard
     </h7>
-    <div class="col main pt-2 mt-3"  >
+      <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card-dash border-left-entrada shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><h6>
+                                Total de Entradas</h6></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ number_format($saldo_entrada, 2, ',', '.') }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <a href="{{ route('entradas', []) }}" ><i class="fas fa-fw fal fa-shopping-cart fa-4x" id="entrada_dashborad_icon"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card-dash border-left-saida shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            <h6>Total de Saídas</h6></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ number_format($saldo_saida, 2, ',', '.') }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <a href="{{ route('saidas', []) }}" ><i class="fa fa-share fa-4x" id="saida_dashborad_icon"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card-dash border-left-estoque shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            <h6>Produtos com estoque baixo</h6></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $estoque_baixo[1] }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn " type="button" data-toggle="modal" data-target="#exampleModal"> 
+                                <i class="fa fa-window-restore fa-4x" id="estoque_dashborad_icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card-dash border-left-cliente shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            <h6>Total de Clientes</h6></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_clientes}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <a href="{{ route('clientes', []) }}" ><i class="fas fal fa-users fa-4x" id="user_dashborad_icon"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card-dash border-left-caixa shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            <h6>Total de Caixa</h6></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ number_format($caixa, 2, ',', '.') }}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fal fa-chart-line fa-4x" id="caixa_dashborad_icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card-dash border-left-produtos shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            <h6>Produtos cadastrados</h6></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_produtos}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-fw fal fa-barcode fa-4x" id="produtos_dashborad_icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+    {{-- <div class="col main pt-2  mt-3">
         <div class="row mb-3">
-            <div class="col-xl-3 col-sm-6 py-2" >
-                <div class="card text-white bg_1 h-100">
+            <div class="col-xl-3 col-sm-1 py-2" >
+                <div class="card text-white bg_1">
                     <div class="card-body">
                         <div class="rotate">
                             <a href="{{ route('clientes', []) }}" ><i class="fas fal fa-users fa-4x"></i></a>
@@ -20,7 +130,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 py-2">
-                <div class="card text-white bg_2 h-100">
+                <div class="card text-white bg_2">
                     <div class="card-body">
                         <div class="rotate">
                             <a href="{{ route('produtos', []) }}" ><i class="fas fa-fw fal fa-barcode fa-4x"></i></a>
@@ -32,7 +142,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 py-2">
-                <div class="card text-white bg_3 h-100">
+                <div class="card text-white bg_3">
                     <div class="card-body ">
                         <div class="rotate">
                             <a href="{{ route('entradas', []) }}" ><i class="fas fa-fw fal  fa-shopping-cart fa-4x"></i></a>
@@ -45,7 +155,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 py-2">
-                <div class="card text-white bg_4 h-100">
+                <div class="card text-white bg_4 h-60">
                     <div class="card-body">
                         <div class="rotate">
                             <a href="{{ route('saidas', []) }}" ><i class="fa fa-share fa-4x"></i></a>
@@ -60,7 +170,7 @@
             </div>
 
             <div class="col-xl-3 col-sm-6 py-2">
-                <div class="card bg_5 h-100">
+                <div class="card bg_5 h-60">
                     <div class="card-body">
                         <div class="rotate">
                             <i class="fas fal fa-chart-line fa-4x"></i>
@@ -72,7 +182,7 @@
                 </div>
             </div>
             <div class="col-xl-3 col-sm-6 py-2">
-                <div class="card bg_6 h-100">
+                <div class="card bg_6 h-60">
                     <div class="card-body ">
                         <div class="rotate">
                             <a href="{{ route('entradas', []) }}" ><i class="fas fa-fw fal fa-exclamation-triangle fa-4x"></i></a>
@@ -86,6 +196,7 @@
                 </div>
             </div>
         </div>
+         --}}
 
 
         <!-- Modal -->
@@ -123,7 +234,7 @@
         
         <!--/row-->
 
-        <hr>
+        {{-- <hr>
         <div class="row placeholders mb-3">
             <div class="col-6 col-sm-3 placeholder text-center">
                 <img src="//placehold.it/200/dddddd/fff?text=1" class="mx-auto img-fluid rounded-circle"
@@ -149,7 +260,7 @@
                 <h4>Framework</h4>
                 <span class="text-muted">CSS and JavaScript</span>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 

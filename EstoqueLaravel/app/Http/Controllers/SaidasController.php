@@ -15,7 +15,13 @@ class SaidasController extends Controller{
 	}
 
     public function create(){ 
-        $products = Produto::all();
+        $produtos_disponiveis = Produto::all();
+        $products = array();
+        foreach($produtos_disponiveis as $p) {
+            if ($p->quantidade != 0){
+                array_push($products, $p);
+            }
+        }
         return view('saidas.create', compact('products'));
     }
 
@@ -46,6 +52,7 @@ class SaidasController extends Controller{
 
     public function destroy($id){
         try {
+            dd($id);
             Saida::find($id)->delete();
             $ret = array('status'=>200, 'msg'=>"null");
         }catch(\Illuminate\Database\QueryException $e){
