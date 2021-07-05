@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-4">
-                            {!! Form::open(['name' => 'form_name', 'route' => 'fornecedores']) !!}
+                            {!! Form::open(['name' => 'form_name', 'route' => 'clientes']) !!}
                             <div class="input-group mb-8">
                                 <input type="text" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
                                 <div class="input-group-append">

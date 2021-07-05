@@ -25,7 +25,7 @@
                     </div>
                     <div class="col">
                         {!! Form::label('quantidade', 'Quantidade') !!}
-                        {!! Form::number('quantidade', null, ['class' => 'form-control', 'required']) !!}
+                        {!! Form::number('quantidade', null, ['class' => 'form-control', 'required', 'pattern' => '[0-9]+([,\.][0-9]+)?']) !!}
                     </div>
                     <div class="col">
                         {!! Form::label('preco_un', 'Preço Unitário') !!}

@@ -52,7 +52,6 @@ class SaidasController extends Controller{
 
     public function destroy($id){
         try {
-            dd($id);
             Saida::find($id)->delete();
             $ret = array('status'=>200, 'msg'=>"null");
         }catch(\Illuminate\Database\QueryException $e){

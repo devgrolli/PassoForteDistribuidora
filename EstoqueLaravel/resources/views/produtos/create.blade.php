@@ -15,7 +15,7 @@
       <div class="form-row">
         <div class="col">
           {!! Form::label('id', 'Código do produto') !!}
-          {!! Form::text('id', null, ['class'=>'form-control']) !!}
+          {!! Form::number('id', null, ['class'=>'form-control', 'pattern' => '[0-9]+([,\.][0-9]+)?']) !!}
         </div>
           <div class="col">
             {!! Form::label('nome', 'Nome') !!}

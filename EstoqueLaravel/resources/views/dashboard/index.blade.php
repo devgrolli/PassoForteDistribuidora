@@ -16,7 +16,16 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ number_format($saldo_entrada, 2, ',', '.') }}</div>
                         </div>
                         <div class="col-auto">
-                            <a href="{{ route('entradas', []) }}" ><i class="fas fa-fw fal fa-shopping-cart fa-4x" id="entrada_dashborad_icon"></i></a>
+                            <a href="{{ route('entradas', []) }}" >
+                                <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com//uetqnvvg.json"
+                                    trigger="loop"
+                                    colors="primary:#173820,secondary:#173820"
+                                    stroke="71"
+                                    style="width:70PX;height:70PX">
+                                </lord-icon>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -33,7 +42,16 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ number_format($saldo_saida, 2, ',', '.') }}</div>
                         </div>
                         <div class="col-auto">
-                            <a href="{{ route('saidas', []) }}" ><i class="fa fa-share fa-4x" id="saida_dashborad_icon"></i></a>
+                            <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+                            <a href="{{ route('saidas', []) }}" >
+                                <lord-icon
+                                    src="https://cdn.lordicon.com//krmfspeu.json"
+                                    trigger="loop"
+                                    colors="primary:#4c5253,secondary:#4c5253"
+                                    stroke="80"
+                                    style="width:70px;height:70px">
+                                </lord-icon>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -51,7 +69,14 @@
                         </div>
                         <div class="col-auto">
                             <button class="btn " type="button" data-toggle="modal" data-target="#exampleModal"> 
-                                <i class="fa fa-window-restore fa-4x" id="estoque_dashborad_icon"></i>
+                            <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+                            <lord-icon
+                                src="https://cdn.lordicon.com//tdrtiskw.json"
+                                trigger="loop"
+                                colors="primary:#0a4e5c,secondary:#0a4e5c"
+                                stroke="80"
+                                style="width:70px;height:70px">
+                            </lord-icon>
                         </div>
                     </div>
                 </div>
@@ -67,8 +92,18 @@
                             <h6>Total de Clientes</h6></div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_clientes}}</div>
                         </div>
+                        
                         <div class="col-auto">
-                            <a href="{{ route('clientes', []) }}" ><i class="fas fal fa-users fa-4x" id="user_dashborad_icon"></i></a>
+                            <a href="{{ route('clientes', []) }}">
+                                <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com//uukerzzv.json"
+                                    trigger="loop"
+                                    colors="primary:#ff5e32,secondary:#ff5e32"
+                                    stroke="80"
+                                    style="width:70px;height:70px">
+                                </lord-icon>
+                            </a>  
                         </div>
                     </div>
                 </div>
@@ -83,11 +118,47 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            <h6>Total de Caixa</h6></div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ number_format($caixa, 2, ',', '.') }}</div>
+                            @if(is_array($caixa) == true)
+                                <h6 style="color: #FF0000" >Total de Caixa - Prejuízo 
+                                    <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+                                    <lord-icon
+                                        src="https://cdn.lordicon.com//tdrtiskw.json"
+                                        trigger="loop"
+                                        colors="primary:#FF0000,secondary:#FF0000"
+                                        stroke="90"
+                                        style="width:30px;height:30px">
+                                    </lord-icon>
+                                </h6></div>
+                                <div class="h5 mb-0 font-weight-bold text-red-800" style="color: #FF0000">
+                                    R$ {{ number_format($caixa[0], 2, ',', '.') }} 
+                                </div>
+                            @else
+                                <h6>Total de Caixa</h6></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ number_format($caixa, 2, ',', '.') }}</div>
+                            @endif
                         </div>
+
                         <div class="col-auto">
-                            <i class="fas fal fa-chart-line fa-4x" id="caixa_dashborad_icon"></i>
+                            @if(is_array($caixa) == true)
+                                <svg  viewBox="0 0 24 24"  width="70" height="70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <style>
+                                    @keyframes downit{0%{opacity:0;transform:translate(0,-4px) scaleX(.9) scaleY(.9)}25%{opacity:1;transform:translate(0,2px) 
+                                        scaleX(.7) scaleY(.7)}to{opacity:0;transform:translate(0,2px) scaleX(1) scaleY(1)}}
+                                </style>
+                                    <circle cx="12" cy="12" r="8.5" stroke="#242424"/>
+                                    <path d="M12.5 8a.5.5 0 00-1 0h1zm-1 7.2a.5.5 0 001 0h-1zm-2.146-2.754a.5.5 0 00-.708.708l.708-.708zM12 15.8l-.354.354a.5.5 0 00.708 0L12 15.8zm3.354-2.646a.5.5 0 00-.708-.708l.708.708zM11.5 8v7.2h1V8h-1zm-2.854 5.154l3 3 .708-.708-3-3-.708.708zm3.708 3l3-3-.708-.708-3 3 .708.708z" 
+                                    fill="#242424" style="animation:downit cubic-bezier(.9,-.32,0,1.56) 1.5s infinite;transform-origin:50% 50%"/>
+                                </svg>
+                            @else
+                                <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com//gqdnbnwt.json"
+                                    trigger="loop"
+                                    colors="primary:#eeca66,secondary:#eeca66"
+                                    stroke="80"
+                                    style="width:70px;height:70px">
+                                </lord-icon>
+                            @endif    
                         </div>
                     </div>
                 </div>
@@ -104,7 +175,14 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_produtos}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fas fa-fw fal fa-barcode fa-4x" id="produtos_dashborad_icon"></i>
+                            <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com//slkvcfos.json"
+                                    trigger="loop"
+                                    colors="primary:#f8efbe,secondary:#f8efbe"
+                                    stroke="80"
+                                    style="width:70PX;height:70PX">
+                                </lord-icon>
                         </div>
                     </div>
                 </div>

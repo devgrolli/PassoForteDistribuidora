@@ -17,6 +17,7 @@ class ProdutosController extends Controller{
             ->orderBy("nome")
             ->paginate(5);
                 // ->setpath('produtos?desc_filtro='+$filtragem); 
+
         return view('produtos.index', ['produtos'=>$produtos]);
     }
 
