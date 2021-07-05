@@ -34,6 +34,6 @@ class CreatePedidosTable extends Migration
 
     /**
      * DROP SCHEMA public CASCADE;
-       CREATE SCHEMA public;
+     * CREATE SCHEMA public;
      */
 }

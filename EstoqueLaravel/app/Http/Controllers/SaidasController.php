@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 use App\Saida;
 use App\Produto;
+use App\Entrada;
 use App\Http\Requests\SaidaRequest;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -28,16 +30,24 @@ class SaidasController extends Controller{
     public function store(SaidaRequest $request){ 
         $nova_saida = $request->all(); 
         $estoque_produto = Produto::find($request->produto_id);
+        $verifica_valor_entrada = DB::table('entradas')->where('produto_id', '=', $estoque_produto->id)->get()->first();
+        $nome_tipo_saida = DB::table('tipo_saidas')->where('id', '=', $request->tipo_saidas_id)->get()->first();
+
+
         if ($request->quantidade > $estoque_produto->quantidade) {
-            Alert::error("Quantidade em estoque: $estoque_produto->quantidade" , 'Quantidade da saída do produto é maior que a quantidade em estoque!');
+            Alert::error("Quantidade em estoque: $estoque_produto->quantidade" , 'Quantidade da saída do produto é maior que a quantidade em estoque!')->persistent('Close');
             return redirect()->back()->withInput();
 
         }else if ($request->quantidade == 0){
-            Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada');
+            Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada')->persistent('Close');
             return redirect()->back()->withInput();
-         
+
         }else if ($estoque_produto->quantidade == 0){  
-            Alert::error('Produto sem estoque', "Tente outro produto");
+            Alert::error('Produto sem estoque', "Tente outro produto")->persistent('Close');
+            return redirect()->back()->withInput();
+
+        }else if (($nome_tipo_saida->nome != 'Outras Saídas') && ($nome_tipo_saida->nome != 'Remessa') && ($nome_tipo_saida->nome != 'Ajuste de Estoque') && (floatval($request->preco_un) < floatval($verifica_valor_entrada->preco_un))){ 
+            Alert::error('Valor da saída abaixo do valor de entrada', "Preço para o tipo de saída '$nome_tipo_saida->nome' está abaixo do preço de entrada, tente outro tipo ou um valor maior")->persistent('Close');
             return redirect()->back()->withInput();
 
         }else{
@@ -79,15 +89,15 @@ class SaidasController extends Controller{
         $request['preco_un'] = ProdutosController::formataMoeda($request->preco_un);
         $busca_produto = Produto::find($request->produto_id);
         if ($request->quantidade > $busca_produto->quantidade) {
-            Alert::error("Quantidade em estoque: $busca_produto->quantidade" , 'Quantidade da saída do produto é maior que a quantidade em estoque!');
+            Alert::error("Quantidade em estoque: $busca_produto->quantidade" , 'Quantidade da saída do produto é maior que a quantidade em estoque!')->persistent('Close');
             return redirect()->back()->withInput();
 
         }else if ($request->quantidade == 0){
-            Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada');
+            Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada')->persistent('Close');
             return redirect()->back()->withInput();
          
         }else if ($busca_produto->quantidade == 0){  
-            Alert::error('Produto sem estoque', "Tente outro produto");
+            Alert::error('Produto sem estoque', "Tente outro produto")->persistent('Close');
             return redirect()->back()->withInput();
         
         }else{

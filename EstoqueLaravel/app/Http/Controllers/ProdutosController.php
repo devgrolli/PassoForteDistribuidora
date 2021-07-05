@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use App\Produto;
 use App\Http\Requests\ProdutoRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProdutosController extends Controller{
     
@@ -26,9 +28,15 @@ class ProdutosController extends Controller{
     }
 
     public function store(ProdutoRequest $request){ 
-        $novo_produto = $request->all(); 
-        Produto::create($novo_produto);
-        return redirect()->route('produtos')->with('success', "Produto cadastrado com sucesso!");
+        $novo_produto = $request->all();
+        $valida_id = DB::table('produtos')->where('id', '=', $request->id)->get()->first();
+        if ($valida_id == null){
+            Produto::create($novo_produto);
+            return redirect()->route('produtos')->with('success', "Produto cadastrado com sucesso!");
+        }else{
+            Alert::error('Código do produto já utilizado', 'Insira um código que não esteja cadastrado')->persistent('Close');
+            return redirect()->back()->withInput();
+        }
     }
 
     public static function formataMoeda($get_valor) {
@@ -57,6 +65,6 @@ class ProdutosController extends Controller{
 
     public function update(ProdutoRequest $request, $id){
         Produto::find($id)->update($request->all());
-        return redirect()->route('produtos')->with('success', "Produto alterado com sucesso!");;
+        return redirect()->route('produtos')->with('success', "Produto alterado com sucesso!");
     }
 }

@@ -23,7 +23,7 @@ class EntradasController extends Controller{
         $nova_entrada = $request->all(); 
         $estoque_produto = Produto::find($request->produto_id);
         if ($request->quantidade == 0 || $request->quantidade < 0) {
-            Alert::error('Quantidade Inválida', 'Insira uma quantidade maior que zero');
+            Alert::error('Quantidade Inválida', 'Insira uma quantidade maior que zero')->persistent('Close');
             return redirect()->back()->withInput();
         }else{
             $valor = ProdutosController::formataMoeda($request->preco_un);
@@ -68,11 +68,11 @@ class EntradasController extends Controller{
     public function update(EntradaRequest $request, $id){
         $busca_produto = Produto::find($request->produto_id);
         if ($request->quantidade == 0){
-            Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada');
+            Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada')->persistent('Close');
             return redirect()->back()->withInput();
          
         }else if ($busca_produto->quantidade == 0){  
-            Alert::error('Produto sem estoque', "Tente outro produto");
+            Alert::error('Produto sem estoque', "Tente outro produto")->persistent('Close');
             return redirect()->back()->withInput();
         
         }else{

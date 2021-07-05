@@ -94,6 +94,7 @@
         </div>
     </div>
     </div>
+    @include('sweetalert::alert')
 @stop
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
