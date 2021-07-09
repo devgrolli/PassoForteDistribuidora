@@ -12,6 +12,7 @@ class TipoEntradaSeeder extends Seeder
      */
     public function run() {
         TipoEntrada::create(['nome' => 'Compra']);
+        TipoEntrada::create(['nome' => 'Troca']);
         TipoEntrada::create(['nome' => 'Devolução de cliente']);
         TipoEntrada::create(['nome' => 'Transferência entre lojas']);
         TipoEntrada::create(['nome' => 'Retorno de Remessa']);

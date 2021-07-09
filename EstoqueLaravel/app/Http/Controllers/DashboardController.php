@@ -18,15 +18,12 @@ class DashboardController extends Controller{
         $total_entradas = DB::table('entradas')->count();
         $total_saidas = DB::table('saidas')->count();
 
-        // DashboardController::validadeExpirada();
         $estoque_baixo = DashboardController::produtosEstoqueBaixo();
         $saldo_saida = DashboardController::totalSaidas();
         $saldo_entrada = DashboardController::totalEntradas();
         $caixa = DashboardController::totalCaixa();
-        
+        $data_expirada = DashboardController::validadeExpirada();
 
-        #Total do caixa
-        
         return view('dashboard.index', compact(
             'total_clientes', 
             'total_produtos', 
@@ -35,7 +32,8 @@ class DashboardController extends Controller{
             'saldo_entrada', 
             'saldo_saida',
             'estoque_baixo', 
-            'caixa'
+            'caixa',
+            'data_expirada'
         ));
 	}
 
@@ -60,15 +58,17 @@ class DashboardController extends Controller{
             }
         }
 
-        $caixa = $saldo_entrada > $saldo_saida ? [0, 'abaixo'] : $saldo_saida - $saldo_entrada;
+        $caixa = $saldo_entrada > $saldo_saida ? [$saldo_entrada - $saldo_saida, 'prejuízo'] : $saldo_saida - $saldo_entrada;
         return $caixa;
     }
 
     public function validadeExpirada(){
-        $data_atual = Carbon\Carbon::now()->format('d-m-Y');
-        $entradas_validate = DB::table('entradas');
-        // dd($entrada_data); 
-        // $validade_produto = $entrada_data->validade;
+        $data_atual = Carbon\Carbon::now()->format('Y-m-d');
+        $entradas_validate = DB::table('entradas')->join('produtos', 'entradas.produto_id', '=', 'produtos.id')
+                                                  ->where('entradas.validade', '<', $data_atual)
+                                                  ->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')
+                                                  ->get();
+        return [$entradas_validate, $entradas_validate->count()];                                                  
     }
 
     public function totalEntradas(){

@@ -99,7 +99,7 @@
                                 <lord-icon
                                     src="https://cdn.lordicon.com//uukerzzv.json"
                                     trigger="loop"
-                                    colors="primary:#ff5e32,secondary:#ff5e32"
+                                    colors="primary:#ff5e32,secondary:#000000"
                                     stroke="80"
                                     style="width:70px;height:70px">
                                 </lord-icon>
@@ -188,12 +188,104 @@
                 </div>
             </div>
         </div>
+
+        @if($data_expirada[1] > 0)
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card-dash border-left-vencimento shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                <h6>Produtos com Validade expirada</h6></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data_expirada[1] }}</div>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn " type="button" data-toggle="modal" data-target="#exampleModalExpirado"> 
+                                <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
+                                <lord-icon
+                                    src="https://cdn.lordicon.com//tvyxmjyo.json"
+                                    trigger="loop"
+                                    colors="primary:#0cf29d,secondary:#000000"
+                                    stroke="80"
+                                    style="width:70px;height:70px">
+                                </lord-icon>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
 
-    
+    <!-- Modal Estoque baixo-->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Estoque baixo 
+                <a href="{{ route('entradas.create', []) }}" class="btn btn-padrao1" >Cadastrar entradas</a>
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
 
+            <div class="modal-body">
+                <table class="table table-hover" id="table">
+                    <thead class="letra" id="thead_colors"  >
+                        <th>Nome</th>
+                        <th>Estoque</th>
+                    </thead>
+                <tbody>
+                  @foreach ($estoque_baixo[0] as $eb)
+                    <tr>
+                      <td>{{ $eb->nome }}</td>
+                      <td>{{ $eb->quantidade }}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>          
+            </div>     
+          </div>
+        </div>
+      </div>
+        
+         <!-- Modal Data expiração -->
+      <div class="modal fade" id="exampleModalExpirado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Produto com data expirada 
+                <a href="{{ route('entradas.create', []) }}" class="btn btn-padrao1" >Cadastrar produto estoque</a>
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
 
-    {{-- <div class="col main pt-2  mt-3">
+            <div class="modal-body">
+                <table class="table table-hover" id="table">
+                    <thead class="letra" id="thead_colors">
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                        <th>Data expiração</th>
+                    </thead>
+                <tbody>
+                  @foreach ($data_expirada[0] as $de)
+                    <tr>
+                      <td>{{ $de->nome }}</td>
+                      <td>{{ $de->quantidade }}</td>
+                      <td>{{ Carbon\Carbon::parse($de->validade)->format('d/m/Y') }}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+            </div>     
+          </div>
+        </div>
+      </div>
+
+          {{-- <div class="col main pt-2  mt-3">
         <div class="row mb-3">
             <div class="col-xl-3 col-sm-1 py-2" >
                 <div class="card text-white bg_1">
@@ -275,40 +367,6 @@
             </div>
         </div>
          --}}
-
-
-        <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Estoque baixo 
-                <a href="{{ route('entradas.create', []) }}" class="btn btn-padrao1" >Cadastrar entradas</a>
-              </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-
-            <div class="modal-body">
-                <table class="table table-hover" id="table">
-                    <thead class="letra" id="thead_colors"  >
-                        <th>Nome</th>
-                        <th>Estoque</th>
-                    </thead>
-                <tbody>
-                  @foreach ($estoque_baixo[0] as $eb)
-                    <tr>
-                      <td>{{ $eb->nome }}</td>
-                      <td>{{ $eb->quantidade }}</td>
-                    </tr>
-                  @endforeach
-                </tbody>
-              </table>          
-            </div>     
-          </div>
-        </div>
-      </div>
         
         <!--/row-->
 

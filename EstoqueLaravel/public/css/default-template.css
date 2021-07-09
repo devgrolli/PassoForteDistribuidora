@@ -252,6 +252,10 @@ td,
     border-left: .50rem solid #f8efbe!important;
 }
 
+.border-left-vencimento {
+    border-left: .50rem solid #0CF29D!important;
+}
+
 #estoque_dashborad_icon {
     color: #005365;
 }

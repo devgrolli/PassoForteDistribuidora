@@ -11,6 +11,7 @@ class TipoSaidaSeeder extends Seeder
      * @return void
      */
     public function run()    {
+        TipoSaida::create(['nome' => 'Venda cliente']);
         TipoSaida::create(['nome' => 'Devolução ao Fornecedor']);
         TipoSaida::create(['nome' => 'Transferência entre Lojas']);
         TipoSaida::create(['nome' => 'Remessa']);
