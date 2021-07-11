@@ -13,7 +13,9 @@ class Entrada extends Model{
         'validade', 
         'fornecedor_id', 
         'tipo_entrada_id', 
-        'observacoes']; 
+        'observacoes',
+        'status_preco'
+    ]; 
 
     public function produto(){
         return $this->belongsTo("App\Produto"); 

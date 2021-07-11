@@ -70,29 +70,21 @@
                                     <td>{{ $cliente->telefone }}</td>
                                     <td>{{ $cliente->email }}</td>
                                     <td>{{ $cliente->endereco }}</td>
-                                    @switch( $cliente->categoria_cliente )
-                                        @case( 1 )
-                                            <td style="color:rgb(43, 184, 0)">
-                                                <strong>{{ $cliente->tipo_cliente->nome }} <i class="fas fa-laugh" id="icon_positivo"></i></strong>
-                                            </td>
+                                    @switch($cliente->categoria_cliente)
+                                        @case(1)
+                                            <td style="color:rgb(43, 184, 0)"><strong>{{ $cliente->tipo_cliente->nome }} <i class="fas fa-laugh" id="icon_positivo"></i></strong></td>
                                         @break
 
                                         @case(2)
-                                            <td style="color:rgb(230, 8, 0)">
-                                                <strong>{{ $cliente->tipo_cliente->nome }} <i class="fas fa-angry" id="icon_negativo"></i></strong>
-                                            </td>
+                                            <td style="color:rgb(230, 8, 0)"><strong>{{ $cliente->tipo_cliente->nome }} <i class="fas fa-angry" id="icon_negativo"></i></strong></td>
                                         @break
 
                                         @case(3)
-                                            <td style="color:rgb(255, 166, 0)">
-                                                <strong> {{ $cliente->tipo_cliente->nome }} <i class="fas fa-frown" id="icon_melhorar"></i></strong>
-                                            </td>
+                                            <td style="color:rgb(255, 166, 0)"><strong> {{ $cliente->tipo_cliente->nome }} <i class="fas fa-frown" id="icon_melhorar"></i></strong></td>
                                         @break
 
                                         @case(4)
-                                            <td style="color:rgb(0, 89, 255)">
-                                                <strong> {{ $cliente->tipo_cliente->nome }} <i class="fas fa-meh" id="icon_normal"></i></strong>
-                                            </td>
+                                            <td style="color:rgb(0, 89, 255)"><strong> {{ $cliente->tipo_cliente->nome }} <i class="fas fa-meh" id="icon_normal"></i></strong></td>
                                         @break
                                     @endswitch
 
@@ -122,8 +114,11 @@
             </div>
         </div>
     </div>
-
     @include('sweetalert::alert')
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+        setTimeout(function() { $( "#table" ).load(window.location.href + " #table" ); }, 15); 
+    </script>
 @stop
 @section('table-delete')
     "clientes"

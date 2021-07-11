@@ -68,12 +68,13 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['prefix'=>'saidas', 'where'=>['id'=>'[0-9]+']], function() {
-        Route::any('',             ['as'=>'saidas',         'uses'=>'SaidasController@index'  ]);
-        Route::get('create',       ['as'=>'saidas.create',  'uses'=>'SaidasController@create' ]);
-        Route::get('{id}/destroy', ['as'=>'saidas.destroy', 'uses'=>'SaidasController@destroy']);
-        Route::get('edit',         ['as'=>'saidas.edit',    'uses'=>'SaidasController@edit'   ]);
-        Route::put('{id}/update',  ['as'=>'saidas.update',  'uses'=>'SaidasController@update' ]);
-        Route::post('store',       ['as'=>'saidas.store',   'uses'=>'SaidasController@store'  ]);
+        Route::any('',                  ['as'=>'saidas',         'uses'=>'SaidasController@index'  ]);
+        Route::get('create',            ['as'=>'saidas.create',  'uses'=>'SaidasController@create' ]);
+        Route::get('{id}/destroy',      ['as'=>'saidas.destroy', 'uses'=>'SaidasController@destroy']);
+        Route::get('edit',              ['as'=>'saidas.edit',    'uses'=>'SaidasController@edit'   ]);
+        Route::put('{id}/update',       ['as'=>'saidas.update',  'uses'=>'SaidasController@update' ]);
+        Route::post('store',            ['as'=>'saidas.store',   'uses'=>'SaidasController@store'  ]);
+        Route::get('getprods/{valor}',  ['as'=>'saidas.getprods',   'uses'=>'SaidasController@getprods']);
     });
 
     Route::group(['prefix'=>'fornecedores', 'where'=>['id'=>'[0-9]+']], function() {

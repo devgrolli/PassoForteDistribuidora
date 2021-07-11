@@ -16,6 +16,7 @@ class AddTipoSaidaIdToSaidas extends Migration
         Schema::table('saidas', function (Blueprint $table) {
             $table->bigInteger('tipo_saidas_id')->unsigned()->nullable();
             $table->foreign('tipo_saidas_id')->references('id')->on('tipo_saidas');
+            $table->string('validade_produto')->nullable();
             $table->string('observacoes', 4000)->nullable();
         });
     }

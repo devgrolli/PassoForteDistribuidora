@@ -11,11 +11,10 @@ class TipoEntradaSeeder extends Seeder
      * @return void
      */
     public function run() {
-        TipoEntrada::create(['nome' => 'Compra']);
         TipoEntrada::create(['nome' => 'Troca']);
-        TipoEntrada::create(['nome' => 'Devolução de cliente']);
-        TipoEntrada::create(['nome' => 'Transferência entre lojas']);
-        TipoEntrada::create(['nome' => 'Retorno de Remessa']);
+        TipoEntrada::create(['nome' => 'Reposição de estoque']);
+        TipoEntrada::create(['nome' => 'Devolução de mercadoria']);
+        TipoEntrada::create(['nome' => 'Reajuste preço fornecedor']);
         TipoEntrada::create(['nome' => 'Ajuste de estoque']);
     }
 }

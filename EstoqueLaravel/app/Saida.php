@@ -11,6 +11,7 @@ class Saida extends Model{
         'quantidade', 
         'preco_un', 
         'tipo_saidas_id',
+        'validade_produto',
         'observacoes'
     ]; 
 

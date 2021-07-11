@@ -42,7 +42,7 @@ class DashboardController extends Controller{
         $saldo_saida = 0;
         foreach($get_saidas as $get){
             $find_id_saidas = DB::table('tipo_saidas')->where('id', '=', $get->tipo_saidas_id)->get()->first();
-            if(($find_id_saidas->nome != "Ajuste de Estoque") && ($find_id_saidas->nome != "Bonificação")){
+            if(($find_id_saidas->nome != 'Ajuste de Estoque') && ($find_id_saidas->nome != 'Bonificação')){
                 $acum = $get->preco_un * $get->quantidade;
                 $saldo_saida += $acum;
             }
@@ -88,7 +88,7 @@ class DashboardController extends Controller{
     }
 
     public function produtosEstoqueBaixo() {
-        $prods_eb = DB::table('produtos')->where('quantidade', '<', 5)->get();
+        $prods_eb = DB::table('produtos')->where('quantidade', '<', 2)->get();
         $qtd_eb  = $prods_eb->count();
         return [$prods_eb, $qtd_eb];
     }
