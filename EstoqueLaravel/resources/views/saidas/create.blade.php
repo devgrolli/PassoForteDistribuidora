@@ -16,23 +16,32 @@
         {!! Form::open(['route' => 'saidas.store']) !!}
         <div class="form-row">
           <div class="col">
-            {!! Form::label('produto_id', 'Produto') !!}
-            {!! Form::select('produto_id', \App\Produto::orderBy('nome')->pluck('nome', 'id')->toArray(),
-                                                null, ['class'=>'form-control', 'id'=>'produto_nome', 'required']) !!}
+              {!! Form::Label('produto_id', 'Produto:') !!}
+              <select class="form-control" id="produto_nome" required name="produto_id">
+                <option value="">Selecione um Produto</option>
+                @foreach($products as $p)
+                  <option value="{{$p->id}}">{{$p->nome}}</option>
+                @endforeach
+              </select>
           </div>
+
           <div class="col">
             {!! Form::label('validade_produto', 'Validade do Produto') !!}
-            <select name="validade_produto" class="form-control" id="validade_produto">
+            <select name="validade_produto" class="form-control" id="validade_produto" required>
               <option></option>
             </select>
           </div>
           <div class="col">
-            {!! Form::label('quantidade', 'Quantidade') !!}
-            {!! Form::number('quantidade', null, ['class'=>'form-control', 'required', 'pattern' => '[0-9]+([,\.][0-9]+)?']) !!}
+            {!! Form::label('preco_entrada', 'Preço Entrada') !!}
+            {!! Form::text('preco_entrada', null, ['class'=>'form-control', 'id'=>'preco_entrada', 'readonly']) !!}
           </div>
           <div class="col">
-            {!! Form::label('preco_un', 'Preço') !!}
+            {!! Form::label('preco_un', 'Preço Saída') !!}
             {!! Form::text('preco_un', null, ['class'=>'form-control', 'id'=>'valor', 'onkeyup'=>"formatarMoeda()", 'placeholder'=>'R$', 'required']) !!}
+          </div>
+          <div class="col">
+            {!! Form::label('quantidade', 'Quantidade') !!}
+            {!! Form::number('quantidade', null, ['class'=>'form-control', 'required', 'pattern' => '[0-9]+([,\.][0-9]+)?']) !!}
           </div>
           <div class="col">
             {!! Form::label('tipo_saidas_id', 'Tipo de saída') !!}
@@ -106,40 +115,52 @@
   }
 
   $(document).ready(function() {
-    var valor = $('#produto_nome').val();
     $('#produto_nome').on('change', function(){
       var valor = $(this).val();
       var url = "{{ URL('saidas/getprods') }}";
-
       var dltUrl = url+"/"+valor;
+      if(valor !== ''){
         $.ajax({
           type: "GET",
           url: dltUrl,
           data: valor,
           dataType: "json",
-          headers: {
-          "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-          },
-          success:function(response){
+          headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+          },success:function(response){
             if (response.length > 0 && typeof response !== 'string'){
+              option += '<option>'+ 'Selecione uma Validade' +'</option>';    
               $.each(response, function(i, obj){
-                console.log(obj);
                 var dataFormatada = obj.validade.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
                 option += '<option>'+dataFormatada+'</option>';
-              })
+              });
               $('#validade_produto').html(option).show();
+              $('#validade_produto').on('change', function(){
+                var set_preco = $('#validade_produto').val();
+                if (set_preco !== 'Selecione uma Validade'){
+                  $.each(response, function(i, obj){
+                    var dataFormatada = obj.validade.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
+                    if (set_preco === dataFormatada)  $('#preco_entrada').val(obj.preco_un);
+                  });
+                }else{
+                  $('#preco_entrada').val('');
+                }
+              });
             }else{
-              var option = '<option>PRODUTO SEM VALIDADE</option>';
+              var option = '<option></option>';
               $('#validade_produto').html(option).show();
             }
-          },error:function(response){ 
-            console.log(response);
-            console.log(token);
-            console.log("ERROR");
-        }
-      });
+          },error:function(response){
+            console.log("Ocorreu algum erro");
+          }
+        });
+      }else{
+        $('#validade_produto').empty();
+        $('#preco_entrada').val('');
+      }
     });
   });
+  
+
   
 </script>
 
