@@ -16,8 +16,10 @@ class CreateSaidasTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('produto_id')->unsigned()->nullable();
             $table->foreign('produto_id')->references('id')->on('produtos');
+            $table->string('validade_produto')->nullable();
+            $table->double('preco_un', 8, 2);
+            $table->double('preco_saida', 8, 2);
             $table->integer('quantidade');
-            $table->double('preco_un', 8, 2); 
             $table->timestamps();
         });
     }

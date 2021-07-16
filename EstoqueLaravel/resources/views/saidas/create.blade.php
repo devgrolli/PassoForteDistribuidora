@@ -6,10 +6,11 @@
     <div class="card">
         <div class="card-header">
             <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
-                <h1 class="text-create"><strong>Saída de Produtos
-                  <button class="btn btn-padrao2" type="button" data-toggle="modal" data-target="#exampleModal">
-                    Visualizar estoque <i class="fa fa-search"></i></button></strong></strong>
+              <strong>
+                <h1 class="text-create">Saída de Produtos
+                  <button class="btn btn-padrao2" type="button" data-toggle="modal" data-target="#exampleModal"> Visualizar estoque <i class="fa fa-search"></i></button>
                 </h1>
+              </strong>
             </div>
         </div>
       <div class="card-body" id="card_crud">
@@ -19,9 +20,9 @@
               {!! Form::Label('produto_id', 'Produto:') !!}
               <select class="form-control" id="produto_nome" required name="produto_id">
                 <option value="">Selecione um Produto</option>
-                @foreach($products as $p)
-                  <option value="{{$p->id}}">{{$p->nome}}</option>
-                @endforeach
+                  @foreach($products as $p)
+                    <option value="{{$p->id}}">{{$p->nome}}</option>
+                  @endforeach
               </select>
           </div>
 
@@ -32,12 +33,12 @@
             </select>
           </div>
           <div class="col">
-            {!! Form::label('preco_entrada', 'Preço Entrada') !!}
-            {!! Form::text('preco_entrada', null, ['class'=>'form-control', 'id'=>'preco_entrada', 'readonly']) !!}
+            {!! Form::label('preco_un', 'Preço Entrada') !!}
+            {!! Form::text('preco_un', null, ['class'=>'form-control', 'id'=>'preco_un', 'placeholder'=>'R$', 'readonly']) !!}
           </div>
           <div class="col">
-            {!! Form::label('preco_un', 'Preço Saída') !!}
-            {!! Form::text('preco_un', null, ['class'=>'form-control', 'id'=>'valor', 'onkeyup'=>"formatarMoeda()", 'placeholder'=>'R$', 'required']) !!}
+            {!! Form::label('preco_saida', 'Preço Saída') !!}
+            {!! Form::text('preco_saida', null, ['class'=>'form-control', 'id'=>'valor', 'onkeyup'=>"formatarMoeda()", 'placeholder'=>'R$', 'required']) !!}
           </div>
           <div class="col">
             {!! Form::label('quantidade', 'Quantidade') !!}
@@ -45,8 +46,7 @@
           </div>
           <div class="col">
             {!! Form::label('tipo_saidas_id', 'Tipo de saída') !!}
-            {!! Form::select('tipo_saidas_id', \App\TipoSaida::orderBy('nome')->pluck('nome', 'id')->toArray(), 
-                                                  null, ['class'=>'form-control', 'required']) !!}
+            {!! Form::select('tipo_saidas_id', \App\TipoSaida::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control', 'required']) !!}
           </div>
         </div>
         <div class="form-group">
@@ -56,7 +56,7 @@
 
         <div class="form-group">
           {!! Form::button('Cadastrar <i class="far fa-save"></i>',['class'=>'btn btn-padrao1', 'type'=>'submit']) !!}
-            <a href="{{ route('saidas', []) }}" class="btn btn-padrao2">Cancelar <i class="fas fa-ban"></i></a>
+          <a href="{{ route('saidas', []) }}" class="btn btn-padrao2">Cancelar <i class="fas fa-ban"></i></a>
         </div>
       {!! Form::close() !!} 
     </div>
@@ -78,18 +78,27 @@
             <div class="modal-body">
                 <table class="table table-hover" id="table">
                     <thead class="letra" id="thead_colors">
-                      <th>Nome</th>
-                      <th>Quantidade</th>
+                      <th scope="col"></th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Quantidade</th>
                     </thead>
                     <tbody>
                       @foreach ($products as $product)
                         <tr>
+                          <td>
+                            <div class="custom-control custom-checkbox">
+                              <input type="checkbox" class="custom-control-input" id="tableDefaultCheck1">
+                              <label class="custom-control-label" for="tableDefaultCheck1"></label>
+                            </div>
+                          </td>
                           <td>{{ $product->nome }}</td>
                           <td>{{ $product->quantidade }}</td>
                         </tr>
                       @endforeach
                     </tbody>
                 </table>
+                <button type="button" value="selectAll" class="main" onclick="checkAll()">Select All</button>
+               <button type="button" value="deselectAll" class="main" onclick="uncheckAll()">Clear</button>
             </div>
         </div>
     </div>
@@ -117,12 +126,13 @@
   $(document).ready(function() {
     $('#produto_nome').on('change', function(){
       var valor = $(this).val();
-      var url = "{{ URL('saidas/getprods') }}";
-      var dltUrl = url+"/"+valor;
+      var route = "{{ URL('saidas/getprods') }}";
+      var url = route+"/"+valor;
+
       if(valor !== ''){
         $.ajax({
           type: "GET",
-          url: dltUrl,
+          url: url,
           data: valor,
           dataType: "json",
           headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
@@ -139,10 +149,14 @@
                 if (set_preco !== 'Selecione uma Validade'){
                   $.each(response, function(i, obj){
                     var dataFormatada = obj.validade.replace(/(\d*)-(\d*)-(\d*).*/, '$3/$2/$1');
-                    if (set_preco === dataFormatada)  $('#preco_entrada').val(obj.preco_un);
+                    if (set_preco === dataFormatada) {
+                      number = formatReal(obj.preco_un)
+                      $('#preco_un').val(number);
+                    }
                   });
                 }else{
-                  $('#preco_entrada').val('');
+                  $('#preco_un').val('');
+                  $('#valor').val('');
                 }
               });
             }else{
@@ -155,12 +169,35 @@
         });
       }else{
         $('#validade_produto').empty();
-        $('#preco_entrada').val('');
+        $('#preco_un').val('');
+        $('#valor').val('');
       }
     });
   });
   
 
+  function formatReal(numero) {
+    var tmp = numero + '';
+    var neg = false;
+
+    if (tmp - (Math.round(numero)) == 0) tmp = tmp + '00';
+    if (tmp.indexOf(".")) tmp = tmp.replace(".", "");
+    if (tmp.indexOf("-") == 0) {
+      neg = true;
+      tmp = tmp.replace("-", "");
+    }
+
+    if (tmp.length == 1) tmp = "0" + tmp
+    tmp = tmp.replace(/([0-9]{2})$/g, ",$1");
+    if (tmp.length > 6) tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+    if (tmp.length > 9) tmp = tmp.replace(/([0-9]{3}).([0-9]{3}),([0-9]{2}$)/g, ".$1.$2,$3");
+    if (tmp.length = 12) tmp = tmp.replace(/([0-9]{3}).([0-9]{3}).([0-9]{3}),([0-9]{2}$)/g, ".$1.$2.$3,$4");
+    if (tmp.length > 12) tmp = tmp.replace(/([0-9]{3}).([0-9]{3}).([0-9]{3}).([0-9]{3}),([0-9]{2}$)/g, ".$1.$2.$3.$4,$5");
+    if (tmp.indexOf(".") == 0) tmp = tmp.replace(".", "");
+    if (tmp.indexOf(",") == 0) tmp = tmp.replace(",", "0,");
+
+    return (neg ? '-' + tmp : tmp);
+  }
   
 </script>
 

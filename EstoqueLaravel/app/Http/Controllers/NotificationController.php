@@ -1,15 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use DB;
-use Carbon;
-use App\Saida;
-use App\Cliente;
-use App\Entrada;
-use App\Produto;
-use Illuminate\Http\Request;
-
 class NotificationController extends Controller{
 
     public function retornoNotificacoes(){

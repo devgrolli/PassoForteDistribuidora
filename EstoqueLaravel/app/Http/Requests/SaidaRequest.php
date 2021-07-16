@@ -25,7 +25,7 @@ class SaidaRequest extends FormRequest
         return [
             'produto_id' => 'required',
             'quantidade' => 'required',
-            'preco_un' => 'required',
+            'preco_saida' => 'required',
             'data_saida' => 'date',
             'tipo_saidas_id' => 'required',
         ];

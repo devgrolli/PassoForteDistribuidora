@@ -5,12 +5,9 @@ use DB;
 use App\Saida;
 use App\Produto;
 use App\Entrada;
-use Lib\Collection;
-use App\Http\Controllers\Response;
 use App\Http\Requests\SaidaRequest;
-use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use Illuminate\Http\Request;
 
 class SaidasController extends Controller{
     public function index() {
@@ -32,8 +29,8 @@ class SaidasController extends Controller{
     public function store(SaidaRequest $request){ 
         $nova_saida = $request->all();
         $estoque_produto = Produto::find($request->produto_id);
-        $verifica_valor_entrada = DB::table('entradas')->where('produto_id', '=', $estoque_produto->id)->get()->first();
         $nome_tipo_saida = DB::table('tipo_saidas')->where('id', '=', $request->tipo_saidas_id)->get()->first();
+
         if ($request->quantidade > $estoque_produto->quantidade) {
             Alert::error("Quantidade do produto em estoque: $estoque_produto->quantidade" , 'Insira uma quantidade válida')->persistent('Close');
             return redirect()->back()->withInput();
@@ -42,36 +39,23 @@ class SaidasController extends Controller{
             Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada')->persistent('Close');
             return redirect()->back()->withInput();
 
-        }else if (($nome_tipo_saida->nome != 'Outras Saídas') && ($nome_tipo_saida->nome != 'Remessa') && ($nome_tipo_saida->nome != 'Ajuste de Estoque') && (floatval($request->preco_un) < floatval($verifica_valor_entrada->preco_un))){ 
-            Alert::error('Valor da saída abaixo do valor de entrada', "Preço para o tipo de saída '$nome_tipo_saida->nome' está abaixo do preço de entrada, tente outro tipo ou um valor maior")->persistent('Close');
+        }else if ((floatval($request->preco_un) > floatval($request->preco_saida)) && (mb_strtoupper($nome_tipo_saida->nome, 'UTF-8') == 'VENDA')){
+            Alert::error('Valor Saída maior que de Entrada', "Insira um outro tipo de saída ou um valor maior que o valor de entrada para o produto com essa validade $request->validade_produto")->persistent('Close');
             return redirect()->back()->withInput();
 
         }else{
-            // $compara_movi = SaidasController::comparaValidade($request);
-            if ((floatval($request->preco_entrada) < (floatval($request->preco_un))) && ($nome_tipo_saida->nome == 'Venda')){
-                $formatada = date('d/m/Y', strtotime($request->validade));
-                Alert::error('Valor Saída maior que de Entrada', "Insira um outro tipo de saída ou um valor maior que o valor de entrada para o produto com essa validade $formatada")->persistent('Close');
-                return redirect()->back()->withInput();
-            }else{
-                $valor = ProdutosController::formataMoeda($request->preco_un);
-                $nova_saida['preco_un'] = $valor;
-                Saida::create($nova_saida);
-                $estoque_produto->quantidade = $estoque_produto->quantidade - $request->quantidade;
-                $estoque_produto->save();
-                return redirect()->route('saidas')->with('success', 'Saída cadastrada com sucesso!');
-            }
-        }  
-    }
-
-    public function comparaValidade($request){
-        $compara_preco_movimentacoes =[];
-        $check_validade = Entrada::where('produto_id', '=', $request->produto_id)->get();
-        foreach($check_validade as $check){ if(date('d/m/Y', strtotime($check->validade)) == $request->validade_produto){ array_push($compara_preco_movimentacoes, $check); }}
-        return $compara_preco_movimentacoes;
+            $nova_saida['preco_saida'] = UtilController::formataMoeda($request->preco_saida);
+            $nova_saida['preco_un'] = UtilController::formataMoeda($request->preco_un);
+            Saida::create($nova_saida);
+            $estoque_produto->quantidade -= $request->quantidade;
+            $estoque_produto->save();
+            return redirect()->route('saidas')->with('success', 'Saída cadastrada com sucesso!');
+        }
     }
 
     public function destroy($id){
         try {
+            SaidasController::atualizaEstoque($id);
             Saida::find($id)->delete();
             $ret = array('status'=>200, 'msg'=>"null");
         }catch(\Illuminate\Database\QueryException $e){
@@ -83,9 +67,9 @@ class SaidasController extends Controller{
     }
 
     public function atualizaEstoque($id){
-        $update_product = Produto::all();
-        $retoma_valor = Saida::find($id)->quantidade;
-        $update_product->quantidade = $retoma_valor; #retoma o valor do produto de entrada
+        $retoma_valor = Saida::find($id);
+        $update_product = Produto::find($retoma_valor->produto_id);
+        $update_product->quantidade += $retoma_valor->quantidade; #retoma o valor do produto de entrada
         $update_product->save();
     }
 
@@ -96,7 +80,7 @@ class SaidasController extends Controller{
     }
 
     public function update(SaidaRequest $request, $id){
-        $request['preco_un'] = ProdutosController::formataMoeda($request->preco_un);
+        $request['preco_un'] = UtilController::formataMoeda($request->preco_un);
         $busca_produto = Produto::find($request->produto_id);
         if ($request->quantidade > $busca_produto->quantidade) {
             Alert::error("Quantidade em estoque: $busca_produto->quantidade" , 'Quantidade da saída do produto é maior que a quantidade em estoque!')->persistent('Close');

@@ -15,53 +15,6 @@
            		 	$.get('/'+ @yield('table-delete') +'/'+id+'/destroy', function(data){
                         console.log(data);
                         if (data.status == 200) {
-                                $.ajaxSetup({
-                                    headers: {
-                                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                                    }
-                                    });
-
-                                    $.ajax({
-                                        url: '/'+ @yield('table-delete') +'/'+id+'/stock',
-                                        type: 'POST',
-                                        method: 'POST',
-                                        dataType: 'json',
-                                        ContentType: 'application/json',
-                                        data: {
-                                            id: id,
-                                            _token: '{!! csrf_token() !!}',
-                                        },    
-                                        success: function (response) {
-                                            var json = $.parseJSON(response);
-                                                console.log(json);
-                                        },error:function(response){ 
-                                            console.log(response);
-                                            console.log("ERROR");
-                                        }
-                                    });
-    
-                            // $.post({
-                            //     beforeSend: function(xhr, type) {
-                            //         if (!type.crossDomain) {
-                            //             xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
-                            //         }
-                            //     },
-                            //     url: '/'+ @yield('table-delete') +'/'+id+'/stock',
-                            //     dataType : 'json',
-                            //     type: 'POST',
-                            //     data: { 
-                            //         id: id,
-                            //         _token: '{{csrf_token()}}' 
-                            //     },
-                            //     contentType: false,
-                            //     processData: false,
-                            //     success:function(response) {
-                            //         console.log(response);
-                            //     },error:function(response){ 
-                            //         console.log(response);
-                            //         console.log("ERROR");
-                            //     }
-                            // });
                             swal.fire(
                                 'Deletado!',
                                 'Exclusão confirmada.',
