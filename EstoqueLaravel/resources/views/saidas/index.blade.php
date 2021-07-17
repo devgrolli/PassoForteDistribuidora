@@ -1,7 +1,7 @@
 <!-- blade: sistema de template simples -->
 @extends('layouts.default')
 @section('content')
-    <script src="{{ asset('js/loading.js') }}"></script>
+    @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="col-xxl-4 col-xl-12 mb-4">
         <div class="card h-100">

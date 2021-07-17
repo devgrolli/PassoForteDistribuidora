@@ -4,6 +4,7 @@
 
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
     <div id="div_create">
+        @include('layouts.spinner')
         <div class="card">
             <div class="card-header">
                 <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">

@@ -1,5 +1,6 @@
 @extends('layouts.default')
 @section('content')
+@include('layouts.spinner')
 
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <h7 class="display-4 dashtext d-none d-sm-block ">

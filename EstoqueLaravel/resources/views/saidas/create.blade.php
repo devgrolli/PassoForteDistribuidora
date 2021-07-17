@@ -1,8 +1,9 @@
 @extends('layouts.default') 
-
 @section('content')
+
 <link rel="stylesheet" type="text/css" href="../css/default-template.css">
 <div id="div_create">
+  @include('layouts.spinner')
     <div class="card">
         <div class="card-header">
             <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
@@ -78,9 +79,9 @@
             <div class="modal-body">
                 <table class="table table-hover" id="table">
                     <thead class="letra" id="thead_colors">
-                      <th scope="col"></th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">Quantidade</th>
+                      <th></th>
+                      <th>Nome</th>
+                      <th>Quantidade</th>
                     </thead>
                     <tbody>
                       @foreach ($products as $product)
@@ -110,7 +111,12 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
 <script>
+
   function formatarMoeda() {
     var elemento = document.getElementById('valor');
     var valor = elemento.value;
@@ -123,7 +129,7 @@
     if(valor == 'NaN') elemento.value = '';
   }
 
-  $(document).ready(function() {
+  $(document).ready(function(){
     $('#produto_nome').on('change', function(){
       var valor = $(this).val();
       var route = "{{ URL('saidas/getprods') }}";

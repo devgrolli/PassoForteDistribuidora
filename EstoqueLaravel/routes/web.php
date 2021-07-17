@@ -61,7 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::any('',             ['as'=>'entradas',         'uses'=>'EntradasController@index'  ]);
         Route::get('create',       ['as'=>'entradas.create',  'uses'=>'EntradasController@create' ]);
         Route::get('{id}/destroy', ['as'=>'entradas.destroy', 'uses'=>'EntradasController@destroy']);
-        Route::post('{id}/stock',   ['as'=>'entradas.stock',   'uses'=>'EntradasController@stock'  ]);
+        Route::post('{id}/stock',  ['as'=>'entradas.stock',   'uses'=>'EntradasController@stock'  ]);
         Route::get('edit',         ['as'=>'entradas.edit',    'uses'=>'EntradasController@edit'   ]);
         Route::put('{id}/update',  ['as'=>'entradas.update',  'uses'=>'EntradasController@update' ]);
         Route::post('store',       ['as'=>'entradas.store',   'uses'=>'EntradasController@store'  ]);

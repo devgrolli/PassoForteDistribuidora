@@ -1,5 +1,6 @@
 @extends('layouts.default')
 @section('content')
+@include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="col-xxl-4 col-xl-12 mb-4" >
         <div class="card h-100">

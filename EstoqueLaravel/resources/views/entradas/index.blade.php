@@ -1,9 +1,8 @@
 @extends('layouts.default')
 @section('content')
+@include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
-    <head>
-        <meta name="csrf-token" content="{{ csrf_token() }}" />
-    </head>
+    <head><meta name="csrf-token" content="{{ csrf_token() }}" /></head>
     <div class="col-xxl-4 col-xl-12 mb-4">
         <div class="card h-100">
             <div class="card-body h-100 d-flex flex-column justify-content-center py-5 py-xl-4">
