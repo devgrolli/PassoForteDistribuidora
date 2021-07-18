@@ -17,6 +17,7 @@ class CreatePedidosTable extends Migration
             $table->date('data_pedido');
             $table->bigInteger('fornecedor_id')->unsigned()->nullable();
             $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
+            $table->json('items')->nullable();
             $table->timestamps();
         });
     }

@@ -10,7 +10,7 @@
 
       <tbody>
         <div class="card-body" id="card_crud">
-          {!! Form::open(['route'=>'pedidos.store', 'id'=>'dynamic_form']) !!}
+          {!! Form::open(['route'=>'pedidos.store', 'id'=>'dynamic_form', 'enctype'=>'application/json']) !!}
 
             <div class="form-row">
               <div class="col-md-2">
@@ -52,11 +52,11 @@
           <div><div style="width:80%; float:left" id="ator">
             <div class="form-row">
             <div class="col">
-              {!! Form::text('produto', null, ['class'=>'form-control', 'required', 'placeholder'=>'Produto']) !!}
+              {!! Form::text('items[produto]', null, ['class'=>'form-control', 'required', 'placeholder'=>'Produto']) !!}
             </div>
 
             <div class="col">
-              {!! Form::text('quantidade', null, ['class'=>'form-control', 'required', 'placeholder'=>'Quantidade']) !!}
+              {!! Form::text('items[quantidade]', null, ['class'=>'form-control', 'required', 'placeholder'=>'Quantidade']) !!}
             </div>
           </div>
           </div><button type="button" class="remove_field btn btn-padrao2 btn-circle"><i class="fa fa-times"></button></div>`;

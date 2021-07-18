@@ -27,7 +27,7 @@
 
           <div class="form-group col-md-2">
             {!! Form::label('telefone', 'Telefone') !!}
-            {!! Form::text('telefone', null, ['class'=>'form-control', 'id'=>'telefone', 'maxlength' => 15, 'required']) !!}
+            {!! Form::text('telefone', null, ['class' => 'form-control', 'id' => 'telefone', 'maxlength' => 15, 'required']) !!}
           </div>
         </div>
 
@@ -61,36 +61,36 @@
   @include('sweetalert::alert')
 @stop
 
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <script src="js/jquery-1.2.6.pack.js" type="text/javascript"></script>
-  <script src="js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript" /></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <script>
-      function mascara(o,f){
-          v_obj=o
-          v_fun=f
-          setTimeout("execmascara()",1)
-      }
-      
-      function execmascara(){
-          v_obj.value=v_fun(v_obj.value)
-      }
+<script src="js/jquery-1.2.6.pack.js" type="text/javascript"></script>
+<script src="js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript" /></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-      function mtel(v){
-          v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
-          v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
-          v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
-          return v;
-      }
+<script>
+    function mascara(o,f){
+        v_obj=o
+        v_fun=f
+        setTimeout("execmascara()",1)
+    }
+    
+    function execmascara(){
+        v_obj.value=v_fun(v_obj.value)
+    }
 
-      function id( el ){
-        return document.getElementById( el );
-      }
+    function mtel(v){
+        v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
+        v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+        v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+        return v;
+    }
 
-      window.onload = function(){
-        id('telefone').onkeyup = function(){
-          mascara( this, mtel );
-        }
-      }
+    function id( el ){
+      return document.getElementById( el );
+    }
 
-  </script>
+    window.onload = function(){
+      id('telefone').onkeyup = function(){
+        mascara( this, mtel );
+      }
+    }
+
+</script>
