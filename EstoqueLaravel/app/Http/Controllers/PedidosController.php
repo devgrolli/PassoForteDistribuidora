@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\PedidosDados;
 use Illuminate\Http\Request;
 use App\Pedido;
 use App\Http\Requests\PedidoRequest;
@@ -25,6 +25,8 @@ class PedidosController extends Controller{
 
     public function store(PedidoRequest $request){ // Responsável por gravar um novo registro 
         $novo_pedido = $request->all();
+        dd($request);
+        #PedidosDados::create(
         Pedido::create($novo_pedido);
         return redirect()->route('pedidos')->with('success', "Pedido cadastrado com sucesso!");
     }

@@ -32,10 +32,6 @@ class EntradasController extends Controller{
             Alert::error('Quantidade Inválida', 'Insira uma quantidade maior que zero')->persistent('Close');
             return redirect()->back()->withInput();
 
-        }else if ((mb_strtoupper($validate_tipo_id->nome, 'UTF-8') == 'REAJUSTE PREÇO FORNECEDOR') && (!$all_entradas->isEmpty()) && ($produto_utilizado->count() > 0)){
-            
-            dd($all_entradas);
-
         }else{
             $popula_table = 'NA';
             if(!$all_entradas->isEmpty()){
