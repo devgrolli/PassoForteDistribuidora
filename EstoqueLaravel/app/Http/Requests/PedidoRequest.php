@@ -24,6 +24,7 @@ class PedidoRequest extends FormRequest{
             'produto'  => 'required',
             'quantidade'  => 'required', 
             'fornecedor_id' => 'required',
+            'items'=>'required'
         ];
     }
 }

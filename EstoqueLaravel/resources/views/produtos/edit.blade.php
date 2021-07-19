@@ -1,5 +1,6 @@
 @extends('adminlte::page')
 @section('content')
+@include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
     <div id="div_create">
       <div class="card">

@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
-
+@include('layouts.spinner')
 <link rel="stylesheet" type="text/css" href="../css/default-template.css">
   <div id="div_create">
    <div class="card">
@@ -15,7 +15,7 @@
       <div class="form-row">
         <div class="col">
           {!! Form::label('id', 'Código do produto') !!}
-          {!! Form::text('id', null, ['class'=>'form-control']) !!}
+          {!! Form::number('id', null, ['class'=>'form-control', 'pattern' => '[0-9]+([,\.][0-9]+)?']) !!}
         </div>
           <div class="col">
             {!! Form::label('nome', 'Nome') !!}

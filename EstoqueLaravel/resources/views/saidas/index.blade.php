@@ -1,7 +1,7 @@
 <!-- blade: sistema de template simples -->
 @extends('layouts.default')
 @section('content')
-    <script src="{{ asset('js/loading.js') }}"></script>
+    @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="col-xxl-4 col-xl-12 mb-4">
         <div class="card h-100">
@@ -75,7 +75,6 @@
                                     <td>{{ $saida->quantidade }} </td>
                                     <td>R$ {{ number_format($saida->preco_un, 2, ',', '.') }}</td>
                                     <td>{{ Carbon\Carbon::parse($saida->created_at)->format('d/m/Y - H:i:s') }}</td>
-                                    {{-- <td>{{ $s->tipo_saidas->nome }}</td> --}}
                                     <td>
                                         <a href="{{ route('saidas.edit', ['id' => \Crypt::encrypt($saida->id)]) }}"
                                             class="btn btn-padrao1-icons">

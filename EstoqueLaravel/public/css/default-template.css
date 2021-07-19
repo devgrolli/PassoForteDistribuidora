@@ -174,21 +174,20 @@ thead {
     border-radius: 25px;
 }
 
-h1{
+h1 {
     font-family: Poppins-Regular;
     font-weight: bold;
     padding-top: 15px;
 }
 
-h6{
+h6 {
     font-family: Poppins-Regular;
     font-weight: bold;
     padding-top: 15px;
     color: #333333;
 }
 
-
-.textex{
+.textex {
     font-family: Poppins-Regular;
     font-weight: bold;
     padding-top: 15px;
@@ -200,7 +199,7 @@ h5 {
     padding-top: 0px;
 }
 
-.text-dash-card{
+.text-dash-card {
     font-family: Poppins-Regular;
     font-weight: bold;
     padding-top: 15px;
@@ -212,7 +211,6 @@ td,
     font-family: Poppins-Regular;
     font-size: 15px;
 }
-
 
 #entrada_dashborad_icon {
     color: #173820;
@@ -254,6 +252,10 @@ td,
     border-left: .50rem solid #f8efbe!important;
 }
 
+.border-left-vencimento {
+    border-left: .50rem solid #0CF29D!important;
+}
+
 #estoque_dashborad_icon {
     color: #005365;
 }
@@ -273,6 +275,7 @@ td,
     border: 1px solid #e3e6f0;
     border-radius: .35rem;
 }
+
 
 /* .bg_1,
 .bg_2,
@@ -298,6 +301,8 @@ td,
     -webkit-transform: translateX(-3px);
     transform: translateX(-3px);
 } */
+
+
 /* 
 .bg_1 {
     background-color: #122617;
@@ -325,3 +330,42 @@ td,
     color: #000000;
 } */
 
+@keyframes bi-exclamation-circle-fill {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.bi-exclamation-circle-fill {
+    -webkit-animation: fa-blink .75s linear infinite;
+    -moz-animation: fa-blink .75s linear infinite;
+    -ms-animation: fa-blink .75s linear infinite;
+    -o-animation: fa-blink .75s linear infinite;
+    animation: fa-blink .75s linear infinite;
+}
+
+.loader {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: #ffffffcf;
+}
+
+.loader img {
+    padding: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    height: 170px;
+}

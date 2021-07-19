@@ -4,6 +4,7 @@
 
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
     <div id="div_create">
+        @include('layouts.spinner')
         <div class="card">
             <div class="card-header">
                 <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
@@ -25,7 +26,7 @@
                     </div>
                     <div class="col">
                         {!! Form::label('quantidade', 'Quantidade') !!}
-                        {!! Form::number('quantidade', null, ['class' => 'form-control', 'required']) !!}
+                        {!! Form::number('quantidade', null, ['class' => 'form-control', 'required', 'pattern' => '[0-9]+([,\.][0-9]+)?']) !!}
                     </div>
                     <div class="col">
                         {!! Form::label('preco_un', 'Preço Unitário') !!}
@@ -98,27 +99,5 @@
         </div>
     </div>
     @include('sweetalert::alert')
+    @include('layouts.formata_modea')
 @stop
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-
-<script>
-    function formatarMoeda() {
-        var elemento = document.getElementById('valor');
-        var valor = elemento.value;
-
-        valor = valor + '';
-        valor = parseInt(valor.replace(/[\D]+/g, ''));
-        valor = valor + '';
-        valor = valor.replace(/([0-9]{2})$/g, ",$1");
-
-        if (valor.length > 6) {
-            valor = valor.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-        }
-
-        elemento.value = valor;
-        if (valor == 'NaN') elemento.value = '';
-    }
-
-</script>

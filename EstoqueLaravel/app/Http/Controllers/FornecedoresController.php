@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use App\Fornecedor;
 use App\Http\Requests\FornecedorRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class FornecedoresController extends Controller{
     public function index(){
@@ -20,8 +22,14 @@ class FornecedoresController extends Controller{
         $novo_fornecedor = $request->all();
         // $telefone_formatado = preg_replace("/[^0-9]/", "", $request->telefone);
         // $novo_fornecedor['telefone'] = $telefone_formatado;
-        Fornecedor::create($novo_fornecedor);
-        return redirect()->route('fornecedores')->with('success', "Fornecedor cadastrado com sucesso!");
+        $valida_cnpj = DB::table('fornecedores')->where('cnpj', '=', $request->cnpj)->get()->first();
+        if ($valida_cnpj == null){
+            Fornecedor::create($novo_fornecedor);
+            return redirect()->route('fornecedores')->with('success', "Fornecedor cadastrado com sucesso!");
+        }else{
+            Alert::error('CNPJ já cadastrado', 'Insira outro cnpj para realizar o cadastro')->persistent('Close');
+            return redirect()->back()->withInput();
+        }
     }
 
     public function destroy($id){

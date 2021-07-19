@@ -26,7 +26,7 @@ class TipoEntradasController extends Controller{
     public function store(TipoEntradaRequest $request){ 
         $novo_tipo_entrada = $request->all(); 
         TipoEntrada::create($novo_tipo_entrada);
-        return redirect()->route('tipo_entradas')->with('success', "Tipo de entrada cadastrada com sucesso!");;
+        return redirect()->route('tipo_entradas')->with('success', "Tipo de entrada cadastrada com sucesso!");
     }
 
     public function destroy($id){

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\PedidosDados;
 use Illuminate\Http\Request;
 use App\Pedido;
 use App\Http\Requests\PedidoRequest;
@@ -23,8 +23,19 @@ class PedidosController extends Controller{
         return view('pedidos.create');
     }
 
-    public function store(PedidoRequest $request){ // Responsável por gravar um novo registro 
+    public function store(PedidoRequest $request){ // Responsável por gravar um novo registro
+        dd($request);
         $novo_pedido = $request->all();
+
+        for ($i = 0; $i < count($request->all()); $i++) { 
+            $this->pedido = new Pedido();
+            $this->pedido->data_pedido = $request->data_pedido[$i];
+            $this->pedido->fornecedor_id = $request->fornecedor_id[$i];
+            $this->pedido->produto = $request->produto[$i];
+            $this->pedido->quantidade = $request->produto[$i];
+            $this->pedido->save();
+        }        
+        #PedidosDados::create(
         Pedido::create($novo_pedido);
         return redirect()->route('pedidos')->with('success', "Pedido cadastrado com sucesso!");
     }

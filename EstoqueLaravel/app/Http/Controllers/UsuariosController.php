@@ -63,12 +63,12 @@ class UsuariosController extends Controller{
             
         foreach($compara_db as $db){
             if ($data['email'] == $db->email){
-                Alert::error('E-mail utilizado', 'Esse e-mail já está sendo utilizado, tente novamente');
+                Alert::error('E-mail utilizado', 'Esse e-mail já está sendo utilizado, tente novamente')->persistent('Close');
                 return redirect()->back()->withInput();
             }else{
                 $update = auth()->user()->update($data);
                 if($update == true){
-                    return redirect()->route('usuarios')->with('success', "Usuário alterado cadastrado com sucesso");
+                    return redirect()->route('usuarios')->with('success', "Usuário alterado cadastrado com sucesso")->persistent('Close');
                 }else{
                     Alert::error('Erro', 'Falha ao alterar usuário, tente novamente!');
                     return redirect()->back()->withInput();

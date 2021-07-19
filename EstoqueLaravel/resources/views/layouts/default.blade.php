@@ -20,7 +20,7 @@
                                 'Exclusão confirmada.',
                                 'success'
                             ).then(function(isConfirm) {
-                                    window.location.reload();
+                                window.location.reload();
                             });
                         }
                         else

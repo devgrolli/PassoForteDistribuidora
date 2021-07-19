@@ -1,6 +1,8 @@
 @extends('layouts.default')
 @section('content')
+@include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
+    <head><meta name="csrf-token" content="{{ csrf_token() }}" /></head>
     <div class="col-xxl-4 col-xl-12 mb-4">
         <div class="card h-100">
             <div class="card-body h-100 d-flex flex-column justify-content-center py-5 py-xl-4">
@@ -53,6 +55,7 @@
                         </div>
 
                         <table class="table table-hover" id="table">
+                            @csrf
                             <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
                                 <th></th>
                                 <th>Produto</th>
@@ -89,7 +92,7 @@
                                                 </svg>
 
                                             </a>
-                                            <a href="#" onclick="return ConfirmaExclusao({{ $entrada->id }})"
+                                            <a href="#" onclick="return ConfirmaExclusao({{ $entrada->id }})" name="_token" value="<?php echo csrf_token(); ?>"
                                                 class="btn btn-padrao2-icons">
                                                 <i class="bi bi-archive">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -112,5 +115,5 @@
         @include('sweetalert::alert')
     @stop
     @section('table-delete')
-        "entradas"
+        'entradas'
     @endsection

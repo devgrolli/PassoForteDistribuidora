@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use App\Produto;
 use App\Http\Requests\ProdutoRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProdutosController extends Controller{
     
@@ -17,6 +19,7 @@ class ProdutosController extends Controller{
             ->orderBy("nome")
             ->paginate(5);
                 // ->setpath('produtos?desc_filtro='+$filtragem); 
+
         return view('produtos.index', ['produtos'=>$produtos]);
     }
 
@@ -25,16 +28,15 @@ class ProdutosController extends Controller{
     }
 
     public function store(ProdutoRequest $request){ 
-        $novo_produto = $request->all(); 
-        Produto::create($novo_produto);
-        return redirect()->route('produtos')->with('success', "Produto cadastrado com sucesso!");
-    }
-
-    public static function formataMoeda($get_valor) {
-        $source = array('.', ',');
-        $replace = array('', '.');
-        $valor = str_replace($source, $replace, $get_valor); //remove os pontos e substitui a virgula pelo ponto
-        return $valor; //retorna o valor formatado para gravar no banco
+        $novo_produto = $request->all();
+        $valida_id = DB::table('produtos')->where('id', '=', $request->id)->get()->first();
+        if ($valida_id == null){
+            Produto::create($novo_produto);
+            return redirect()->route('produtos')->with('success', "Produto cadastrado com sucesso!");
+        }else{
+            Alert::error('Código do produto já utilizado', 'Insira um código que não esteja cadastrado')->persistent('Close');
+            return redirect()->back()->withInput();
+        }
     }
 
     public function destroy($id){
@@ -56,6 +58,6 @@ class ProdutosController extends Controller{
 
     public function update(ProdutoRequest $request, $id){
         Produto::find($id)->update($request->all());
-        return redirect()->route('produtos')->with('success', "Produto alterado com sucesso!");;
+        return redirect()->route('produtos')->with('success', "Produto alterado com sucesso!");
     }
 }
