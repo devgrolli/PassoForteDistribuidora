@@ -36,7 +36,7 @@ Released   : 20140207
                 </div>
                 <div id="menu">
                     <ul>
-                        <li class="current_page_item"><a href="{{ route('login') }}" accesskey="2" title="">Entrar</a>
+                        <li class="current_page_item"><a href="{{ route('login') }}" accesskey="2" title="" id="btn-entrar">Entrar</a>
                         </li>
                         {{-- <li class="current_page_item"><a href="{{ route('register') }}" accesskey="3"
                                 title="">Cadastrar-se</a></li> --}}

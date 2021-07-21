@@ -23,7 +23,7 @@
                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
                         <div class="btn-group" role="group" aria-label="Exemplo básico">
-                            <a href="{{ route('produtos.create', []) }}" type="button" class="btn btn-padrao1-div_table">Cadastrar
+                            <a href="{{ route('produtos.create', []) }}" id="btn-cadastrar-produto" type="button" class="btn btn-padrao1-div_table">Cadastrar
                                 <i class="fa fa-plus" aria-hidden="true"></i></a>
                             </a>
                             <button class="btn dropdown-toggle btn-padrao2-div_table" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

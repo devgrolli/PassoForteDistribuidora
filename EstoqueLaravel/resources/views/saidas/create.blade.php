@@ -2,6 +2,7 @@
 @section('content')
 
 <link rel="stylesheet" type="text/css" href="../css/default-template.css">
+
 <div id="div_create">
   @include('layouts.spinner')
     <div class="card">
@@ -18,11 +19,11 @@
         {!! Form::open(['route' => 'saidas.store']) !!}
         <div class="form-row">
           <div class="col">
-              {!! Form::Label('produto_id', 'Produto:') !!}
-              <select class="form-control" id="produto_nome" required name="produto_id">
-                <option value="">Selecione um Produto</option>
+              {!! Form::Label('produto_id', 'Produto') !!}
+              <select class="selectpicker form-control" id="produto_nome" data-live-search="true" name="produto_id" required>
+                <option data-tokens="">Selecione um Produto</option>
                   @foreach($products as $p)
-                    <option value="{{$p->id}}">{{$p->nome}}</option>
+                    <option data-tokens="{{$p->id}}">{{$p->nome}}</option>
                   @endforeach
               </select>
           </div>
@@ -108,3 +109,11 @@
   @include('layouts.formata_modea')
   @include('layouts.dynamic_validade')
 @stop
+
+@push('scripts')
+
+<script>
+$(function () {
+    $('select').selectpicker();
+});
+</script>

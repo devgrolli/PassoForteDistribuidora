@@ -31,7 +31,7 @@
                                             aria-label="Toolbar com grupos de botões">
                                             <div class="btn-group" role="group" aria-label="Exemplo básico">
                                                 <a href="{{ route('entradas.create', []) }}" type="button"
-                                                    class="btn btn-padrao1-div_table">Cadastrar
+                                                    class="btn btn-padrao1-div_table" id="btn-entrada">Cadastrar
                                                     <i class="bi bi-cart-plus-fill"></i>
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                         fill="currentColor" class="bi bi-cart-plus-fill"
