@@ -81,7 +81,7 @@
                                         <td>{{ $entrada->tipo_entrada->nome }}</td>
                                         <td>
                                             <a href="{{ route('entradas.edit', ['id' => \Crypt::encrypt($entrada->id)]) }}"
-                                                class="btn btn-padrao1-icons">
+                                                class="btn btn-padrao1-icons edit-entrada">
                                                 <i class="bi bi-pencil-square"></i>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -93,7 +93,7 @@
 
                                             </a>
                                             <a href="#" onclick="return ConfirmaExclusao({{ $entrada->id }})" name="_token" value="<?php echo csrf_token(); ?>"
-                                                class="btn btn-padrao2-icons">
+                                                class="btn btn-padrao2-icons exclusao-entrada">
                                                 <i class="bi bi-archive">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-archive" viewBox="0 0 16 16">

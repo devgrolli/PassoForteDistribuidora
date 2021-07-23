@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="form-group">
-                  {!! Form::button('Cadastrar <i class="far fa-save"></i>',['class'=>'btn btn-padrao1', 'type'=>'submit', 'id'=>'btn-cadastrar-entrada']) !!}
+                  {!! Form::button('Cadastrar <i class="far fa-save"></i>',['class'=>'btn btn-padrao1 btn-cadastrar-entrada', 'type'=>'submit']) !!}
                   <a href="{{ route('entradas', []) }}" class="btn btn-padrao2">Cancelar <i class="fas fa-ban"></i></a>
                 </div>
                 {!! Form::close() !!}

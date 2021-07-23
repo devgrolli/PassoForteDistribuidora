@@ -89,7 +89,8 @@ class EntradasController extends Controller{
             Alert::error('Produto sem estoque', "Tente outro produto")->persistent('Close');
             return redirect()->back()->withInput();
         
-        }else{
+        }else{  
+            $request['preco_un'] = UtilController::formataMoeda($request->preco_un);
             Entrada::find($id)->update($request->all());
             $busca_produto->quantidade = $request->quantidade;
             $busca_produto->save();
