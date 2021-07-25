@@ -3,20 +3,19 @@
 @section('content')
 <link rel="stylesheet" type="text/css" href="css/default-template.css">
 
-
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="jumbotron">
                 <h1 class="display-4">Precisa de uma ajuda?</h1>
-                <p class="lead">Siga o passo a passo abaixo para entender sobre o gerencimaneto do estoque</p>
+                <p class="lead">Siga o passo a passo abaixo para entender sobre o gerencimaneto do estoque. Para continuar acesse os menus a sua esquerda, caso contrário, 
+                  clique no botão abaixo para saber mais ou visualize o dashbaord</p>
                 <hr class="my-4">
-                <p>Para continuar acesse os menus a sua esquerda, caso contrário, clique no botão abaixo para saber mais ou visualize o dashbaord </p>
               
                 <div id="accordion">
                     <div class="card">
-                      <div class="card-header" id="headingOne">
+                      <div class="card-header ajuda-div" id="headingOne">
                         <h5 class="mb-0">
-                          <button class="btn btn-link btn-lg collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                          <button class="btn btn-link btn-lg collapsed btn-ajuda" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             Fornecedor <i class="fas fa-angle-down"></i>
                           </button>
                         </h5>
@@ -31,9 +30,9 @@
                     </div>
             
                     <div class="card">
-                      <div class="card-header" id="headingTwo">
+                      <div class="card-header ajuda-div" id="headingTwo">
                         <h5 class="mb-0">
-                          <button class="btn btn-link collapsed btn-lg" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          <button class="btn btn-link collapsed btn-lg btn-ajuda" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                             Produto <i class="fas fa-angle-down"></i>
                           </button>
                         </h5>
@@ -47,7 +46,7 @@
                     </div>
                     
                     <div class="card">
-                      <div class="card-header" id="headingThree">
+                      <div class="card-header ajuda-div" id="headingThree">
                         <h5 class="mb-0">
                           <button class="btn btn-link btn-lg collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                             Entrada <i class="fas fa-angle-down"></i>
@@ -63,7 +62,7 @@
                   </div>
 
                   <div class="card">
-                    <div class="card-header" id="headingFour">
+                    <div class="card-header ajuda-div" id="headingFour">
                       <h5 class="mb-0">
                         <button class="btn btn-link btn-lg collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                           Saída <i class="fas fa-angle-down"></i>

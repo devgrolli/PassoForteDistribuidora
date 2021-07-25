@@ -332,11 +332,6 @@ return [
             'icon' => 'fas fa-fw fal fa-align-justify',
             'submenu' => [
                 [
-                    'text' => 'Registro de Usuários',
-                    'url'  => 'usuarios',
-                    'icon' => '',
-                ],
-                [
                     'text' => 'Categorias',
                     'url'  => 'categorias',
                     'icon' => ''

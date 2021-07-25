@@ -1,5 +1,6 @@
 @php( $logout_url = View::getSection('logout_url') ?? config('adminlte.logout_url', 'logout') )
 @php( $profile_url = View::getSection('profile_url') ?? config('adminlte.profile_url', 'logout') )
+@inject('dashboard', App\Http\Controllers\DashboardController)
 
 @if (config('adminlte.usermenu_profile_url', false))
     @php( $profile_url = Auth::user()->adminlte_profile_url() )
@@ -13,16 +14,40 @@
     @php( $logout_url = $logout_url ? url($logout_url) : '' )
 @endif
 
-@inject('layout', App\Http\Controllers\DashboardController)
+@php($estoque = $dashboard->produtosEstoqueBaixo()[1])
+@php($validade = $dashboard->validadeExpirada()[1])
+@php($soma = $estoque + $validade)
 
-<button type="button" class="btn position-relative">
-    <i class="far fa-bell"></i>
-    @if($layout->produtosEstoqueBaixo()[1] > 2)
-        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            {{ $layout->produtosEstoqueBaixo()[1] }}
-        </span>
-    @endif
-</button>
+
+<div class="dropdown">
+    <button class="btn position-relative" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        @if($soma != 0)
+            <i class="far fa-bell"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ $soma }}</span>
+        @else
+            <i class="far fa-bell-slash"></i>
+        @endif
+    </button>
+    <div class="dropdown-menu">
+        @if($soma == 0)
+            <a class="dropdown-item" href="#"> Você não possui notificações </a>
+        @else
+            <a class="dropdown-item" href="#"> Você possui novas notificações </a>
+            <div class="dropdown-divider"></div>
+        @endif
+        @if($estoque > 0)
+            <a class="dropdown-item" href="{{ route('estoque', []) }}"><i class="fas fa-dolly p-2" style="color: #035c77"></i> 
+                Produtos abaixo do Estoque  <span class="badge badge-danger w-10 p-2" style="background-color: #8400ff "> {{$estoque}} </span>
+            </a>
+        @endif
+        @if($validade > 0)
+            <a class="dropdown-item" href="{{ route('dashboard', []) }}"><i class="far fa-calendar-times p-2"style="color: #035c77"></i> 
+                Produtos com validade expirada  <span class="badge badge-danger w-10 p-2"> {{$validade}} </span>
+            </a>
+        @endif
+      {{-- <a class="dropdown-item" href="#">Dashboard</a> --}}
+    </div>
+</div>
 
 <li class="nav-item dropdown">
     {{-- User menu toggler --}}
@@ -79,7 +104,9 @@
                     {{ __('adminlte::menu.profile') }}
                 </a>
             @endif
-            <a class="dropdown-item" href="#"><i class="fas fa-hands-helping"></i> Ajuda</a>
+            <a class="dropdown-item" href="{{ route('ajuda', []) }}"><i class="fas fa-hands-helping"></i> Ajuda</a>
+            <a class="dropdown-item" href="{{ route('usuarios', []) }}"><i class="fas fa-cog"></i> Configurações de Usuário</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item @if(!$profile_url) btn-block @endif"
                href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                <i class="fas fa-sign-out-alt"></i>
