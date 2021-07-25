@@ -28,29 +28,37 @@ class EntradasController extends Controller{
         $validate_tipo_id = DB::table('tipo_entradas')->where('id', '=', $request->tipo_entrada_id)->get()->first();
         $produto_utilizado = DB::table('entradas')->where('produto_id', '=', $request->produto_id)->get();
 
+
         if ($request->quantidade == 0 || $request->quantidade < 0) {
             Alert::error('Quantidade Inválida', 'Insira uma quantidade maior que zero')->persistent('Close');
             return redirect()->back()->withInput();
 
         }else{
-            $popula_table = 'NA';
-            if(!$all_entradas->isEmpty()){
-                foreach($all_entradas as $all){
-                    if ($request->preco_un > $all->preco_un){
-                        $popula_table = 'VALOR ACIMA';
-                        break;
-                    }else if ($request->preco_un < $all->preco_un){
-                        $popula_table = 'VALOR ABAIXO';
-                        break;
+            $same_date_entrada = DB::table('entradas')->where('produto_id', '=', $request->produto_id)
+                                                      ->where('validade', '=', $request->validade)->get(); # verifica se o produto de entrada tem a mesma data de validade
+            if ($same_date_entrada->isEmpty()){
+                $popula_table = 'NA';
+                if(!$all_entradas->isEmpty()){
+                    foreach($all_entradas as $all){
+                        if ($request->preco_un > $all->preco_un){
+                            $popula_table = 'VALOR ACIMA';
+                            break;
+                        }else if ($request->preco_un < $all->preco_un){
+                            $popula_table = 'VALOR ABAIXO';
+                            break;
+                        }
                     }
                 }
+                $nova_entrada = array_merge($nova_entrada, array("status_preco" => $popula_table));
+                $nova_entrada['preco_un'] = UtilController::formataMoeda($request->preco_un);
+                Entrada::create($nova_entrada);
+                $estoque_produto->quantidade += $request->quantidade;
+                $estoque_produto->save();
+                return redirect()->route('entradas')->with('success', "Entrada cadastrada com sucesso!");
+            }else{
+                Alert::error('Produto já cadastro com mesma data de validade', 'Altere a entrada do produto que possui esta mesma validade')->persistent('Close');
+                return redirect()->back()->withInput();
             }
-            $nova_entrada = array_merge($nova_entrada, array("status_preco" => $popula_table));
-            $nova_entrada['preco_un'] = UtilController::formataMoeda($request->preco_un);
-            Entrada::create($nova_entrada);
-            $estoque_produto->quantidade += $request->quantidade;
-            $estoque_produto->save();
-            return redirect()->route('entradas')->with('success', "Entrada cadastrada com sucesso!");
         }    
     }
 

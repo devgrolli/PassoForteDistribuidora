@@ -78,5 +78,4 @@
 
         return (neg ? '-' + tmp : tmp);
     }
-
 </script>

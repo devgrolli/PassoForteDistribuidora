@@ -21,9 +21,9 @@
           <div class="col">
               {!! Form::Label('produto_id', 'Produto') !!}
               <select class="selectpicker form-control" id="produto_nome" data-live-search="true" name="produto_id" required>
-                <option data-tokens="">Selecione um Produto</option>
+                <option value="">Selecione um Produto</option>
                   @foreach($products as $p)
-                    <option data-tokens="{{$p->id}}">{{$p->nome}}</option>
+                    <option value="{{$p->id}}">{{$p->nome}}</option>
                   @endforeach
               </select>
           </div>
@@ -109,11 +109,3 @@
   @include('layouts.formata_moeda')
   @include('layouts.dynamic_validade')
 @stop
-
-@push('scripts')
-
-<script>
-$(function () {
-    $('select').selectpicker();
-});
-</script>
