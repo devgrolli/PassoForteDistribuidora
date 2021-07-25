@@ -106,7 +106,7 @@
     </div>
   </div>
   @include('sweetalert::alert')
-  @include('layouts.formata_modea')
+  @include('layouts.formata_moeda')
   @include('layouts.dynamic_validade')
 @stop
 

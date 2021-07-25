@@ -53,6 +53,7 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
 
                         <table class="table table-hover" id="table">
                             @csrf

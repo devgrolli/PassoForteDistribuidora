@@ -29,36 +29,24 @@
                                         <div class="btn-toolbar mb-3" role="toolbar"
                                             aria-label="Toolbar com grupos de botões">
                                             <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
-                                                <div class="btn-group float-sm-left" role="group"
-                                                    aria-label="Exemplo básico">
-                                                    <a href="{{ route('fornecedores.create', []) }}"
-                                                        class="btn btn-padrao1-div_table">Cadastrar <i class="fa fa-plus"
-                                                            aria-hidden="true"></i></a>
-                                                    <a href="{{ route('pedidos', []) }}" type="button"
-                                                        class="btn btn-padrao2-div_table">Pedido fornecedor <i class="fa fa-table"
-                                                            aria-hidden="true"></i></a>
+                                                <div class="btn-group float-sm-left" role="group" aria-label="Exemplo básico">
+                                                    <a href="{{ route('fornecedores.create', []) }}" class="btn btn-padrao1-div_table">Cadastrar <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                                    <a href="{{ route('pedidos', []) }}" type="button" class="btn btn-padrao2-div_table">Pedido fornecedor <i class="fa fa-table" aria-hidden="true"></i></a>
                                                 </div>
                                             </div>
 
                                             {!! Form::open(['name' => 'form_name', 'route' => 'fornecedores']) !!}
                                             <div class="input-group mb-3">
-                                                <input type="text" class="form-control-padrao1-div_table"
-                                                    aria-describedby="basic-addon2">
+                                                <input type="text" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-padrao1-div_table" type="submit" name="search"
-                                                        type="button" id="search-btn"><i class="fa fa-search"></i></button>
+                                                    <button class="btn btn-padrao1-div_table" type="submit" name="search" type="button" id="search-btn"><i class="fa fa-search"></i></button>
                                                 </div>
-
                                             </div>
                                             {!! Form::close() !!}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_filter"> </div>
                         </div>
                     </div>
 

@@ -16,7 +16,7 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     {!! Form::label('cnpj', 'CNPJ') !!}
-                    {!! Form::text('cnpj', null, ['class' => 'form-control', 'id' => 'cnpj', 'required', 'maxlength' =>'18', 'onSubmit' => 'validarCNPJ()']) !!}
+                    {!! Form::text('cnpj', null, ['class' => 'form-control', 'id' => 'cnpj', 'required', 'maxlength' =>'18']) !!}
                 </div>
 
                 <div class="form-group col-md-6">
@@ -85,4 +85,5 @@
     </div>
     @include('sweetalert::alert')
     @include('layouts.cep')
+    @include('layouts.mascaras')
 @stop

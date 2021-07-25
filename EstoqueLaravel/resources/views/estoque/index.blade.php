@@ -27,7 +27,6 @@
                                 <th></th>
                                 <th>Código</th>
                                 <th>Produto</th>
-                                {{-- <th>Validade</th> --}}
                                 <th>Quantidade em Estoque</th>
                             </thead>
 
@@ -37,7 +36,6 @@
                                         <td></td>
                                         <td>{{ $e->id }}</td>
                                         <td>{{ $e->nome }}</td>
-                                        {{-- <td>{{ Carbon\Carbon::parse($e->validade)->format('d/m/Y') }}</td> --}}
                                         @if ($e->quantidade > 0)
                                             <td><span class='badge badge-pill badge-success w-25 p-3'>{{ $e->quantidade }} </span></td>
                                         @else

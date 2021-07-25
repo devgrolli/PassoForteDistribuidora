@@ -52,6 +52,7 @@
                         </div>
                     </div>
 
+                    <br>
                     <table class="table table-hover" id="table">
                         <thead class="letra" id="thead_colors">
                             <th></th>

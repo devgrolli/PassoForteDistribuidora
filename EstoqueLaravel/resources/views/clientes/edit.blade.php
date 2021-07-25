@@ -35,11 +35,9 @@
                     {!! Form::label('endereco', 'Endereço') !!}
                     {!! Form::text('endereco', $cliente->endereco, ['class' => 'form-control', 'required']) !!}
                 </div>
-
                 <div class="col">
                     {!! Form::label('tipo_cliente_id', 'Tipo do Cliente') !!}
-                    {!! Form::select('tipo_cliente_id',\App\TipoCliente::orderBy('nome')->pluck('nome', 'id')->toArray(),
-                                                        $cliente->tipo_cliente_id,['class' => 'form-control', 'required']) !!}
+                    {!! Form::select('tipo_cliente_id',\App\TipoCliente::orderBy('nome')->pluck('nome', 'id')->toArray(), $cliente->tipo_cliente_id,['class' => 'form-control', 'required']) !!}
                 </div>
             </div>
 
@@ -55,9 +53,9 @@
                 <a href="{{ route('clientes', []) }}" class="btn btn-padrao2">Cancelar</a>
             </div>
             {!! Form::close() !!}
-            <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' -->
+            </div>
         </div>
     </div>
-</div>
+    @include('layouts.mascaras')
     @include('sweetalert::alert')
 @stop
