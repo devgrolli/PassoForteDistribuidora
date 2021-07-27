@@ -1,8 +1,7 @@
 @extends('layouts.default')
-
 @section('content')
+@include('layouts.spinner')
 <link rel="stylesheet" type="text/css" href="css/default-template.css">
-
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="jumbotron">

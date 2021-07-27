@@ -1,5 +1,4 @@
 @extends('layouts.default')
-
 @section('content')
 
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
@@ -18,11 +17,11 @@
             <div class="card-body" id="card_crud">
                 {!! Form::open(['route' => 'entradas.store']) !!}
 
-                <div class="form-row">
+                <div class="form-row" >
                     <div class="col">
                         {!! Form::label('produto_id', 'Produto') !!}
                         {!! Form::select('produto_id',\App\Produto::orderBy('nome')->pluck('nome', 'id')->toArray(),
-                                                      null, ['class' => 'form-control', 'required']) !!}
+                                                      null, ['class' => 'form-control select_search', 'required']) !!}
                     </div>
                     <div class="col">
                         {!! Form::label('quantidade', 'Quantidade') !!}
@@ -43,12 +42,12 @@
                     <div class="col">
                         {!! Form::label('fornecedor_id', 'Fornecedor') !!}
                         {!! Form::select('fornecedor_id',\App\Fornecedor::orderBy('razao_social')->pluck('razao_social', 'id')->toArray(),
-                                                        null,['class' => 'form-control', 'required']) !!}
+                                                        null,['class' => 'form-control select_search', 'required']) !!}
                     </div>
                     <div class="col">
                         {!! Form::label('tipo_entrada_id', 'Tipo de entrada') !!}
                         {!! Form::select('tipo_entrada_id',\App\TipoEntrada::orderBy('nome')->pluck('nome', 'id')->toArray(),
-                                                          null,['class' => 'form-control', 'required']) !!}
+                                                          null,['class' => 'form-control select_search', 'id'=>'tipo-entrada-id', 'required']) !!}
                     </div>
                 </div><br>
 
@@ -100,4 +99,5 @@
     </div>
     @include('sweetalert::alert')
     @include('layouts.formata_moeda')
+    @extends('layouts.select_search')
 @stop

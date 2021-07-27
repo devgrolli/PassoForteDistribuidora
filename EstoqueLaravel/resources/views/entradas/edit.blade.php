@@ -1,6 +1,9 @@
-@extends('layouts.default')
 @section('content')
+@include('sweetalert::alert')
+@extends('layouts.default')
 @include('layouts.spinner')
+@include('layouts.formata_moeda')
+@extends('layouts.select_search')
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
     <div id="div_create">
         <div class="card">
@@ -16,7 +19,7 @@
                     <div class="col">
                         {!! Form::label('produto_id', 'Produto') !!}
                         {!! Form::select('produto_id', \App\Produto::orderBy('nome')->pluck('nome', 'id')->toArray(),
-                                                      $entrada->produto_id,['class' => 'form-control', 'required']) !!}
+                                                      $entrada->produto_id,['class' => 'form-control select_search', 'required']) !!}
                     </div>
                     <div class="col">
                         {!! Form::label('quantidade', 'Quantidade') !!}
@@ -36,12 +39,12 @@
                     <div class="col">
                         {!! Form::label('fornecedor_id', 'Fornecedor') !!}
                         {!! Form::select('fornecedor_id',\App\Fornecedor::orderBy('razao_social')->pluck('razao_social', 'id')->toArray(),
-                                                          $entrada->fornecedor_id,['class' => 'form-control', 'required']) !!}
+                                                          $entrada->fornecedor_id,['class' => 'form-control select_search', 'required']) !!}
                     </div>
                     <div class="col">
                         {!! Form::label('tipo_entrada_id', 'Tipo de entrada') !!}
                         {!! Form::select('tipo_entrada_id',\App\TipoEntrada::orderBy('nome')->pluck('nome', 'id')->toArray(),
-                                                          $entrada->tipo_entrada_id, ['class' => 'form-control', 'required']) !!}
+                                                          $entrada->tipo_entrada_id, ['class' => 'form-control select_search', 'required']) !!}
                     </div>
                 </div><br>
 
@@ -59,6 +62,4 @@
             </div>
         </div>
     </div>
-    @include('sweetalert::alert')
-    @include('layouts.formata_moeda')
 @stop
