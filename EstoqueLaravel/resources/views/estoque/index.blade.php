@@ -1,6 +1,6 @@
 @extends('layouts.default')
 @section('content')
-@include('layouts.spinner')
+    @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="col-xxl-4 col-xl-12 mb-4">
         <div class="card h-100">
@@ -16,13 +16,13 @@
             </div>
         </div>
     </div>
-    
+
     <div class="card mb-4">
         <div class="card-body">
             <div class="datatable">
                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
-                        <table class="table table-hover" id="table">
+                        <table class="table table-hover tabela_id" id="table">
                             <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
                                 <th></th>
                                 <th>Código</th>
@@ -37,9 +37,12 @@
                                         <td>{{ $e->id }}</td>
                                         <td>{{ $e->nome }}</td>
                                         @if ($e->quantidade > 0)
-                                            <td><span class='badge badge-pill badge-success w-25 p-3'>{{ $e->quantidade }} </span></td>
+                                            <td><span class='badge badge-pill badge-success w-25 p-3'>{{ $e->quantidade }}
+                                                </span></td>
                                         @else
-                                            <td><span class='badge badge-pill badge-danger w-25 p-3'>{{ 'SEM ESTOQUE' }}</span></td>
+                                            <td><span
+                                                    class='badge badge-pill badge-danger w-25 p-3'>{{ 'SEM ESTOQUE' }}</span>
+                                            </td>
                                         @endif
                                     </tr>
                                 @endforeach

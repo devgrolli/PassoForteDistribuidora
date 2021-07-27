@@ -38,28 +38,36 @@ class DashboardController extends Controller{
 	}
 
     public function totalCaixa(){
-        $get_saidas = DB::table('saidas')->get();
-        $saldo_saida = 0;
-        foreach($get_saidas as $get){
-            $find_id_saidas = DB::table('tipo_saidas')->where('id', '=', $get->tipo_saidas_id)->get()->first();
-            if(($find_id_saidas->nome != 'Ajuste de Estoque') && ($find_id_saidas->nome != 'Bonificação')){
-                $acum = $get->preco_un * $get->quantidade;
-                $saldo_saida += $acum;
+        $calcula_descontos = DB::table('saidas')->get();
+        $valor_prejuizo = 0;
+        $valor_lucro = 0;
+        $table_saidas_prejuizo = [];
+        $table_saidas_lucro = [];
+
+        foreach($calcula_descontos as $cal){
+            $find_id_saidas = DB::table('tipo_saidas')->where('id', '=', $cal->tipo_saidas_id)->get()->first();
+            $cal->preco_un = floatval($cal->preco_un);
+            $cal->preco_saida = floatval($cal->preco_saida);
+
+            if(($find_id_saidas->nome != 'Venda') && ($find_id_saidas->nome != 'Devolução ao Fornecedor') && ($cal->preco_un > $cal->preco_saida)){
+                $prejuizo = $cal->preco_un - $cal->preco_saida;
+                $cal->valor_desconto = $prejuizo * $cal->quantidade;
+                $valor_prejuizo += $prejuizo * $cal->quantidade;
+                array_push($table_saidas_prejuizo, $cal);
+            }else{
+                $lucro = $cal->preco_saida - $cal->preco_un;
+                $cal->valor_desconto = $lucro * $cal->quantidade;
+                $valor_lucro += $lucro * $cal->quantidade;
+                array_push($table_saidas_lucro, $cal);
             }
         }
-
-        $get_entradas = DB::table('entradas')->get();
-        $saldo_entrada = 0;
-        foreach($get_entradas as $get){
-            $find_id_entrada = DB::table('tipo_entradas')->where('id', '=', $get->tipo_entrada_id)->get()->first();
-            if(($find_id_entrada->nome != 'Devolução de cliente') && ($find_id_entrada->nome != 'Ajuste de estoque')){    
-                $acum = $get->preco_un * $get->quantidade;
-                $saldo_entrada = $saldo_entrada + $acum;
-            }
+        if($valor_lucro > $valor_prejuizo){
+            $caixa = $valor_lucro - $valor_prejuizo;
+            return [$caixa, $table_saidas_lucro, 'lucro'];
+        }else{
+            $caixa = $valor_prejuizo - $valor_lucro;
+            return [$caixa, $table_saidas_prejuizo, 'prejuizo'];
         }
-
-        $caixa = $saldo_entrada > $saldo_saida ? [$saldo_entrada - $saldo_saida, 'prejuízo'] : $saldo_saida - $saldo_entrada;
-        return $caixa;
     }
 
     public function validadeExpirada(){

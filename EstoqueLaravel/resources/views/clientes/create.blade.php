@@ -42,8 +42,7 @@
 
             <div class="col">
               {!! Form::label('tipo_cliente_id', 'Tipo do Cliente') !!}
-              {!! Form::select('tipo_cliente_id', \App\TipoCliente::orderBy('nome')->pluck('nome', 'id')->toArray(), 
-                                                    null, ['class'=>'form-control select_search', 'required']) !!}
+              {!! Form::select('tipo_cliente_id', \App\TipoCliente::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control select_search', 'required']) !!}
             </div>
           </div>
 

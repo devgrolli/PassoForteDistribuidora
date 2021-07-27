@@ -1,5 +1,6 @@
 @extends('layouts.default')
 @section('content')
+@include('layouts.mascaras')
 @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="col-xxl-4 col-xl-12 mb-4" >
@@ -69,7 +70,7 @@
                                 <tr>
                                     <td></td>
                                     <td>{{ $cliente->nome }}</td>
-                                    <td>{{ $cliente->telefone }}</td>
+                                    <td id="telefone">{{ $cliente->telefone }}</td>
                                     <td>{{ $cliente->email }}</td>
                                     <td>{{ $cliente->endereco }}</td>
                                     @switch($cliente->categoria_cliente)

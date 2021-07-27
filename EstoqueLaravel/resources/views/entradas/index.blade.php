@@ -1,8 +1,11 @@
 @extends('layouts.default')
 @section('content')
-@include('layouts.spinner')
+    @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
-    <head><meta name="csrf-token" content="{{ csrf_token() }}" /></head>
+
+    <head>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+    </head>
     <div class="col-xxl-4 col-xl-12 mb-4">
         <div class="card h-100">
             <div class="card-body h-100 d-flex flex-column justify-content-center py-5 py-xl-4">
@@ -44,7 +47,8 @@
                                                     class="btn btn-padrao2-div_table">Cadastrar Tipo de Entrada
                                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                                 </a>
-                                                <a href="{{ route('entradas.export', ['type' => 'entradas']) }}" type="button" class="btn btn-padrao1-div_table"> 
+                                                <a href="{{ route('entradas.export', ['type' => 'entradas']) }}"
+                                                    type="button" class="btn btn-padrao1-div_table">
                                                     Exportar Excel <i class="fas fa-file-export"></i>
                                                 </a>
                                             </div><br><br>
@@ -93,7 +97,8 @@
                                                 </svg>
 
                                             </a>
-                                            <a href="#" onclick="return ConfirmaExclusao({{ $entrada->id }})" name="_token" value="<?php echo csrf_token(); ?>"
+                                            <a href="#" onclick="return ConfirmaExclusao({{ $entrada->id }})"
+                                                name="_token" value="<?php echo csrf_token(); ?>"
                                                 class="btn btn-padrao2-icons exclusao-entrada">
                                                 <i class="bi bi-archive">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

@@ -1,8 +1,8 @@
 @extends('layouts.default')
 @section('content')
 @include('layouts.spinner')
-
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
+    <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
     <h7 class="display-4 dashtext d-none d-sm-block ">
         Dashboard
     </h7>
@@ -18,7 +18,6 @@
                         </div>
                         <div class="col-auto">
                             <a href="{{ route('entradas', []) }}" >
-                                <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
                                 <lord-icon
                                     src="https://cdn.lordicon.com//uetqnvvg.json"
                                     trigger="loop"
@@ -43,7 +42,6 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">R$ {{ number_format($saldo_saida, 2, ',', '.') }}</div>
                         </div>
                         <div class="col-auto">
-                            <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
                             <a href="{{ route('saidas', []) }}" >
                                 <lord-icon
                                     src="https://cdn.lordicon.com//krmfspeu.json"
@@ -70,7 +68,6 @@
                         </div>
                         <div class="col-auto">
                             <button class="btn " type="button" data-toggle="modal" data-target="#exampleModal"> 
-                            <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
                             <lord-icon
                                 src="https://cdn.lordicon.com//tdrtiskw.json"
                                 trigger="loop"
@@ -96,7 +93,6 @@
                         
                         <div class="col-auto">
                             <a href="{{ route('clientes', []) }}">
-                                <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
                                 <lord-icon
                                     src="https://cdn.lordicon.com//uukerzzv.json"
                                     trigger="loop"
@@ -112,6 +108,7 @@
         </div>
     </div>
 
+    {{-- @php(dd($caixa[2])) --}}
     <div class="row">
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card-dash border-left-caixa shadow h-100 py-2">
@@ -119,9 +116,8 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                            @if(is_array($caixa) == true)
+                            @if($caixa[2] == 'prejuizo')
                                 <h6 style="color: #FF0000" >Total de Caixa - Prejuízo 
-                                    <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
                                     <lord-icon
                                         src="https://cdn.lordicon.com//tdrtiskw.json"
                                         trigger="loop"
@@ -140,7 +136,8 @@
                         </div>
 
                         <div class="col-auto">
-                            @if(is_array($caixa) == true)
+                            @if($caixa[2] == 'prejuizo')
+                                <button class="btn" type="button" data-toggle="modal" data-target="#exampleModalCaixa"> 
                                 <svg  viewBox="0 0 24 24"  width="70" height="70" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <style>
                                     @keyframes downit{0%{opacity:0;transform:translate(0,-4px) scaleX(.9) scaleY(.9)}25%{opacity:1;transform:translate(0,2px) 
@@ -151,7 +148,6 @@
                                     fill="#242424" style="animation:downit cubic-bezier(.9,-.32,0,1.56) 1.5s infinite;transform-origin:50% 50%"/>
                                 </svg>
                             @else
-                                <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
                                 <lord-icon
                                     src="https://cdn.lordicon.com//gqdnbnwt.json"
                                     trigger="loop"
@@ -176,14 +172,13 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_produtos}}</div>
                         </div>
                         <div class="col-auto">
-                            <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
-                                <lord-icon
-                                    src="https://cdn.lordicon.com//slkvcfos.json"
-                                    trigger="loop"
-                                    colors="primary:#f8efbe,secondary:#f8efbe"
-                                    stroke="80"
-                                    style="width:70PX;height:70PX">
-                                </lord-icon>
+                            <lord-icon
+                                src="https://cdn.lordicon.com//slkvcfos.json"
+                                trigger="loop"
+                                colors="primary:#f8efbe,secondary:#f8efbe"
+                                stroke="80"
+                                style="width:70PX;height:70PX">
+                            </lord-icon>
                         </div>
                     </div>
                 </div>
@@ -202,7 +197,6 @@
                             </div>
                             <div class="col-auto">
                                 <button class="btn " type="button" data-toggle="modal" data-target="#exampleModalExpirado"> 
-                                <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
                                 <lord-icon
                                     src="https://cdn.lordicon.com//tvyxmjyo.json"
                                     trigger="loop"
@@ -281,6 +275,51 @@
                   @endforeach
                 </tbody>
               </table>
+            </div>     
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModalCaixa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                  @if($caixa[2] == 'lucro')
+                    Lista das saídas com {{ $desconto = 'Lucro'}}
+                  @else
+                    Lista das saídas com {{ $desconto = 'Prejuízos'}}
+                  @endif
+                {{-- <a href="{{ route('entradas.create', []) }}" class="btn btn-padrao1" >Cadastrar entradas</a> --}}
+              </h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+                <table class="table table-hover" id="table">
+                    <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
+                        <th>Produto</th>
+                        <th>Validade</th>
+                        <th>Valor Entrada</th>
+                        <th>Valor Saída</th>
+                        <th>Total {{$desconto}}</th>
+                        <th>QTD</th>
+                    </thead>
+                <tbody align="center" style="margin: 0px auto;">
+                  @foreach ($caixa[1] as $caixa)
+                    <tr>
+                        <td>{{ $caixa->produto_id }}</td>
+                        <td>{{ $caixa->validade_produto }}</td>
+                        <td>R$ {{ number_format($caixa->preco_un, 2, ',', '.') }}</td>
+                        <td>R$ {{ number_format($caixa->preco_saida, 2, ',', '.') }}</td>
+                        <td>R$ {{ number_format($caixa->valor_desconto, 2, ',', '.') }}</td>
+                        <td>{{ $caixa->quantidade }}</td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>          
             </div>     
           </div>
         </div>
