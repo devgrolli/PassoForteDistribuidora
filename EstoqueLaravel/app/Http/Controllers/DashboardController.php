@@ -21,7 +21,7 @@ class DashboardController extends Controller{
         $estoque_baixo = DashboardController::produtosEstoqueBaixo();
         $saldo_saida = DashboardController::totalSaidas();
         $saldo_entrada = DashboardController::totalEntradas();
-        $caixa = DashboardController::totalCaixa();
+        $balanco_caixa = DashboardController::calulaBalancoCaixa();
         $data_expirada = DashboardController::validadeExpirada();
 
         return view('dashboard.index', compact(
@@ -29,22 +29,22 @@ class DashboardController extends Controller{
             'total_produtos', 
             'total_entradas', 
             'total_saidas', 
-            'saldo_entrada', 
+            'saldo_entrada',
+            'balanco_caixa',
             'saldo_saida',
             'estoque_baixo', 
-            'caixa',
             'data_expirada'
         ));
 	}
 
-    public function totalCaixa(){
-        $calcula_descontos = DB::table('saidas')->get();
+    public function calulaBalancoCaixa(){
         $valor_prejuizo = 0;
         $valor_lucro = 0;
         $table_saidas_prejuizo = [];
         $table_saidas_lucro = [];
 
-        foreach($calcula_descontos as $cal){
+        $calcula_prejuizo = DB::table('saidas')->get();
+        foreach($calcula_prejuizo as $cal){
             $find_id_saidas = DB::table('tipo_saidas')->where('id', '=', $cal->tipo_saidas_id)->get()->first();
             $cal->preco_un = floatval($cal->preco_un);
             $cal->preco_saida = floatval($cal->preco_saida);
@@ -54,6 +54,7 @@ class DashboardController extends Controller{
                 $cal->valor_desconto = $prejuizo * $cal->quantidade;
                 $valor_prejuizo += $prejuizo * $cal->quantidade;
                 array_push($table_saidas_prejuizo, $cal);
+
             }else{
                 $lucro = $cal->preco_saida - $cal->preco_un;
                 $cal->valor_desconto = $lucro * $cal->quantidade;
@@ -61,13 +62,10 @@ class DashboardController extends Controller{
                 array_push($table_saidas_lucro, $cal);
             }
         }
-        if($valor_lucro > $valor_prejuizo){
-            $caixa = $valor_lucro - $valor_prejuizo;
-            return [$caixa, $table_saidas_lucro, 'lucro'];
-        }else{
-            $caixa = $valor_prejuizo - $valor_lucro;
-            return [$caixa, $table_saidas_prejuizo, 'prejuizo'];
-        }
+        $calulos_prejuizo = $valor_prejuizo == 0 ? $valor_prejuizo : [$valor_prejuizo, $table_saidas_prejuizo];
+        $calulos_lucro = $valor_lucro == 0 ? $valor_lucro : [$valor_lucro, $table_saidas_lucro];
+
+        return [$calulos_prejuizo, $calulos_lucro];
     }
 
     public function validadeExpirada(){
