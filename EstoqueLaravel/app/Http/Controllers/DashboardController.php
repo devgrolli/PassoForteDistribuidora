@@ -46,18 +46,46 @@ class DashboardController extends Controller{
         $calcula_prejuizo = DB::table('saidas')->get();
         foreach($calcula_prejuizo as $cal){
             $find_id_saidas = DB::table('tipo_saidas')->where('id', '=', $cal->tipo_saidas_id)->get()->first();
+
+            #Transforma valores de String para Float
             $cal->preco_un = floatval($cal->preco_un);
             $cal->preco_saida = floatval($cal->preco_saida);
 
-            if(($find_id_saidas->nome != 'Venda') && ($find_id_saidas->nome != 'Devolução ao Fornecedor') && ($cal->preco_un > $cal->preco_saida)){
+            if(($find_id_saidas->nome != 'Venda') || ($find_id_saidas->nome != 'Devolução ao Fornecedor') && ($cal->preco_un > $cal->preco_saida)){
+
+                #Calcula o valor do Prejuizo do preço de entrada
                 $prejuizo = $cal->preco_un - $cal->preco_saida;
+
+                #Passa o valor total do prejuizo pra dentro do objeto que será usado na view
+                $cal->valor_total_saida = $cal->preco_saida * $cal->quantidade; 
+
+                #Passa o valor total do prejuizo pra dentro do objeto que será usado na view
                 $cal->valor_desconto = $prejuizo * $cal->quantidade;
+
+                #Calcula a porcentagem de Prejuizo
+                $porcentagem = $prejuizo / $cal->preco_un * 100;
+                $cal->procentagem = intval($porcentagem);
+
+                #Recebe o valor total do prejuizo vezes a quantidade e joga para dentro do array que será usado na view
                 $valor_prejuizo += $prejuizo * $cal->quantidade;
                 array_push($table_saidas_prejuizo, $cal);
 
             }else{
+                #Calcula o valor do lucro sobre o preço de entrada
                 $lucro = $cal->preco_saida - $cal->preco_un;
+
+                #Passa o valor total do lucro pra dentro do objeto que será usado na view
+                $cal->valor_total_saida = $cal->preco_saida * $cal->quantidade;
+
+                #Passa o valor total do lucro pra dentro do objeto que será usado na view
                 $cal->valor_desconto = $lucro * $cal->quantidade;
+
+                #Calcula a porcentagem de lucro
+                $porcentagem = $lucro / $cal->preco_un * 100;
+                $cal->procentagem = intval($porcentagem);
+
+
+                #Recebe o valor total do lucro vezes a quantidade e joga para dentro do array que será usado na view
                 $valor_lucro += $lucro * $cal->quantidade;
                 array_push($table_saidas_lucro, $cal);
             }
@@ -66,6 +94,10 @@ class DashboardController extends Controller{
         $calulos_lucro = $valor_lucro == 0 ? $valor_lucro : [$valor_lucro, $table_saidas_lucro];
 
         return [$calulos_prejuizo, $calulos_lucro];
+    }
+
+    public function calculaPorcentagem(){
+
     }
 
     public function validadeExpirada(){

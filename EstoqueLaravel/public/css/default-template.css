@@ -151,6 +151,16 @@ thead {
     font-size: 16px;
 }
 
+.color-header-modal {
+    background-color: #006f88;
+    color: white;
+}
+
+.modal-close-color {
+    color: white;
+    font-weight: bold;
+}
+
 .card-body-text {
     background-color: #005365;
     color: white;
@@ -221,15 +231,15 @@ td,
     color: #173820;
 }
 
-.border-left-entrada {
+.border-left-lucro {
     border-left: .50rem solid #173820!important;
 }
 
 #saida_dashborad_icon {
-    color: #4c5253;
+    color: #4c534f;
 }
 
-.border-left-saida {
+.border-left-prejuizo {
     border-left: .50rem solid #4c5253!important;
 }
 
@@ -245,8 +255,12 @@ td,
     color: #FFD452;
 }
 
-.border-left-caixa {
+.border-left-entrada {
     border-left: .50rem solid #FFD452!important;
+}
+
+.border-left-saidas {
+    border-left: .50rem solid #eeca66!important;
 }
 
 #produtos_dashborad_icon {
