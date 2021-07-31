@@ -57,10 +57,10 @@ class ProdutosController extends Controller{
     }
 
     public function update(ProdutoRequest $request, $id){
-        $produto_entrada = DB::table('entradas')->where('produto_id', '=', $request->id)->get();
-        $produto = Produto::find($id);
+        $produto_entrada = DB::table('entradas')->where('produto_id', '=', $id)->get();
+        $produto = DB::table('produtos')->where('id', '=', $id)->get()->first();
 
-        if((!$produto_entrada->isEmpty()) and ($request->nome != $produto->nome)){
+        if((!$produto_entrada->isEmpty()) and ($request->nome != $produto->nome) || ($request->id != $produto->id)){
             Alert::error("Produto $produto->nome (Código $produto->id) não pode ser alterado", 'Cadastre um novo produto ou exclua as entradas deste produto para efetuar alteração do nome')->persistent('Close');
             return redirect()->back()->withInput();
 

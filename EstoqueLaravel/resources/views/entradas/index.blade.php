@@ -63,6 +63,7 @@
                             @csrf
                             <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
                                 <th></th>
+                                <th>Cód. Produto</th>
                                 <th>Produto</th>
                                 <th>Quantidade</th>
                                 <th>Preço UN</th>
@@ -77,6 +78,7 @@
                                 @foreach ($entradas as $entrada)
                                     <tr>
                                         <td></td>
+                                        <td>{{ $entrada->produto->id }}</td>
                                         <td>{{ $entrada->produto->nome }}</td>
                                         <td> {{ $entrada->quantidade }}</td>
                                         <td>R$ {{ number_format($entrada->preco_un, 2, ',', '.') }}</td>

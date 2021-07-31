@@ -319,10 +319,12 @@ return [
                 [
                     'text' => 'Listagem',
                     'url'  => 'fornecedores',
+                    'icon' => ''
                 ],
                 [
                     'text' => 'Pedidos',
                     'url'  => 'pedidos',
+                    'icon' => ''
                 ],
             ],
         ],

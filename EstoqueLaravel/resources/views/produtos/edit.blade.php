@@ -14,7 +14,7 @@
       </div>
 
       <div class="card-body" id="card_crud">
-        {!! Form::open(['route'=>'produtos.store']) !!}
+        {!! Form::open(['route' => ['produtos.update', 'id' => $produto->id], 'method' => 'put']) !!}
           <div class="form-row">
             <div class="col">
               {!! Form::label('id', 'Código do produto') !!}
