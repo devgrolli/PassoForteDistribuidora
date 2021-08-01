@@ -88,9 +88,7 @@
     var wrapper = $(".input_fields_wrap");
     $('.form-check-input').change(function(){
       selected_value = $("input[name='flexRadioDefault']:checked").val();
-
       if(selected_value == 'completo'){
-        console.log(selected_value);
         var newField = `
         <div id="form-completo">
           <div class="form-row">
@@ -121,15 +119,15 @@
           </div>
           
           <div class="form-row">
-              <div class="form-group col-md-4">
-                {!! Form::label('cidade', 'Cidade') !!}
-                {!! Form::text('cidade', null, ['class' => 'form-control', 'id' => 'cidade', 'required']) !!}
-              </div>
+            <div class="form-group col-md-4">
+              {!! Form::label('cidade', 'Cidade') !!}
+              {!! Form::text('cidade', null, ['class' => 'form-control', 'id' => 'cidade', 'required']) !!}
+            </div>
 
-              <div class="col">
-                {!! Form::label('estado', 'Estado') !!}
-                {!! Form::text('estado', null, ['class' => 'form-control', 'id' => 'uf', 'required']) !!}
-              </div>
+            <div class="col">
+              {!! Form::label('estado', 'Estado') !!}
+              {!! Form::text('estado', null, ['class' => 'form-control', 'id' => 'uf', 'required']) !!}
+            </div>
           </div>
         </div>`;
         $(wrapper).append(newField);

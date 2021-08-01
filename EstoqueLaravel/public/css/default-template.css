@@ -166,10 +166,28 @@ thead {
     color: white;
 }
 
+.datatable {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+.row-dashboard-div {
+    padding-left: 30px;
+    padding-right: 40px;
+}
+
 #card_crud {
     padding-left: 100px;
     padding-right: 100px;
     padding-top: 30px;
+}
+
+.config-space-divs {
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 15px;
 }
 
 #div_create {
