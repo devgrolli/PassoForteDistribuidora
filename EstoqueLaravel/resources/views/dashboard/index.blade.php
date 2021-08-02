@@ -25,9 +25,13 @@
                             <div class="col-auto">
                                 <button class="btn" type="button" data-toggle="modal" data-target="#exampleModalLucro"
                                     data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar os lucros">
-                                    <lord-icon src="https://cdn.lordicon.com//gqdnbnwt.json" trigger="loop"
-                                        colors="primary:#173820,secondary:#173820" stroke="80" style="width:70px;height:70px">
-                                    </lord-icon>
+                                    <lord-icon
+                                    src="https://cdn.lordicon.com/rgyftmhc.json"
+                                    trigger="loop"
+                                    colors="primary:#173820,secondary:#173820"
+                                    stroke="70"
+                                    style="width:80px;height:80px">
+                                </lord-icon>
                             </div>
                         </div>
                     </div>
@@ -150,9 +154,8 @@
                             <div class="col-auto">
                                 <a href="{{ route('entradas', []) }}" data-toggle="tooltip" data-placement="top"
                                     title="Clique aqui para acessar página de cadastro de entradas">
-                                    <lord-icon src="https://cdn.lordicon.com//uetqnvvg.json" trigger="loop"
-                                        colors="primary:#FFD452,secondary:#FFD452" stroke="71" style="width:70PX;height:70PX">
-                                    </lord-icon>
+
+                                <lord-icon src="https://cdn.lordicon.com/nlzvfogq.json" trigger="loop" colors="primary:#ffd452,secondary:#ffd452" stroke="80" style="width:70PX;height:70PX"></lord-icon>
                                 </a>
                             </div>
                         </div>
@@ -176,9 +179,13 @@
                             <div class="col-auto">
                                 <a href="{{ route('saidas', []) }}" data-toggle="tooltip" data-placement="top"
                                     title="Clique aqui para acessar página de cadastro de saídas">
-                                    <lord-icon src="https://cdn.lordicon.com//krmfspeu.json" trigger="loop"
-                                        colors="primary:#eeca66,secondary:#eeca66" stroke="80" style="width:70px;height:70px">
-                                    </lord-icon>
+                                    <lord-icon
+                                    src="https://cdn.lordicon.com/slkvcfos.json"
+                                    trigger="loop"
+                                    colors="primary:#eeca66,secondary:#eeca66"
+                                    stroke="80"
+                                    style="width:70px;height:70px">
+                                </lord-icon>
                                 </a>
                             </div>
                         </div>
@@ -197,9 +204,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_produtos }}</div>
                             </div>
                             <div class="col-auto">
-                                <lord-icon src="https://cdn.lordicon.com//slkvcfos.json" trigger="loop"
-                                    colors="primary:#f8efbe,secondary:#f8efbe" stroke="80" style="width:70PX;height:70PX">
-                                </lord-icon>
+                                <lord-icon src="https://cdn.lordicon.com/fqrjldna.json" trigger="loop" colors="primary:#4c5253,secondary:#f8efbe" style="width:70px;height:70px"> </lord-icon>
                             </div>
                         </div>
                     </div>

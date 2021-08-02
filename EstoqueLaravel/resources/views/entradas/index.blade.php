@@ -47,10 +47,10 @@
                                                         class="btn btn-padrao2-div_table">Cadastrar Tipo de Entrada
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </a>
-                                                    <a href="{{ route('entradas.export', ['type' => 'entradas']) }}"
-                                                        type="button" class="btn btn-padrao1-div_table">
+
+                                                    <button type="button" class="btn btn-padrao1-div_table" data-toggle="modal" data-target="#excelModal">
                                                         Exportar Excel <i class="fas fa-file-export"></i>
-                                                    </a>
+                                                    </button>
                                                 </div><br><br>
                                             </div>
                                         </div>
@@ -116,6 +116,35 @@
                             {{ $entradas->links() }}
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+    <div class="modal fade" id="excelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header color-header-modal">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Filtre a Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {!! Form::label('data_inicio', 'Data Inicial', ['class'=>'letras']) !!}
+                    {!! Form::date('data_inicio', null, ['class' => 'form-control']) !!}
+                </div>
+
+                <div class="modal-body">
+                    {!! Form::label('data_fim', 'Data Final') !!}
+                    {!! Form::date('data_fim', null, ['class' => 'form-control']) !!}
+                </div>
+                <br>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Fechar <i class="fas fa-times-circle"></i></button>
+                    <a href="{{ route('entradas.export', ['type' => 'entradas']) }}" type="button" class="btn btn-padrao1-div_table"> 
+                        Baixar <i class="fas fa-download"></i>
+                    </a>
                 </div>
             </div>
         </div>
