@@ -19,12 +19,11 @@
         </div>
       </div>
         <div class="card-body" id="card_crud">
-          {!! Form::open(['route' => 'saidas.store']) !!}
+          {!! Form::open(['route'=> ["saidas.update", 'id'=>$saida->id], 'method'=>'put']) !!}
           <div class="form-row">
             <div class="col">
               {!! Form::Label('produto_id', 'Produto') !!}
               <select class="selectpicker form-control select_search" id="produto_nome" data-live-search="true" name="produto_id" required>
-                <option value="">Selecione um Produto</option>
                   @foreach($products as $p)
                     <option value="{{$p->id}}">{{$p->nome}}</option>
                   @endforeach
@@ -43,7 +42,7 @@
             </div>
             <div class="col">
               {!! Form::label('preco_saida', 'Preço Saída') !!}
-              {!! Form::text('preco_saida', $saida->preco_saida, ['class'=>'form-control', 'id'=>'valor', 'onkeyup'=>"formatarMoeda()", 'placeholder'=>'R$', 'required']) !!}
+              {!! Form::text('preco_saida', $saida->preco_saida, ['class'=>'form-control', 'id'=>'valor', 'placeholder'=>'R$', 'required']) !!}
             </div>
             <div class="col">
               {!! Form::label('quantidade', 'Quantidade') !!}

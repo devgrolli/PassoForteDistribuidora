@@ -1,4 +1,6 @@
 @extends('layouts.default')
+@include('sweetalert::alert')
+@include('layouts.spinner')
 @section('content')
 <link rel="stylesheet" type="text/css" href="../css/default-template.css">
   <div id="div_create">
@@ -10,7 +12,7 @@
 
       <tbody>
         <div class="card-body" id="card_crud">
-          {!! Form::open(['route'=>'pedidos.store', 'id'=>'dynamic_form', 'enctype'=>'application/json']) !!}
+          {!! Form::open(['route'=>'pedidos.store']) !!}
 
             <div class="form-row">
               <div class="col-md-2">
@@ -37,9 +39,7 @@
     </div>
   </div>
 </div>
-@include('sweetalert::alert')
 @stop
-
 @section('js')
 	<script>
 		$(document).ready(function(){
@@ -48,19 +48,13 @@
 			var x=0;
 			$(add_button).click(function(e){
         x++;
-        var newField = `<br>
-          <div><div style="width:80%; float:left" id="ator">
-            <div class="form-row">
-            <div class="col">
-              {!! Form::text('items[produto]', null, ['class'=>'form-control', 'required', 'placeholder'=>'Produto']) !!}
-            </div>
-
-            <div class="col">
-              {!! Form::text('items[quantidade]', null, ['class'=>'form-control', 'required', 'placeholder'=>'Quantidade']) !!}
-            </div>
-          </div>
-          </div><button type="button" class="remove_field btn btn-padrao2 btn-circle"><i class="fa fa-times"></button></div>`;
-        $(wrapper).append(newField);
+        e.preventDefault();
+        var output = "<br>";
+            output += '<div><div style="width:80%; float:left" id="ator">';
+            output += '<div class="form-row"><div class="col"><input type="text" class="form-control" name="produtos[]" placeholder="Produto" required/></div>';
+            output += '<div class="col"><input type="text" class="form-control" name="quantidades[]" placeholder="Quantidade" required/></div>';
+            output += '</div></div><button type="button" class="remove_field btn btn-padrao2 btn-circle"><i class="fa fa-times"></button></div>';
+        $(wrapper).append(output);
 		  });
       $(wrapper).on("click",".remove_field", function(e){
         e.preventDefault(); 
@@ -69,81 +63,4 @@
       });
 		})
 	</script>
-
 @stop
-
-{{-- 
-<div class="form-row">
-  <div class="form-group col-md-2">
-      {!! Form::label('cep', 'CEP') !!}
-      {!! Form::text('cep', null, ['class' => 'form-control', 'id' => 'cep', 'required']) !!}
-  </div>
-
-  <div class="form-group col-md-4">
-      {!! Form::label('endereco', 'Endereço') !!}
-      {!! Form::text('endereco', null, ['class' => 'form-control', 'id' => 'rua', 'required']) !!}
-  </div>
-
-  <div class="form-group col-md-1">
-      {!! Form::label('numero', 'Número') !!}
-      {!! Form::number('numero', null, ['class' => 'form-control', 'required']) !!}
-  </div> --}}
-
-
-
-{{-- <script>
-$(document).ready(function(){
-  var count =1;
-  dynamic_field(count);
-
-  function dynamic_field(number){
-    var html = '<div class="form-row">';
-    html += '<div class="col"> {!! Form::text("produto", null, ["class"=>"form-control", "required"]) !!} </div>'';
-    if(number >1){
-      html += '<button class="btn btn-padrao1" type="button" name="remove" id="remove"> Remove <i class="fa fa-search"></i></button>';
-      $('tbody').append(html);
-    }else{
-      html += "<button class='btn btn-padrao1' type='button' name='add' id='add'> Add <i class='fa fa-search'></i></button>";
-      $('tbody').append(html);
-    }
-  }
-
-  $('#add').click(function(){
-    count++;
-    dynamic_field(count);
-  });
-
-  $(document).on('click', '#remove', function(){
-    count--;
-    dynamic_field(count);
-  });
-
-  $('#dynamic_form').on('submit', function(event){
-    even.preventDefault();
-    $ajax({
-      url:'{{route("pedidos.store") }}',
-      method: 'post',
-      data:$(this).serialize(),
-      dataType:'json', 
-      beforeSend:function(){
-        $('#save').attr('disabled', 'disabçed');
-      },
-      success:function(data){
-        if(data.error){
-          var error_html = '';
-          for(var count=0; count < data.error.length; count++){
-            error_html += '<p>' +data.error[count]+ '</p>';
-          }
-          $('#result').html('<div class="alert alert-danger">' +error_html+ '</div>');
-        }else{
-          dynamic_field(1);
-          $('#result').html('<div class="alert alert-success">' +data.success+ '</div>');
-        }
-        $('#save').attr('disabled', false); 
-      }
-    })
-  });
-  
-});
-
-</script> --}}

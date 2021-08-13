@@ -35,10 +35,9 @@
                                         <a href="{{ route('tipo_clientes.create', []) }}" type="button" class="btn btn-padrao2-div_table">
                                             Cadastrar Tipo de Cliente <i class="fa fa-plus" aria-hidden="true"></i>
                                         </a>                                   
-                                        <a href="{{ route('clientes.export', ['type' => 'clientes']) }}" type="button" class="btn btn-padrao1-div_table"> 
+                                        <button type="button" class="btn btn-padrao1-div_table" data-toggle="modal" data-target="#excelModal">
                                             Exportar Excel <i class="fas fa-file-export"></i>
-                                        </a>
-                            
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -78,19 +77,23 @@
                                         <td>{{ $cliente->endereco }}</td>
                                         @switch($cliente->categoria_cliente)
                                             @case(1)
-                                                <td style="color:rgb(43, 184, 0)"><strong>{{ $cliente->tipo_cliente->nome }} <i class="fas fa-laugh" id="icon_positivo"></i></strong></td>
+                                                <td><span class="badge badge-pill badge-dark" id="icon_positivo">{{ $cliente->tipo_cliente->nome }} <i class="fas fa-heart"></i></span> </td>
                                             @break
 
                                             @case(2)
-                                                <td style="color:rgb(230, 8, 0)"><strong>{{ $cliente->tipo_cliente->nome }} <i class="fas fa-angry" id="icon_negativo"></i></strong></td>
+                                                <td><span class="badge badge-pill badge-dark" id="icon_negativo">{{ $cliente->tipo_cliente->nome }} <i class="far fa-thumbs-down"></i></span> </td>
                                             @break
 
                                             @case(3)
-                                                <td style="color:rgb(255, 166, 0)"><strong> {{ $cliente->tipo_cliente->nome }} <i class="fas fa-frown" id="icon_melhorar"></i></strong></td>
+                                                <td><span class="badge badge-pill badge-dark" id="icon_melhorar">{{ $cliente->tipo_cliente->nome }} <i class="far fa-handshake"></i></span> </td>
                                             @break
 
                                             @case(4)
-                                                <td style="color:rgb(0, 89, 255)"><strong> {{ $cliente->tipo_cliente->nome }} <i class="fas fa-meh" id="icon_normal"></i></strong></td>
+                                                <td><span class="badge badge-pill badge-dark" id="icon_normal">{{ $cliente->tipo_cliente->nome }} <i class="fas fa-exclamation-triangle"></i></span> </td>
+                                            @break
+
+                                            @case(5)
+                                                <td><span class="badge badge-pill badge-dark" id="icon_default">{{ $cliente->tipo_cliente->nome }} <i class="far fa-smile-plus"></i></span> </td>
                                             @break
                                         @endswitch
 
@@ -117,6 +120,35 @@
                         </table>
                         {{ $clientes->links() }}
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="excelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header color-header-modal">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Filtre a Data</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {!! Form::open(['route' => ['export', 'type'=> 'clientes']]) !!}   
+                        <div class="modal-body">
+                            {!! Form::Label('type_doc', 'Tipo de Documento') !!}
+                            <select class="selectpicker form-control select_search" name="type_doc" id="type_doc" data-live-search="true" required>
+                                <option value="1">Excel</option>
+                                <option value="2">PDF</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Fechar <i class="fas fa-times-circle"></i></button>
+                            {!! Form::button('Baixar <i class="fa fa-download" aria-hidden="true"></i>',['class'=>'btn btn-padrao1 btn-cadastrar-entrada', 'type'=>'submit']) !!}
+                            {{-- <a href="{{ route('entradas.export', ['type' => 'entradas']) }}" type="button" class="btn btn-padrao1-div_table"> 
+                                Baixar <i class="fas fa-download"></i>
+                            </a> --}}
+                        </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

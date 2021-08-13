@@ -15,7 +15,7 @@ class TipoEntradasController extends Controller{
             $tipo_entradas = TipoEntrada::where('nome', 'like', '%'.$filtragem.'%')
             ->orderBy("nome")
             ->paginate(10)
-            ->setpath('tipo_entradas?desc_filtro='+$filtragem); 
+            ->setpath('tipo_entradas?desc_filtro='+$filtragem);
         return view('tipo_entradas.index', ['tipo_entradas'=>$tipo_entradas]);
     }
 
@@ -41,13 +41,13 @@ class TipoEntradasController extends Controller{
         return $ret; 
     }
 
-    public function edit(Request $request){
-        $tipo_entrada = TipoEntrada::find(\Crypt::decrypt($request->get('id')));
-        return view('tipo_entradas.edit', compact('tipo_entrada'));
+    public function edit($id){
+        $tipo_entrada = TipoEntrada::find($id);
+        return json_encode($tipo_entrada);
     }
 
-    public function update(TipoEntradaRequest $request, $id){
-        TipoEntrada::find($id)->update($request->all());
+    public function update(TipoEntradaRequest $request){
+        TipoEntrada::find($request->id)->update($request->all());
         return redirect()->route('tipo_entradas');
     }
 }

@@ -130,22 +130,33 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    {!! Form::label('data_inicio', 'Data Inicial', ['class'=>'letras']) !!}
-                    {!! Form::date('data_inicio', null, ['class' => 'form-control']) !!}
-                </div>
+                {!! Form::open(['route' => ['export', 'type'=> 'entradas']]) !!}
+                    <div class="modal-body">
+                        {!! Form::label('start_date', 'Data Inicial', ['class'=>'letras']) !!}
+                        {!! Form::date('start_date', null, ['class' => 'form-control', 'required']) !!}
+                    </div>
 
-                <div class="modal-body">
-                    {!! Form::label('data_fim', 'Data Final') !!}
-                    {!! Form::date('data_fim', null, ['class' => 'form-control']) !!}
-                </div>
-                <br>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Fechar <i class="fas fa-times-circle"></i></button>
-                    <a href="{{ route('entradas.export', ['type' => 'entradas']) }}" type="button" class="btn btn-padrao1-div_table"> 
-                        Baixar <i class="fas fa-download"></i>
-                    </a>
-                </div>
+                    <div class="modal-body">
+                        {!! Form::label('end_date', 'Data Final') !!}
+                        {!! Form::date('end_date', null, ['class' => 'form-control', 'required']) !!}
+                    </div>
+
+                    <div class="modal-body">
+                        {!! Form::Label('type_doc', 'Tipo de Documento') !!}
+                        <select class="selectpicker form-control select_search" name="type_doc" id="type_doc" data-live-search="true" required>
+                            <option value="1">Excel</option>
+                            <option value="2">PDF</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Fechar <i class="fas fa-times-circle"></i></button>
+                        {!! Form::button('Baixar <i class="fa fa-download" aria-hidden="true"></i>',['class'=>'btn btn-padrao1 btn-cadastrar-entrada', 'type'=>'submit']) !!}
+                        {{-- <a href="{{ route('entradas.export', ['type' => 'entradas']) }}" type="button" class="btn btn-padrao1-div_table"> 
+                            Baixar <i class="fas fa-download"></i>
+                        </a> --}}
+                    </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

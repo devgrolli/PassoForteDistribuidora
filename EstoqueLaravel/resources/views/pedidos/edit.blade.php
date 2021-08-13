@@ -1,139 +1,86 @@
 @extends('layouts.default')
+@include('sweetalert::alert')
+@include('layouts.spinner')
 @section('content')
-    <link rel="stylesheet" type="text/css" href="../css/default-template.css">
+<link rel="stylesheet" type="text/css" href="../css/default-template.css">
+  <div id="div_create">
     <div class="card">
       <div class="card-header" style="background: rgb(52, 58, 64)">
-        <h3 style="color:rgb(255, 255, 255)"><strong>Editando Saída de Produtos</strong></h3>
+        <h3 style="color:rgb(255, 255, 255)"><strong>Editando Pedido</strong></h3>
       </div>
-  
-      <div class="card-body">
+
+      <tbody>
+        <div class="card-body" id="card_crud">
         {!! Form::open(['route'=> ["pedidos.update", 'id'=>$pedido->id], 'method'=>'put']) !!}
 
         <div class="form-row">
-          <div class="col">
-            {!! Form::label('produto', 'Produtos') !!}
-            {!! Form::text('produto', $pedido->produto, ['class'=>'form-control', 'required']) !!}
-          </div>
-
-          <div class="col">
-            {!! Form::label('quantidade', 'Quantidades') !!}
-            {!! Form::text('quantidade', $pedido->quantidade, ['class'=>'form-control', 'required']) !!}
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="col">
+          <div class="col-md-2">
             {!! Form::label('data_pedido', 'Data do Pedido') !!}
-            {!! Form::date('data_pedido', $pedido->data_pedido, ['class'=>'form-control', 'required']) !!}                                   
+            {!! Form::date('data_pedido', $pedido->data_pedido, ['class' => 'form-control', 'required']) !!}
           </div>
-          <div class="col">
+          <div class="col-md-4">
             {!! Form::label('fornecedor_id', 'Fornecedor') !!}
             {!! Form::select('fornecedor_id', \App\Fornecedor::orderBy('razao_social')->pluck('razao_social', 'id')->toArray(), 
                                                 $pedido->fornecedor_id, ['class'=>'form-control', 'required']) !!}
-          </div>  
-        </div> 
+          </div>
+        </div><br>
+
+        <label>Clique no botão ao lado para adicionar produtos para o seu pedido <button class="add_field_button btn btn-padrao2"><i class="fa fa-plus" aria-hidden="true"></i> </button>
+        </label>
+        <div class="input_fields_wrap"></div><br>
 
         <br><div class="form-group">
           {!! Form::submit('Salvar', ['class'=>'btn btn-padrao1']) !!}
-          <a href="{{ route('fornecedores', []) }}" class="btn btn-padrao2">Cancelar</a>
+          <a href="{{ route('pedidos', []) }}" class="btn btn-padrao2">Cancelar</a>
         </div>
-      {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' -->
-    </div>
+        {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' --> 
+      </div>
+    </tbody>
   </div>
-  @include('sweetalert::alert')
+</div>
 @stop
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="js/jquery-1.2.6.pack.js" type="text/javascript"></script>
-    <script src="js/jquery.maskedinput-1.1.4.pack.js" type="text/javascript" /></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function() {
-
-            function limpa_formulário_cep() {
-                // Limpa valores do formulário de cep.
-                $("#rua").val("");
-                $("#bairro").val("");
-                $("#cidade").val("");
-                $("#uf").val("");
-                $("#ibge").val("");
-            }
-            
-            //Quando o campo cep perde o foco.
-            $("#cep").blur(function() {
-
-                //Nova variável "cep" somente com dígitos.
-                var cep = $(this).val().replace(/\D/g, '');
-
-                //Verifica se campo cep possui valor informado.
-                if (cep != "") {
-
-                    //Expressão regular para validar o CEP.
-                    var validacep = /^[0-9]{8}$/;
-
-                    //Valida o formato do CEP.
-                    if(validacep.test(cep)) {
-
-                        //Preenche os campos com "..." enquanto consulta webservice.
-                        $("#rua").val("...");
-                        $("#bairro").val("...");
-                        $("#cidade").val("...");
-                        $("#uf").val("...");
-                        $("#ibge").val("...");
-
-                        //Consulta o webservice viacep.com.br/
-                        $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
-
-                            if (!("erro" in dados)) {
-                                //Atualiza os campos com os valores da consulta.
-                                $("#rua").val(dados.logradouro);
-                                $("#bairro").val(dados.bairro);
-                                $("#cidade").val(dados.localidade);
-                                $("#uf").val(dados.uf);
-                                $("#ibge").val(dados.ibge);
-                            } //end if.
-                            else {
-                                //CEP pesquisado não foi encontrado.
-                                limpa_formulário_cep();
-                                swal.fire("CEP não encontrado.");
-                            }
-                        });
-                    } //end if.
-                    else {
-                        //cep é inválido.
-                        limpa_formulário_cep();
-                        swal.fire("Formato de CEP inválido.");
-                        // alert("Formato de CEP inválido.");
-                    }
-                } //end if.
-                else {
-                    //cep sem valor, limpa formulário.
-                    limpa_formulário_cep();
-                }
-            });
-        });
-
-        function mascara(o,f){
-            v_obj=o
-            v_fun=f
-            setTimeout("execmascara()",1)
+	<script>
+		$(document).ready(function(){
+      $.ajax({
+        type: "GET",
+        url: "{{ URL('pedidos/getPedidos') }}" + "/" + '{{$pedido->id}}',
+        dataType: "json",
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(data) {
+          $.each(data.items, function(i, json) {
+            var output = "<br>";
+                output += '<div><div style="width:80%; float:left" id="items">';
+                output += '<div class="form-row"><div class="col"><input type="text" value='+json.produto+' class="form-control" name="produtos[]" placeholder="Produto" required/></div>';
+                output += '<div class="col"><input type="text" class="form-control" value='+json.quantidade+' name="quantidades[]" placeholder="Quantidade" required/></div>';
+                output += '</div></div><button type="button" class="remove_field btn btn-padrao2 btn-circle"><i class="fa fa-times"></button></div>';
+                $(wrapper).append(output);
+          });
+        },
+        error: function(response) {
+          swal.fire("Ocorreu um erro ao processar os dados, contate o suporte.");
         }
-        function execmascara(){
-            v_obj.value=v_fun(v_obj.value)
-        }
-        function mtel(v){
-            v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
-            v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
-            v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
-            return v;
-        }
-        function id( el ){
-          return document.getElementById( el );
-        }
-        window.onload = function(){
-          id('telefone').onkeyup = function(){
-            mascara( this, mtel );
-          }
-        }
-
-    </script>
+      });
+			var wrapper = $(".input_fields_wrap");
+			var add_button = $(".add_field_button");
+			var x=0;
+			$(add_button).click(function(e){
+        x++;
+        e.preventDefault();
+        var output = "<br>";
+            output += '<div><div style="width:80%; float:left" id="ator">';
+            output += '<div class="form-row"><div class="col"><input type="text" class="form-control" name="produtos[]" placeholder="Produto" required/></div>';
+            output += '<div class="col"><input type="text" class="form-control" name="quantidades[]" placeholder="Quantidade" required/></div>';
+            output += '</div></div><button type="button" class="remove_field btn btn-padrao2 btn-circle"><i class="fa fa-times"></button></div>';
+        $(wrapper).append(output);
+		  });
+      $(wrapper).on("click",".remove_field", function(e){
+        e.preventDefault(); 
+        $(this).parent('div').remove(); 
+        x--;
+      });
+		})
+	</script>

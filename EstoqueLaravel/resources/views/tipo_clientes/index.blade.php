@@ -22,8 +22,10 @@
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
                                 <div class="dataTables_length">
-                                    <a href="{{ route('tipo_clientes.create', []) }}"
-                                        class="btn btn-padrao1-div_table">Cadastrar <i class="fa fa-plus" aria-hidden="true"></i></a><br></br>
+                                    <button type="button" class="btn btn-padrao1-div_table" data-toggle="modal"
+                                        data-target="#excelModal">
+                                        Cadastrar <i class="fa fa-plus" aria-hidden="true"></i>
+                                    </button>
                                 </div>
                             </div>
 
@@ -48,8 +50,9 @@
                                         <td>{{ $tipo_cliente->nome }}</td>
                                         <td>{{ $tipo_cliente->descricao }}</td>
                                         <td>
-                                            <a href="{{ route('tipo_clientes.edit', ['id' => \Crypt::encrypt($tipo_cliente->id)]) }}"
-                                                class="btn btn-padrao1-icons">
+                                            <button data-toggle="modal" data-target='#editModal'
+                                                onclick="editarModal('{{ $tipo_cliente->id }}');"
+                                                class="btn btn-padrao1-icons edit-tipo">
                                                 <i class="bi bi-pencil-square"></i>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -58,8 +61,7 @@
                                                     <path fill-rule="evenodd"
                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                 </svg>
-
-                                            </a>
+                                            </button>
                                             <a href="#" onclick="return ConfirmaExclusao({{ $tipo_cliente->id }})"
                                                 class="btn btn-padrao2-icons">
                                                 <i class="bi bi-archive">
@@ -77,6 +79,69 @@
                         </table>
                         {{ $tipo_clientes->links() }}
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="excelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header color-header-modal">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Cadastro Tipo de Cliente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {!! Form::open(['route' => 'tipo_clientes.store']) !!}
+                    <div class="modal-body">
+                        {!! Form::label('nome', 'Nome') !!}
+                        {!! Form::text('nome', null, ['class' => 'form-control', 'required']) !!}
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('descricao', 'Descrição') !!}
+                        {!! Form::textarea('descricao', null, ['class' => 'form-control']) !!}
+                    </div>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Cancelar <i
+                            class="fas fa-times-circle"></i></button>
+                    {!! Form::button('Salvar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' => 'submit']) !!}
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header color-header-modal">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Editando Tipos de Cliente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {!! Form::open(['route'=> 'tipo_clientes.update', 'method'=>'put']) !!}
+                    <div class="modal-body">
+                        {!! Form::label('id', 'Código') !!}
+                        {!! Form::text('id', null, ['class' => 'form-control id-div', 'readonly']) !!}
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('nome', 'Nome') !!}
+                        {!! Form::text('nome', null, ['class' => 'form-control nome-div', 'required']) !!}
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('descricao', 'Descrição') !!}
+                        {!! Form::textarea('descricao', null, ['class' => 'form-control descricao-div']) !!}
+                    </div>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Cancelar <i class="fas fa-times-circle"></i></button>
+                        {!! Form::button('Salvar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' => 'submit']) !!}
+                    </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

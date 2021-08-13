@@ -6,6 +6,7 @@ use App\Produto;
 use App\TipoEntrada;
 use DB;
 use App\Http\Requests\EntradaRequest;
+use App\Http\Controllers\EntradasExport;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -27,7 +28,6 @@ class EntradasController extends Controller{
 
         $validate_tipo_id = DB::table('tipo_entradas')->where('id', '=', $request->tipo_entrada_id)->get()->first();
         $produto_utilizado = DB::table('entradas')->where('produto_id', '=', $request->produto_id)->get();
-
 
         if ($request->quantidade == 0 || $request->quantidade < 0) {
             Alert::error('Quantidade Inválida', 'Insira uma quantidade maior que zero')->persistent('Close');
@@ -104,5 +104,15 @@ class EntradasController extends Controller{
             $busca_produto->save();
             return redirect()->route('entradas')->with('success', "Entrada de produto alterada com sucesso!");
         }
+    }
+
+    public function generate(Request $request){
+        if($request->type_doc == '1'){
+            // $request->start_date->format('Y-m-d');
+            // $data_atual = Carbon\Carbon::now()->format('Y-m-d');
+        }else{
+
+        }
+
     }
 }

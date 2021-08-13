@@ -46,7 +46,7 @@
                         }
                     },
                     error: function(response) {
-                        console.log("Ocorreu algum erro");
+                        swal.fire("Ocorreu um erro ao processar os dados, contate o suporte.");
                     }
                 });
             } else {

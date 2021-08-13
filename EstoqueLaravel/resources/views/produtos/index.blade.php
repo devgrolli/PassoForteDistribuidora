@@ -23,24 +23,18 @@
                 <div class="datatable">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
-                            <div class="btn-group" role="group" aria-label="Exemplo básico">
-                                <a href="{{ route('produtos.create', []) }}" id="btn-cadastrar-produto" type="button" class="btn btn-padrao1-div_table">Cadastrar
-                                    <i class="fa fa-plus" aria-hidden="true"></i></a>
-                                </a>
-                                <button class="btn dropdown-toggle btn-padrao2-div_table" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Documentos 
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">PDF <i class="fas fa-file-pdf iten-icon-pdf"></i></a>
-                                    <a class="dropdown-item" href="{{ route('produtos.export', ['type' => 'produtos']) }}"> 
-                                        Exportar excel  <i class="fas fa-file-export iten-icon-excel"></i> 
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                    Importar excel <i class="fas fa-file-import iten-icon-excel"></i>
-                                    </a>
+                            <div class="btn-group mr-2">               
+                                <div class="form-group col-12">
+                                    <div class="btn-group" role="group" aria-label="Exemplo básico">
+                                        <a href="{{ route('produtos.create', []) }}" id="btn-cadastrar-produto" type="button" class="btn btn-padrao1-div_table">Cadastrar
+                                            <i class="fa fa-plus" aria-hidden="true"></i></a>
+                                        </a>
+                                        <button type="button" class="btn btn-padrao2-div_table" data-toggle="modal" data-target="#excelModal">
+                                            Exportar Excel <i class="fas fa-file-export"></i>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                    
                             <div class="col-sm-12 col-md-4">
                                 {!! Form::open(['name' => 'form_name', 'route' => 'produtos']) !!}
                                 <div class="input-group mb-8">
@@ -106,6 +100,45 @@
                         {{ $produtos->links() }}
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="excelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header color-header-modal">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Filtre a Data</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {!! Form::open(['route' => ['export', 'type'=> 'produtos']]) !!}
+                    <div class="modal-body">
+                        {!! Form::label('start_date', 'Data Inicial', ['class'=>'letras']) !!}
+                        {!! Form::date('start_date', null, ['class' => 'form-control', 'required']) !!}
+                    </div>
+
+                    <div class="modal-body">
+                        {!! Form::label('end_date', 'Data Final') !!}
+                        {!! Form::date('end_date', null, ['class' => 'form-control', 'required']) !!}
+                    </div>
+
+                    <div class="modal-body">
+                        {!! Form::Label('type_doc', 'Tipo de Documento') !!}
+                        <select class="selectpicker form-control select_search" name="type_doc" id="type_doc" data-live-search="true" required>
+                            <option value="1">Excel</option>
+                            <option value="2">PDF</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Fechar <i class="fas fa-times-circle"></i></button>
+                        {!! Form::button('Baixar <i class="fa fa-download" aria-hidden="true"></i>',['class'=>'btn btn-padrao1 btn-cadastrar-entrada', 'type'=>'submit']) !!}
+                        {{-- <a href="{{ route('entradas.export', ['type' => 'entradas']) }}" type="button" class="btn btn-padrao1-div_table"> 
+                            Baixar <i class="fas fa-download"></i>
+                        </a> --}}
+                    </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

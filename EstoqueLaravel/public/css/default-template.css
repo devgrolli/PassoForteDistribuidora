@@ -362,3 +362,38 @@ td,
     background-color: #fff;
     color: #005365;
 }
+
+#icon_positivo {
+    background-color: rgb(255, 0, 191);
+    color: white;
+    font-size: 13px;
+    height: 20px;
+}
+
+#icon_melhorar {
+    background-color: rgb(0, 175, 117);
+    color: white;
+    font-size: 13px;
+    height: 20px;
+}
+
+#icon_negativo {
+    background-color: rgb(255, 0, 0);
+    color: white;
+    font-size: 13px;
+    height: 20px;
+}
+
+#icon_normal {
+    background-color: rgb(255, 166, 0);
+    color: white;
+    font-size: 13px;
+    height: 20px;
+}
+
+#icon_default {
+    background-color: rgb(42, 5, 255);
+    color: white;
+    font-size: 13px;
+    height: 20px;
+}

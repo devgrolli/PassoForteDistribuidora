@@ -55,23 +55,24 @@
                         <table class="table table-hover" id="table">
                             <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
                                 <th></th>
-                                <th>Código</th>
-                                <th>Produto</th>
-                                <th>Quantidades</th>
                                 <th>Data do pedido</th>
                                 <th>Fornecedor</th>
+                                <th>Items Pedido</th>
                                 <td></td>
                             </thead>
 
-                            <tbody align="center" style="margin: 0px auto;">
+                            <tbody align="center" style="margin: 0px auto;">        
                                 @foreach ($pedidos as $pedido)
                                     <tr>
                                         <td></td>
-                                        <td>{{ $pedido->id }}</td>
-                                        <td>{{ $pedido->produto }}</td>
-                                        <td>{{ $pedido->quantidade }}</td>
                                         <td>{{ Carbon\Carbon::parse($pedido->data_pedido)->format('d/m/Y') }}</td>
                                         <td>{{ $pedido->fornecedor->razao_social }}</td>
+                                        <td> 
+                                            @foreach ($pedido->items as $items)
+                                                <li><strong>Prod</strong>: {{ $items['produto']}} - <strong>qtd</strong>: {{ $items['quantidade']}} </li>
+                                                <br>
+                                            @endforeach
+                                        </td>
                                         <td>
                                             <a href="{{ route('pedidos.edit', ['id' => \Crypt::encrypt($pedido->id)]) }}"
                                                 class="btn btn-padrao1-icons">
@@ -100,13 +101,14 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $pedidos->links() }}
+                        {{-- {{ $pedidos->links() }} --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
     @include('sweetalert::alert')
+    @include('layouts.spinner')
 @stop
 @section('table-delete')
     "pedidos"
