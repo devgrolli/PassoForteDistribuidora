@@ -60,8 +60,8 @@
             {!! Form::textarea('observacoes', null, ['class'=>'form-control', 'id'=>'cal']) !!}
           </div>
           <div class="form-group">
-            {!! Form::button('Salvar <i class="far fa-save"></i>',['class'=>'btn btn-padrao1', 'type'=>'submit']) !!}
             <a href="{{ route('saidas', []) }}" class="btn btn-padrao2">Cancelar <i class="fas fa-ban"></i></a>
+            {!! Form::button('Salvar <i class="far fa-save"></i>',['class'=>'btn btn-padrao1', 'type'=>'submit']) !!}
           </div>
         {!! Form::close() !!} 
       </div>

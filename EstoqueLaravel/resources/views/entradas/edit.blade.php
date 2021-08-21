@@ -54,8 +54,8 @@
                 </div>
 
                 <div class="form-group">
-                    {!! Form::button('salvar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' =>'submit']) !!}
                     <a href="{{ route('entradas', []) }}" class="btn btn-padrao2 btn-cancelar-entrada">Cancelar <i class="fas fa-ban"></i></a>
+                    {!! Form::button('salvar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' =>'submit']) !!} 
                 </div>
                 {!! Form::close() !!}
                 <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' -->

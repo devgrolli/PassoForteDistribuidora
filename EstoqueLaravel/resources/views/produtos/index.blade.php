@@ -103,6 +103,16 @@
             </div>
         </div>
     </div>
+
+    {{-- @if(!empty($export) )
+        <script>
+        $(function() {
+            $('#myModal').modal('show');
+        });
+        </script>
+    @endif --}}
+
+
     <div class="modal fade" id="excelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -128,6 +138,7 @@
                         <select class="selectpicker form-control select_search" name="type_doc" id="type_doc" data-live-search="true" required>
                             <option value="1">Excel</option>
                             <option value="2">PDF</option>
+                            <option value="3">Visualizar</option>
                         </select>
                     </div>
                     <br>

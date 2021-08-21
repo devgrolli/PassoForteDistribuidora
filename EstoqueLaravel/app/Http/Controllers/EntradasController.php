@@ -6,7 +6,6 @@ use App\Produto;
 use App\TipoEntrada;
 use DB;
 use App\Http\Requests\EntradaRequest;
-use App\Http\Controllers\EntradasExport;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 

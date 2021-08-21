@@ -32,7 +32,6 @@
                             <div class="col-sm-12 col-md-6">
                                 <div class="dataTables_filter"> </div>
                             </div>
-
                         </div>
 
                         <table class="table table-hover" id="table">
@@ -93,20 +92,21 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    {!! Form::open(['route' => 'tipo_clientes.store']) !!}
-                    <div class="modal-body">
-                        {!! Form::label('nome', 'Nome') !!}
-                        {!! Form::text('nome', null, ['class' => 'form-control', 'required']) !!}
-                    </div>
-                    <div class="modal-body">
-                        {!! Form::label('descricao', 'Descrição') !!}
-                        {!! Form::textarea('descricao', null, ['class' => 'form-control']) !!}
+                    <div class="crud-alignment-modal">
+                        {!! Form::open(['route' => 'tipo_clientes.store']) !!}
+                        <div class="modal-body">
+                            {!! Form::label('nome', 'Nome') !!}
+                            {!! Form::text('nome', null, ['class' => 'form-control', 'required']) !!}
+                        </div>
+                        <div class="modal-body">
+                            {!! Form::label('descricao', 'Descrição') !!}
+                            {!! Form::textarea('descricao', null, ['class' => 'form-control']) !!}
+                        </div>
                     </div>
                     <br>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Cancelar <i
-                            class="fas fa-times-circle"></i></button>
-                    {!! Form::button('Salvar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' => 'submit']) !!}
+                        <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Cancelar <i class="fas fa-times-circle"></i></button>
+                        {!! Form::button('Salvar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' => 'submit']) !!}
                     </div>
                     {!! Form::close() !!}
                 </div>
@@ -123,18 +123,20 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    {!! Form::open(['route'=> 'tipo_clientes.update', 'method'=>'put']) !!}
-                    <div class="modal-body">
-                        {!! Form::label('id', 'Código') !!}
-                        {!! Form::text('id', null, ['class' => 'form-control id-div', 'readonly']) !!}
-                    </div>
-                    <div class="modal-body">
-                        {!! Form::label('nome', 'Nome') !!}
-                        {!! Form::text('nome', null, ['class' => 'form-control nome-div', 'required']) !!}
-                    </div>
-                    <div class="modal-body">
-                        {!! Form::label('descricao', 'Descrição') !!}
-                        {!! Form::textarea('descricao', null, ['class' => 'form-control descricao-div']) !!}
+                    <div class="crud-alignment-modal">
+                        {!! Form::open(['route'=> 'tipo_clientes.update', 'method'=>'put']) !!}
+                        <div class="modal-body">
+                            {!! Form::label('id', 'Código') !!}
+                            {!! Form::text('id', null, ['class' => 'form-control id-div', 'readonly']) !!}
+                        </div>
+                        <div class="modal-body">
+                            {!! Form::label('nome', 'Nome') !!}
+                            {!! Form::text('nome', null, ['class' => 'form-control nome-div', 'required']) !!}
+                        </div>
+                        <div class="modal-body">
+                            {!! Form::label('descricao', 'Descrição') !!}
+                            {!! Form::textarea('descricao', null, ['class' => 'form-control descricao-div']) !!}
+                        </div>
                     </div>
                     <br>
                     <div class="modal-footer">

@@ -76,25 +76,11 @@
                                         <td>{{ $cliente->email }}</td>
                                         <td>{{ $cliente->endereco }}</td>
                                         @switch($cliente->categoria_cliente)
-                                            @case(1)
-                                                <td><span class="badge badge-pill badge-dark" id="icon_positivo">{{ $cliente->tipo_cliente->nome }} <i class="fas fa-heart"></i></span> </td>
-                                            @break
-
-                                            @case(2)
-                                                <td><span class="badge badge-pill badge-dark" id="icon_negativo">{{ $cliente->tipo_cliente->nome }} <i class="far fa-thumbs-down"></i></span> </td>
-                                            @break
-
-                                            @case(3)
-                                                <td><span class="badge badge-pill badge-dark" id="icon_melhorar">{{ $cliente->tipo_cliente->nome }} <i class="far fa-handshake"></i></span> </td>
-                                            @break
-
-                                            @case(4)
-                                                <td><span class="badge badge-pill badge-dark" id="icon_normal">{{ $cliente->tipo_cliente->nome }} <i class="fas fa-exclamation-triangle"></i></span> </td>
-                                            @break
-
-                                            @case(5)
-                                                <td><span class="badge badge-pill badge-dark" id="icon_default">{{ $cliente->tipo_cliente->nome }} <i class="far fa-smile-plus"></i></span> </td>
-                                            @break
+                                            @case(1) <td><span class="badge badge-pill badge-dark" id="icon_positivo">{{ $cliente->tipo_cliente->nome }} <i class="fas fa-heart"></i></span> </td> @break
+                                            @case(2) <td><span class="badge badge-pill badge-dark" id="icon_negativo">{{ $cliente->tipo_cliente->nome }} <i class="far fa-thumbs-down"></i></span> </td> @break
+                                            @case(3) <td><span class="badge badge-pill badge-dark" id="icon_melhorar">{{ $cliente->tipo_cliente->nome }} <i class="far fa-handshake"></i></span> </td> @break
+                                            @case(4) <td><span class="badge badge-pill badge-dark" id="icon_normal">{{ $cliente->tipo_cliente->nome }} <i class="fas fa-exclamation-triangle"></i></span> </td> @break
+                                            @case(5) <td><span class="badge badge-pill badge-dark" id="icon_default">{{ $cliente->tipo_cliente->nome }} <i class="far fa-smile-plus"></i></span> </td> @break
                                         @endswitch
 
                                         <td>
@@ -133,7 +119,7 @@
                         </button>
                     </div>
                     {!! Form::open(['route' => ['export', 'type'=> 'clientes']]) !!}   
-                        <div class="modal-body">
+                        <div class="modal-body crud-alignment-modal">
                             {!! Form::Label('type_doc', 'Tipo de Documento') !!}
                             <select class="selectpicker form-control select_search" name="type_doc" id="type_doc" data-live-search="true" required>
                                 <option value="1">Excel</option>
@@ -153,10 +139,10 @@
             </div>
         </div>
     </div>
-        <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-        <script>
-            setTimeout(function() { $( "#table" ).load(window.location.href + " #table" ); }, 15); 
-        </script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+        setTimeout(function() { $( "#table" ).load(window.location.href + " #table" ); }, 15); 
+    </script>
 @stop
 @section('table-delete')
     "clientes"

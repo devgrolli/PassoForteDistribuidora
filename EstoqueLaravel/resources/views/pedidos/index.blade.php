@@ -53,7 +53,8 @@
                         </div>
 
                         <table class="table table-hover" id="table">
-                            <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
+                            <thead class="letra" id="thead_colors" align="left" style="margin: 0px auto;">
+                                <th></th>
                                 <th></th>
                                 <th>Data do pedido</th>
                                 <th>Fornecedor</th>
@@ -61,15 +62,16 @@
                                 <td></td>
                             </thead>
 
-                            <tbody align="center" style="margin: 0px auto;">        
+                            <tbody align="left" style="margin: 0px auto;">        
                                 @foreach ($pedidos as $pedido)
                                     <tr>
+                                        <td></td>
                                         <td></td>
                                         <td>{{ Carbon\Carbon::parse($pedido->data_pedido)->format('d/m/Y') }}</td>
                                         <td>{{ $pedido->fornecedor->razao_social }}</td>
                                         <td> 
                                             @foreach ($pedido->items as $items)
-                                                <li><strong>Prod</strong>: {{ $items['produto']}} - <strong>qtd</strong>: {{ $items['quantidade']}} </li>
+                                                <li style="margin: 0px auto;"> {{ $items['produto']}} - <strong>qtd</strong>: {{ $items['quantidade']}} </li>
                                                 <br>
                                             @endforeach
                                         </td>
@@ -84,7 +86,6 @@
                                                     <path fill-rule="evenodd"
                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                 </svg>
-
                                             </a>
                                             <a href="#" onclick="return ConfirmaExclusao({{ $pedido->id }})"
                                                 class="btn btn-padrao2-icons">

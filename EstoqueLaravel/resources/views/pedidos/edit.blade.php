@@ -21,15 +21,14 @@
           <div class="col-md-4">
             {!! Form::label('fornecedor_id', 'Fornecedor') !!}
             {!! Form::select('fornecedor_id', \App\Fornecedor::orderBy('razao_social')->pluck('razao_social', 'id')->toArray(), 
-                                                $pedido->fornecedor_id, ['class'=>'form-control', 'required']) !!}
+                                                $pedido->fornecedor_id, ['class'=>'form-control', 'id'=>'teste','required']) !!}
           </div>
-        </div><br>
+        </div>
+        
+        <button class="add_field_button btn btn-padrao1" style="margin-bottom: 10px;!important; margin-top: 10px;!important">Cadastrar itens<i class="fa fa-plus" aria-hidden="true"></i> </button>
+        <div class="input_fields_wrap"></div>
 
-        <label>Clique no botão ao lado para adicionar produtos para o seu pedido <button class="add_field_button btn btn-padrao2"><i class="fa fa-plus" aria-hidden="true"></i> </button>
-        </label>
-        <div class="input_fields_wrap"></div><br>
-
-        <br><div class="form-group">
+        <div class="form-group">
           {!! Form::submit('Salvar', ['class'=>'btn btn-padrao1']) !!}
           <a href="{{ route('pedidos', []) }}" class="btn btn-padrao2">Cancelar</a>
         </div>
@@ -39,48 +38,53 @@
   </div>
 </div>
 @stop
+<script>
+  $(document).ready(function() {
+    var cont_inputs = null;
+    $.ajax({
+      type: "GET",
+      url: "{{ URL('pedidos/getPedidos') }}" + "/" + '{{ $pedido->id }}',
+      dataType: "json",
+      headers: {
+        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function(data) {
+        $.each(data.items, function(i, json) {
+          cont_inputs = data.items.length;
+          var output = '<div style="margin-bottom: 10px;!important"><div style="width:80%; float:left">';
+          output += '<div class="form-row"><div class="col"><input type="text" value='+json.produto+' class="form-control id="uaheuah" edit-dynamic-prod" name="produtos[]" placeholder="Produto" required/></div>';
+          output += '<div class="col"><input type="text" class="form-control" value='+json.quantidade+' name="quantidades[]" placeholder="Quantidade" required/></div>';
+          output += '</div></div><button type="button" class="remove_field btn btn-padrao2 btn-circle" style="margin-left: 10px;!important"><i class="fa fa-times"></button></div>';
+          $(wrapper).append(output);
+        });
+      },
+      error: function(response) {
+        swal.fire("Ocorreu um erro ao processar os dados, contate o suporte.");
+      }
+    });
 
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<script>
-		$(document).ready(function(){
-      $.ajax({
-        type: "GET",
-        url: "{{ URL('pedidos/getPedidos') }}" + "/" + '{{$pedido->id}}',
-        dataType: "json",
-        headers: {
-            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(data) {
-          $.each(data.items, function(i, json) {
-            var output = "<br>";
-                output += '<div><div style="width:80%; float:left" id="items">';
-                output += '<div class="form-row"><div class="col"><input type="text" value='+json.produto+' class="form-control" name="produtos[]" placeholder="Produto" required/></div>';
-                output += '<div class="col"><input type="text" class="form-control" value='+json.quantidade+' name="quantidades[]" placeholder="Quantidade" required/></div>';
-                output += '</div></div><button type="button" class="remove_field btn btn-padrao2 btn-circle"><i class="fa fa-times"></button></div>';
-                $(wrapper).append(output);
-          });
-        },
-        error: function(response) {
-          swal.fire("Ocorreu um erro ao processar os dados, contate o suporte.");
-        }
-      });
-			var wrapper = $(".input_fields_wrap");
-			var add_button = $(".add_field_button");
-			var x=0;
-			$(add_button).click(function(e){
-        x++;
+    var wrapper = $(".input_fields_wrap");
+    var add_button = $(".add_field_button");
+    var x = 0;
+    $(add_button).click(function(e) {
+      x++;
+      cont_inputs++;
+      e.preventDefault();
+      var output = '<div style="margin-bottom: 10px;!important"><div style="width:80%; float:left">';
+      output += '<div class="form-row"><div class="col"><input type="text" class="form-control" name="produtos[]" placeholder="Produto" required/></div>';
+      output += '<div class="col"><input type="text" class="form-control" name="quantidades[]" placeholder="Quantidade" required/></div>';
+      output += '</div></div><button type="button" class="remove_field btn btn-padrao2 btn-circle" style="margin-left: 10px;!important"><i class="fa fa-times"></button></div>';
+      $(wrapper).append(output);
+    });
+
+    $(wrapper).on("click", ".remove_field", function(e) {
+      var exclui_input = cont_inputs - 1;
+      if (exclui_input >= 1) {
         e.preventDefault();
-        var output = "<br>";
-            output += '<div><div style="width:80%; float:left" id="ator">';
-            output += '<div class="form-row"><div class="col"><input type="text" class="form-control" name="produtos[]" placeholder="Produto" required/></div>';
-            output += '<div class="col"><input type="text" class="form-control" name="quantidades[]" placeholder="Quantidade" required/></div>';
-            output += '</div></div><button type="button" class="remove_field btn btn-padrao2 btn-circle"><i class="fa fa-times"></button></div>';
-        $(wrapper).append(output);
-		  });
-      $(wrapper).on("click",".remove_field", function(e){
-        e.preventDefault(); 
-        $(this).parent('div').remove(); 
+        $(this).parent('div').remove();
         x--;
-      });
-		})
-	</script>
+        cont_inputs--;
+      }
+    });
+  });
+</script>

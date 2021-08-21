@@ -23,13 +23,26 @@
                 {!! Form::label('fornecedor_id', 'Fornecedor') !!}
                 {!! Form::select('fornecedor_id', \App\Fornecedor::orderBy('razao_social')->pluck('razao_social', 'id')->toArray(), 
                                                     null, ['class'=>'form-control', 'required']) !!}
-              </div>  
-            </div><br>
+              </div>
+            </div>
+              
+            <br>
             
-            <label>Clique no botão ao lado para adicionar produtos para o seu pedido <button class="add_field_button btn btn-padrao2"><i class="fa fa-plus" aria-hidden="true"></i> </button>
-            </label>
-            <div class="input_fields_wrap"></div><br>
-            <div class="form-group">
+            <button class="add_field_button btn btn-padrao1" style="margin-left: 10px;!important"> <i class="fa fa-plus" aria-hidden="true"></i> </button>
+
+            <div style="width:80%; float:left">
+              <div class="form-row">
+                <div class="col">
+                  <input type="text" class="form-control" name="produtos[]" placeholder="Produto" required/>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" name="quantidades[]" placeholder="Quantidade" required/>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 10px;!important" class="input_fields_wrap"></div>
+
+            <br><div class="form-group">
               {!! Form::submit('Cadastrar', ['class'=>'btn btn-padrao1']) !!}
               <a href="{{ route('pedidos', []) }}" class="btn btn-padrao2">Cancelar</a>
             </div>
@@ -45,15 +58,14 @@
 		$(document).ready(function(){
 			var wrapper = $(".input_fields_wrap");
 			var add_button = $(".add_field_button");
-			var x=0;
+			var x=1;
 			$(add_button).click(function(e){
         x++;
         e.preventDefault();
-        var output = "<br>";
-            output += '<div><div style="width:80%; float:left" id="ator">';
+        var output = '<div style="margin-bottom: 10px;!important"><div style="width:80%; float:left" >';
             output += '<div class="form-row"><div class="col"><input type="text" class="form-control" name="produtos[]" placeholder="Produto" required/></div>';
             output += '<div class="col"><input type="text" class="form-control" name="quantidades[]" placeholder="Quantidade" required/></div>';
-            output += '</div></div><button type="button" class="remove_field btn btn-padrao2 btn-circle"><i class="fa fa-times"></button></div>';
+            output += '</div></div><button type="button" class="remove_field btn btn-padrao2 btn-circle" style="margin-left: 10px;!important"><i class="fa fa-times"></button></div>';
         $(wrapper).append(output);
 		  });
       $(wrapper).on("click",".remove_field", function(e){

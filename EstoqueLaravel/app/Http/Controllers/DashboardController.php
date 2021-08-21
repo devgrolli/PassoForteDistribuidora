@@ -1,16 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Saida;
-use App\Cliente;
-use App\Entrada;
-use App\Produto;
-use App\TipoEntrada;
-use App\TipoSaida;
 use DB;
 use Carbon;
-use Illuminate\Http\Request;
-
 class DashboardController extends Controller{
     public function index() {
         $total_clientes = DB::table('clientes')->count();
@@ -96,16 +88,10 @@ class DashboardController extends Controller{
         return [$calulos_prejuizo, $calulos_lucro];
     }
 
-    public function calculaPorcentagem(){
-
-    }
-
     public function validadeExpirada(){
         $data_atual = Carbon\Carbon::now()->format('Y-m-d');
-        $entradas_validate = DB::table('entradas')->join('produtos', 'entradas.produto_id', '=', 'produtos.id')
-                                                  ->where('entradas.validade', '<', $data_atual)
-                                                  ->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')
-                                                  ->get();
+        $entradas_validate = DB::table('entradas')->join('produtos', 'entradas.produto_id', '=', 'produtos.id')->where('entradas.validade', '<', $data_atual)
+                                                  ->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')->get();
         return [$entradas_validate, $entradas_validate->count()];                                                  
     }
 
