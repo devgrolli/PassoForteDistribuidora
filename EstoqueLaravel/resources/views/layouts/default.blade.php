@@ -41,8 +41,13 @@
         function editarModal(id) {
             $.getJSON('/' + @yield('table-delete') + '/edit/' + id, function(data) {
                 $('.id-div').val(data.id);
-                $('.nome-div').val(data.nome);
-                $('.descricao-div').val(data.descricao);
+                if(@yield('table-delete') === 'usuarios'){
+                    $('.nome-div').val(data.name);
+                    $('.email-div').val(data.email);
+                }else{
+                    $('.nome-div').val(data.nome);
+                    $('.descricao-div').val(data.descricao);
+                }
             }).fail(function() {
                 swal.fire(
                     'Erro!',

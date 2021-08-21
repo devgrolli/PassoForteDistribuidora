@@ -17,7 +17,6 @@ class AddTipoEntradaIdToEntradas extends Migration
             $table->bigInteger('tipo_entrada_id')->unsigned()->nullable();
             $table->foreign('tipo_entrada_id')->references('id')->on('tipo_entradas');
             $table->string('observacoes', 4000)->nullable();
-            $table->string('status_preco')->nullable();
         });
     }
 

@@ -32,7 +32,7 @@
                                         <a href="{{ route('clientes.create', []) }}" type="button" class="btn btn-padrao1-div_table">
                                             Cadastrar <i class="fa fa-user-plus" aria-hidden="true"></i>
                                         </a>
-                                        <a href="{{ route('tipo_clientes.create', []) }}" type="button" class="btn btn-padrao2-div_table">
+                                        <a href="{{ route('tipo_clientes', []) }}" type="button" class="btn btn-padrao2-div_table">
                                             Cadastrar Tipo de Cliente <i class="fa fa-plus" aria-hidden="true"></i>
                                         </a>                                   
                                         <button type="button" class="btn btn-padrao1-div_table" data-toggle="modal" data-target="#excelModal">

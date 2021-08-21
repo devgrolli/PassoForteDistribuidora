@@ -7,8 +7,8 @@ class DashboardController extends Controller{
     public function index() {
         $total_clientes = DB::table('clientes')->count();
         $total_produtos = DB::table('produtos')->count();
-        $total_entradas = DB::table('entradas')->count();
-        $total_saidas = DB::table('saidas')->count();
+        $total_entradas = DB::table('entradas')->where('deleted_at', '=', false)->count();
+        $total_saidas = DB::table('saidas')->where('deleted_at', '=', false)->count();
 
         $estoque_baixo = DashboardController::produtosEstoqueBaixo();
         $saldo_saida = DashboardController::totalSaidas();
@@ -35,7 +35,7 @@ class DashboardController extends Controller{
         $table_saidas_prejuizo = [];
         $table_saidas_lucro = [];
 
-        $calcula_prejuizo = DB::table('saidas')->get();
+        $calcula_prejuizo = DB::table('saidas')->where('deleted_at', '=', false)->get();
         foreach($calcula_prejuizo as $cal){
             $find_id_saidas = DB::table('tipo_saidas')->where('id', '=', $cal->tipo_saidas_id)->get()->first();
 
@@ -90,13 +90,16 @@ class DashboardController extends Controller{
 
     public function validadeExpirada(){
         $data_atual = Carbon\Carbon::now()->format('Y-m-d');
-        $entradas_validate = DB::table('entradas')->join('produtos', 'entradas.produto_id', '=', 'produtos.id')->where('entradas.validade', '<', $data_atual)
+        $entradas_validate = DB::table('entradas')->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')
+                                                  ->join('produtos', 'entradas.produto_id', '=', 'produtos.id')
+                                                  ->where('entradas.validade', '<', $data_atual)
+                                                  ->where('deleted_at', '=', false)
                                                   ->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')->get();
         return [$entradas_validate, $entradas_validate->count()];                                                  
     }
 
     public function totalEntradas(){
-        $produtos = DB::table('entradas')->select('quantidade', 'preco_un')->get();
+        $produtos = DB::table('entradas')->select('quantidade', 'preco_un')->where('deleted_at', '=', false)->get();
         $qtd_entrada = $produtos->sum('quantidade');
         $preco_entrada = $produtos->sum('preco_un');
         $saldo_ent = $preco_entrada * $qtd_entrada; 
@@ -104,7 +107,7 @@ class DashboardController extends Controller{
     }
 
     public function totalSaidas(){
-        $saidas = DB::table('saidas')->select('quantidade', 'preco_un')->get();
+        $saidas = DB::table('saidas')->select('quantidade', 'preco_un')->where('deleted_at', '=', false)->get();
         $quantidade_saida = $saidas->sum('quantidade');
         $preco_saida = $saidas->sum('preco_un');
         $saldo_s = $preco_saida * $quantidade_saida; 

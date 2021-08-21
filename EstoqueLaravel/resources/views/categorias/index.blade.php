@@ -112,16 +112,18 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    {!! Form::open(['route' => 'categorias.store']) !!}
-                    <div class="modal-body">
-                        {!! Form::label('nome', 'Nome') !!}
-                        {!! Form::text('nome', null, ['class' => 'form-control', 'required']) !!}
+                    <div class="crud-alignment-modal">
+                        {!! Form::open(['route' => 'categorias.store']) !!}
+                        <div class="modal-body">
+                            {!! Form::label('nome', 'Nome') !!}
+                            {!! Form::text('nome', null, ['class' => 'form-control', 'required']) !!}
+                        </div>
+                        <div class="modal-body">
+                            {!! Form::label('descricao', 'Descrição') !!}
+                            {!! Form::textarea('descricao', null, ['class' => 'form-control']) !!}
+                        </div>
+                        <br>
                     </div>
-                    <div class="modal-body">
-                        {!! Form::label('descricao', 'Descrição') !!}
-                        {!! Form::textarea('descricao', null, ['class' => 'form-control']) !!}
-                    </div>
-                    <br>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Cancelar <i class="fas fa-times-circle"></i></button>
                         {!! Form::button('Salvar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' => 'submit']) !!}

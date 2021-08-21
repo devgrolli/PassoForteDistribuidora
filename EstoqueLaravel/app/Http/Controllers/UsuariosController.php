@@ -48,9 +48,9 @@ class UsuariosController extends Controller{
         return $ret; 
     }
 
-    public function edit(Request $request){
-        $usuario = User::find(\Crypt::decrypt($request->get('id')));
-        return view('usuarios.edit', compact('usuario'));
+    public function edit($id){
+        $usuario = User::find($id);
+        return json_encode($usuario);
     }
 
     public function update(UsuarioRequest $request, $id){

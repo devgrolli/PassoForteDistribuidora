@@ -25,8 +25,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::any('',             ['as' => 'usuarios',         'uses' => 'UsuariosController@index']);
         Route::get('create',       ['as' => 'usuarios.create',  'uses' => 'UsuariosController@create']);
         Route::get('{id}/destroy', ['as' => 'usuarios.destroy', 'uses' => 'UsuariosController@destroy']);
-        Route::get('edit',         ['as' => 'usuarios.edit',    'uses' => 'UsuariosController@edit']);
-        Route::put('{id}/update',  ['as' => 'usuarios.update',  'uses' => 'UsuariosController@update']);
+        Route::get('edit/{id}',    ['as' => 'usuarios.edit',    'uses' => 'UsuariosController@edit']);
+        Route::put('/update',      ['as' => 'usuarios.update',  'uses' => 'UsuariosController@update']);
         Route::post('store',       ['as' => 'usuarios.store',   'uses' => 'UsuariosController@store']);
     });
 

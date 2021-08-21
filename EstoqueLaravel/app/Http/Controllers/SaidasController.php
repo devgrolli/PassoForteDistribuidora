@@ -11,12 +11,12 @@ use Illuminate\Http\Request;
 
 class SaidasController extends Controller{
     public function index() {
-		$saidas = Saida::orderBy('id')->paginate(10);
+		$saidas = Saida::orderBy('id')->where('deleted_at', '=', false)->paginate(10);
 		return view('saidas.index', ['saidas'=>$saidas]);
 	}
 
     public function getprods($valor){
-        $produto = Entrada::where('produto_id', '=', $valor)->get();
+        $produto = Entrada::where('produto_id', '=', $valor)->where('deleted_at', '=', false)->get();
         return $produto->isEmpty() ? json_encode('Sem estoque') : json_encode($produto);
     }
 
@@ -56,7 +56,9 @@ class SaidasController extends Controller{
     public function destroy($id){
         try {
             SaidasController::atualizaEstoque($id);
-            Saida::find($id)->delete();
+            $entrada_deleted = Saida::find($id);
+            $entrada_deleted->deleted_at = true;
+            $entrada_deleted->save();
             $ret = array('status'=>200, 'msg'=>"null");
         }catch(\Illuminate\Database\QueryException $e){
             $ret = array('status'=>500, 'msg'=>$e->getMessage());
