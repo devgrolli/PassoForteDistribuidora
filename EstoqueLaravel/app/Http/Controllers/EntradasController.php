@@ -1,17 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 use App\Entrada;
 use App\Produto;
-use App\TipoEntrada;
-use DB;
 use App\Http\Requests\EntradaRequest;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class EntradasController extends Controller{
     public function index() {
-		$entradas = Entrada::orderBy('id')->paginate(10);
+		$entradas = Entrada::orderBy('id')->where('deleted_at', '=', false)->paginate(10);
 		return view('entradas.index', ['entradas'=>$entradas]);
 	}
 
@@ -23,41 +22,34 @@ class EntradasController extends Controller{
     public function store(EntradaRequest $request){
         $nova_entrada = $request->all(); 
         $estoque_produto = Produto::find($request->produto_id);
-        $all_entradas = DB::table('entradas')->get();
-
-        $validate_tipo_id = DB::table('tipo_entradas')->where('id', '=', $request->tipo_entrada_id)->get()->first();
-        $produto_utilizado = DB::table('entradas')->where('produto_id', '=', $request->produto_id)->get();
 
         if ($request->quantidade == 0 || $request->quantidade < 0) {
             Alert::error('Quantidade Inválida', 'Insira uma quantidade maior que zero')->persistent('Close');
             return redirect()->back()->withInput();
 
         }else{
-            $popula_table = 'NA';
-            if(!$all_entradas->isEmpty()){
-                foreach($all_entradas as $all){
-                    if ($request->preco_un > $all->preco_un){
-                        $popula_table = 'VALOR ACIMA';
-                        break;
-                    }else if ($request->preco_un < $all->preco_un){
-                        $popula_table = 'VALOR ABAIXO';
-                        break;
-                    }
-                }
+            $same_date_entrada = DB::table('entradas')->where('produto_id', '=', $request->produto_id)
+                                                      ->where('deleted_at', '=', false)
+                                                      ->where('validade', '=', $request->validade)->get(); # verifica se o produto de entrada tem a mesma data de validade
+            if ($same_date_entrada->isEmpty()){
+                $nova_entrada['preco_un'] = UtilController::formataMoeda($request->preco_un);
+                Entrada::create($nova_entrada);
+                $estoque_produto->quantidade += $request->quantidade;
+                $estoque_produto->save();
+                return redirect()->route('entradas')->with('success', "Entrada cadastrada com sucesso!");
+            }else{
+                Alert::error('Produto já cadastro com mesma data de validade', 'Altere a entrada do produto que possui esta mesma validade')->persistent('Close');
+                return redirect()->back()->withInput();
             }
-            $nova_entrada = array_merge($nova_entrada, array("status_preco" => $popula_table));
-            $nova_entrada['preco_un'] = UtilController::formataMoeda($request->preco_un);
-            Entrada::create($nova_entrada);
-            $estoque_produto->quantidade += $request->quantidade;
-            $estoque_produto->save();
-            return redirect()->route('entradas')->with('success', "Entrada cadastrada com sucesso!");
         }    
     }
 
     public function destroy($id){
         try {
             EntradasController::atualizaEstoque($id);
-            Entrada::find($id)->delete();
+            $entrada_deleted = Entrada::find($id);
+            $entrada_deleted->deleted_at = true;
+            $entrada_deleted->save();
             $ret = array('status'=>200, 'msg'=>"null");
         }catch(\Illuminate\Database\QueryException $e){
             $ret = array('status'=>500, 'msg'=>$e->getMessage());
@@ -89,7 +81,8 @@ class EntradasController extends Controller{
             Alert::error('Produto sem estoque', "Tente outro produto")->persistent('Close');
             return redirect()->back()->withInput();
         
-        }else{
+        }else{  
+            $request['preco_un'] = UtilController::formataMoeda($request->preco_un);
             Entrada::find($id)->update($request->all());
             $busca_produto->quantidade = $request->quantidade;
             $busca_produto->save();

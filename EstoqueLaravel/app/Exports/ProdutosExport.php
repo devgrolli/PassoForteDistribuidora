@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Exports;
-use DB;
-use App\Produto;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -10,12 +8,12 @@ class ProdutosExport implements FromCollection, WithHeadings{
     /**
     * @return \Illuminate\Support\Collection
     */
+    private $dados;
+    public function __construct(object $dados){
+        $this->dados = $dados;
+    }
     public function collection() {
-        $excel_prods = DB::table('produtos')
-            ->join('categorias', 'produtos.categorias_id', '=', 'categorias.id')
-            ->select('produtos.id', 'produtos.nome','produtos.unidade','produtos.marca', 'categorias.nome as categoria')->get();
-        
-        return $excel_prods;
+        return $this->dados;
     }
 
     public function headings(): array    {
@@ -24,7 +22,8 @@ class ProdutosExport implements FromCollection, WithHeadings{
             'Produto',
             'Unidade',
             'Marca',
-            'Categoria'
+            'Categoria',
+            'Data do Cadastro'
         ];
     }
 }

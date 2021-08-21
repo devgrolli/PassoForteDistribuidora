@@ -34,13 +34,13 @@ class CategoriasController extends Controller{
         return $ret; 
     }
 
-    public function edit(Request $request){
-        $categoria = Categoria::find(\Crypt::decrypt($request->get('id')));
-        return view('categorias.edit', compact('categoria'));
+    public function edit($id){
+        $categoria = Categoria::find($id);
+        return json_encode($categoria);
     }
 
-    public function update(CategoriaRequest $request, $id){
-        Categoria::find($id)->update($request->all());
+    public function update(CategoriaRequest $request){
+        Categoria::find($request->id)->update($request->all());
         return redirect()->route('categorias');
     }
 }

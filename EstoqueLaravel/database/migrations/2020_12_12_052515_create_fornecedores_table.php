@@ -15,7 +15,7 @@ class CreateFornecedoresTable extends Migration
     {
         Schema::create('fornecedores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('cnpj', 14);
+            $table->string('cnpj', 18);
             $table->string('razao_social', 100);
             $table->string('email', 60);
             $table->string('cep', 10);

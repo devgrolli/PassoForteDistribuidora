@@ -33,14 +33,14 @@ class TipoClientesController extends Controller{
         }
         return $ret; 
     }
-
-    public function edit(Request $request){
-        $tipo_cliente = TipoCliente::find(\Crypt::decrypt($request->get('id')));
-        return view('tipo_clientes.edit', compact('tipo_cliente'));
+    
+    public function edit($id){
+        $tipo_cliente = TipoCliente::find($id);
+        return json_encode($tipo_cliente);
     }
 
-    public function update(TipoClienteRequest $request, $id){
-        TipoCliente::find($id)->update($request->all());
+    public function update(TipoClienteRequest $request){
+        TipoCliente::find($request->id)->update($request->all());
         return redirect()->route('tipo_clientes');
     }
 }

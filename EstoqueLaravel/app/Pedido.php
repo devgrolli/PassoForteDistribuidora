@@ -12,5 +12,5 @@ class Pedido extends Model{
         return $this->belongsTo("App\Fornecedor"); 
     }
 
-    protected $casts = ['items' => 'json'];
+    protected $casts = ['items' => 'array'];
 }

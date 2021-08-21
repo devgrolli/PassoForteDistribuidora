@@ -34,7 +34,9 @@ class ClientesController extends Controller{
                     break;      
                 case "Mal comprador":
                     $numero = 4;
-                    break;        
+                    break;
+                default:
+                    $numero = 5;
                                    
             }
             $nome_cliente->categoria_cliente = $numero;
@@ -74,5 +76,5 @@ class ClientesController extends Controller{
         Cliente::find($id)->update($request->all());
         return redirect()->route('clientes')->with('success', "Cliente alterado com sucesso!");
     }
-    
+
 }

@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Exports;
-use DB;
-use App\Cliente;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -10,13 +8,12 @@ class ClientesExport implements FromCollection, WithHeadings{
     /**
     * @return \Illuminate\Support\Collection
     */
+    private $dados;
+    public function __construct(object $dados){
+        $this->dados = $dados;
+    }
     public function collection() {
-        $excel_clientes = DB::table('clientes')
-            ->join('tipo_clientes', 'clientes.tipo_cliente_id', '=', 'tipo_clientes.id')
-            ->select('clientes.id', 'clientes.nome','clientes.email','clientes.telefone', 
-                     'clientes.endereco', 'tipo_clientes.nome as tipo_cliente', 'clientes.descricao')->get();
-        
-        return $excel_clientes;
+        return $this->dados;
     }
 
     public function headings(): array    {
@@ -27,6 +24,7 @@ class ClientesExport implements FromCollection, WithHeadings{
             'Telefone',
             'Endereço',
             'Tipo de Cliente',
+            'Data do Cadastro',
             'Descrição'
         ];
     }

@@ -11,12 +11,12 @@ use Illuminate\Http\Request;
 
 class SaidasController extends Controller{
     public function index() {
-		$saidas = Saida::orderBy('id')->paginate(10);
+		$saidas = Saida::orderBy('id')->where('deleted_at', '=', false)->paginate(10);
 		return view('saidas.index', ['saidas'=>$saidas]);
 	}
 
     public function getprods($valor){
-        $produto = Entrada::where('produto_id', '=', $valor)->get();
+        $produto = Entrada::where('produto_id', '=', $valor)->where('deleted_at', '=', false)->get();
         return $produto->isEmpty() ? json_encode('Sem estoque') : json_encode($produto);
     }
 
@@ -39,8 +39,8 @@ class SaidasController extends Controller{
             Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada')->persistent('Close');
             return redirect()->back()->withInput();
 
-        }else if ((floatval($request->preco_un) > floatval($request->preco_saida)) && (mb_strtoupper($nome_tipo_saida->nome, 'UTF-8') == 'VENDA')){
-            Alert::error('Valor Saída maior que de Entrada', "Insira um outro tipo de saída ou um valor maior que o valor de entrada para o produto com essa validade $request->validade_produto")->persistent('Close');
+        }else if ((floatval($request->preco_un) >= floatval($request->preco_saida)) && (mb_strtoupper($nome_tipo_saida->nome, 'UTF-8') == 'VENDA')){
+            Alert::error('Valor Saída maior que de Entrada', "Insira um outro tipo de saída ou um valor maior/igual que o valor de entrada para o produto com essa validade $request->validade_produto")->persistent('Close');
             return redirect()->back()->withInput();
 
         }else{
@@ -56,7 +56,9 @@ class SaidasController extends Controller{
     public function destroy($id){
         try {
             SaidasController::atualizaEstoque($id);
-            Saida::find($id)->delete();
+            $entrada_deleted = Saida::find($id);
+            $entrada_deleted->deleted_at = true;
+            $entrada_deleted->save();
             $ret = array('status'=>200, 'msg'=>"null");
         }catch(\Illuminate\Database\QueryException $e){
             $ret = array('status'=>500, 'msg'=>$e->getMessage());
@@ -74,7 +76,7 @@ class SaidasController extends Controller{
     }
 
     public function edit(Request $request){
-        $products = Produto::all();
+        $products = Produto::where('quantidade', '>', '0')->get();
         $saida = Saida::find(\Crypt::decrypt($request->get('id')));
         return view('saidas.edit', compact('saida', 'products'));
     }

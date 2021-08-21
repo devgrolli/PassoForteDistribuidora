@@ -20,8 +20,6 @@ class FornecedoresController extends Controller{
 
     public function store(FornecedorRequest $request){ // Responsável por gravar um novo registro 
         $novo_fornecedor = $request->all();
-        // $telefone_formatado = preg_replace("/[^0-9]/", "", $request->telefone);
-        // $novo_fornecedor['telefone'] = $telefone_formatado;
         $valida_cnpj = DB::table('fornecedores')->where('cnpj', '=', $request->cnpj)->get()->first();
         if ($valida_cnpj == null){
             Fornecedor::create($novo_fornecedor);

@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => '<b>Passo Forte </b>',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/stock.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -319,10 +319,12 @@ return [
                 [
                     'text' => 'Listagem',
                     'url'  => 'fornecedores',
+                    'icon' => ''
                 ],
                 [
                     'text' => 'Pedidos',
                     'url'  => 'pedidos',
+                    'icon' => ''
                 ],
             ],
         ],
@@ -331,11 +333,6 @@ return [
             'url'  => 'tipos',
             'icon' => 'fas fa-fw fal fa-align-justify',
             'submenu' => [
-                [
-                    'text' => 'Registro de Usuários',
-                    'url'  => 'usuarios',
-                    'icon' => '',
-                ],
                 [
                     'text' => 'Categorias',
                     'url'  => 'categorias',

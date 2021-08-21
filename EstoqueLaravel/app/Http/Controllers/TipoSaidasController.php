@@ -34,13 +34,13 @@ class TipoSaidasController extends Controller{
         return $ret; 
     }
 
-    public function edit(Request $request){
-        $tipo_saida = TipoSaida::find(\Crypt::decrypt($request->get('id')));
-        return view('tipo_saidas.edit', compact('tipo_saida'));
+    public function edit($id){
+        $tipo_saida = TipoSaida::find($id);
+        return json_encode($tipo_saida);
     }
 
-    public function update(TipoSaidaRequest $request, $id){
-        TipoSaida::find($id)->update($request->all());
+    public function update(TipoSaidaRequest $request){
+        TipoSaida::find($request->id)->update($request->all());
         return redirect()->route('tipo_saidas');
     }
 }
