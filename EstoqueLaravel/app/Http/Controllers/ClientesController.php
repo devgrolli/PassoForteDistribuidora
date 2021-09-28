@@ -17,11 +17,8 @@ class ClientesController extends Controller{
             $clientes = Cliente::where('nome', 'like', '%'.$filtragem.'%')
             ->orderBy("nome")
             ->paginate(5);
-            // ->setpath('clientes?desc_filtro='+$filtragem); 
-        $nome_clientes = Cliente::all();
-        foreach ($nome_clientes as $nome_cliente) {
-            $nome_tipo = $nome_cliente->tipo_cliente->nome;
-            switch ($nome_tipo) {
+        foreach (Cliente::all() as $nc) {
+            switch ($nc->tipo_cliente->nome) {
                 case "Bom comprador":
                     $numero = 1;
                     break;
@@ -39,8 +36,8 @@ class ClientesController extends Controller{
                     $numero = 5;
                                    
             }
-            $nome_cliente->categoria_cliente = $numero;
-            $nome_cliente->save();
+            $nc->categoria_cliente = $numero;
+            $nc->save();
         }
         return view('clientes.index', ['clientes'=>$clientes]);
     }

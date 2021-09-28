@@ -11,12 +11,12 @@ use Illuminate\Http\Request;
 
 class SaidasController extends Controller{
     public function index() {
-		$saidas = Saida::orderBy('id')->where('deleted_at', '=', false)->paginate(10);
+		$saidas = Saida::orderBy('id')->where('is_excluded', '=', false)->paginate(10);
 		return view('saidas.index', ['saidas'=>$saidas]);
 	}
 
     public function getprods($valor){
-        $produto = Entrada::where('produto_id', '=', $valor)->where('deleted_at', '=', false)->get();
+        $produto = Entrada::where('produto_id', '=', $valor)->where('is_excluded', '=', false)->get();
         return $produto->isEmpty() ? json_encode('Sem estoque') : json_encode($produto);
     }
 
@@ -54,25 +54,16 @@ class SaidasController extends Controller{
     }
 
     public function destroy($id){
-        try {
-            SaidasController::atualizaEstoque($id);
-            $entrada_deleted = Saida::find($id);
-            $entrada_deleted->deleted_at = true;
-            $entrada_deleted->save();
-            $ret = array('status'=>200, 'msg'=>"null");
-        }catch(\Illuminate\Database\QueryException $e){
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
-        }catch(\PDOException $e){
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
-        }
-        return $ret; 
-    }
-
-    public function atualizaEstoque($id){
         $retoma_valor = Saida::find($id);
+        $retoma_valor->is_excluded = true;
+        $retoma_valor->deleted_at = date('d/m/Y H:i:s', time());
+        $retoma_valor->save();
+
         $update_product = Produto::find($retoma_valor->produto_id);
         $update_product->quantidade += $retoma_valor->quantidade; #retoma o valor do produto de entrada
-        $update_product->save();
+        $return = $update_product->save();
+
+        return $return == true ? array('status'=>200, 'msg'=>"null") : array('status'=>500, 'msg'=>'error');
     }
 
     public function edit(Request $request){

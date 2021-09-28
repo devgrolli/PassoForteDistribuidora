@@ -3,6 +3,7 @@
   @include('sweetalert::alert')
   @include('layouts.formata_moeda')
   @include('layouts.dynamic_validade')
+  @include('layouts.estoque_modal')
   @extends('layouts.select_search')
   @include('layouts.spinner')
 
@@ -64,40 +65,6 @@
             {!! Form::button('Salvar <i class="far fa-save"></i>',['class'=>'btn btn-padrao1', 'type'=>'submit']) !!}
           </div>
         {!! Form::close() !!} 
-      </div>
-    </div>
-  </div>
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header color-header-modal">
-          <h5 class="modal-title" id="exampleModalLabel">Estoque</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        </div>
-        <div class="modal-body">
-          <table class="table table-hover" id="table">
-            <thead class="letra" id="thead_colors">
-              <th></th>
-              <th>Nome</th>
-              <th>Quantidade</th>
-            </thead>
-            <tbody>
-              @foreach ($products as $product)
-                <tr>
-                  <td>
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="tableDefaultCheck1">
-                      <label class="custom-control-label" for="tableDefaultCheck1"></label>
-                    </div>
-                  </td>
-                  <td>{{ $product->nome }}</td>
-                  <td>{{ $product->quantidade }}</td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
       </div>
     </div>
   </div>

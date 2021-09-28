@@ -20,7 +20,8 @@ class CreateEntradasTable extends Migration
             $table->integer('quantidade');
             $table->double('preco_un', 8, 2); 
             $table->date('validade');
-            $table->boolean('deleted_at')->default(false);
+            $table->boolean('is_excluded')->default(false);
+            $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
     }

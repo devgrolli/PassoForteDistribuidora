@@ -15,8 +15,8 @@ class PedidosController extends Controller{
         //     $pedidos = Pedido::where('produto', 'like', '%'.$filtragem.'%')
         //     ->orderBy("produto")
         //     ->paginate(5);
-        //     // ->setpath('clientes?desc_filtro='+$filtragem); 
-        $pedidos = Pedido::all();
+        //     // ->setpath('clientes?desc_filtro='+$filtragem);
+        $pedidos = Pedido::orderBy('id')->where('is_excluded', '=', false)->paginate(10);
         return view('pedidos.index', ['pedidos'=>$pedidos]);
     }
 
@@ -52,15 +52,10 @@ class PedidosController extends Controller{
     }
 
     public function destroy($id){
-        try {
-            Pedido::find($id)->delete();
-            $ret = array('status'=>200, 'msg'=>"null");
-        }catch(\Illuminate\Database\QueryException $e){
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
-        }catch(\PDOException $e){
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
-        }
-        return $ret; 
+        $pedidos = Pedido::find($id);
+        $pedidos->is_excluded = true;
+        $pedidos->deleted_at = date('d/m/Y H:i:s', time());
+        return $pedidos->save() ? array('status'=>200, 'msg'=>"null") : array('status'=>500, 'msg'=>'error');
     }
 
     public function edit(Request $request){

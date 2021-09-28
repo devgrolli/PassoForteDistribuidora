@@ -11,6 +11,7 @@ use App\Http\Controllers\TipoSaidasController;
 use App\Http\Controllers\CepController;
 use App\Http\Controllers\UsuariosController;
 use App\Http\Controllers\ExportContorller;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -52,8 +53,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::any('',             ['as' => 'produtos',         'uses' => 'ProdutosController@index']);
         Route::get('create',       ['as' => 'produtos.create',  'uses' => 'ProdutosController@create']);
         Route::get('{id}/destroy', ['as' => 'produtos.destroy', 'uses' => 'ProdutosController@destroy']);
-        Route::get('edit',         ['as' => 'produtos.edit',    'uses' => 'ProdutosController@edit']);
-        Route::put('{id}/update',  ['as' => 'produtos.update',  'uses' => 'ProdutosController@update']);
+        Route::get('edit/{id}',    ['as' => 'produtos.edit',    'uses' => 'ProdutosController@edit']);
+        Route::put('/update',      ['as' => 'produtos.update',  'uses' => 'ProdutosController@update']);
         Route::post('store',       ['as' => 'produtos.store',   'uses' => 'ProdutosController@store']);
     });
 

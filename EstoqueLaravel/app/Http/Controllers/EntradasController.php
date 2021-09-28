@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use DB;
 use App\Entrada;
+use App\Saida;
 use App\Produto;
 use App\Http\Requests\EntradaRequest;
 use Illuminate\Http\Request;
@@ -10,7 +11,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class EntradasController extends Controller{
     public function index() {
-		$entradas = Entrada::orderBy('id')->where('deleted_at', '=', false)->paginate(10);
+		$entradas = Entrada::orderBy('id')->where('is_excluded', '=', false)->paginate(10);
 		return view('entradas.index', ['entradas'=>$entradas]);
 	}
 
@@ -29,7 +30,7 @@ class EntradasController extends Controller{
 
         }else{
             $same_date_entrada = DB::table('entradas')->where('produto_id', '=', $request->produto_id)
-                                                      ->where('deleted_at', '=', false)
+                                                      ->where('is_excluded', '=', false)
                                                       ->where('validade', '=', $request->validade)->get(); # verifica se o produto de entrada tem a mesma data de validade
             if ($same_date_entrada->isEmpty()){
                 $nova_entrada['preco_un'] = UtilController::formataMoeda($request->preco_un);
@@ -45,25 +46,22 @@ class EntradasController extends Controller{
     }
 
     public function destroy($id){
-        try {
-            EntradasController::atualizaEstoque($id);
-            $entrada_deleted = Entrada::find($id);
-            $entrada_deleted->deleted_at = true;
-            $entrada_deleted->save();
+        $entrada = Entrada::find($id);
+        $has_saidas = Saida::where('produto_id', '=', $entrada->produto_id)->where('is_excluded', '=', false)->get();
+        if($has_saidas->isEmpty()){
+            $entrada->is_excluded = true;
+            $entrada->deleted_at = date('d/m/Y H:i:s', time());
+            $entrada->save();
+    
+            #Repoem quantidade na table de Produtos
+            $update_estoque = Produto::find($entrada->produto_id);
+            $entrada->quantidade > $update_estoque->quantidade ? $update_estoque->quantidade = 0 : $update_estoque->quantidade -= $entrada->quantidade;
+            $update_estoque->save();
             $ret = array('status'=>200, 'msg'=>"null");
-        }catch(\Illuminate\Database\QueryException $e){
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
-        }catch(\PDOException $e){
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
+        }else{
+            $ret = array('status'=>500, 'msg'=>'ERROR');
         }
         return $ret;
-    }
-
-    public function atualizaEstoque($id_destroy){
-        $entrada = Entrada::find($id_destroy);
-        $update_estoque = Produto::find($entrada->produto_id);
-        $entrada->quantidade > $update_estoque->quantidade ? $update_estoque->quantidade = 0 : $update_estoque->quantidade -= $entrada->quantidade;
-        $update_estoque->save();
     }
 
     public function edit(Request $request){

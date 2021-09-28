@@ -26,9 +26,9 @@
                             <div class="btn-group mr-2">               
                                 <div class="form-group col-12">
                                     <div class="btn-group" role="group" aria-label="Exemplo básico">
-                                        <a href="{{ route('produtos.create', []) }}" id="btn-cadastrar-produto" type="button" class="btn btn-padrao1-div_table">Cadastrar
-                                            <i class="fa fa-plus" aria-hidden="true"></i></a>
-                                        </a>
+                                        <button type="button" class="btn btn-padrao1-div_table" data-toggle="modal" data-target="#cadastro">
+                                            Cadastrar <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </button>
                                         <button type="button" class="btn btn-padrao2-div_table" data-toggle="modal" data-target="#excelModal">
                                             Exportar Excel <i class="fas fa-file-export"></i>
                                         </button>
@@ -70,8 +70,8 @@
                                         <td>{{ $produto->marca }}</td>
                                         <td>{{ $produto->categorias->nome }}</td>
                                         <td>
-                                            <a href="{{ route('produtos.edit', ['id' => \Crypt::encrypt($produto->id)]) }}"
-                                                class="btn btn-padrao1-icons">
+                                            <button data-toggle="modal" data-target='#editModal' onclick="editarModal('{{ $produto->id }}');"
+                                                class="btn btn-padrao1-icons edit-tipo">
                                                 <i class="bi bi-pencil-square"></i>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -80,8 +80,7 @@
                                                     <path fill-rule="evenodd"
                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                 </svg>
-
-                                            </a>
+                                            </button>
                                             <a href="#" onclick="return ConfirmaExclusao({{ $produto->id }})"
                                                 class="btn btn-padrao2-icons">
                                                 <i class="bi bi-archive">
@@ -152,6 +151,93 @@
                 {!! Form::close() !!}
             </div>
         </div>
+    </div>
+
+    <div class="modal fade" id="cadastro" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header color-header-modal">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Cadastro de Produto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="crud-alignment-modal">
+                    {!! Form::open(['route' => 'produtos.store']) !!}
+                    <div class="modal-body">
+                        {!! Form::label('id', 'Código') !!}
+                        {!! Form::text('id', null, ['class' => 'form-control id-div', 'required']) !!}
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('nome', 'Nome') !!}
+                        {!! Form::text('nome', null, ['class' => 'form-control', 'required']) !!}
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('unidade', 'Unidade') !!}
+                        {!! Form::text('unidade', null, ['class'=>'form-control']) !!}
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('marca', 'Marca') !!}
+                        {!! Form::text('marca', null, ['class'=>'form-control', 'required']) !!}
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('categorias_id', 'Categorias') !!}
+                        {!! Form::select('categorias_id', \App\Categoria::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control select_search', 'required']) !!}
+                    </div>
+                </div>
+                <br>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Cancelar <i class="fas fa-times-circle"></i></button>
+                    {!! Form::button('Salvar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' => 'submit']) !!}
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header color-header-modal">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Alteração de Produto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="crud-alignment-modal">
+                    {!! Form::open(['route'=> "produtos.update", 'method'=>'put']) !!}
+                    <div class="modal-body">
+                        {!! Form::label('id', 'Código') !!}
+                        {!! Form::text('id', null, ['class' => 'form-control id-div', 'readonly']) !!}
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('nome', 'Nome') !!}
+                        {!! Form::text('nome', null, ['class' => 'form-control nome-div', 'required']) !!}
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('unidade', 'Unidade') !!}
+                        {!! Form::text('unidade', null, ['class'=>'form-control un-div', 'required']) !!}
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('marca', 'Marca') !!}
+                        {!! Form::text('marca', null, ['class'=>'form-control marca-div', 'required']) !!}
+                    </div>
+                    <div class="modal-body">
+                        {!! Form::label('categorias_id', 'Categorias') !!}
+                        {!! Form::select('categorias_id', \App\Categoria::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control select_search', 'required']) !!}
+                    </div>
+                </div>
+                <br>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Cancelar <i class="fas fa-times-circle"></i></button>
+                    {!! Form::button('Salvar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' => 'submit']) !!}
+                </div>
+                {!! Form::close() !!}
+            </div>
+        </div>
+    </div>
+    </div>
     </div>
     @include('sweetalert::alert')
 @stop

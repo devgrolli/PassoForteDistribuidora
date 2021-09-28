@@ -18,8 +18,8 @@
 
         <div class="form-row">
             <div class="col-md-6">
-              {!! Form::label('nome', 'Nome') !!}
-              {!! Form::text('nome', null, ['class'=>'form-control', 'required']) !!}
+              {!! Form::label('name', 'Nome') !!}
+              {!! Form::text('name', null, ['class'=>'form-control', 'required']) !!}
             </div>
         </div>
 

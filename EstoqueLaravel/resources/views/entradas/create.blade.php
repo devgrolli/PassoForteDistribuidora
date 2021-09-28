@@ -1,4 +1,7 @@
 @extends('layouts.default')
+@extends('layouts.select_search')
+@include('sweetalert::alert')
+@include('layouts.formata_moeda')
 @section('content')
 
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
@@ -65,39 +68,5 @@
             </div>
         </div>
     </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Estoque</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <table class="table table-hover" id="table">
-                        <thead class="letra" id="thead_colors">
-                            <th>Nome</th>
-                            <th>Quantidade</th>
-                        </thead>
-                        <tbody>
-                            @foreach ($products as $product)
-                                <tr>
-                                    <td>{{ $product->nome }}</td>
-                                    <td>{{ $product->quantidade }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    @include('sweetalert::alert')
-    @include('layouts.formata_moeda')
-    @extends('layouts.select_search')
+    @include('layouts.estoque_modal')
 @stop

@@ -7,13 +7,12 @@
 @extends('layouts.select_search')
 
 <link rel="stylesheet" type="text/css" href="../css/default-template.css">
-
   <div id="div_create">
       <div class="card">
           <div class="card-header">
-              <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
-                  <h1 class="text-create"><strong>Cadastro cliente </strong></h1>
-              </div>
+            <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
+                <h1 class="text-create"><strong>Cadastro cliente </strong></h1>
+            </div>
           </div>
 
           <div class="card-body" id="card_crud">
@@ -49,7 +48,7 @@
           </div>
           <br>
 
-          <div class="form-group col-md-2" id="check-endereco">
+          {{-- <div class="form-group col-md-2" id="check-endereco">
             <div class="form-check">
               <input class="form-check-input" type="radio" name="flexRadioDefault" value="simplificado" checked>
               <label class="form-check-label" for="flexRadioDefault2">
@@ -62,9 +61,9 @@
                 Endereço Completo
               </label>
             </div>
-          </div>
-
-          <div class="input_fields_wrap"></div><br>
+          </div> --}}
+{{-- 
+          <div class="input_fields_wrap"></div><br> --}}
 
           <div class="form-row">
             <div class="col">
@@ -90,46 +89,46 @@
       selected_value = $("input[name='flexRadioDefault']:checked").val();
       if(selected_value == 'completo'){
         var newField = `
-        <div id="form-completo">
-          <div class="form-row">
-            <div class="form-group col-md-2">
-              {!! Form::label('cep', 'CEP') !!}
-              {!! Form::text('cep', null, ['class' => 'form-control', 'id' => 'cep', 'required']) !!}
-            </div>  
+          <div id="form-completo">
+            <div class="form-row">
+              <div class="form-group col-md-2">
+                {!! Form::label('cep', 'CEP') !!}
+                {!! Form::text('cep', null, ['class' => 'form-control', 'id' => 'cep', 'required']) !!}
+              </div>  
 
-            <div class="form-group col-md-4">
-              {!! Form::label('endereco', 'Endereço') !!}
-              {!! Form::text('endereco', null, ['class' => 'form-control', 'id' => 'rua', 'required']) !!}
+              <div class="form-group col-md-4">
+                {!! Form::label('endereco', 'Endereço') !!}
+                {!! Form::text('endereco', null, ['class' => 'form-control', 'id' => 'rua', 'required']) !!}
+              </div>
+
+              <div class="form-group col-md-1">
+                {!! Form::label('numero', 'Número') !!}
+                {!! Form::number('numero', null, ['class' => 'form-control', 'required']) !!}
+              </div>  
+
+              <div class="form-group col-md-3">
+                {!! Form::label('complemento', 'Complemento') !!}
+                {!! Form::text('complemento', null, ['class' => 'form-control']) !!}
+              </div>  
+
+              <div class="form-group col-md-2">
+                {!! Form::label('bairro', 'Bairro') !!}
+                {!! Form::text('bairro', null, ['class' => 'form-control', 'id' => 'bairro', 'required']) !!}
+              </div>
             </div>
+            
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                {!! Form::label('cidade', 'Cidade') !!}
+                {!! Form::text('cidade', null, ['class' => 'form-control', 'id' => 'cidade', 'required']) !!}
+              </div>
 
-            <div class="form-group col-md-1">
-              {!! Form::label('numero', 'Número') !!}
-              {!! Form::number('numero', null, ['class' => 'form-control', 'required']) !!}
-            </div>  
-
-            <div class="form-group col-md-3">
-              {!! Form::label('complemento', 'Complemento') !!}
-              {!! Form::text('complemento', null, ['class' => 'form-control']) !!}
-            </div>  
-
-            <div class="form-group col-md-2">
-              {!! Form::label('bairro', 'Bairro') !!}
-              {!! Form::text('bairro', null, ['class' => 'form-control', 'id' => 'bairro', 'required']) !!}
+              <div class="col">
+                {!! Form::label('estado', 'Estado') !!}
+                {!! Form::text('estado', null, ['class' => 'form-control', 'id' => 'uf', 'required']) !!}
+              </div>
             </div>
-          </div>
-          
-          <div class="form-row">
-            <div class="form-group col-md-4">
-              {!! Form::label('cidade', 'Cidade') !!}
-              {!! Form::text('cidade', null, ['class' => 'form-control', 'id' => 'cidade', 'required']) !!}
-            </div>
-
-            <div class="col">
-              {!! Form::label('estado', 'Estado') !!}
-              {!! Form::text('estado', null, ['class' => 'form-control', 'id' => 'uf', 'required']) !!}
-            </div>
-          </div>
-        </div>`;
+          </div>`;
         $(wrapper).append(newField);
       }else{
         $('#form-completo').remove(); 

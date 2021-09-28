@@ -1,9 +1,11 @@
-@section('content')
-@include('sweetalert::alert')
-@extends('layouts.default')
-@include('layouts.spinner')
-@include('layouts.formata_moeda')
 @extends('layouts.select_search')
+@extends('layouts.default')
+@include('sweetalert::alert')
+@include('layouts.spinner')
+@include('layouts.estoque_modal')
+@include('layouts.formata_moeda')
+@section('content')
+
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
     <div id="div_create">
         <div class="card">
@@ -27,8 +29,7 @@
                     </div>
                     <div class="col">
                         {!! Form::label('preco_un', 'Preço Unitário') !!}
-                        {!! Form::text('preco_un', $entrada->preco_un, ['class' => 'form-control', 'id' => 'valor',
-                        'onkeyup' => 'formatarMoeda()', 'placeholder' => 'R$', 'required']) !!}
+                        {!! Form::text('preco_un', $entrada->preco_un, ['class' => 'form-control', 'id' => 'valor', 'onkeyup' => 'formatarMoeda()', 'placeholder' => 'R$', 'required']) !!}
                     </div>
                 </div><br>
                 <div class="form-row">

@@ -20,7 +20,8 @@ class CreateSaidasTable extends Migration
             $table->double('preco_un', 8, 2);
             $table->double('preco_saida', 8, 2);
             $table->integer('quantidade');
-            $table->boolean('deleted_at')->default(false);
+            $table->boolean('is_excluded')->default(false);
+            $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
     }

@@ -18,8 +18,7 @@ class ProdutosController extends Controller{
             $produtos = Produto::where('nome', 'like', '%'.$filtragem.'%')
             ->orderBy("nome")
             ->paginate(5);
-                // ->setpath('produtos?desc_filtro='+$filtragem); 
-
+                // ->setpath('produtos?desc_filtro='+$filtragem);
         return view('produtos.index', ['produtos'=>$produtos]);
     }
 
@@ -39,6 +38,10 @@ class ProdutosController extends Controller{
         }
     }
 
+    public function get_products(){
+        return Produto::all();
+    }
+
     public function destroy($id){
         try {
             Produto::find($id)->delete();
@@ -51,21 +54,21 @@ class ProdutosController extends Controller{
         return $ret; 
     }
 
-    public function edit(Request $request){
-        $produto = Produto::find(\Crypt::decrypt($request->get('id')));
-        return view('produtos.edit', compact('produto'));
+    public function edit($id){
+        $produto = Produto::find($id);
+        return json_encode($produto);
     }
 
-    public function update(ProdutoRequest $request, $id){
-        $produto_entrada = DB::table('entradas')->where('produto_id', '=', $id)->get();
-        $produto = DB::table('produtos')->where('id', '=', $id)->get()->first();
+    public function update(ProdutoRequest $request){
+        $produto_entrada = DB::table('entradas')->where('produto_id', '=', $request->id)->get();
+        $produto = DB::table('produtos')->where('id', '=', $request->id)->get()->first();
 
         if((!$produto_entrada->isEmpty()) and ($request->nome != $produto->nome) || ($request->id != $produto->id)){
             Alert::error("Produto $produto->nome (Código $produto->id) não pode ser alterado", 'Cadastre um novo produto ou exclua as entradas deste produto para efetuar alteração do nome')->persistent('Close');
             return redirect()->back()->withInput();
 
         }else{
-            Produto::find($id)->update($request->all());
+            Produto::find($request->id)->update($request->all());
             return redirect()->route('produtos')->with('success', "Produto alterado com sucesso!");
         }
     }

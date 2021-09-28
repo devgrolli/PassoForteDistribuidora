@@ -24,27 +24,31 @@
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
                             <table class="table table-hover tabela_id" id="table">
-                                <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
-                                    <th></th>
-                                    <th>Código</th>
-                                    <th>Produto</th>
-                                    <th>Quantidade em Estoque</th>
-                                </thead>
+                                {{-- @if($estoque->count() != 0) --}}
+                                    <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
+                                        <th></th>
+                                        <th>Código</th>
+                                        <th>Produto</th>
+                                        <th>Quantidade em Estoque</th>
+                                    </thead>
 
-                                <tbody align="center" style="margin: 0px auto;">
-                                    @foreach ($estoque as $e)
-                                        <tr>
-                                            <td></td>
-                                            <td>{{ $e->id }}</td>
-                                            <td>{{ $e->nome }}</td>
-                                            @if ($e->quantidade > 0)
-                                                <td><span class='badge badge-pill badge-success w-25 p-3' style="font-size: 15px;">{{ $e->quantidade }}</span></td>
-                                            @else
-                                                <td ><span class='badge badge-pill badge-danger w-25 p-3' >{{ 'SEM ESTOQUE' }}</span></td>
-                                            @endif
-                                        </tr>
-                                    @endforeach
-                                </tbody>
+                                    <tbody align="center" style="margin: 0px auto;">
+                                        @foreach ($estoque as $e)
+                                            <tr>
+                                                <td></td>
+                                                <td>{{ $e->id }}</td>
+                                                <td>{{ $e->nome }}</td>
+                                                @if ($e->quantidade > 0)
+                                                    <td><span class='badge badge-pill badge-success w-25 p-3' style="font-size: 15px;">{{ $e->quantidade }}</span></td>
+                                                @else
+                                                    <td ><span class='badge badge-pill badge-danger w-25 p-3' >{{ 'SEM ESTOQUE' }}</span></td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                {{-- @else
+                                    <center><img src="{{ url('/img/stock.png') }}" style="width:100%;height:100%;"></center>
+                                @endif --}}
                             </table>
                             {{ $estoque->links() }}
                         </div>

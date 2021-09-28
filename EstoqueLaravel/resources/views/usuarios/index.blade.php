@@ -114,8 +114,8 @@
                     <div class="crud-alignment-modal">
                         {!! Form::open(['route' => 'usuarios.store']) !!}
                         <div class="modal-body">
-                            {!! Form::label('nome', 'Nome') !!}
-                            {!! Form::text('nome', null, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::label('name', 'Nome') !!}
+                            {!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
                         </div>
                         <div class="modal-body">
                             {!! Form::label('email', 'E-mail') !!}
@@ -153,8 +153,8 @@
                             {!! Form::text('id', null, ['class' => 'form-control id-div', 'readonly']) !!}
                         </div>
                         <div class="modal-body">
-                            {!! Form::label('nome', 'Nome') !!}
-                            {!! Form::text('nome', null, ['class' => 'form-control nome-div', 'required']) !!}
+                            {!! Form::label('name', 'Nome') !!}
+                            {!! Form::text('name', null, ['class' => 'form-control nome-div', 'required']) !!}
                         </div>
                         <div class="modal-body">
                             {!! Form::label('email', 'E-mail') !!}

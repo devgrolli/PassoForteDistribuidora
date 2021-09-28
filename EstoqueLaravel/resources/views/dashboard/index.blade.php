@@ -204,7 +204,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_produtos }}</div>
                             </div>
                             <div class="col-auto">
-                                <lord-icon src="https://cdn.lordicon.com/fqrjldna.json" trigger="loop" colors="primary:#4c5253,secondary:#f8efbe" style="width:70px;height:70px"> </lord-icon>
+                                <a href="{{ route('produtos', []) }}" ><lord-icon src="https://cdn.lordicon.com/fqrjldna.json" trigger="loop" colors="primary:#4c5253,secondary:#f8efbe" style="width:70px;height:70px"> </lord-icon></a>
                             </div>
                         </div>
                     </div>

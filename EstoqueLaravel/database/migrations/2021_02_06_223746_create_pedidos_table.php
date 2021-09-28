@@ -18,6 +18,8 @@ class CreatePedidosTable extends Migration
             $table->bigInteger('fornecedor_id')->unsigned()->nullable();
             $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
             $table->json('items')->nullable();
+            $table->boolean('is_excluded')->default(false);
+            $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
     }
