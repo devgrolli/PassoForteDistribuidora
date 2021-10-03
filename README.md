@@ -8,7 +8,7 @@
 </p>
 
 ## Instalação do Node
-Acesse o site o site e baixe o [Node] (https://nodejs.org/en/download/)
+Acesse o site o site e baixe o Node https://nodejs.org/en/download/
 
 ## Instalação do PHP
 Baixe o Xampp/Wampp para o PHP ou instale diretamente do repositório do sistema operacional
@@ -48,7 +48,7 @@ f) Procure pelas seguintes extensões e descomente as linhas:
   - extension=pdo_sqlite
 
 ## Banco de Dados 
-O projeto em si utiliza o banco PostgresSQL
+O projeto utiliza o banco postgres, baixe caso não tenha instalado na máquina
 
 ## Baixando e executando o projeto
 Clone o projeto do repositório GitHub
