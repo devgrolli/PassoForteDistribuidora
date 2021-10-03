@@ -81,3 +81,11 @@ Execute o comando no terminal 'composer update' e em seguida novamente o comando
 ## Migrations e Seeds
 - Execute no terminal o comando 'php artisan migrate' para a criação das tabelas no comando 
 - Execute no terminal o comando 'php artisan db:seed' para inserir dados das tabelas no banco
+
+## Execução do projeto
+Por fim, execute o comando 'php artisan serve' para subir o projeto local e em seguida acesse no browser a url 'http://127.0.0.1:8000'
+
+![Screenshot_10](https://user-images.githubusercontent.com/59673152/135765211-5aba4491-f1a1-4dd4-82dc-dbe3cf7bbbfe.png)
+
+![Screenshot_11](https://user-images.githubusercontent.com/59673152/135765231-f83b15a2-3b3b-494d-9c6a-8573d9987de5.png)
+
