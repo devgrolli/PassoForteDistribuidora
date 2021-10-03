@@ -19,9 +19,11 @@ Baixe o Xampp/Wampp para o PHP ou instale diretamente do repositório do sistema
 Acesse e abra o arquivo 'php.ini' (utilizando o xampp, o caminho é este C:\xampp\php)
 
 a) Procure por "extension_dir" e descomente (retire o ";" - ponto e vírgula - no início da linha caso exista) a linha.
+
 ![Screenshot_2](https://user-images.githubusercontent.com/59673152/135761105-cc39476e-732d-4c84-9115-68f06399b92b.png)
 
 b) Procure por "display_errors" e deixe configurado com "ON"
+
 ![Screenshot_1](https://user-images.githubusercontent.com/59673152/135761072-6a461ac8-1771-42d3-a9d9-e5be7c08d79f.png)
 
 
