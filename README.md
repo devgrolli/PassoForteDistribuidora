@@ -50,7 +50,7 @@ f) Procure pelas seguintes extensões e descomente as linhas:
 ## Banco de Dados 
 O projeto utiliza o banco postgres, baixe caso não tenha instalado na máquina
 
-## Baixando e executando o projeto
+## Clonando o projeto
 Clone o projeto do repositório GitHub
 git clone https://github.com/devgrolli/EstoqueLaravel.git
 
