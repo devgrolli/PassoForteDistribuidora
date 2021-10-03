@@ -60,5 +60,17 @@ git clone https://github.com/devgrolli/EstoqueLaravel.git
 'composer install'
 
 ## Environment 
-Execute esse comando no terminal para gerar o arquivo onde serão configurados os dados importantes da aplicação
-'cp .env.example .env'
+- Execute esse comando no terminal para gerar o arquivo onde serão configurados os dados importantes da aplicação 'cp .env.example .env'
+
+![Screenshot_7](https://user-images.githubusercontent.com/59673152/135764319-f712030d-9ffd-41c3-a9ee-205f0a8fbce5.png)
+
+- Após esse passo do arquivo .env, vamos gerar a chave da aplicação utilzando o comando 'php artisan key:generate'
+
+![Screenshot_9](https://user-images.githubusercontent.com/59673152/135764732-1183dbf9-9223-4e56-9a3a-af4a9e9827b9.png)
+
+Obs: Caso ocorra o erro como este
+
+![Screenshot_8](https://user-images.githubusercontent.com/59673152/135764742-e103e277-5d91-4621-92e6-da9af3fd64ca.png)
+
+Execute o comando no terminal 'composer update' e em seguida novamente o comando 'php artisan key:generate'
+
