@@ -74,3 +74,10 @@ Obs: Caso ocorra o erro como este
 
 Execute o comando no terminal 'composer update' e em seguida novamente o comando 'php artisan key:generate'
 
+- Alterne no arquivo .env as configurações do banco de dados 
+
+![database](https://user-images.githubusercontent.com/59673152/135764900-c8852740-df59-4aed-bd25-07acd7a97bfd.png)
+
+## Migrations e Seeds
+- Execute no terminal o comando 'php artisan migrate' para a criação das tabelas no comando 
+- Execute no terminal o comando 'php artisan db:seed' para inserir dados das tabelas no banco
