@@ -27,7 +27,6 @@ class EntradasController extends Controller{
         if ($request->quantidade == 0 || $request->quantidade < 0) {
             Alert::error('Quantidade Inválida', 'Insira uma quantidade maior que zero')->persistent('Close');
             return redirect()->back()->withInput();
-
         }else{
             $same_date_entrada = DB::table('entradas')->where('produto_id', '=', $request->produto_id)
                                                       ->where('is_excluded', '=', false)

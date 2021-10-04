@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use PDF;
 use Carbon;
 use App\Produto;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class ExportContorller extends Controller{
                 if(!$return_query->isEmpty()){
                     switch($request->type_doc){
                         case '1': return Excel::download(new ClientesExport($return_query), 'clientes.xlsx');
-                        case '2': return 'PDF';
+                        case '2':return 'PDF';
                         case '3': return 'VIEW';
                     }
                 } else {
