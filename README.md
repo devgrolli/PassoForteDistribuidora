@@ -48,7 +48,10 @@ f) Procure pelas seguintes extensões e descomente as linhas:
   - extension=pdo_sqlite
 
 ## Banco de Dados 
-O projeto utiliza o banco postgres, baixe caso não tenha instalado na máquina
+O projeto utiliza o banco postgres, baixe o programa caso não tenha instalado na máquina. Após instalado e configurado, crie um database com o nome 'estoquelaravel'. O nome para do database será configurado no arquivo .env nos próximos passos deste documento.
+
+![Screenshot_12](https://user-images.githubusercontent.com/59673152/135947032-bbe0e63f-bd6f-44c6-8b74-c5e7a2560e0a.png)
+
 
 ## Clonando o projeto
 Clone o projeto do repositório GitHub
