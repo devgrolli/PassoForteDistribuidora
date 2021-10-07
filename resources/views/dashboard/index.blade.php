@@ -2,6 +2,8 @@
 @section('content')
     @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
+    <!-- Chart JS -->
+    <script src="{{ asset('assets/chart.js') }}"></script>
     <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
 
     <div class="row-dashboard-div">
@@ -404,6 +406,116 @@
                 </div>
             </div>
         @endif
+
+        <div class="row">
+            <div class="col-xl-3 col-md-3 mb-4">
+                <div class="card-dash border-left-saidas shadow h-100 py-2">
+                    <div class="card-body">
+                        <h4 class="mt-0 header-title mb-3">Gráfico de Entradas</h4>
+                        <hr>
+                        <div class="inbox-wid">
+                            <div class="inbox-item">
+                                <canvas id="myChart" width="200" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-3 mb-4">
+                <div class="card-dash border-left-estoque shadow h-100 py-2">
+                    <div class="card-body">
+                        <h4 class="mt-0 header-title mb-3">Gráfico de Saídas</h4>
+                        <hr>
+                        <div class="inbox-wid">
+                            <div class="inbox-item">
+                                <canvas id="myChart2" width="200" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @stop
 
+
+@section('js')
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [ {{ implode(',', $balanco_entrada[1])}}],
+                datasets: [{
+                    label: 'Quantidade de entradas nos últimos 6 meses', 
+                    data: [ {{ implode(',', $balanco_entrada[0])}}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        var ctx = document.getElementById('myChart2').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [ {{ implode(',', $balanco_entrada[1])}}],
+                datasets: [{
+                    label: 'Quantidade de saídas nos últimos 6 meses', 
+                    data: [ {{ implode(',', $balanco_entrada[0])}}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+@endsection
