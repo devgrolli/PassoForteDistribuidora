@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UsuarioRequest;
 use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\PermissionRegistrar;
 
 class UsuariosController extends Controller{
     public function index(Request $filtro) {
@@ -18,8 +21,6 @@ class UsuariosController extends Controller{
             $usuarios = User::where('name', 'like', '%'.$filtragem.'%')
             ->orderBy("name")
             ->paginate(5);
-
-        $teste = auth()->user();
      
         return view('usuarios.index', ['usuarios'=>$usuarios]);
     }
@@ -28,11 +29,18 @@ class UsuariosController extends Controller{
         return view('usuarios.create');
     }
 
-    public function store(UsuarioRequest $request){ 
-        $teste = auth()->user();
+    public function store(UsuarioRequest $request){
+        if($request->permission == '1'){
+            $role = 'writer';
+        }else{
+            $role = 'Super-Admin';
+        }
+
         $senha_criptografada = Hash::make($request->password);
         $request->merge(['password' => $senha_criptografada]);
-        User::create($request->all());
+        $user = User::create($request->all());
+
+        $user->assignRole($role);
         return redirect()->route('usuarios')->with('success', "Usuário novo cadastrado com sucesso!");
     }
 

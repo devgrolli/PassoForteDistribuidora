@@ -8,7 +8,7 @@
     <div class="row-dashboard-div">
         <div class="row">
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-dash border-left-lucro shadow h-100 py-2">
+                <div class="card-dash border-left-lucro slide shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -40,7 +40,7 @@
             </div>
 
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-dash border-left-prejuizo shadow h-100 py-2">
+                <div class="card-dash border-left-prejuizo slide shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -93,7 +93,7 @@
             </div>
 
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-dash border-left-estoque shadow h-100 py-2">
+                <div class="card-dash border-left-estoque slide shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -116,7 +116,7 @@
             </div>
 
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-dash border-left-cliente shadow h-100 py-2">
+                <div class="card-dash border-left-cliente slide shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -142,7 +142,7 @@
 
         <div class="row">
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-dash border-left-entrada shadow h-100 py-2">
+                <div class="card-dash border-left-entrada slide shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -165,7 +165,7 @@
             </div>
 
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-dash border-left-saidas shadow h-100 py-2">
+                <div class="card-dash border-left-saidas slide shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -195,7 +195,7 @@
             </div>
 
             <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card-dash border-left-produtos shadow h-100 py-2">
+                <div class="card-dash border-left-produtos slide shadow h-100 py-2">
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
@@ -214,25 +214,36 @@
 
             @if ($data_expirada[1] > 0)
                 <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card-dash border-left-vencimento shadow h-100 py-2">
+                    <div class="small-box card-dash border-left-vencimento slide shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        <h6>Produtos com Validade expirada</h6>
+                                        <h6>Produtos com Validade expirada 
+                                            <i class="fa fa-window-restore" aria-hidden="true"></i>
+                                        </h6> 
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data_expirada[1] }}</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data_expirada[1] }} </div>
                                 </div>
                                 <div class="col-auto">
                                     <button class="btn " type="button" data-toggle="modal" data-target="#exampleModalExpirado">
-                                        <lord-icon src="https://cdn.lordicon.com//tvyxmjyo.json" trigger="loop"
-                                            colors="primary:#0cf29d,secondary:#000000" stroke="80"
-                                            style="width:70px;height:70px">
-                                        </lord-icon>
+                                    <lord-icon src="https://cdn.lordicon.com//tvyxmjyo.json" trigger="loop"
+                                        colors="primary:#0cf29d,secondary:#000000" stroke="80"
+                                        style="width:70px;height:70px">
+                                    </lord-icon>
                                 </div>
                             </div>
                         </div>
+                        {{-- <a href="#" class="small-box-footer">
+                            Visualizar <i class="fas fa-arrow-circle-right"></i>
+                            </a> --}}
+                        {{-- <button class="btn-primary visubtn" id="visu">
+                            Visualizar
+                        </button> --}}
+                        
+                        
                     </div>
+                    
                 </div>
             @endif
         </div>
@@ -443,22 +454,22 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-xl-3 col-md-3 mb-4">
-                <div class="card-dash shadow h-100 py-2">
-                    <div class="card-body">
-                        <h4 class="mt-0 header-title mb-3">Gráfico de Saídas</h4>
-                        <hr>
-                        <div class="inbox-wid">
-                            <div class="inbox-item">
-                                <canvas id="pie-chart" width="200" height="200"></canvas>
+        @role('writer')
+            <div class="row">
+                <div class="col-xl-3 col-md-3 mb-4">
+                    <div class="card-dash shadow h-100 py-2">
+                        <div class="card-body">
+                            <h4 class="mt-0 header-title mb-3">Gráfico de Saídas</h4>
+                            <hr>
+                            <div class="inbox-wid">
+                                <div class="inbox-item">
+                                    <canvas id="pie-chart" width="200" height="200"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        @endrole
     </div>
 @stop
-
-

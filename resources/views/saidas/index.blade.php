@@ -74,7 +74,7 @@
                                         <td>{{ $saida->produto->nome }}</td>
                                         <td>{{ $saida->quantidade }} </td>
                                         <td>R$ {{ number_format($saida->preco_saida, 2, ',', '.') }}</td>
-                                        <td>{{ $saida->tipo_saidas_id }}</td>
+                                        <td>{{ $saida->tipo_saidas->nome }}</td>
                                         <td>{{ Carbon\Carbon::parse($saida->created_at)->format('d/m/Y - H:i:s') }}</td>
                                         <td>
                                             <a href="{{ route('saidas.edit', ['id' => \Crypt::encrypt($saida->id)]) }}"

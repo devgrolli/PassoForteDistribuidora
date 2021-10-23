@@ -55,6 +55,7 @@
               {!! Form::select('tipo_saidas_id', \App\TipoSaida::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control select_search', 'required']) !!}
             </div>
           </div>
+          <br>
 
           <div class="form-group">
             {!! Form::label('observacoes', 'Observações') !!}

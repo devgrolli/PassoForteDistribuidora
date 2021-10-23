@@ -20,7 +20,7 @@ class Saida extends Model{
         return $this->belongsTo("App\Produto"); 
     }
 
-    public function tipo_saida(){
+    public function tipo_saidas(){
         return $this->belongsTo("App\TipoSaida"); 
     }
 
