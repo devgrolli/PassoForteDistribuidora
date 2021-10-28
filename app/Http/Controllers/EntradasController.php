@@ -50,17 +50,19 @@ class EntradasController extends Controller{
         if($has_saidas->isEmpty()){
             $entrada->is_excluded = true;
             $entrada->deleted_at = date('d/m/Y H:i:s', time());
-            $entrada->save();
-    
-            #Repoem quantidade na table de Produtos
-            $update_estoque = Produto::find($entrada->produto_id);
+            $update_status = $entrada->save();
+            $update_estoque = Produto::find($entrada->produto_id); #Repoem quantidade na table de Produtos
             $entrada->quantidade > $update_estoque->quantidade ? $update_estoque->quantidade = 0 : $update_estoque->quantidade -= $entrada->quantidade;
-            $update_estoque->save();
-            $ret = array('status'=>200, 'msg'=>"null");
+            $estoque_update = $update_estoque->save();
+            if($estoque_update == true && $update_status == true){
+                $retorno = array('status'=>200, 'msg'=>'Exclusão lógica confirmada');
+            }else{
+                $retorno = array('status'=>500, 'msg'=>'erro generico');
+            }
         }else{
-            $ret = array('status'=>500, 'msg'=>'ERROR');
+            $retorno = array('status'=>501, 'msg'=>'Há saídas de produtos cadastradas com este produto!');
         }
-        return $ret;
+        return $retorno;
     }
 
     public function edit(Request $request){

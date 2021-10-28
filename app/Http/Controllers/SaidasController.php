@@ -63,7 +63,7 @@ class SaidasController extends Controller{
         $update_product->quantidade += $retoma_valor->quantidade; #retoma o valor do produto de entrada
         $return = $update_product->save();
 
-        return $return == true ? array('status'=>200, 'msg'=>"null") : array('status'=>500, 'msg'=>'error');
+        return $return == true ? array('status'=>200, 'msg'=>"null") : array('status'=>501, 'msg'=>'Ocorreu um erro ao excluir a saída do produto, contate o suporte!');
     }
 
     public function edit(Request $request){

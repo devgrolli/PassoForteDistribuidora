@@ -105,7 +105,7 @@ class DashboardController extends Controller{
         $entradas_validate = DB::table('entradas')->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')
                                                   ->join('produtos', 'entradas.produto_id', '=', 'produtos.id')
                                                   ->where('entradas.validade', '<', $data_atual)
-                                                  ->where('is_excluded', '=', false)
+                                                  ->where('entradas.is_excluded', '=', false)
                                                   ->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')->get();
         return [$entradas_validate, $entradas_validate->count()];                                                  
     }
@@ -127,7 +127,7 @@ class DashboardController extends Controller{
     }
 
     public function produtosEstoqueBaixo() {
-        $prods_eb = DB::table('produtos')->where('quantidade', '<', 2)->get();
+        $prods_eb = DB::table('produtos')->where('quantidade', '<', 2)->where('is_excluded', '=', true)->get();
         $qtd_eb  = $prods_eb->count();
         return [$prods_eb, $qtd_eb];
     }

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 use App\Cliente;
-use App\TipoCliente;
 use App\Http\Requests\ClienteRequest;
 
 class ClientesController extends Controller{
@@ -14,8 +12,8 @@ class ClientesController extends Controller{
         if ($filtragem == null)
             $clientes = Cliente::orderBy('nome')->paginate(10);
         else
-            $clientes = Cliente::where('nome', 'like', '%'.$filtragem.'%')
-            ->orderBy("nome")
+            $clientes = Cliente::where('nome', 'ilike', '%'.$filtragem.'%')
+            ->orderBy('nome')
             ->paginate(5);
         foreach (Cliente::all() as $nc) {
             switch ($nc->tipo_cliente->nome) {

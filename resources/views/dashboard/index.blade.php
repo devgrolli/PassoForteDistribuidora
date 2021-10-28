@@ -24,15 +24,15 @@
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <button class="btn" type="button" data-toggle="modal" data-target="#exampleModalLucro"
-                                    data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar os lucros">
+                                <button class="btn" type="button" data-toggle="modal" data-target="#exampleModalLucro" data-toggle="tooltip" data-placement="top" title="Clique aqui para visualizar os lucros">
                                     <lord-icon
-                                    src="https://cdn.lordicon.com/rgyftmhc.json"
-                                    trigger="loop"
-                                    colors="primary:#173820,secondary:#173820"
-                                    stroke="70"
-                                    style="width:80px;height:80px">
-                                </lord-icon>
+                                        src="https://cdn.lordicon.com/rgyftmhc.json"
+                                        trigger="loop"
+                                        colors="primary:#173820,secondary:#173820"
+                                        stroke="70"
+                                        style="width:80px;height:80px">
+                                    </lord-icon>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -86,6 +86,7 @@
                                             fill="#020202"
                                             style="animation:downit cubic-bezier(.9,-.32,0,1.56) 1.5s infinite;transform-origin:50% 50%" />
                                     </svg>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -109,6 +110,7 @@
                                     <lord-icon src="https://cdn.lordicon.com//tdrtiskw.json" trigger="loop"
                                         colors="primary:#0a4e5c,secondary:#0a4e5c" stroke="80" style="width:70px;height:70px">
                                     </lord-icon>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -173,20 +175,18 @@
                                     <h6>Total de Saídas</h6>
                                 </div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-
                                     {{ $total_saidas }}
                                     {{-- {{ number_format($saldo_saida, 2, ',', '.') }} --}} </div> 
                             </div>
                             <div class="col-auto">
-                                <a href="{{ route('saidas', []) }}" data-toggle="tooltip" data-placement="top"
-                                    title="Clique aqui para acessar página de cadastro de saídas">
+                                <a href="{{ route('saidas', []) }}" data-toggle="tooltip" data-placement="top" title="Clique aqui para acessar página de cadastro de saídas">
                                     <lord-icon
-                                    src="https://cdn.lordicon.com/slkvcfos.json"
-                                    trigger="loop"
-                                    colors="primary:#eeca66,secondary:#eeca66"
-                                    stroke="80"
-                                    style="width:70px;height:70px">
-                                </lord-icon>
+                                        src="https://cdn.lordicon.com/slkvcfos.json"
+                                        trigger="loop"
+                                        colors="primary:#eeca66,secondary:#eeca66"
+                                        stroke="80"
+                                        style="width:70px;height:70px">
+                                    </lord-icon>
                                 </a>
                             </div>
                         </div>
@@ -227,23 +227,15 @@
                                 </div>
                                 <div class="col-auto">
                                     <button class="btn " type="button" data-toggle="modal" data-target="#exampleModalExpirado">
-                                    <lord-icon src="https://cdn.lordicon.com//tvyxmjyo.json" trigger="loop"
-                                        colors="primary:#0cf29d,secondary:#000000" stroke="80"
-                                        style="width:70px;height:70px">
-                                    </lord-icon>
+                                        <lord-icon src="https://cdn.lordicon.com//tvyxmjyo.json" trigger="loop"
+                                            colors="primary:#0cf29d,secondary:#000000" stroke="80"
+                                            style="width:70px;height:70px">
+                                        </lord-icon>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        {{-- <a href="#" class="small-box-footer">
-                            Visualizar <i class="fas fa-arrow-circle-right"></i>
-                            </a> --}}
-                        {{-- <button class="btn-primary visubtn" id="visu">
-                            Visualizar
-                        </button> --}}
-                        
-                        
                     </div>
-                    
                 </div>
             @endif
         </div>

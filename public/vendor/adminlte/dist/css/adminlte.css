@@ -12080,7 +12080,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 .brand-link {
     display: block;
-    font-size: 1.25rem;
+    font-size: 1.30rem;
     line-height: 1.5;
     padding: 0.8125rem 0.5rem;
     transition: width 0.3s ease-in-out;
@@ -12383,7 +12383,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 [class*='sidebar-light-'] .nav-sidebar>.nav-item.menu-open>.nav-link,
 [class*='sidebar-light-'] .nav-sidebar>.nav-item:hover>.nav-link {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 0, 0, 0.1);
     color: #212529;
 }
 
