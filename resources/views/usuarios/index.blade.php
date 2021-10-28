@@ -125,6 +125,13 @@
                             {!! Form::label('password', 'Senha') !!}
                             {!! Form::text('password', null, ['class' => 'form-control', 'required']) !!}
                         </div>
+                        <div class="modal-body">
+                            {!! Form::Label('permission', 'Permissão') !!}
+                            <select class="selectpicker form-control select_search" name="permission" id="permission" data-live-search="true" required>
+                                <option value="1">Administrador</option>
+                                <option value="2">Usuário</option>
+                            </select>
+                        </div>
                     </div>
                     <br>
                     <div class="modal-footer">

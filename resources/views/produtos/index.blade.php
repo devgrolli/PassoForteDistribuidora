@@ -38,7 +38,7 @@
                             <div class="col-sm-12 col-md-4">
                                 {!! Form::open(['name' => 'form_name', 'route' => 'produtos']) !!}
                                 <div class="input-group mb-8">
-                                    <input type="text" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
+                                    <input type="text" name="desc_filtro" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-padrao1-div_table" type="submit" name="search"
                                             type="button" id="search-btn"><i class="fa fa-search"></i>
@@ -81,7 +81,8 @@
                                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                 </svg>
                                             </button>
-                                            <a href="#" onclick="return ConfirmaExclusao({{ $produto->id }})"
+                                            <a href="#" onclick="return ConfirmaExclusao({{ $produto->id }})" 
+                                   
                                                 class="btn btn-padrao2-icons">
                                                 <i class="bi bi-archive">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -166,7 +167,7 @@
                     {!! Form::open(['route' => 'produtos.store']) !!}
                     <div class="modal-body">
                         {!! Form::label('id', 'Código') !!}
-                        {!! Form::text('id', null, ['class' => 'form-control id-div', 'required']) !!}
+                        {!! Form::number('id', null, ['class' => 'form-control id-div', 'required']) !!}
                     </div>
                     <div class="modal-body">
                         {!! Form::label('nome', 'Nome') !!}
@@ -209,7 +210,7 @@
                     {!! Form::open(['route'=> "produtos.update", 'method'=>'put']) !!}
                     <div class="modal-body">
                         {!! Form::label('id', 'Código') !!}
-                        {!! Form::text('id', null, ['class' => 'form-control id-div', 'readonly']) !!}
+                        {!! Form::number('id', null, ['class' => 'form-control id-div', 'readonly']) !!}
                     </div>
                     <div class="modal-body">
                         {!! Form::label('nome', 'Nome') !!}

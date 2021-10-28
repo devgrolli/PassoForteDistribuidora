@@ -113,7 +113,7 @@ thead {
 .card-header {
     font-size: 40px;
     font-family: Poppins-Regular;
-    background-color: rgb(52, 58, 64);
+    background-color: #035c77;
 }
 
 .text-create {
@@ -258,12 +258,20 @@ td,
     border-left: .50rem solid #173820!important;
 }
 
+.border-left-lucro:hover {
+    border-left: 40px solid #173820!important;
+}
+
 #saida_dashborad_icon {
     color: #4c534f;
 }
 
 .border-left-prejuizo {
     border-left: .50rem solid #4c5253!important;
+}
+
+.border-left-prejuizo:hover {
+    border-left: 40px solid #4c5253!important;
 }
 
 #user_dashborad_icon {
@@ -274,6 +282,10 @@ td,
     border-left: .50rem solid #FF5E32!important;
 }
 
+.border-left-cliente:hover {
+    border-left: 40px solid #FF5E32!important;
+}
+
 #caixa_dashborad_icon {
     color: #FFD452;
 }
@@ -282,8 +294,16 @@ td,
     border-left: .50rem solid #FFD452!important;
 }
 
+.border-left-entrada:hover {
+    border-left: 40px solid #FFD452!important;
+}
+
 .border-left-saidas {
     border-left: .50rem solid #eeca66!important;
+}
+
+.border-left-saidas:hover {
+    border-left: 40px solid #eeca66!important;
 }
 
 #produtos_dashborad_icon {
@@ -294,16 +314,49 @@ td,
     border-left: .50rem solid #f8efbe!important;
 }
 
-.border-left-vencimento {
-    border-left: .50rem solid #0CF29D!important;
-}
-
-#estoque_dashborad_icon {
-    color: #005365;
+.border-left-produtos:hover {
+    border-left: 40px solid #f8efbe!important;
 }
 
 .border-left-estoque {
     border-left: .50rem solid #005365!important;
+}
+
+.border-left-estoque:hover {
+    border-left: 40px solid #005365!important;
+}
+
+.border-left-vencimento {
+    border-left: .50rem solid #0CF29D!important;
+}
+
+.border-left-vencimento:hover {
+    border-left: 40px solid #0CF29D!important;
+}
+
+.card-for-show:hover + .fa-window-restore {
+    display: block;
+}
+
+.slide {
+    transition-duration: 1s;
+    transition-delay: 0s;
+}
+
+.fa-window-restore{
+    display: none;
+}
+
+.card-for-show:hover + .visubtn {
+    display: block;
+    transform: scale(1.015);
+    transition: 0.15s linear;
+    box-shadow: 1px 1px 22px rgba(157, 184, 209, 0.5);
+}
+
+
+#estoque_dashborad_icon {
+    color: #005365;
 }
 
 .card-dash {

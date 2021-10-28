@@ -134,5 +134,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('{type}/export', ['as' => 'export', 'uses' => 'ExportContorller@export']);
 
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+    Route::get('/graficoSaida', 'DashboardController@graficoSaida')->name('graficoSaida');
+    Route::get('/graficoEntrada', 'DashboardController@graficoEntrada')->name('graficoEntrada');
+
     Route::get('/ajuda',    'AjudaController@index')->name('ajuda');
 });

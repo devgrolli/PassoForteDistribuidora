@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use App\Entrada;
+use App\Saida;
 use App\Produto;
 use App\Http\Requests\ProdutoRequest;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -13,12 +15,9 @@ class ProdutosController extends Controller{
     public function index(Request $filtro) {
         $filtragem = $filtro->get('desc_filtro');
         if ($filtragem == null)
-            $produtos = Produto::orderBy('nome')->paginate(10);
+            $produtos = Produto::orderBy('id')->where('is_excluded', '=', false)->paginate(10);
         else
-            $produtos = Produto::where('nome', 'like', '%'.$filtragem.'%')
-            ->orderBy("nome")
-            ->paginate(5);
-                // ->setpath('produtos?desc_filtro='+$filtragem);
+            $produtos = Produto::where('nome', 'ilike', '%'.$filtragem.'%')->orderBy('nome')->where('is_excluded', '=', false)->paginate(5);
         return view('produtos.index', ['produtos'=>$produtos]);
     }
 
@@ -28,10 +27,16 @@ class ProdutosController extends Controller{
 
     public function store(ProdutoRequest $request){ 
         $novo_produto = $request->all();
-        $valida_id = DB::table('produtos')->where('id', '=', $request->id)->get()->first();
-        if ($valida_id == null){
+        $validate_store = DB::table('produtos')->where('id', '=', $request->id)->get()->first();
+        if ($validate_store == null){
             Produto::create($novo_produto);
             return redirect()->route('produtos')->with('success', "Produto cadastrado com sucesso!");
+
+        }else if($validate_store->is_excluded == true && $validate_store->id != null){
+            DB::table('produtos')->where('id', '=', $request->id)->update($request->except(['_token']));
+            Produto::where('id', '=', $request->id)->update(['is_excluded' => false, 'updated_at' => date('d/m/Y H:i:s', time())]);
+            return redirect()->route('produtos')->with('success', "Produto cadastrado com sucesso!");
+
         }else{
             Alert::error('Código do produto já utilizado', 'Insira um código que não esteja cadastrado')->persistent('Close');
             return redirect()->back()->withInput();
@@ -43,13 +48,14 @@ class ProdutosController extends Controller{
     }
 
     public function destroy($id){
-        try {
-            Produto::find($id)->delete();
-            $ret = array('status'=>200, 'msg'=>"null");
-        }catch(\Illuminate\Database\QueryException $e){
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
-        }catch(\PDOException $e){
-            $ret = array('status'=>500, 'msg'=>$e->getMessage());
+        $has_saidas = Saida::where('produto_id', '=', $id)->where('is_excluded', '=', false)->get();
+        $has_entradas = Entrada::where('produto_id', '=', $id)->where('is_excluded', '=', false)->get();
+
+        if($has_saidas->isEmpty() && ($has_entradas->isEmpty())){
+            $exclused = Produto::where('id', '=', $id)->update(['is_excluded' => true, 'deleted_at' => date('d/m/Y H:i:s', time())]);
+            $ret = $exclused == 1 ?array('status'=>200, 'msg'=>"Exclusão lógica confirmada") : array('status'=>501, 'msg'=>'Ocorreu um erro ao excluir produto, contate o suporte');
+        }else{
+            $ret = array('status'=>501, 'msg'=>'Há Entradas/Saídas cadastradas com este produto');
         }
         return $ret; 
     }

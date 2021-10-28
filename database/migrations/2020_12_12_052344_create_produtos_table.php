@@ -19,6 +19,8 @@ class CreateProdutosTable extends Migration
             $table->string('unidade');
             $table->integer('quantidade')->default('0');
             $table->string('marca', 4000);
+            $table->boolean('is_excluded')->default(false);
+            $table->dateTime('deleted_at')->nullable();
             $table->timestamps();
         });
     }

@@ -33,7 +33,7 @@
     --info: #17a2b8;
     --warning: #ffc107;
     --danger: #ff7300;
-    --light: #f8f9fa;
+    --light: #f4f6f9;
     --dark: #343a40;
     --breakpoint-xs: 0;
     --breakpoint-sm: 576px;
@@ -103,7 +103,8 @@ h6 {
 
 p {
     margin-top: 0;
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
+    
 }
 
 abbr[data-original-title],
@@ -152,7 +153,8 @@ blockquote {
 
 b,
 strong {
-    font-weight: bolder
+    font-weight: bolder;
+    font-weight: bold;
 }
 
 small {
@@ -12078,6 +12080,11 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
     color: #343a40
 }
 
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../fonts/poppins/Poppins-Regular.ttf');
+}
+
 .brand-link {
     display: block;
     font-size: 1.25rem;
@@ -12103,7 +12110,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 
 [class*=sidebar-light] .brand-link {
     border-bottom: 1px solid #dee2e6;
-    color: rgba(0, 0, 0, .8)
+    color: #005365
 }
 
 .brand-link .brand-image {
@@ -12327,7 +12334,20 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
     animation-duration: .3s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
+    font-family: Poppins-Regular;
+    font-size: 18px;
+    padding-left: 1px;
     margin: 0
+}
+
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../fonts/poppins/Poppins-Regular.ttf');
+}
+
+@font-face {
+    font-family: Poppins-Bold;
+    src: url('../fonts/poppins/Poppins-Bold.ttf');
 }
 
 #sidebar-overlay {
@@ -12384,7 +12404,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 [class*=sidebar-light-] .nav-sidebar>.nav-item.menu-open>.nav-link,
 [class*=sidebar-light-] .nav-sidebar>.nav-item:hover>.nav-link {
     background-color: rgba(0, 0, 0, .1);
-    color: #212529
+    color: #005365
 }
 
 [class*=sidebar-light-] .nav-sidebar>.nav-item>.nav-link.active {
@@ -12402,7 +12422,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 }
 
 [class*=sidebar-light-] .sidebar a {
-    color: #343a40
+    color: #005365
 }
 
 [class*=sidebar-light-] .sidebar a:hover {
@@ -12416,20 +12436,22 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 [class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link.active,
 [class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link.active:hover {
     background-color: rgba(0, 0, 0, .1);
-    color: #212529
+    color: #005365;
+    font-weight: bold;
 }
 
 [class*=sidebar-light-] .nav-treeview>.nav-item>.nav-link:hover {
-    background-color: rgba(0, 0, 0, .1)
+    background-color: #005365;
+    color: #fff;
 }
 
 [class*=sidebar-light-] .nav-flat .nav-item .nav-treeview .nav-treeview {
-    border-color: rgba(0, 0, 0, .1)
+    border-color: rgba(248, 1, 1, 0.1)
 }
 
 [class*=sidebar-light-] .nav-flat .nav-item .nav-treeview>.nav-item>.nav-link,
 [class*=sidebar-light-] .nav-flat .nav-item .nav-treeview>.nav-item>.nav-link.active {
-    border-color: rgba(0, 0, 0, .1)
+    border-color: #005365
 }
 
 [class*=sidebar-dark-] {
@@ -12509,7 +12531,7 @@ body.sidebar-collapse:not(.sidebar-mini-md):not(.sidebar-mini) .main-header::bef
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus,
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
     background-color: rgba(255, 255, 255, .9);
-    color: #343a40
+    color: #eeeeee
 }
 
 [class*=sidebar-dark-] .nav-flat .nav-item .nav-treeview .nav-treeview {

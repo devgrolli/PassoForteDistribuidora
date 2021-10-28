@@ -19,23 +19,20 @@
                 if (isConfirm.value) {
                     $.get('/' + @yield('table-delete') + '/' + id + '/destroy', function(data) {
                         console.log(data);
-                        if (data.status == 200) {
-                            swal.fire(
-                                'Deletado!',
-                                'Exclusão confirmada.',
-                                'success'
-                            ).then(function(isConfirm) {
+                        if(data.status == 200) {
+                            swal.fire('Deletado!', 'Exclusão confirmada.', 'success').then(function(isConfirm) {
                                 window.location.reload();
                             });
-                        } else
-                            swal.fire(
-                                'Erro!',
-                                'Ocorreram erros na exclusão. Entre em contato com o suporte.',
-                                'error'
-                            );
+                        }else if(data.status == 501){
+                            swal.fire('Erro!', data.msg, 'error');
+                        }else{
+                            swal.fire('Erro!', 'Ocorreram erros na exclusão. Entre em contato com o suporte.', 'error');
+                        }   
                     });
                 }
-            })
+            }).then(function(value) {
+                console.log(value);
+            });
         }
 
         function editarModal(id) {

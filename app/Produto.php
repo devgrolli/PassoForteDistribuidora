@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Produto extends Model{
-    protected $table = "produtos"; 
+    protected $table = "produtos";
     protected $fillable = ['id', 'nome', 'unidade', 'quantidade'=> 0, 'marca', 'categorias_id']; 
 
     public function entradas(){
@@ -13,6 +13,6 @@ class Produto extends Model{
     }
 
     public function categorias(){
-        return $this->belongsTo("App\Categoria"); //
+        return $this->belongsTo("App\Categoria");
     }
 }

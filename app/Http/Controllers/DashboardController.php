@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use DB;
 use Carbon;
 use App\Entrada;
+use App\Saida;
 class DashboardController extends Controller{
     public function index() {
         $total_clientes = DB::table('clientes')->count();
@@ -16,7 +17,6 @@ class DashboardController extends Controller{
         $saldo_entrada = DashboardController::totalEntradas();
         $balanco_caixa = DashboardController::calulaBalancoCaixa();
         $data_expirada = DashboardController::validadeExpirada();
-        $balanco_entrada = DashboardController::balancoEntradas();
 
         return view('dashboard.index', compact(
             'total_clientes', 
@@ -27,41 +27,9 @@ class DashboardController extends Controller{
             'balanco_caixa',
             'saldo_saida',
             'estoque_baixo', 
-            'data_expirada',
-            'balanco_entrada'
+            'data_expirada'
         ));
 	}
-
-    public function balancoEntradas(){
-        $months_ago = Carbon\Carbon::now()->subMonths(6)->format('d/m/Y');
-        $today = Carbon\Carbon::now()->format('d/m/Y');
-
-        $month = intval(Carbon\Carbon::now()->subMonths(6)->format('m'));
-        $day = intval(Carbon\Carbon::now()->format('m'));
-        $periodo = Entrada::whereBetween('validade', [$months_ago, $today])->get();
-
-        $recebe = [];
-        $name_month = [];
-        $qtd_entradas = [];
-
-        for ($i=$month; $i <= $day; $i++) {
-            $cont = 0;
-            foreach($periodo as $p){
-                $validate_month = Carbon\Carbon::parse($p->validade)->format('m');
-                $month_year = Carbon\Carbon::parse($p->validade)->format('m/Y');
-                if(intval($validate_month) == $i){
-                    array_push($recebe, Carbon\Carbon::parse($p->validade)->format('d/m/Y'));
-                    $cont += 1;
-                }
-            }
-            array_push($qtd_entradas, $cont);
-            $year = Carbon\Carbon::now()->format('Y');
-            // $year = Carbon\Carbon::now()->subMonths($month - $day)->format('m-Y');
-            $month_join = DashboardController::getMeses($i);
-            array_push($name_month, $i);
-        }
-        return [$qtd_entradas, $name_month]; 
-    }
 
     public function calulaBalancoCaixa(){
         $valor_prejuizo = 0;
@@ -123,7 +91,6 @@ class DashboardController extends Controller{
                         $valor_prejuizo += $prejuizo * $cal->quantidade;
                         array_push($table_saidas_prejuizo, $cal);
                         break;
-
                 }
             }
         }
@@ -138,7 +105,7 @@ class DashboardController extends Controller{
         $entradas_validate = DB::table('entradas')->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')
                                                   ->join('produtos', 'entradas.produto_id', '=', 'produtos.id')
                                                   ->where('entradas.validade', '<', $data_atual)
-                                                  ->where('is_excluded', '=', false)
+                                                  ->where('entradas.is_excluded', '=', false)
                                                   ->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')->get();
         return [$entradas_validate, $entradas_validate->count()];                                                  
     }
@@ -160,28 +127,53 @@ class DashboardController extends Controller{
     }
 
     public function produtosEstoqueBaixo() {
-        $prods_eb = DB::table('produtos')->where('quantidade', '<', 2)->get();
+        $prods_eb = DB::table('produtos')->where('quantidade', '<', 2)->where('is_excluded', '=', true)->get();
         $qtd_eb  = $prods_eb->count();
         return [$prods_eb, $qtd_eb];
     }
-    
-    public function getMeses($v){
-        switch ($v) {
-            case 1: $m = 'Janeiro';     break;
-            case 2: $m = 'Fevereiro';   break;
-            case 3: $m = 'Março';       break;
-            case 4: $m = 'Abril';       break;
-            case 5: $m = 'Maio';        break;
-            case 6: $m = 'Junho';       break;
-            case 7: $m = 'Julho';       break;
-            case 8: $m = 'Agosto';      break;
-            case 9: $m = 'Setembro';    break;
-            case 10: $m = 'Outubro';     break;
-            case 11: $m = 'Novembro';    break;
-            case 12: $m = 'Dezembro';    break; 
+
+    public function graficoEntrada(){
+        $get_periodo = [];
+        $count_entradas = [];
+        $periodo = Entrada::whereBetween('validade', [Carbon\Carbon::now()->subMonths(6)->format('d/m/Y'), Carbon\Carbon::now()->format('d/m/Y')])->where('is_excluded', '=', false)->get();
+
+        $month = intval(Carbon\Carbon::now()->format('m'));
+        $months_ago = intval(Carbon\Carbon::now()->subMonths(6)->format('m'));
+
+        for ($i = $months_ago; $i <= $month; $i++) {
+            $cont = 0;
+            foreach($periodo as $p){
+                $validate_month = Carbon\Carbon::parse($p->validade)->format('m');
+                if(intval($validate_month) == $i){
+                    $cont += 1;
+                }
+            }
+            array_push($get_periodo, Carbon\Carbon::now()->subMonths($month - $i)->format('m/Y'));
+            array_push($count_entradas, $cont);
         }
-        $year = Carbon\Carbon::now()->format('Y');
-        return "$m/$year";
+        return [$count_entradas, $get_periodo]; 
+    }
+
+    public function graficoSaida(){
+        $get_periodo = [];
+        $count_entradas = [];
+        $periodo = Saida::whereBetween('validade_produto', [Carbon\Carbon::now()->subMonths(6)->format('m/Y'), Carbon\Carbon::now()->format('d/m/Y')])->where('is_excluded', '=', false)->get();
+
+        $month = intval(Carbon\Carbon::now()->format('m'));
+        $months_ago = intval(Carbon\Carbon::now()->subMonths(6)->format('m'));
+
+        for ($i = $months_ago; $i <= $month; $i++) {
+            $cont = 0;
+            foreach($periodo as $p){
+                $validate_month = Carbon\Carbon::parse($p->validade_produto)->format('m');
+                if(intval($validate_month) == $i){
+                    $cont += 1;  
+                }
+            }
+            array_push($get_periodo, Carbon\Carbon::now()->subMonths($month - $i)->format('m/Y'));
+            array_push($count_entradas, $cont);
+        }
+        return [$count_entradas, $get_periodo]; 
     }
 }
 
