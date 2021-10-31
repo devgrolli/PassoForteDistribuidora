@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 use App\Entrada;
 use App\Saida;
 use App\Produto;
 use App\Http\Requests\ProdutoRequest;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProdutosController extends Controller{

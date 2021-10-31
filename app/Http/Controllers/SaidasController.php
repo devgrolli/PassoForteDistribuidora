@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
 use App\Saida;
 use App\Produto;
 use App\Entrada;
 use App\Http\Requests\SaidaRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 class SaidasController extends Controller{
     public function index() {
@@ -68,7 +69,7 @@ class SaidasController extends Controller{
 
     public function edit(Request $request){
         $products = Produto::where('quantidade', '>', '0')->get();
-        $saida = Saida::find(\Crypt::decrypt($request->get('id')));
+        $saida = Saida::find(Crypt::decrypt($request->get('id')));
         return view('saidas.edit', compact('saida', 'products'));
     }
 

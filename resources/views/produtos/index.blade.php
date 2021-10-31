@@ -30,7 +30,7 @@
                                             Cadastrar <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
                                         <button type="button" class="btn btn-padrao2-div_table" data-toggle="modal" data-target="#excelModal">
-                                            Exportar Excel <i class="fas fa-file-export"></i>
+                                            Exportar <i class="fas fa-file-export"></i>
                                         </button>
                                     </div>
                                 </div>

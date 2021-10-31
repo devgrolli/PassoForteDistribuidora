@@ -1,17 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use DB;
-use PDF;
 use Carbon;
-use App\Produto;
 use Illuminate\Http\Request;
 use App\Exports\ClientesExport;
 use App\Exports\ProdutosExport;
 use App\Exports\EntradasExport;
 use App\Exports\SaidasExport;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade as PDF;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExportContorller extends Controller{
@@ -22,7 +20,7 @@ class ExportContorller extends Controller{
                 if(!$return_query->isEmpty()){
                     switch($request->type_doc){
                         case '1': return Excel::download(new ClientesExport($return_query), 'clientes.xlsx');
-                        case '2':return 'PDF';
+                        case '2': return PDF::loadView('relatorios\cliente_pdf', compact('return_query'))->setPaper('a4')->stream('clientes.pdf');
                         case '3': return 'VIEW';
                     }
                 } else {
@@ -34,7 +32,7 @@ class ExportContorller extends Controller{
                 if(!$return_query->isEmpty()){
                     switch($request->type_doc){
                         case '1': return Excel::download(new ProdutosExport($return_query), 'produtos.xlsx');
-                        case '2': return 'PDF';
+                        case '2': return PDF::loadView('relatorios\produto_pdf', compact('return_query'))->setPaper('a4')->stream('produtos.pdf');
                         case '3': return 'VIEW';
                     }
                 } else {
@@ -46,7 +44,7 @@ class ExportContorller extends Controller{
                 if(!$return_query->isEmpty()){
                     switch($request->type_doc){
                         case '1': return Excel::download(new EntradasExport($return_query), 'entradas.xlsx');
-                        case '2': return 'PDF';
+                        case '2': return PDF::loadView('relatorios\entrada_pdf', compact('return_query'))->setPaper('a4')->stream('entradas.pdf');
                         case '3': return 'VIEW';
                     }
                 } else {
@@ -58,7 +56,7 @@ class ExportContorller extends Controller{
                 if(!$return_query->isEmpty()){
                     switch($request->type_doc){
                         case '1': return Excel::download(new SaidasExport($return_query), 'saidas.xlsx');
-                        case '2': return 'PDF';
+                        case '2': return PDF::loadView('relatorios\saida_pdf', compact('return_query'))->setPaper('a4')->stream('saidas.pdf');
                         case '3': return 'VIEW';
                     }
                 } else {
@@ -68,7 +66,7 @@ class ExportContorller extends Controller{
         }
     }
 
-    public function queryExport($request, $type){
+    public static function queryExport($request, $type){
         switch ($type) {
             case "clientes":
                 $query_db = DB::table('clientes')
@@ -108,8 +106,9 @@ class ExportContorller extends Controller{
                         'fornecedores.razao_social as fornecedor',
                         'tipo_entradas.nome as tipo_entrada',
                         'entradas.observacoes',
-                        'entradas.created_at'
-                    )->whereBetween('entradas.created_at', [$request->start_date, $request->end_date])->get();
+                        'entradas.created_at')
+                    ->where('entradas.is_excluded', '=', false)
+                    ->whereBetween('entradas.created_at', [$request->start_date, $request->end_date])->get();
                 if (!$query_db->isEmpty()) {
                     foreach ($query_db as $query) {
                         $query->created_at = Carbon\Carbon::parse($query->created_at)->format('d/m/Y');
@@ -132,13 +131,13 @@ class ExportContorller extends Controller{
                         'saidas.preco_saida',
                         'tipo_saidas.nome as tipo_saida',
                         'saidas.created_at',
-                        'saidas.observacoes'
-                    )->whereBetween('saidas.created_at', [$request->start_date, $request->end_date])->get();
+                        'saidas.observacoes')
+                    ->where('saidas.is_excluded', '=', false)
+                    ->whereBetween('saidas.created_at', [$request->start_date, $request->end_date])->get();
                 if(!$query_db->isEmpty()) {
                     foreach ($query_db as $query) {
                         $query->created_at = Carbon\Carbon::parse($query->created_at)->format('d/m/Y');
-                        $query->preco_un = number_format($query->preco_un, 2, ',', '.');
-                        $query->preco_un = number_format($query->preco_saida, 2, ',', '.');
+                        $query->preco_saida = number_format($query->preco_saida, 2, ',', '.');
                     }
                 }
                 break;
