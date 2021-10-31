@@ -1,9 +1,8 @@
 @section('content')
-    @include('sweetalert::alert')
-    @extends('layouts.default')
-    @include('layouts.spinner')
-    @include('layouts.cep')
-    @include('layouts.mascaras')
+@include('sweetalert::alert')
+@extends('layouts.default')
+@include('layouts.cep')
+@include('layouts.mascaras')
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
     <div id="div_create">
         <div class="card">
@@ -86,4 +85,5 @@
             </div>
         </div>
     </div>
+    @include('layouts.spinner')
 @stop
