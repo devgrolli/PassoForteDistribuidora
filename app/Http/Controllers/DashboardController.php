@@ -37,60 +37,54 @@ class DashboardController extends Controller{
         $table_saidas_prejuizo = [];
         $table_saidas_lucro = [];
 
-        $calcula_prejuizo = DB::table('saidas')->where('is_excluded', '=', false)->get();
+        $calcula_caixa = DB::table('saidas')->where('is_excluded', '=', false)->get();
 
         $start_date = Carbon::now()->startOfMonth()->format('d/m/Y'); 
         $end_date = Carbon::now()->endOfMonth()->format('d/m/Y'); 
 
-        foreach($calcula_prejuizo as $cal){
-            $validate_dates =  Carbon::parse($cal->created_at)->format('d/m/Y');
+        foreach($calcula_caixa as $cal){
+            $validate_dates = Carbon::parse($cal->created_at)->format('d/m/Y');
 
             if(($validate_dates >= $start_date) && ($validate_dates <= $end_date)){
-                $find_id_saidas = DB::table('tipo_saidas')->where('id', '=', $cal->tipo_saidas_id)->get()->first();
-
                 #Transforma valores de String para Float
                 $cal->preco_un = floatval($cal->preco_un);
                 $cal->preco_saida = floatval($cal->preco_saida);
 
-                switch ($find_id_saidas->nome) {
-                    case 'Venda':
-                    case 'Devolução ao Fornecedor':
-                        #Calcula o valor do lucro sobre o preço de entrada
-                        $lucro = $cal->preco_saida - $cal->preco_un;
+                if($cal->preco_saida > $cal->preco_un){
+                    #Calcula o valor do lucro sobre o preço de entrada
+                    $lucro = $cal->preco_saida - $cal->preco_un;
 
-                        #Passa o valor total do lucro pra dentro do objeto que será usado na view
-                        $cal->valor_total_saida = $cal->preco_saida * $cal->quantidade;
+                    #Passa o valor total do lucro pra dentro do objeto que será usado na view
+                    $cal->valor_total_saida = $cal->preco_saida * $cal->quantidade;
 
-                        #Passa o valor total do lucro pra dentro do objeto que será usado na view
-                        $cal->valor_desconto = $lucro * $cal->quantidade;
+                    #Passa o valor total do lucro pra dentro do objeto que será usado na view
+                    $cal->valor_desconto = $lucro * $cal->quantidade;
 
-                        #Calcula a porcentagem de lucro
-                        $porcentagem = $lucro / $cal->preco_un * 100;
-                        $cal->procentagem = intval($porcentagem);
+                    #Calcula a porcentagem de lucro
+                    $porcentagem = $lucro / $cal->preco_un * 100;
+                    $cal->procentagem = intval($porcentagem);
 
-                        #Recebe o valor total do lucro vezes a quantidade e joga para dentro do array que será usado na view
-                        $valor_lucro += $lucro * $cal->quantidade;
-                        array_push($table_saidas_lucro, $cal);
-                        break;
+                    #Recebe o valor total do lucro vezes a quantidade e joga para dentro do array que será usado na view
+                    $valor_lucro += $lucro * $cal->quantidade;
+                    array_push($table_saidas_lucro, $cal);
 
-                    default:
-                        #Calcula o valor do Prejuizo do preço de entrada
-                        $prejuizo = $cal->preco_un > $cal->preco_saida ? $cal->preco_un - $cal->preco_saida : $cal->preco_saida - $cal->preco_un;
-                        
-                        #Passa o valor total do prejuizo pra dentro do objeto que será usado na view
-                        $cal->valor_total_saida = $cal->preco_saida * $cal->quantidade; 
+                }else{
+                    #Calcula o valor do Prejuizo do preço de entrada
+                    $prejuizo = $cal->preco_un > $cal->preco_saida ? $cal->preco_un - $cal->preco_saida : $cal->preco_saida - $cal->preco_un;
+                    
+                    #Passa o valor total do prejuizo pra dentro do objeto que será usado na view
+                    $cal->valor_total_saida = $cal->preco_saida * $cal->quantidade; 
 
-                        #Passa o valor total do prejuizo pra dentro do objeto que será usado na view
-                        $cal->valor_desconto = $prejuizo * $cal->quantidade;
+                    #Passa o valor total do prejuizo pra dentro do objeto que será usado na view
+                    $cal->valor_desconto = $prejuizo * $cal->quantidade;
 
-                        #Calcula a porcentagem de Prejuizo
-                        $porcentagem = $prejuizo / $cal->preco_un * 100;
-                        $cal->procentagem = intval($porcentagem);
+                    #Calcula a porcentagem de Prejuizo
+                    $porcentagem = $prejuizo / $cal->preco_un * 100;
+                    $cal->procentagem = intval($porcentagem);
 
-                        #Recebe o valor total do prejuizo vezes a quantidade e joga para dentro do array que será usado na view
-                        $valor_prejuizo += $prejuizo * $cal->quantidade;
-                        array_push($table_saidas_prejuizo, $cal);
-                        break;
+                    #Recebe o valor total do prejuizo vezes a quantidade e joga para dentro do array que será usado na view
+                    $valor_prejuizo += $prejuizo * $cal->quantidade;
+                    array_push($table_saidas_prejuizo, $cal);
                 }
             }
         }
@@ -107,8 +101,8 @@ class DashboardController extends Controller{
             ->join('produtos', 'entradas.produto_id', '=', 'produtos.id')
             ->where('entradas.validade', '<', $data_atual)
             ->where('entradas.is_excluded', '=', false)
-            ->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')->get();
-        return [$entradas_validate, $entradas_validate->count()];                                                  
+            ->select('produtos.nome', 'produtos.quantidade', 'entradas.validade');
+        return [$entradas_validate->get(), $entradas_validate->count()];                                                  
     }
 
     public static function totalEntradas(){
@@ -128,7 +122,7 @@ class DashboardController extends Controller{
     }
 
     public static function produtosEstoqueBaixo() {
-        $prods_eb = DB::table('produtos')->where('quantidade', '<', 2)->where('is_excluded', '=', true)->get();
+        $prods_eb = DB::table('produtos')->where('quantidade', '<', 2)->where('is_excluded', '=', false)->get();
         $qtd_eb  = $prods_eb->count();
         return [$prods_eb, $qtd_eb];
     }

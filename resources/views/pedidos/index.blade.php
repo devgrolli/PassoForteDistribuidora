@@ -17,40 +17,36 @@
                 </div>
             </div>
         </div>
-
         <div class="card mb-4">
             <div class="card-body">
                 <div class="datatable">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
-                            <div class="col-sm-12 col-md-6">
-                                <div class="dataTables_length">
-                                    <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar com grupos de botões">
-                                        <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
-                                            <div class="float-sm-left">
-                                                <a href="{{ route('pedidos.create', []) }}" class="btn btn-padrao1-div_table">Cadastrar
-                                                    <i class="fa fa-plus" aria-hidden="true"></i></a><br></br>
-                                            </div>
-                                        </div>
-
-                                        {!! Form::open(['name' => 'form_name', 'route' => 'pedidos']) !!}
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control-padrao1-div_table" name="desc_filtro"
-                                                aria-describedby="basic-addon2">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-padrao1-div_table" type="submit" name="search" type="button"
-                                                    id="search-btn"><i class="fa fa-search"></i></button>
-                                            </div>
-                                        </div>
-                                        {!! Form::close() !!}
+                            <div class="btn-group mr-2">               
+                                <div class="form-group col-12">
+                                    <div class="btn-group" role="group" aria-label="Exemplo básico">
+                                        <a href="{{ route('pedidos.create', []) }}" class="btn btn-padrao1-div_table">Cadastrar
+                                            <i class="fa fa-plus" aria-hidden="true"></i></a><br></br>
+                                        <button type="button" class="btn btn-padrao2-div_table" data-toggle="modal" data-target="#excelModal">
+                                            Exportar <i class="fas fa-file-export"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-sm-12 col-md-6">
-                                <div class="dataTables_filter"> </div>
+                            <div class="col-sm-12 col-md-4">
+                                {!! Form::open(['name' => 'form_name', 'route' => 'produtos']) !!}
+                                <div class="input-group mb-8">
+                                    <input type="text" name="desc_filtro" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-padrao1-div_table" type="submit" name="search"
+                                            type="button" id="search-btn"><i class="fa fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                {!! Form::close() !!}
                             </div>
                         </div>
+                        <br>
 
                         <table class="table table-hover" id="table">
                             <thead class="letra" id="thead_colors" align="left" style="margin: 0px auto;">
@@ -58,7 +54,7 @@
                                 <th></th>
                                 <th>Data do pedido</th>
                                 <th>Fornecedor</th>
-                                <th>Items Pedido</th>
+                                <th>Itens do Pedido</th>
                                 <td></td>
                             </thead>
 
@@ -105,6 +101,36 @@
                         {{-- {{ $pedidos->links() }} --}}
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="excelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header color-header-modal">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Exportar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {!! Form::open(['route' => ['export', 'type'=> 'pedidos']]) !!}
+                    <div class="modal-body">
+                        {!! Form::Label('type_doc', 'Selecione o tipo') !!}
+                        <select class="selectpicker form-control select_search" name="type_doc" id="type_doc" data-live-search="true" required>
+                            <option value="2">PDF</option>
+                            <option value="3">Visualizar</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Fechar <i class="fas fa-times-circle"></i></button>
+                        {!! Form::button('Baixar <i class="fa fa-download" aria-hidden="true"></i>',['class'=>'btn btn-padrao1 btn-cadastrar-entrada', 'type'=>'submit']) !!}
+                        {{-- <a href="{{ route('entradas.export', ['type' => 'entradas']) }}" type="button" class="btn btn-padrao1-div_table"> 
+                            Baixar <i class="fas fa-download"></i>
+                        </a> --}}
+                    </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>

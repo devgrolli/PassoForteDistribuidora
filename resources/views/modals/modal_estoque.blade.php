@@ -1,6 +1,8 @@
 @inject('prods', App\Http\Controllers\ProdutosController)
+@php($products = $prods->get_products())
+
 <link rel="stylesheet" type="text/css" href="../css/default-template.css">
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="exampleModalEstoque" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -9,7 +11,6 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
-            @php($products = $prods->get_products())
             <div class="modal-body">
                 @if (!$products->isEmpty())
                     <table class="table table-hover" id="table">

@@ -3,7 +3,7 @@
   @include('sweetalert::alert')
   @include('layouts.formata_moeda')
   @include('layouts.dynamic_validade')
-  @include('layouts.estoque_modal')
+  @include('modals.modal_estoque')
   @extends('layouts.select_search')
   @include('layouts.spinner')
 
@@ -14,7 +14,7 @@
         <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
           <strong>
             <h1 class="text-create">Saída de Produtos
-              <button class="btn btn-padrao2" type="button" data-toggle="modal" data-target="#exampleModal"> Visualizar estoque <i class="fa fa-search"></i></button>
+              <button class="btn btn-padrao2" type="button" data-toggle="modal" data-target="#exampleModalEstoque"> Visualizar estoque <i class="fa fa-search"></i></button>
             </h1>
           </strong>
         </div>
