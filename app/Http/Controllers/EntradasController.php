@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+
 use App\Entrada;
 use App\Saida;
 use App\Produto;
 use App\Http\Requests\EntradaRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class EntradasController extends Controller{
@@ -66,7 +68,7 @@ class EntradasController extends Controller{
     }
 
     public function edit(Request $request){
-        $entrada = Entrada::find(\Crypt::decrypt($request->get('id')));
+        $entrada = Entrada::find(Crypt::decrypt($request->get('id')));
         return view('entradas.edit', compact('entrada'));
     }
 

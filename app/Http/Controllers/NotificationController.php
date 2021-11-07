@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+use Illuminate\Support\Facades\DB;
 class NotificationController extends Controller{
 
     public function retornoNotificacoes(){

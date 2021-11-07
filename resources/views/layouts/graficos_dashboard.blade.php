@@ -60,6 +60,7 @@
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
+                console.log('data')
                 var ctx = document.getElementById('chartSaida').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'bar',
@@ -103,37 +104,37 @@
             }
         });
 
-        $.ajax({
-            type: "GET",
-            url: "{{ URL('/graficoSaida') }}",
-            dataType: "json",
-            headers: {
-                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(data) {
-                new Chart(document.getElementById("pie-chart"), {
-                    type: 'doughnut',
-                    data: {
-                        labels: data[1],
-                        datasets: [{
-                            label: "Population (millions)",
-                            backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9",
-                                "#c45850"
-                            ],
-                            data: data[0],
-                        }]
-                    },
-                    options: {
-                        title: {
-                            display: true,
-                            text: 'Predicted world population (millions) in 2050'
-                        }
-                    }
-                });
-            },
-            error: function(response) {
-                console.log(response);
-            }
-        });
+        // $.ajax({
+        //     type: "GET",
+        //     url: "{{ URL('/graficoSaida') }}",
+        //     dataType: "json",
+        //     headers: {
+        //         "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        //     },
+        //     success: function(data) {
+        //         new Chart(document.getElementById("pie-chart"), {
+        //             type: 'doughnut',
+        //             data: {
+        //                 labels: data[1],
+        //                 datasets: [{
+        //                     label: "Population (millions)",
+        //                     backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9",
+        //                         "#c45850"
+        //                     ],
+        //                     data: data[0],
+        //                 }]
+        //             },
+        //             options: {
+        //                 title: {
+        //                     display: true,
+        //                     text: 'Predicted world population (millions) in 2050'
+        //                 }
+        //             }
+        //         });
+        //     },
+        //     error: function(response) {
+        //         console.log(response);
+        //     }
+        // });
     </script>
 @stop

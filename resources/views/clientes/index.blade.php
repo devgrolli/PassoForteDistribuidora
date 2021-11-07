@@ -36,7 +36,7 @@
                                             Cadastrar Tipo de Cliente <i class="fa fa-plus" aria-hidden="true"></i>
                                         </a>                                   
                                         <button type="button" class="btn btn-padrao1-div_table" data-toggle="modal" data-target="#excelModal">
-                                            Exportar Excel <i class="fas fa-file-export"></i>
+                                            Exportar <i class="fas fa-file-export"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header color-header-modal">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Filtre a Data</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Escolha o tipo de relatório</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>

@@ -1,8 +1,6 @@
-
 @section('content')
 @include('sweetalert::alert')
 @extends('layouts.default')
-@include('layouts.spinner')
 @include('layouts.cep')
 @include('layouts.mascaras')
   <link rel="stylesheet" type="text/css" href="../css/default-template.css">
@@ -85,4 +83,5 @@
       </div>
     </div>
   </div>
+  @include('layouts.spinner')
 @stop

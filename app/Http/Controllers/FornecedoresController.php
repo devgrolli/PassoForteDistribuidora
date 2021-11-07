@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
 use App\Fornecedor;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\FornecedorRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -43,7 +44,7 @@ class FornecedoresController extends Controller{
     }
 
     public function edit(Request $request){
-        $fornecedor = Fornecedor::find(\Crypt::decrypt($request->get('id')));
+        $fornecedor = Fornecedor::find(Crypt::decrypt($request->get('id')));
         return view('fornecedores.edit', compact('fornecedor'));
     }
 

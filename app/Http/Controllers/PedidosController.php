@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pedido;
 use App\Http\Requests\PedidoRequest;
+use Illuminate\Support\Facades\Crypt;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PedidosController extends Controller{
@@ -59,7 +60,7 @@ class PedidosController extends Controller{
     }
 
     public function edit(Request $request){
-        $pedido = Pedido::find(\Crypt::decrypt($request->get('id')));
+        $pedido = Pedido::find(Crypt::decrypt($request->get('id')));
         return view('pedidos.edit', compact('pedido'));
     }
 

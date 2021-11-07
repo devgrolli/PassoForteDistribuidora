@@ -126,7 +126,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Cancelar <i class="fas fa-times-circle"></i></button>
-                        {!! Form::button('Salvar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' => 'submit']) !!}
+                        {!! Form::button('Cadastrar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' => 'submit']) !!}
                     </div>
                     {!! Form::close() !!}
                 </div>
@@ -168,6 +168,8 @@
             </div>
         </div>
     </div>
+    @include('sweetalert::alert')
+    @include('layouts.spinner')
 @stop
 @section('table-delete')
     "categorias"

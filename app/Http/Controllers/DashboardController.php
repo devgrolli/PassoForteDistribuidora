@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
-use Carbon;
 use App\Entrada;
 use App\Saida;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller{
     public function index() {
         $total_clientes = DB::table('clientes')->count();
@@ -31,7 +31,7 @@ class DashboardController extends Controller{
         ));
 	}
 
-    public function calulaBalancoCaixa(){
+    public static function calulaBalancoCaixa(){
         $valor_prejuizo = 0;
         $valor_lucro = 0;
         $table_saidas_prejuizo = [];
@@ -39,11 +39,11 @@ class DashboardController extends Controller{
 
         $calcula_prejuizo = DB::table('saidas')->where('is_excluded', '=', false)->get();
 
-        $start_date = Carbon\Carbon::now()->startOfMonth()->format('d/m/Y'); 
-        $end_date = Carbon\Carbon::now()->endOfMonth()->format('d/m/Y'); 
+        $start_date = Carbon::now()->startOfMonth()->format('d/m/Y'); 
+        $end_date = Carbon::now()->endOfMonth()->format('d/m/Y'); 
 
         foreach($calcula_prejuizo as $cal){
-            $validate_dates =  Carbon\Carbon::parse($cal->created_at)->format('d/m/Y');
+            $validate_dates =  Carbon::parse($cal->created_at)->format('d/m/Y');
 
             if(($validate_dates >= $start_date) && ($validate_dates <= $end_date)){
                 $find_id_saidas = DB::table('tipo_saidas')->where('id', '=', $cal->tipo_saidas_id)->get()->first();
@@ -100,17 +100,18 @@ class DashboardController extends Controller{
         return [$calulos_prejuizo, $calulos_lucro];
     }
 
-    public function validadeExpirada(){
-        $data_atual = Carbon\Carbon::now()->format('Y-m-d');
-        $entradas_validate = DB::table('entradas')->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')
-                                                  ->join('produtos', 'entradas.produto_id', '=', 'produtos.id')
-                                                  ->where('entradas.validade', '<', $data_atual)
-                                                  ->where('entradas.is_excluded', '=', false)
-                                                  ->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')->get();
+    public static function validadeExpirada(){
+        $data_atual = Carbon::now()->format('Y-m-d');
+        $entradas_validate = DB::table('entradas')
+            ->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')
+            ->join('produtos', 'entradas.produto_id', '=', 'produtos.id')
+            ->where('entradas.validade', '<', $data_atual)
+            ->where('entradas.is_excluded', '=', false)
+            ->select('produtos.nome', 'produtos.quantidade', 'entradas.validade')->get();
         return [$entradas_validate, $entradas_validate->count()];                                                  
     }
 
-    public function totalEntradas(){
+    public static function totalEntradas(){
         $produtos = DB::table('entradas')->select('quantidade', 'preco_un')->where('is_excluded', '=', false)->get();
         $qtd_entrada = $produtos->sum('quantidade');
         $preco_entrada = $produtos->sum('preco_un');
@@ -118,7 +119,7 @@ class DashboardController extends Controller{
         return $saldo_ent;
     }
 
-    public function totalSaidas(){
+    public static function totalSaidas(){
         $saidas = DB::table('saidas')->select('quantidade', 'preco_un')->where('is_excluded', '=', false)->get();
         $quantidade_saida = $saidas->sum('quantidade');
         $preco_saida = $saidas->sum('preco_un');
@@ -126,54 +127,54 @@ class DashboardController extends Controller{
         return $saldo_s;
     }
 
-    public function produtosEstoqueBaixo() {
+    public static function produtosEstoqueBaixo() {
         $prods_eb = DB::table('produtos')->where('quantidade', '<', 2)->where('is_excluded', '=', true)->get();
         $qtd_eb  = $prods_eb->count();
         return [$prods_eb, $qtd_eb];
     }
 
-    public function graficoEntrada(){
+    public static function graficoEntrada(){
         $get_periodo = [];
         $count_entradas = [];
-        $periodo = Entrada::whereBetween('validade', [Carbon\Carbon::now()->subMonths(6)->format('d/m/Y'), Carbon\Carbon::now()->format('d/m/Y')])->where('is_excluded', '=', false)->get();
+        $periodo = Entrada::whereBetween('validade', [Carbon::now()->subMonths(6)->format('d/m/Y'), Carbon::now()->format('d/m/Y')])->where('is_excluded', '=', false)->get();
 
-        $month = intval(Carbon\Carbon::now()->format('m'));
-        $months_ago = intval(Carbon\Carbon::now()->subMonths(6)->format('m'));
+        $month = intval(Carbon::now()->format('m'));
+        $months_ago = intval(Carbon::now()->subMonths(6)->format('m'));
 
         for ($i = $months_ago; $i <= $month; $i++) {
             $cont = 0;
             foreach($periodo as $p){
-                $validate_month = Carbon\Carbon::parse($p->validade)->format('m');
+                $validate_month = Carbon::parse($p->validade)->format('m');
                 if(intval($validate_month) == $i){
                     $cont += 1;
                 }
             }
-            array_push($get_periodo, Carbon\Carbon::now()->subMonths($month - $i)->format('m/Y'));
+            array_push($get_periodo, Carbon::now()->subMonths($month - $i)->format('m/Y'));
             array_push($count_entradas, $cont);
         }
         return [$count_entradas, $get_periodo]; 
     }
 
-    public function graficoSaida(){
+    public static function graficoSaida(){
         $get_periodo = [];
-        $count_entradas = [];
-        $periodo = Saida::whereBetween('validade_produto', [Carbon\Carbon::now()->subMonths(6)->format('m/Y'), Carbon\Carbon::now()->format('d/m/Y')])->where('is_excluded', '=', false)->get();
+        $count_saidas = [];
+        $periodo = Saida::whereBetween('created_at', [Carbon::now()->subMonths(6), Carbon::now()])->where('is_excluded', '=', false)->get();
 
-        $month = intval(Carbon\Carbon::now()->format('m'));
-        $months_ago = intval(Carbon\Carbon::now()->subMonths(6)->format('m'));
+        $month = intval(Carbon::now()->format('m'));
+        $months_ago = intval(Carbon::now()->subMonths(6)->format('m'));
 
         for ($i = $months_ago; $i <= $month; $i++) {
             $cont = 0;
             foreach($periodo as $p){
-                $validate_month = Carbon\Carbon::parse($p->validade_produto)->format('m');
+                $validate_month = Carbon::parse($p->created_at)->format('m');
                 if(intval($validate_month) == $i){
                     $cont += 1;  
                 }
             }
-            array_push($get_periodo, Carbon\Carbon::now()->subMonths($month - $i)->format('m/Y'));
-            array_push($count_entradas, $cont);
+            array_push($get_periodo, Carbon::now()->subMonths($month - $i)->format('m/Y'));
+            array_push($count_saidas, $cont);
         }
-        return [$count_entradas, $get_periodo]; 
+        return [$count_saidas, $get_periodo]; 
     }
 }
 
