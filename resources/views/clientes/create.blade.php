@@ -17,7 +17,6 @@
 
           <div class="card-body" id="card_crud">
           {!! Form::open(['route'=>'clientes.store']) !!}
-
           <div class="form-row">
             <div class="form-group col-md-6">
               {!! Form::label('nome', 'Nome') !!}
@@ -72,8 +71,8 @@
             </div>
           </div><br>
           <div class="form-group">
-              <a href="{{ route('clientes', []) }}" class="btn btn-padrao2">Cancelar <i class="fas fa-ban"></i></a>
-              {!! Form::button('Cadastrar <i class="far fa-save"></i>',['class'=>'btn btn-padrao1', 'type'=>'submit']) !!}
+            <a href="{{ route('clientes', []) }}" class="btn btn-padrao2">Cancelar <i class="fas fa-ban"></i></a>
+            {!! Form::button('Cadastrar <i class="far fa-save"></i>',['class'=>'btn btn-padrao1', 'type'=>'submit']) !!}
           </div>
         {!! Form::close() !!} <!-- id do campo de entrada deve ter o mesmo nome no banco de dados ex: 'nome' --> 
       </div>

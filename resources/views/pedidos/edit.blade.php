@@ -8,7 +8,6 @@
       <div class="card-header" style="background: rgb(52, 58, 64)">
         <h3 style="color:rgb(255, 255, 255)"><strong>Editando Pedido</strong></h3>
       </div>
-
       <tbody>
         <div class="card-body" id="card_crud">
         {!! Form::open(['route'=> ["pedidos.update", 'id'=>$pedido->id], 'method'=>'put']) !!}
@@ -25,7 +24,7 @@
           </div>
         </div>
         
-        <button class="add_field_button btn btn-padrao1" style="margin-bottom: 10px;!important; margin-top: 10px;!important">Cadastrar itens<i class="fa fa-plus" aria-hidden="true"></i> </button>
+        <button class="add_field_button btn btn-padrao1" style="margin-bottom: 10px;!important; margin-top: 10px;!important">Itens <i class="fa fa-plus" aria-hidden="true"></i> </button>
         <div class="input_fields_wrap"></div>
 
         <div class="form-group">
@@ -41,21 +40,26 @@
 <script>
   $(document).ready(function() {
     var cont_inputs = null;
+    var route = "{{ URL('pedidos/getPedidos') }}" + "/" + '{{ $pedido->id }}';
     $.ajax({
       type: "GET",
-      url: "{{ URL('pedidos/getPedidos') }}" + "/" + '{{ $pedido->id }}',
+      url: route,
       dataType: "json",
-      headers: {
-        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
-      },
+      headers: { "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content') },
+      contentType: "application/json; charset=utf-8",
       success: function(data) {
-        $.each(data.items, function(i, json) {
+        $.each(data.items, function(i, json){
+          var prod = json.produto;
           cont_inputs = data.items.length;
+
           var output = '<div style="margin-bottom: 10px;!important"><div style="width:80%; float:left">';
-          output += '<div class="form-row"><div class="col"><input type="text" value='+json.produto+' class="form-control id="uaheuah" edit-dynamic-prod" name="produtos[]" placeholder="Produto" required/></div>';
-          output += '<div class="col"><input type="text" class="form-control" value='+json.quantidade+' name="quantidades[]" placeholder="Quantidade" required/></div>';
-          output += '</div></div><button type="button" class="remove_field btn btn-padrao2 btn-circle" style="margin-left: 10px;!important"><i class="fa fa-times"></button></div>';
+              output += '<div class="form-row"><div class="col"><input type="text" value='+json.produto+' class="form-control" id="produto_name" name="produtos[]" placeholder="Produto" required/></div>';
+              output += '<div class="col"><input type="text" value='+json.quantidade+' class="form-control" id="quantidade" name="quantidades[]" placeholder="Quantidade" required/></div>';
+              output += '</div></div><button type="button" class="remove_field btn btn-padrao2 btn-circle" style="margin-left: 10px;!important"><i class="fa fa-times"></button></div>';
+
           $(wrapper).append(output);
+          // $("input[id='produto_name']").val(data.items[i].produto);
+          // $("input[id='quantidade']").val(data.items[i].quantidade);
         });
       },
       error: function(response) {
@@ -66,6 +70,7 @@
     var wrapper = $(".input_fields_wrap");
     var add_button = $(".add_field_button");
     var x = 0;
+
     $(add_button).click(function(e) {
       x++;
       cont_inputs++;

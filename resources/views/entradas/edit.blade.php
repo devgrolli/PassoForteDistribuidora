@@ -1,17 +1,17 @@
-@extends('layouts.select_search')
-@extends('layouts.default')
-@include('sweetalert::alert')
-@include('layouts.spinner')
-@include('layouts.estoque_modal')
-@include('layouts.formata_moeda')
 @section('content')
+  @extends('layouts.default') 
+  @include('sweetalert::alert')
+  @include('layouts.formata_moeda')
+  @include('layouts.dynamic_validade')
+  @extends('layouts.select_search')
+  @include('layouts.spinner')
 
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
     <div id="div_create">
         <div class="card">
             <div class="card-header">
                 <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
-                    <h1 class="text-create"><strong>Editando Entrada de Produtos </strong></h1>
+                    <h1 class="text-create"><strong>Cadastro Entrada de Produtos <button class="btn btn-padrao2" type="button" data-toggle="modal" data-target="#exampleModalEstoque">Visualizar estoque <i class="fa fa-search"></i></button></h1></strong>
                 </div>
             </div>
 
@@ -63,4 +63,5 @@
             </div>
         </div>
     </div>
+    @include('modals.modal_estoque')
 @stop

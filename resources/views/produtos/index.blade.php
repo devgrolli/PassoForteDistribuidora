@@ -30,7 +30,7 @@
                                             Cadastrar <i class="fa fa-plus" aria-hidden="true"></i>
                                         </button>
                                         <button type="button" class="btn btn-padrao2-div_table" data-toggle="modal" data-target="#excelModal">
-                                            Exportar Excel <i class="fas fa-file-export"></i>
+                                            Exportar <i class="fas fa-file-export"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -189,7 +189,7 @@
                 <br>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-padrao2-div_table" data-dismiss="modal">Cancelar <i class="fas fa-times-circle"></i></button>
-                    {!! Form::button('Salvar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' => 'submit']) !!}
+                    {!! Form::button('Cadastrar <i class="far fa-save"></i>', ['class' => 'btn btn-padrao1 btn-cadastrar-entrada', 'type' => 'submit']) !!}
                 </div>
                 {!! Form::close() !!}
             </div>

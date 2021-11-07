@@ -48,7 +48,7 @@
                                                         <i class="fa fa-plus" aria-hidden="true"></i>
                                                     </a>
                                                     <button type="button" class="btn btn-padrao1-div_table" data-toggle="modal" data-target="#excelModal">
-                                                        Exportar Excel <i class="fas fa-file-export"></i>
+                                                        Exportar <i class="fas fa-file-export"></i>
                                                     </button>
                                                 </div><br><br>
                                             </div>

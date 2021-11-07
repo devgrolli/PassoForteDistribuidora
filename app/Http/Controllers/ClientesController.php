@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Cliente;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Requests\ClienteRequest;
 
 class ClientesController extends Controller{
@@ -63,7 +64,7 @@ class ClientesController extends Controller{
     }
 
     public function edit(Request $request){
-        $cliente = Cliente::find(\Crypt::decrypt($request->get('id')));
+        $cliente = Cliente::find(Crypt::decrypt($request->get('id')));
         return view('clientes.edit', compact('cliente'));
     }
 

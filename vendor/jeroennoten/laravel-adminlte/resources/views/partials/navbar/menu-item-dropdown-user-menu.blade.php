@@ -35,17 +35,27 @@
             <a class="dropdown-item" href="#"> Você possui novas notificações </a>
             <div class="dropdown-divider"></div>
         @endif
+
         @if($estoque > 0)
-            <a class="dropdown-item" href="{{ route('estoque', []) }}"><i class="fas fa-dolly p-2" style="color: #035c77"></i> 
-                Produtos abaixo do Estoque  <span class="badge badge-danger w-10 p-2" style="background-color: #8400ff "> {{$estoque}} </span>
-            </a>
+            @if(Route::getCurrentRoute()->getName() == 'estoque')
+                <a class="dropdown-item" ><i class="fas fa-dolly p-2" style="color: #035c77"></i> 
+                    Produtos abaixo do Estoque <span class="badge badge-danger w-10 p-2" style="background-color: #8400ff "> {{$estoque}} </span>
+                </a>
+            @else
+                <button class="btn" type="button" data-toggle="modal" data-target="#exampleModal" style="display: flex;">
+                    <i class="fas fa-dolly p-2" style="color: #035c77"></i> Produtos abaixo do Estoque <span class="badge badge-danger w-10 p-2" style="background-color: #8400ff "> {{$estoque}} </span>
+                </button>
+            @endif
         @endif
+
         @if($validade > 0)
-            <a class="dropdown-item" href="{{ route('dashboard', []) }}"><i class="far fa-calendar-times p-2"style="color: #035c77"></i> 
+            <button class="btn " type="button" data-toggle="modal" data-target="#exampleModalExpirado" style="display: flex;"> 
+                <i class="far fa-calendar-times p-2"style="color: #035c77"></i>Produtos com validade expirada <span class="badge badge-danger w-10 p-2"> {{$validade}} </span>
+            </button>
+            {{-- <a class="dropdown-item" href="{{ route('dashboard', []) }}"> 
                 Produtos com validade expirada  <span class="badge badge-danger w-10 p-2"> {{$validade}} </span>
-            </a>
+            </a> --}}
         @endif
-      {{-- <a class="dropdown-item" href="#">Dashboard</a> --}}
     </div>
 </div>
 

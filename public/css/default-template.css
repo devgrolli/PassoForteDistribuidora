@@ -22,8 +22,17 @@
     border-radius: 25px;
 }
 
+.btn-padrao3{
+    background-color: #FFD452;
+    border-color: #FFD452;
+    color: #ffffff;
+    height: 40px;
+    border-radius: 25px;
+}
+
 .btn-padrao1:hover,
 .btn-padrao2:hover,
+.btn-padrao3:hover,
 .btn-padrao1-icons:hover,
 .btn-padrao2-icons:hover,
 .btn-padrao1-div_table:hover,
@@ -49,6 +58,7 @@
 }
 
 .form-control-padrao1,
+.btn-padrao3,
 .btn-padrao2,
 .btn-padrao1 {
     box-shadow: 0 0 5px 0px rgba(51, 51, 51, 0.5);
@@ -127,7 +137,7 @@ thead {
     border-bottom-color: inherit;
 }
 
-#table {
+#table, #table-modal {
     border-radius: 10px;
     overflow: hidden;
     line-height: 1.2;
@@ -140,6 +150,7 @@ thead {
 #table,
 .btn-padrao1,
 .btn-padrao2,
+.btn-padrao3,
 .badge-primary,
 .alert-success,
 .btn-padrao1-icons,
@@ -152,8 +163,10 @@ thead {
 }
 
 .color-header-modal {
-    background-color: #006f88;
-    color: white;
+    background-color: #005365;
+    color: #ffffff;
+    font-family: Poppins-Bold;
+
 }
 
 .modal-close-color {
