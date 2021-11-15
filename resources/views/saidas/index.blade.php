@@ -32,7 +32,7 @@
                                         <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
                                             <div class="btn-toolbar mb-3" role="toolbar"
                                                 aria-label="Toolbar com grupos de botões">
-                                                <div class="btn-group" role="group" aria-label="Exemplo básico">
+                                                <div class="btn-group div-group-align" role="group" aria-label="Exemplo básico">
                                                     <a href="{{ route('saidas.create', []) }}" type="button"
                                                         class="btn btn-padrao1-div_table">Cadastrar
                                                         <i class="bi bi-cart-plus-fill"></i>

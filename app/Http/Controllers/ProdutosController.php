@@ -16,8 +16,11 @@ class ProdutosController extends Controller{
         $filtragem = $filtro->get('desc_filtro');
         if ($filtragem == null)
             $produtos = Produto::orderBy('id')->where('is_excluded', '=', false)->paginate(10);
-        else
+        else if(is_numeric($filtragem)){
+            $produtos = Produto::where('id', 'ilike', '%'.$filtragem.'%')->orderBy('nome')->where('is_excluded', '=', false)->paginate(5);
+        }else{
             $produtos = Produto::where('nome', 'ilike', '%'.$filtragem.'%')->orderBy('nome')->where('is_excluded', '=', false)->paginate(5);
+        } 
         return view('produtos.index', ['produtos'=>$produtos]);
     }
 

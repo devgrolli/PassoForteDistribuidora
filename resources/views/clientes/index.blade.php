@@ -2,7 +2,6 @@
 @section('content')
     @extends('layouts.default')
     @include('layouts.mascaras')
-    @include('sweetalert::alert')
     @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="config-space-divs">
@@ -43,7 +42,7 @@
                             </div>
                             <div class="col-sm-12 col-md-4">
                                 {!! Form::open(['name' => 'form_name', 'route' => 'clientes']) !!}
-                                <div class="input-group mb-8">
+                                <div class="input-group mb-8 div-group-align">
                                     <input type="text" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-padrao1-div_table" type="submit" name="search"

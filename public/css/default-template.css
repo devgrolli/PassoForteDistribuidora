@@ -87,6 +87,10 @@ a:hover {
     padding-left: 50px;
 }
 
+#mexido{
+    display: inline;
+}
+
 
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
@@ -160,6 +164,15 @@ thead {
 .card-body-text {
     font-family: Poppins-Regular;
     font-size: 16px;
+    flex: none;
+}
+
+.div-group-align{
+    position: fixed;
+    display: flex;
+    vertical-align: middle;
+    white-space: normal;
+    Word-wrap: break-Word;
 }
 
 .color-header-modal {
