@@ -1,7 +1,8 @@
 @extends('layouts.default')
 @section('content')
-    @include('layouts.graficos_dashboard')
-    @include('layouts.spinner')
+@include('layouts.graficos_dashboard')
+@include('layouts.popover')
+
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <script src="https://cdn.lordicon.com//libs/frhvbuzj/lord-icon-2.0.2.js"></script>
 
@@ -12,9 +13,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    <h6>Total de Lucro </h6>
-                                </div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><h6>Total de Lucro </h6></div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
                                     @if (is_array($balanco_caixa[1]) == true)
                                         R$ {{ number_format($balanco_caixa[1][0], 2, ',', '.') }}
@@ -44,9 +43,7 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    <h6>Total de Prejuízo </h6>
-                                </div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><h6>Total de Prejuízo </h6></div>
                                 <div class="h5 mb-0 font-weight-bold text-red-800">
                                     @if (is_array($balanco_caixa[0]) == true)
                                         R$ {{ number_format($balanco_caixa[0][0], 2, ',', '.') }}
@@ -104,12 +101,8 @@
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $estoque_baixo[1] }}</div>
                             </div>
                             <div class="col-auto">
-                                <button class="btn " type="button" data-toggle="modal" data-target="#exampleModal"
-                                    data-toggle="tooltip" data-placement="top"
-                                    title="Clique aqui para vizualizar os produto com estoque baixo">
-                                    <lord-icon src="https://cdn.lordicon.com//tdrtiskw.json" trigger="loop"
-                                        colors="primary:#0a4e5c,secondary:#0a4e5c" stroke="80" style="width:70px;height:70px">
-                                    </lord-icon>
+                                <button class="btn " type="button" data-toggle="modal" data-target="#exampleModal" data-toggle="tooltip" data-placement="top" title="Clique aqui para vizualizar os produto com estoque baixo">
+                                    <lord-icon src="https://cdn.lordicon.com//tdrtiskw.json" trigger="loop" colors="primary:#0a4e5c,secondary:#0a4e5c" stroke="80" style="width:70px;height:70px"></lord-icon>
                                 </button>
                             </div>
                         </div>
@@ -122,15 +115,12 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    <h6>Total de Clientes</h6>
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_clientes }}</div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><h6>Total de Clientes</h6></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_clientes->count() }}</div>
                             </div>
 
                             <div class="col-auto">
-                                <a href="{{ route('clientes', []) }}" data-toggle="tooltip" data-placement="top"
-                                    title="Clique aqui para acessar página de cadastro de clientes">
+                                <a href="{{ route('clientes', []) }}" data-toggle="tooltip" data-placement="top" title="Clique aqui para acessar página de cadastro de clientes">
                                     <lord-icon src="https://cdn.lordicon.com//uukerzzv.json" trigger="loop"
                                         colors="primary:#ff5e32,secondary:#000000" stroke="80" style="width:70px;height:70px">
                                     </lord-icon>
@@ -148,17 +138,12 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    <h6>Total de Entradas</h6>
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_entradas }}
-                                    {{-- {{ number_format($saldo_entrada, 2, ',', '.') }} --}}</div> 
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><h6>Total de Entradas</h6></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_entradas->count() }}</div>
                             </div>
                             <div class="col-auto">
-                                <a href="{{ route('entradas', []) }}" data-toggle="tooltip" data-placement="top"
-                                    title="Clique aqui para acessar página de cadastro de entradas">
-
-                                <lord-icon src="https://cdn.lordicon.com/nlzvfogq.json" trigger="loop" colors="primary:#ffd452,secondary:#ffd452" stroke="80" style="width:70PX;height:70PX"></lord-icon>
+                                <a href="{{ route('entradas', []) }}" data-toggle="tooltip" data-placement="top" title="Clique aqui para acessar página de cadastro de entradas">
+                                    <lord-icon src="https://cdn.lordicon.com/nlzvfogq.json" trigger="loop" colors="primary:#ffd452,secondary:#ffd452" stroke="80" style="width:70PX;height:70PX"></lord-icon>
                                 </a>
                             </div>
                         </div>
@@ -171,12 +156,8 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    <h6>Total de Saídas</h6>
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    {{ $total_saidas }}
-                                    {{-- {{ number_format($saldo_saida, 2, ',', '.') }} --}} </div> 
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><h6>Total de Saídas</h6></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_saidas->count() }}</div> 
                             </div>
                             <div class="col-auto">
                                 <a href="{{ route('saidas', []) }}" data-toggle="tooltip" data-placement="top" title="Clique aqui para acessar página de cadastro de saídas">
@@ -199,13 +180,15 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    <h6>Produtos cadastrados</h6>
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_produtos }}</div>
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><h6>Produtos cadastrados</h6></div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $total_produtos->count() }}</div>
                             </div>
                             <div class="col-auto">
-                                <a href="{{ route('produtos', []) }}" ><lord-icon src="https://cdn.lordicon.com/fqrjldna.json" trigger="loop" colors="primary:#4c5253,secondary:#f8efbe" style="width:70px;height:70px"> </lord-icon></a>
+                                {{-- <button class="btn" type="button" data-toggle="modal" data-target="#exampleModalPrejuizo"
+                                    data-toggle="tooltip" data-placement="top" title="Clique aqui para vizualizar os prejuízos"> --}}
+                                <button class="btn" type="button" data-toggle="modal" data-target="#dashmodalProduto" >
+                                    <lord-icon src="https://cdn.lordicon.com/fqrjldna.json" trigger="loop" colors="primary:#4c5253,secondary:#f8efbe" style="width:70px;height:70px"> </lord-icon>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -218,11 +201,7 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                        <h6>Produtos com Validade expirada 
-                                            <i class="fa fa-window-restore" aria-hidden="true"></i>
-                                        </h6> 
-                                    </div>
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1"><h6>Produtos com Validade expirada <i class="fa fa-window-restore" aria-hidden="true"></i></h6></div>
                                     <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $data_expirada[1] }} </div>
                                 </div>
                                 <div class="col-auto">
@@ -240,89 +219,12 @@
             @endif
         </div>
 
-        <!-- Modal Estoque baixo-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header color-header-modal">
-                        <h5 class="modal-title" id="exampleModalLabel">Estoque baixo
-                            <a href="{{ route('entradas.create', []) }}" class="btn btn-padrao2"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                        </h5>
-                        <button type="button" class="close modal-close-color" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-                        <table class="table table-hover" id="table">
-                            <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
-                                <th>Nome</th>
-                                <th>Unidade</th>
-                                <th>Marca</th>
-                                <th>Quantidade</th>
-                            </thead>
-                            <tbody align="center" style="margin: 0px auto;">
-                                @foreach ($estoque_baixo[0] as $eb)
-                                    <tr>
-                                        <td>{{ $eb->nome }}</td>
-                                        <td>{{ $eb->unidade }}</td>
-                                        <td>{{ $eb->marca }}</td>
-                                        <td>{{ $eb->quantidade }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Data expiração -->
-        <div class="modal fade" id="exampleModalExpirado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header color-header-modal">
-                        <h5 class="modal-title" id="exampleModalLabel">Produto com data expirada
-                            <a href="{{ route('entradas.create', []) }}" class="btn btn-padrao2">Cadastrar produto
-                                estoque</a>
-                        </h5>
-                        <button type="button" class="close modal-close-color" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-                        <table class="table table-hover" id="table">
-                            <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
-                                <th>Nome</th>
-                                <th>Quantidade</th>
-                                <th>Data expiração</th>
-                            </thead>
-                            <tbody align="center" style="margin: 0px auto;">
-                                @foreach ($data_expirada[0] as $de)
-                                    <tr>
-                                        <td>{{ $de->nome }}</td>
-                                        <td>{{ $de->quantidade }}</td>
-                                        <td style="color: #d82828; font-weight: bold;">{{ Carbon\Carbon::parse($de->validade)->format('d/m/Y') }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="modal fade" id="exampleModalLucro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header color-header-modal">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            Lista das saídas com Lucro
-                        </h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Lista das saídas com Lucro</h5>
                         <button type="button" class="close modal-close-color" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="modal-close">&times;</span>
                         </button>
@@ -350,8 +252,9 @@
                                             <td>R$ {{ number_format($lucro->preco_saida, 2, ',', '.') }}</td>
                                             <td>{{ $lucro->quantidade }}</td>
                                             <td>R$ {{ number_format($lucro->valor_total_saida, 2, ',', '.') }}</td>
-                                            <td style="color: #30d46f;">R$ {{ number_format($lucro->valor_desconto, 2, ',', '.') }}</td>
-                                            <td style="color: #30d46f;">{{ $lucro->procentagem }}%</td>  
+                                            
+                                            <td style="color: #00b661; font-size: 18px;">R$ {{ number_format($lucro->valor_desconto, 2, ',', '.') }}</td>
+                                            <td style="color: #00b661; font-size: 18px;">{{ $lucro->procentagem }}%</td>  
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -364,14 +267,12 @@
             </div>
         </div>
 
-
         <div class="modal fade" id="exampleModalPrejuizo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header color-header-modal">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                            Lista das saídas com Prejuízo
+                        <h5 class="modal-title" id="exampleModalLabel">Lista das saídas com Prejuízo
                         </h5>
                         <button type="button" class="close modal-close-color" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -409,6 +310,63 @@
                         @else
                             <center><img src="{{ url('/img/sem_saidas.png') }}" style="width:80%;height:80%;"></center>
                         @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="dashmodalProduto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header color-header-modal">
+                        <h5 class="modal-title" id="exampleModalLabel">Produtos </h5>
+
+                        <i class="far fa-question-circle" data-toggle="popover" title="Produtos já cadastrados" 
+                            data-placement="right" data-content="Breve apresentação dos produtos já cadastrados. Para visualizar mais, clique em 'Ver todos'">
+                        </i>
+        
+                        <button type="button" class="close modal-close-color" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+        
+                    <div class="modal-body">
+                        <table class="table table-hover" id="table-modal">
+                            <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Unidade</th>
+                                <th>Marca</th>
+                                <th>Categoria</th>
+                            </thead>
+        
+                            <tbody align="center" style="margin: 0px auto;">
+                                @foreach ($total_produtos as $i => $tp)
+                                    @if($i >= 5)
+                                        @break
+                                    @else
+                                        <tr>
+                                            <td>{{ $tp->id }}</td>
+                                            <td>{{ $tp->nome }}</td>
+                                            <td>{{ $tp->unidade }}</td>
+                                            <td>{{ $tp->marca }}</td>
+                                            <td>{{ $tp->categorias->nome }}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+        
+                    <div class="modal-footer">
+                        <a href="{{ route('produtos', []) }}" class="btn btn-padrao1">Ver todos 
+                            @if($total_produtos->count() >= 100)
+                                <span style="font-size: 14px" class="badge badge-pill badge-danger">+99</span>
+                            @else
+                                <span style="font-size: 14px" class="badge badge-pill badge-danger">{{ $total_produtos->count() }} </span>
+                            @endif
+                        </a>
+                        <button type="button" class="btn btn-padrao3" data-dismiss="modal">Fechar <i class="far fa-window-close"></i></button>
                     </div>
                 </div>
             </div>
@@ -464,4 +422,5 @@
             </div>
         @endrole
     </div>
+    @include('layouts.spinner')
 @stop

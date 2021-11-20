@@ -64,6 +64,23 @@
     box-shadow: 0 0 5px 0px rgba(51, 51, 51, 0.5);
 }
 
+.novo{
+    padding-left: 0px;
+}
+
+.fa-question-circle{
+    padding-left: 8px;
+    padding-top: 3px;
+    color: #FFD452;
+    font-size: 25px;
+}
+
+.texts_menus_nav{
+    color: #035c77;
+    font-family: Poppins-Regular;
+
+}
+
 .form-control-padrao1-div_table,
 .btn-padrao1-div_table,
 .btn-padrao2-div_table {

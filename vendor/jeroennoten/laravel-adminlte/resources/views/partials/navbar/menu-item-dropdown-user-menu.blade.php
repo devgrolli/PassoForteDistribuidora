@@ -1,5 +1,6 @@
 @php( $logout_url = View::getSection('logout_url') ?? config('adminlte.logout_url', 'logout') )
 @php( $profile_url = View::getSection('profile_url') ?? config('adminlte.profile_url', 'logout') )
+
 @inject('dashboard', App\Http\Controllers\DashboardController)
 
 @if (config('adminlte.usermenu_profile_url', false))
@@ -19,8 +20,10 @@
 @php($soma = $estoque + $validade)
 
 
+<script src="https://cdn.lordicon.com/libs/mssddfmo/lord-icon-2.1.0.js"></script>
 <div class="dropdown">
-    <button class="btn position-relative" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="btn position-relative novo" href="{{ route('ajuda', []) }}"><i class="far fa-handshake" data-toggle="tooltip" data-placement="top" title="Ajuda"></i></a>
+    <button class="btn position-relative novo" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         @if($soma != 0)
             <i class="far fa-bell"></i>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ $soma }}</span>
@@ -38,19 +41,19 @@
 
         @if($estoque > 0)
             @if(Route::getCurrentRoute()->getName() == 'estoque')
-                <a class="dropdown-item" ><i class="fas fa-dolly p-2" style="color: #035c77"></i> 
+                <a class="dropdown-item" ><i class="fas fa-dolly p-2"></i> 
                     Produtos abaixo do Estoque <span class="badge badge-danger w-10 p-2" style="background-color: #8400ff "> {{$estoque}} </span>
                 </a>
             @else
                 <button class="btn" type="button" data-toggle="modal" data-target="#exampleModal" style="display: flex;">
-                    <i class="fas fa-dolly p-2" style="color: #035c77"></i> Produtos abaixo do Estoque <span class="badge badge-danger w-10 p-2" style="background-color: #8400ff "> {{$estoque}} </span>
+                    <i class="fas fa-dolly p-2"></i> Produtos abaixo do Estoque <span class="badge badge-danger w-10 p-2" style="background-color: #8400ff "> {{$estoque}} </span>
                 </button>
             @endif
         @endif
 
         @if($validade > 0)
             <button class="btn " type="button" data-toggle="modal" data-target="#exampleModalExpirado" style="display: flex;"> 
-                <i class="far fa-calendar-times p-2"style="color: #035c77"></i>Produtos com validade expirada <span class="badge badge-danger w-10 p-2"> {{$validade}} </span>
+                <i class="far fa-calendar-times p-2"></i>Produtos com validade expirada <span class="badge badge-danger w-10 p-2"> {{$validade}} </span>
             </button>
             {{-- <a class="dropdown-item" href="{{ route('dashboard', []) }}"> 
                 Produtos com validade expirada  <span class="badge badge-danger w-10 p-2"> {{$validade}} </span>
@@ -114,14 +117,18 @@
                     {{ __('adminlte::menu.profile') }}
                 </a>
             @endif
-            <a class="dropdown-item" href="{{ route('ajuda', []) }}"><i class="fas fa-hands-helping"></i> Ajuda</a>
-            <a class="dropdown-item" href="{{ route('usuarios', []) }}"><i class="fas fa-cog"></i> Configurações de Usuário</a>
+            <a class="dropdown-item" href="{{ route('usuarios', []) }}">
+                <lord-icon src="https://cdn.lordicon.com/sbiheqdr.json" trigger="loop" colors="primary:#000000,secondary:#000000" stroke="80" style="width:30px;height:30px"></lord-icon>
+            {{-- <i class="fas fa-cog"></i> --}} Configurações de Usuário</a>
+             
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item @if(!$profile_url) btn-block @endif"
-               href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-               <i class="fas fa-sign-out-alt"></i>
+            <a class="dropdown-item 
+                @if(!$profile_url) btn-block @endif" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <lord-icon src="https://cdn.lordicon.com/lywgqtim.json" trigger="loop" colors="primary:#121331,secondary:#000000" stroke="80" style="width:30px;height:30px"></lord-icon>
+                {{-- <i class="fas fa-sign-out-alt"></i> --}}
                 {{ __('adminlte::adminlte.log_out') }}
             </a>
+
             <form id="logout-form" action="{{ $logout_url }}" method="POST" style="display: none;">
                 @if(config('adminlte.logout_method'))
                     {{ method_field(config('adminlte.logout_method')) }}

@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 use App\Entrada;
+use App\Produto;
 use App\Saida;
+use App\Cliente;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller{
     public function index() {
-        $total_clientes = DB::table('clientes')->count();
-        $total_produtos = DB::table('produtos')->count();
-        $total_entradas = DB::table('entradas')->where('is_excluded', '=', false)->count();
-        $total_saidas = DB::table('saidas')->where('is_excluded', '=', false)->count();
+        $total_clientes = Cliente::all();
+        $total_produtos = Produto::all()->where('is_excluded', '=', false);
+        $total_saidas = Saida::all()->where('is_excluded', '=', false);
+        $total_entradas = Entrada::all()->where('is_excluded', '=', false);
 
         $estoque_baixo = DashboardController::produtosEstoqueBaixo();
         $saldo_saida = DashboardController::totalSaidas();
@@ -19,10 +21,10 @@ class DashboardController extends Controller{
         $data_expirada = DashboardController::validadeExpirada();
 
         return view('dashboard.index', compact(
-            'total_clientes', 
+            'total_clientes',
             'total_produtos', 
-            'total_entradas', 
-            'total_saidas', 
+            'total_entradas',
+            'total_saidas',
             'saldo_entrada',
             'balanco_caixa',
             'saldo_saida',
