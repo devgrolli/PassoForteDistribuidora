@@ -1,5 +1,4 @@
 <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="path-para-seu-script"></script>
 <script type="text/javascript" language="javascript"></script>
 
 <script>

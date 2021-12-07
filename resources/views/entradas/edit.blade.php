@@ -29,7 +29,7 @@
                     </div>
                     <div class="col">
                         {!! Form::label('preco_un', 'Preço Unitário') !!}
-                        {!! Form::text('preco_un', $entrada->preco_un, ['class' => 'form-control', 'id' => 'valor', 'onkeyup' => 'formatarMoeda()', 'placeholder' => 'R$', 'required']) !!}
+                        {!! Form::text('preco_un', null, ['class' => 'form-control preco_un', 'id' => 'valor', 'onkeyup' => 'formatarMoeda()', 'placeholder' => 'R$', 'required']) !!}
                     </div>
                 </div><br>
                 <div class="form-row">
@@ -65,3 +65,13 @@
     </div>
     @include('modals.modal_estoque')
 @stop
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script>
+  $(document).ready(function() {
+    var preco_entrada = ({{ $entrada->preco_un }}).toLocaleString('pt-br', {minimumFractionDigits: 2});
+    $('#valor').val(preco_entrada);
+  });
+</script>

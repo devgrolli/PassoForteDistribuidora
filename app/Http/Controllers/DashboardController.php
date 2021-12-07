@@ -132,7 +132,7 @@ class DashboardController extends Controller{
     public static function graficoEntrada(){
         $get_periodo = [];
         $count_entradas = [];
-        $periodo = Entrada::whereBetween('validade', [Carbon::now()->subMonths(6)->format('d/m/Y'), Carbon::now()->format('d/m/Y')])->where('is_excluded', '=', false)->get();
+        $periodo = Entrada::whereBetween('created_at', [Carbon::now()->subMonths(6)->format('d/m/Y'), Carbon::now()->format('d/m/Y')])->where('is_excluded', '=', false)->get();
 
         $month = intval(Carbon::now()->format('m'));
         $months_ago = intval(Carbon::now()->subMonths(6)->format('m'));
@@ -140,7 +140,7 @@ class DashboardController extends Controller{
         for ($i = $months_ago; $i <= $month; $i++) {
             $cont = 0;
             foreach($periodo as $p){
-                $validate_month = Carbon::parse($p->validade)->format('m');
+                $validate_month = Carbon::parse($p->created_at)->format('m');
                 if(intval($validate_month) == $i){
                     $cont += 1;
                 }

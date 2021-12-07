@@ -64,6 +64,7 @@
                                 <th>Quantidade</th>
                                 <th>Valor de saída</th>
                                 <th>Tipo da Saída</th>
+                                <th>Cliente</th>
                                 <th>Data da saída</th>
                                 <th></th>
                             </thead>
@@ -75,6 +76,7 @@
                                         <td>{{ $saida->quantidade }} </td>
                                         <td>R$ {{ number_format($saida->preco_saida, 2, ',', '.') }}</td>
                                         <td>{{ $saida->tipo_saidas->nome }}</td>
+                                        <td>{{ $saida->cliente->nome }}</td>
                                         <td>{{ Carbon\Carbon::parse($saida->created_at)->format('d/m/Y - H:i:s') }}</td>
                                         <td>
                                             <a href="{{ route('saidas.edit', ['id' => \Crypt::encrypt($saida->id)]) }}"

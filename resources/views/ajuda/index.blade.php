@@ -1,6 +1,5 @@
 @extends('layouts.default')
 @section('content')
-    @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <script src="https://cdn.lordicon.com/libs/frhvbuzj/lord-icon-2.0.2.js"></script>
     <div class="row justify-content-center">
@@ -111,4 +110,5 @@
         </div>
     </div>
     </div>
+    @include('layouts.spinner')
 @endsection

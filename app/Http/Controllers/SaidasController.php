@@ -75,6 +75,8 @@ class SaidasController extends Controller{
 
     public function update(SaidaRequest $request, $id){
         $request['preco_un'] = UtilController::formataMoeda($request->preco_un);
+        $request['preco_saida'] = UtilController::formataMoeda($request->preco_saida);
+
         $busca_produto = Produto::find($request->produto_id);
         if ($request->quantidade > $busca_produto->quantidade) {
             Alert::error("Quantidade em estoque: $busca_produto->quantidade" , 'Quantidade da saída do produto é maior que a quantidade em estoque!')->persistent('Close');

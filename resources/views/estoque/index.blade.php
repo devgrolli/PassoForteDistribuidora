@@ -1,6 +1,5 @@
 @extends('layouts.default')
 @section('content')
-    @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="config-space-divs">
         <div class="col-xxl-4 col-xl-12 mb-4">
@@ -23,13 +22,37 @@
                 <div class="datatable">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
+                            {{-- <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_length">
+                                    <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar com grupos de botões">
+                                        <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
+                                            <div class="btn-group div-group-align" role="group" aria-label="Exemplo básico">
+                                                {!! Form::open(['route' => 'estoque.filter']) !!}
+                                                    <div class="input-group mb-8 div-group-align">                                                            
+                                                        <select class="selectpicker form-control select_search form-control-padrao1-div_table" name="type_filter" id="type_filter" data-live-search="true" required>
+                                                            <option value="0"></option>
+                                                            <option value="1">Com Estoque</option>
+                                                            <option value="2">Sem Estoque</option>
+                                                        </select>
+                                                        <div class="input-group-append">
+                                                            {!! Form::button('Aplicar Filtro' ,['class'=>'btn btn-padrao1-div_table', 'type'=>'submit']) !!}
+                                                        </div>
+                                                    </div>
+                                                {!! Form::close() !!}
+                                            </div><br><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br> --}}
+
                             <table class="table table-hover tabela_id" id="table">
                                 {{-- @if($estoque->count() != 0) --}}
                                     <thead class="letra" id="thead_colors" align="center" style="margin: 0px auto;">
                                         <th></th>
                                         <th>Código</th>
                                         <th>Produto</th>
-                                        <th>Quantidade em Estoque</th>
+                                        <th>Estoque</th>
                                     </thead>
 
                                     <tbody align="center" style="margin: 0px auto;">
@@ -57,6 +80,7 @@
             </div>
         </div>
     </div>
+    @include('layouts.spinner')
 @stop
 @section('table-delete')
     "estoques"

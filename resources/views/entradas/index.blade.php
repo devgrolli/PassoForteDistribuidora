@@ -1,6 +1,5 @@
 @extends('layouts.default')
 @section('content')
-    @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
     <div class="config-space-divs">
         <head>
@@ -161,6 +160,7 @@
         </div>
     </div>
     @include('sweetalert::alert')
+    @include('layouts.spinner')
 @stop
 @section('table-delete')
     'entradas'

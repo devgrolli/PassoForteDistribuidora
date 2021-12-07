@@ -13,6 +13,7 @@ class Saida extends Model{
         'preco_saida',
         'quantidade',
         'tipo_saidas_id',
+        'cliente_id',
         'observacoes'
     ]; 
 
@@ -22,6 +23,10 @@ class Saida extends Model{
 
     public function tipo_saidas(){
         return $this->belongsTo("App\TipoSaida"); 
+    }
+
+    public function cliente(){
+        return $this->belongsTo("App\Cliente"); 
     }
 
 }

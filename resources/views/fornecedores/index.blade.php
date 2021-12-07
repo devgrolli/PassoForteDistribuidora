@@ -1,7 +1,7 @@
 @section('content')
 @include('sweetalert::alert')
 @extends('layouts.default')
-@include('layouts.spinner')
+
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="config-space-divs">
         <div class="col-xxl-4 col-xl-12 mb-4">
@@ -107,6 +107,7 @@
         </div>
     </div>
     @include('sweetalert::alert')
+    @include('layouts.spinner')
 @stop
 @section('table-delete')
     "fornecedores"

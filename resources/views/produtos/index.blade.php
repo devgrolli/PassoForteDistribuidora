@@ -1,6 +1,5 @@
 @extends('layouts.default')
 @section('content')
-@include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="config-space-divs">
         <div class="col-xxl-4 col-xl-12 mb-4">
@@ -138,7 +137,6 @@
                         <select class="selectpicker form-control select_search" name="type_doc" id="type_doc" data-live-search="true" required>
                             <option value="1">Excel</option>
                             <option value="2">PDF</option>
-                            <option value="3">Visualizar</option>
                         </select>
                     </div>
                     <br>
@@ -241,6 +239,7 @@
     </div>
     </div>
     @include('sweetalert::alert')
+    @include('layouts.spinner')
 @stop
 @section('table-delete')
     "produtos"

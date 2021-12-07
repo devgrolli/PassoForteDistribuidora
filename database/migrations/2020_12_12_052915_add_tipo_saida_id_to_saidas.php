@@ -16,6 +16,8 @@ class AddTipoSaidaIdToSaidas extends Migration
         Schema::table('saidas', function (Blueprint $table) {
             $table->bigInteger('tipo_saidas_id')->unsigned()->nullable();
             $table->foreign('tipo_saidas_id')->references('id')->on('tipo_saidas');
+            $table->bigInteger('cliente_id')->unsigned()->nullable();
+            $table->foreign('cliente_id')->references('id')->on('clientes');
             $table->string('observacoes', 4000)->nullable();
         });
     }

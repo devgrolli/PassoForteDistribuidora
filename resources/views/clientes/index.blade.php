@@ -2,7 +2,6 @@
 @section('content')
     @extends('layouts.default')
     @include('layouts.mascaras')
-    @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="config-space-divs">
         <div class="col-xxl-4 col-xl-12 mb-4" >
@@ -43,7 +42,7 @@
                             <div class="col-sm-12 col-md-4">
                                 {!! Form::open(['name' => 'form_name', 'route' => 'clientes']) !!}
                                 <div class="input-group mb-8 div-group-align">
-                                    <input type="text" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
+                                    <input type="text" name="desc_filtro" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-padrao1-div_table" type="submit" name="search"
                                             type="button" id="search-btn"><i class="fa fa-search"></i>
@@ -140,8 +139,11 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script>
-        setTimeout(function() { $( "#table" ).load(window.location.href + " #table" ); }, 15); 
+        if({{$filter_cliente}} == false){
+            setTimeout(function() { $( "#table" ).load(window.location.href + " #table" ); }, 15); 
+        }
     </script>
+    @include('layouts.spinner')
 @stop
 @section('table-delete')
     "clientes"

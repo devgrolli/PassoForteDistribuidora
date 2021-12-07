@@ -26,7 +26,7 @@ class FornecedoresController extends Controller{
             Fornecedor::create($novo_fornecedor);
             return redirect()->route('fornecedores')->with('success', "Fornecedor cadastrado com sucesso!");
         }else{
-            Alert::error('CNPJ já cadastrado', 'Insira outro cnpj para realizar o cadastro')->persistent('Close');
+            Alert::error('CNPJ já cadastrado', 'Insira outro CNPJ para cadastrar')->persistent('Close');
             return redirect()->back()->withInput();
         }
     }

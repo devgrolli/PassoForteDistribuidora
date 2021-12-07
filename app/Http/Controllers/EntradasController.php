@@ -30,9 +30,7 @@ class EntradasController extends Controller{
             Alert::error('Quantidade Inválida', 'Insira uma quantidade maior que zero')->persistent('Close');
             return redirect()->back()->withInput();
         }else{
-            $same_date_entrada = DB::table('entradas')->where('produto_id', '=', $request->produto_id)
-                                                      ->where('is_excluded', '=', false)
-                                                      ->where('validade', '=', $request->validade)->get(); # verifica se o produto de entrada tem a mesma data de validade
+            $same_date_entrada = DB::table('entradas')->where('produto_id', '=', $request->produto_id)->where('is_excluded', '=', false)->where('validade', '=', $request->validade)->get(); # verifica se o produto de entrada tem a mesma data de validade
             if ($same_date_entrada->isEmpty()){
                 $nova_entrada['preco_un'] = UtilController::formataMoeda($request->preco_un);
                 Entrada::create($nova_entrada);
@@ -74,15 +72,11 @@ class EntradasController extends Controller{
 
     public function update(EntradaRequest $request, $id){
         $busca_produto = Produto::find($request->produto_id);
-        if ($request->quantidade == 0){
-            Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada')->persistent('Close');
-            return redirect()->back()->withInput();
-         
-        }else if ($busca_produto->quantidade == 0){  
-            Alert::error('Produto sem estoque', "Tente outro produto")->persistent('Close');
+        if ($request->quantidade == 0 || $request->quantidade < 0){
+            Alert::error('Quantidade Inválida', 'Insira uma quantidade maior que zero')->persistent('Close');
             return redirect()->back()->withInput();
         
-        }else{  
+        }else{
             $request['preco_un'] = UtilController::formataMoeda($request->preco_un);
             Entrada::find($id)->update($request->all());
             $busca_produto->quantidade = $request->quantidade;

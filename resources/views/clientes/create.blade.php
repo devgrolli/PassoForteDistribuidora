@@ -1,7 +1,6 @@
 @section('content')
 @include('sweetalert::alert')
 @extends('layouts.default')
-@include('layouts.spinner')
 @include('layouts.cep')
 @include('layouts.mascaras')
 @extends('layouts.select_search')
@@ -78,6 +77,7 @@
       </div>
     </div>
   </div>
+  @include('layouts.spinner')
 @stop
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
