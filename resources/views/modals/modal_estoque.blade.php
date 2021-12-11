@@ -1,5 +1,5 @@
 @inject('prods', App\Http\Controllers\ProdutosController)
-@php($products = $prods->get_products())
+@php($products = $prods->get_all_products())
 
 <link rel="stylesheet" type="text/css" href="../css/default-template.css">
 <div class="modal fade" id="exampleModalEstoque" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

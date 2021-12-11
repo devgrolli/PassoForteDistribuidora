@@ -60,7 +60,6 @@
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
-                console.log('data')
                 var ctx = document.getElementById('chartSaida').getContext('2d');
                 var myChart = new Chart(ctx, {
                     type: 'bar',

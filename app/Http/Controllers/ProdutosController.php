@@ -46,7 +46,7 @@ class ProdutosController extends Controller{
         }
     }
 
-    public function get_products(){
+    public static function get_all_products(){
         return Produto::all();
     }
 

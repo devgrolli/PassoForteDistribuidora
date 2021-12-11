@@ -9,13 +9,14 @@ use App\Http\Requests\ClienteRequest;
 
 class ClientesController extends Controller{
     public function index(Request $filtro) {
+        $filter_cliente = 'false';
         $filtragem = $filtro->get('desc_filtro');
-        if ($filtragem == null)
+        if ($filtragem == null){
             $clientes = Cliente::orderBy('nome')->paginate(10);
-        else
-            $clientes = Cliente::where('nome', 'ilike', '%'.$filtragem.'%')
-            ->orderBy('nome')
-            ->paginate(5);
+        }else{
+            $clientes = Cliente::where('nome', 'ilike', '%'.$filtragem.'%')->orderBy('nome')->paginate(5);
+            $filter_cliente = 'true';
+        }
         foreach (Cliente::all() as $nc) {
             switch ($nc->tipo_cliente->nome) {
                 case "Bom comprador":
@@ -38,7 +39,7 @@ class ClientesController extends Controller{
             $nc->categoria_cliente = $numero;
             $nc->save();
         }
-        return view('clientes.index', ['clientes'=>$clientes]);
+        return view('clientes.index', compact('clientes', 'filter_cliente'));
     }
 
     public function create(){ 

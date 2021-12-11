@@ -104,10 +104,6 @@ a:hover {
     padding-left: 50px;
 }
 
-#mexido{
-    display: inline;
-}
-
 
 /*//////////////////////////////////////////////////////////////////
 [ FONT ]*/
@@ -184,13 +180,13 @@ thead {
     flex: none;
 }
 
-.div-group-align{
+/* .div-group-align{
     position: fixed;
     display: flex;
     vertical-align: middle;
     white-space: normal;
     Word-wrap: break-Word;
-}
+} */
 
 .color-header-modal {
     background-color: #005365;

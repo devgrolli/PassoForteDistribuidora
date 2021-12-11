@@ -103,15 +103,6 @@
         </div>
     </div>
 
-    {{-- @if(!empty($export) )
-        <script>
-        $(function() {
-            $('#myModal').modal('show');
-        });
-        </script>
-    @endif --}}
-
-
     <div class="modal fade" id="excelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">

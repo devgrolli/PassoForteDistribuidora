@@ -16,7 +16,7 @@ class SaidasController extends Controller{
 		return view('saidas.index', ['saidas'=>$saidas]);
 	}
 
-    public function getprods($valor){
+    public static function getprods($valor){
         $produto = Entrada::where('produto_id', '=', $valor)->where('is_excluded', '=', false)->get();
         return $produto->isEmpty() ? json_encode('Sem estoque') : json_encode($produto);
     }
@@ -25,6 +25,12 @@ class SaidasController extends Controller{
         $entradas = Entrada::all();
         $products = Produto::where('quantidade', '>', '0')->get();
         return view('saidas.create', compact('products', 'entradas'));
+    }
+
+    public function venda(){
+        $entradas = Entrada::all();
+        $products = Produto::where('quantidade', '>', '0')->get();
+        return view('saidas.venda', compact('products', 'entradas'));
     }
 
     public function store(SaidaRequest $request){ 
@@ -96,5 +102,11 @@ class SaidasController extends Controller{
             $busca_produto->save();
             return redirect()->route('saidas')->with('success', "Saída alterada com sucesso!");
         }
+    }
+    
+    public function dynamic_venda($valor){
+        $saidas_products = Entrada::where('produto_id', '=', $valor)->where('is_excluded', '=', false)->get();
+        $all_prods = ProdutosController::get_all_products();
+        return json_encode([$saidas_products, $all_prods]); 
     }
 }
