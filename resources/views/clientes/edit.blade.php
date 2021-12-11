@@ -1,7 +1,6 @@
 @section('content')
 @include('sweetalert::alert')
 @extends('layouts.default')
-@include('layouts.spinner')
 @include('layouts.mascaras')
 @extends('layouts.select_search')
 
@@ -59,4 +58,5 @@
             </div>
         </div>
     </div>
+    @include('layouts.spinner')
 @stop

@@ -1,7 +1,7 @@
 @section('content')
 @include('sweetalert::alert')
 @extends('layouts.default')
-@include('layouts.spinner')
+
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="config-space-divs">
         <div class="col-xxl-4 col-xl-12 mb-4">
@@ -38,7 +38,7 @@
                                                 </div>
 
                                                 {!! Form::open(['name' => 'form_name', 'route' => 'fornecedores']) !!}
-                                                <div class="input-group mb-3">
+                                                <div class="input-group mb-3 div-group-align">
                                                     <input type="text" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
                                                     <div class="input-group-append">
                                                         <button class="btn btn-padrao1-div_table" type="submit" name="search" type="button" id="search-btn"><i class="fa fa-search"></i></button>
@@ -107,6 +107,7 @@
         </div>
     </div>
     @include('sweetalert::alert')
+    @include('layouts.spinner')
 @stop
 @section('table-delete')
     "fornecedores"

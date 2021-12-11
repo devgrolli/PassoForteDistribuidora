@@ -20,19 +20,25 @@
                         <th>Data expiração</th>
                     </thead>
                     <tbody align="center" style="margin: 0px auto;">
-                        @foreach ($validade[0] as $de)
-                            <tr>
-                                <td>{{ $de->nome }}</td>
-                                <td>{{ $de->quantidade }}</td>
-                                <td style="color: #d82828; font-weight: bold;">{{ Carbon\Carbon::parse($de->validade)->format('d/m/Y') }}</td>
-                            </tr>
+                        @foreach ($validade[0] as $i => $de)
+                            @if($i >= 5)
+                                @break
+                            @else
+                                <tr>
+                                    <td>{{ $de->nome }}</td>
+                                    <td>{{ $de->quantidade }}</td>
+                                    <td style="font-weight: bold;"><span style="font-size: 14px" class="badge badge-pill badge-danger">{{ Carbon\Carbon::parse($de->validade)->format('d/m/Y') }}</span></td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>
             </div>
 
             <div class="modal-footer">
-                <a href="{{ route('entradas.create', []) }}" class="btn btn-padrao1">Cadastrar produto estoque <i class="fa fa-plus" aria-hidden="true"></i></a>
+                <a href="{{ route('entradas.create', []) }}" class="btn btn-padrao1">
+                    Cadastrar produto estoque <lord-icon src="https://cdn.lordicon.com/mecwbjnp.json" trigger="loop" colors="primary:#ffffff,secondary:#ffffff" stroke="100" style="width:26px;height:26px;padding-top:0px"></lord-icon>
+                </a>
                 <button type="button" class="btn btn-padrao3" data-dismiss="modal">Fechar <i class="far fa-window-close"></i></button>
             </div>
         </div>

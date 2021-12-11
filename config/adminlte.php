@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => '<b>Passo Forte </b>',
-    'logo_img' => 'vendor/adminlte/dist/img/stock.png',
+    'logo_img' => 'vendor/adminlte/dist/img/icone.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -283,7 +283,8 @@ return [
         [
             'text' => 'Produtos',
             'url'  => 'produtos',
-            'icon' => 'fas fa-fw fal fa-barcode',
+            'icon' => 'fas fa-fw fal fa-qrcode',
+
         ],
         [
             'text' => 'Entradas',

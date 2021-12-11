@@ -35,7 +35,7 @@
                                         </div>
 
                                         {!! Form::open(['name' => 'form_name', 'route' => 'usuarios']) !!}
-                                        <div class="input-group mb-3">
+                                        <div class="input-group mb-3 div-group-align">
                                             <input type="text" class="form-control-padrao1-div_table" name="desc_filtro"
                                                 aria-describedby="basic-addon2">
                                             <div class="input-group-append">

@@ -1,17 +1,6 @@
 <?php
 
-use App\Http\Controllers\ProdutosController;
-use App\Http\Controllers\EntradasController;
-use App\Http\Controllers\SaidasController;
-use App\Http\Controllers\FornecedoresController;
-use App\Http\Controllers\ClientesController;
-use App\Http\Controllers\CategoriasController;
-use App\Http\Controllers\TipoEntradasController;
-use App\Http\Controllers\TipoSaidasController;
-use App\Http\Controllers\CepController;
-use App\Http\Controllers\UsuariosController;
-use App\Http\Controllers\ExportContorller;
-use App\Http\Controllers\PDFController;
+use Illuminate\Support\Facades\Auth; 
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,7 +8,6 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
 Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'usuarios', 'where' => ['id' => '[0-9]+']], function () {
@@ -128,6 +116,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'estoque', 'where' => ['id' => '[0-9]+']], function () {
         Route::any('',      ['as' => 'estoque',        'uses' => 'EstoqueController@index']);
         Route::get('store', ['as' => 'estoque.store',  'uses' => 'EstoqueController@store']);
+        Route::post('filter', ['as' => 'estoque.filter',  'uses' => 'EstoqueController@filter']);
     });
 
     #Exportar excel

@@ -5,7 +5,6 @@
   @include('layouts.dynamic_validade')
   @include('modals.modal_estoque')
   @extends('layouts.select_search')
-  @include('layouts.spinner')
 
   <link rel="stylesheet" type="text/css" href="../css/default-template.css">
   <div id="div_create">
@@ -22,7 +21,7 @@
         <div class="card-body" id="card_crud">
           {!! Form::open(['route' => 'saidas.store']) !!}
           <div class="form-row">
-            <div class="col">
+            <div class="form-group col-md-6">
               {!! Form::Label('produto_id', 'Produto') !!}
               <select class="selectpicker form-control select_search" id="produto_nome" data-live-search="true" name="produto_id" required>
                 <option value="">Selecione um Produto</option>
@@ -46,6 +45,8 @@
               {!! Form::label('preco_saida', 'Preço Saída') !!}
               {!! Form::text('preco_saida', null, ['class'=>'form-control', 'id'=>'valor', 'onkeyup'=>"formatarMoeda()", 'placeholder'=>'R$', 'required']) !!}
             </div>
+          </div>
+          <div class="form-row" >
             <div class="col">
               {!! Form::label('quantidade', 'Quantidade') !!}
               {!! Form::number('quantidade', null, ['class'=>'form-control', 'required', 'pattern' => '[0-9]+([,\.][0-9]+)?']) !!}
@@ -53,6 +54,11 @@
             <div class="col">
               {!! Form::label('tipo_saidas_id', 'Tipo de saída') !!}
               {!! Form::select('tipo_saidas_id', \App\TipoSaida::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control select_search', 'required']) !!}
+            </div>
+
+            <div class="col">
+              {!! Form::label('cliente_id', 'Cliente') !!}
+              {!! Form::select('cliente_id', \App\Cliente::orderBy('nome')->pluck('nome', 'id')->toArray(), null, ['class'=>'form-control select_search', 'required']) !!}
             </div>
           </div>
           <br>
@@ -69,4 +75,5 @@
       </div>
     </div>
   </div>
+  @include('layouts.spinner')
 @stop

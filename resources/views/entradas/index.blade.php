@@ -1,6 +1,5 @@
 @extends('layouts.default')
 @section('content')
-    @include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="../css/default-template.css">
     <div class="config-space-divs">
         <head>
@@ -32,7 +31,7 @@
                                         <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
                                             <div class="btn-toolbar mb-3" role="toolbar"
                                                 aria-label="Toolbar com grupos de botões">
-                                                <div class="btn-group" role="group" aria-label="Exemplo básico">
+                                                <div class="btn-group div-group-align" role="group" aria-label="Exemplo básico">
                                                     <a href="{{ route('entradas.create', []) }}" type="button"
                                                         class="btn btn-padrao1-div_table" id="btn-entrada">Cadastrar
                                                         <i class="bi bi-cart-plus-fill"></i>
@@ -161,6 +160,7 @@
         </div>
     </div>
     @include('sweetalert::alert')
+    @include('layouts.spinner')
 @stop
 @section('table-delete')
     'entradas'

@@ -32,7 +32,7 @@
                                         <div class="btn-group mr-2" role="group" aria-label="Primeiro grupo">
                                             <div class="btn-toolbar mb-3" role="toolbar"
                                                 aria-label="Toolbar com grupos de botões">
-                                                <div class="btn-group" role="group" aria-label="Exemplo básico">
+                                                <div class="btn-group div-group-align" role="group" aria-label="Exemplo básico">
                                                     <a href="{{ route('saidas.create', []) }}" type="button"
                                                         class="btn btn-padrao1-div_table">Cadastrar
                                                         <i class="bi bi-cart-plus-fill"></i>
@@ -64,6 +64,7 @@
                                 <th>Quantidade</th>
                                 <th>Valor de saída</th>
                                 <th>Tipo da Saída</th>
+                                <th>Cliente</th>
                                 <th>Data da saída</th>
                                 <th></th>
                             </thead>
@@ -75,6 +76,7 @@
                                         <td>{{ $saida->quantidade }} </td>
                                         <td>R$ {{ number_format($saida->preco_saida, 2, ',', '.') }}</td>
                                         <td>{{ $saida->tipo_saidas->nome }}</td>
+                                        <td>{{ $saida->cliente->nome }}</td>
                                         <td>{{ Carbon\Carbon::parse($saida->created_at)->format('d/m/Y - H:i:s') }}</td>
                                         <td>
                                             <a href="{{ route('saidas.edit', ['id' => \Crypt::encrypt($saida->id)]) }}"

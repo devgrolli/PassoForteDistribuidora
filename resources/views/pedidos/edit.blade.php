@@ -1,6 +1,5 @@
 @extends('layouts.default')
 @include('sweetalert::alert')
-@include('layouts.spinner')
 @section('content')
 <link rel="stylesheet" type="text/css" href="../css/default-template.css">
   <div id="div_create">
@@ -36,6 +35,7 @@
     </tbody>
   </div>
 </div>
+@include('layouts.spinner')
 @stop
 <script>
   $(document).ready(function() {

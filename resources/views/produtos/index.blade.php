@@ -1,6 +1,5 @@
 @extends('layouts.default')
 @section('content')
-@include('layouts.spinner')
     <link rel="stylesheet" type="text/css" href="css/default-template.css">
     <div class="config-space-divs">
         <div class="col-xxl-4 col-xl-12 mb-4">
@@ -8,7 +7,7 @@
                 <div class="card-body h-100 d-flex flex-column justify-content-center py-5 py-xl-4">
                     <div class="col-xl-8 col-xxl-12">
                         <div class="text-center text-xl-left text-xxl-center px-4 mb-4 mb-xl-0 mb-xxl-4">
-                            <h1 class="text-primary">Produtos <i class="fas fa-fw fal fa-barcode"> </i></h1>
+                            <h1 class="text-primary">Produtos <i class="fas fa-fw fal fa-qrcode"> </i></h1>
                             <p class="text-gray-700 mb-0">
                                 Lista de todos os produtos cadastrados!
                             </p>
@@ -35,9 +34,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-4">
+                            <div class="col-sm-12 col-md-4 ">
                                 {!! Form::open(['name' => 'form_name', 'route' => 'produtos']) !!}
-                                <div class="input-group mb-8">
+                                <div class="input-group mb-8 div-group-align">
                                     <input type="text" name="desc_filtro" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-padrao1-div_table" type="submit" name="search"
@@ -104,15 +103,6 @@
         </div>
     </div>
 
-    {{-- @if(!empty($export) )
-        <script>
-        $(function() {
-            $('#myModal').modal('show');
-        });
-        </script>
-    @endif --}}
-
-
     <div class="modal fade" id="excelModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -138,7 +128,6 @@
                         <select class="selectpicker form-control select_search" name="type_doc" id="type_doc" data-live-search="true" required>
                             <option value="1">Excel</option>
                             <option value="2">PDF</option>
-                            <option value="3">Visualizar</option>
                         </select>
                     </div>
                     <br>
@@ -241,6 +230,7 @@
     </div>
     </div>
     @include('sweetalert::alert')
+    @include('layouts.spinner')
 @stop
 @section('table-delete')
     "produtos"

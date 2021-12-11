@@ -1,10 +1,8 @@
 @extends('layouts.default')
 @include('sweetalert::alert')
-@include('layouts.spinner')
 @section('content')
 <link rel="stylesheet" type="text/css" href="../css/default-template.css">
   <div id="div_create">
-    @include('layouts.spinner')
     <div class="card">
       <div class="card-header" style="background: rgb(52, 58, 64)">
         <h3 style="color:rgb(255, 255, 255)"><strong>Cadastro de Pedido</strong></h3>
@@ -52,6 +50,7 @@
     </div>
   </div>
 </div>
+@include('layouts.spinner')
 @stop
 @section('js')
 	<script>
