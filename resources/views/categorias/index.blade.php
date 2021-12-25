@@ -38,11 +38,9 @@
 
                                         {!! Form::open(['name' => 'form_name', 'route' => 'categorias']) !!}
                                         <div class="input-group mb-3 div-group-align">
-                                            <input type="text" class="form-control-padrao1-div_table" name="desc_filtro"
-                                                aria-describedby="basic-addon2">
+                                            <input type="text" class="form-control-padrao1-div_table" name="desc_filtro" aria-describedby="basic-addon2">
                                             <div class="input-group-append">
-                                                <button class="btn btn-padrao1-div_table" type="submit" name="search" type="button"
-                                                    id="search-btn"><i class="fa fa-search"></i></button>
+                                                <button class="btn btn-padrao1-div_table" type="submit" name="search" type="button" id="search-btn"><i class="fa fa-search"></i></button>
                                             </div>
                                         </div>
                                         {!! Form::close() !!}

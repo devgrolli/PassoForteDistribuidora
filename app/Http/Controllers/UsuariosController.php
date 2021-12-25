@@ -18,10 +18,7 @@ class UsuariosController extends Controller{
         if ($filtragem == null)
             $usuarios = User::orderBy('name')->paginate(10);
         else
-            $usuarios = User::where('name', 'like', '%'.$filtragem.'%')
-            ->orderBy("name")
-            ->paginate(5);
-     
+            $usuarios = User::where('name', 'like', '%'.$filtragem.'%')->orderBy("name")->paginate(5);
         return view('usuarios.index', ['usuarios'=>$usuarios]);
     }
 

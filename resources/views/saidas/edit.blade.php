@@ -62,7 +62,7 @@
               {!! Form::label('cliente_id', 'Cliente') !!}
               {!! Form::select('cliente_id', \App\Cliente::orderBy('nome')->pluck('nome', 'id')->toArray(), $saida->cliente_id, ['class'=>'form-control select_search', 'required']) !!}
             </div>
-          </div>
+          </div><br>
 
           <div class="form-group">
             {!! Form::label('observacoes', 'Observações') !!}

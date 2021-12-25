@@ -40,7 +40,7 @@
                             </span>
                         @enderror
                         
-                        <div class="flex-sb-m w-full p-t-3 p-b-24">    
+                        {{-- <div class="flex-sb-m w-full p-t-3 p-b-24">    
                             @if (Route::has('password.request'))
                                 <div>
                                     <a class="txt1" href="{{ route('password.request') }}">
@@ -48,7 +48,7 @@
                                     </a>
                                 </div>
                             @endif
-                        </div>
+                        </div> --}}
     
                         <div class="container-login100-form-btn m-t-17">
                             <button id="btn-logar" class="login100-form-btn" type="submit"> {{ __('Entrar') }}</button>

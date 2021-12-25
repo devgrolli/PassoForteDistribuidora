@@ -36,14 +36,14 @@
                             </div>
                             <div class="col-sm-12 col-md-4 ">
                                 {!! Form::open(['name' => 'form_name', 'route' => 'produtos']) !!}
-                                <div class="input-group mb-8 div-group-align">
-                                    <input type="text" name="desc_filtro" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-padrao1-div_table" type="submit" name="search"
-                                            type="button" id="search-btn"><i class="fa fa-search"></i>
-                                        </button>
+                                    <div class="input-group mb-8 div-group-align">
+                                        <input type="text" name="desc_filtro" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-padrao1-div_table" type="submit" name="search"
+                                                type="button" id="search-btn"><i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
                                 {!! Form::close() !!}
                             </div>
                         </div>
@@ -56,6 +56,7 @@
                                 <th>Unidade</th>
                                 <th>Marca</th>
                                 <th>Categoria</th>
+                                <th>Data do cadastro</th>
                                 </th>
                                 <td></td>
                             </thead>
@@ -68,6 +69,7 @@
                                         <td>{{ $produto->unidade }}</td>
                                         <td>{{ $produto->marca }}</td>
                                         <td>{{ $produto->categorias->nome }}</td>
+                                        <td>{{ Carbon\Carbon::parse($produto->created_at)->format('d/m/Y') }}</td>
                                         <td>
                                             <button data-toggle="modal" data-target='#editModal' onclick="editarModal('{{ $produto->id }}');"
                                                 class="btn btn-padrao1-icons edit-tipo">

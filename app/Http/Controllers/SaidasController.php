@@ -43,11 +43,11 @@ class SaidasController extends Controller{
             return redirect()->back()->withInput();
 
         }else if ($request->quantidade == 0){
-            Alert::error('Quantidade zerada', 'Saída não realizada devido a quantidade estar zerada')->persistent('Close');
+            Alert::error('Quantidade zerada', 'Não é possível realizar saída de produto do estoque com a quantidade igual a zero')->persistent('Close');
             return redirect()->back()->withInput();
 
         }else if ((floatval($request->preco_un) >= floatval($request->preco_saida)) && (mb_strtoupper($nome_tipo_saida->nome, 'UTF-8') == 'VENDA')){
-            Alert::error('Valor Saída maior que de Entrada', "Insira um outro tipo de saída ou um valor maior/igual que o valor de entrada para o produto com essa validade $request->validade_produto")->persistent('Close');
+            Alert::error('Preço Saída é menor que Preço Entrada para tipo "Venda"', "Insira outro tipo de saída ou valor maior/igual que o preço entrada para o produto com essa validade $request->validade_produto")->persistent('Close');
             return redirect()->back()->withInput();
 
         }else{

@@ -22,18 +22,25 @@
                 <div class="datatable">
                     <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                         <div class="row">
-                            <div class="btn-group mr-2">               
+                            <div class="btn-group mr-2"> 
+                                              
                                 <div class="form-group col-12">
-                                    <div class="btn-group" role="group" aria-label="Exemplo básico">
+                                    <div class="dataTables_length">
+                                        <a href="{{ route('pedidos.create', []) }}" class="btn btn-padrao1-div_table">Cadastrar
+                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
+
+                                    {{-- <div class="btn-group" role="group" aria-label="Exemplo básico">
                                         <a href="{{ route('pedidos.create', []) }}" class="btn btn-padrao1-div_table">Cadastrar
                                             <i class="fa fa-plus" aria-hidden="true"></i></a><br></br>
                                         <button type="button" class="btn btn-padrao2-div_table" data-toggle="modal" data-target="#excelModal">
                                             Exportar <i class="fas fa-file-export"></i>
                                         </button>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
-                            <div class="col-sm-12 col-md-4">
+                            {{-- <div class="col-sm-12 col-md-4">
                                 {!! Form::open(['name' => 'form_name', 'route' => 'produtos']) !!}
                                 <div class="input-group mb-8 div-group-align">
                                     <input type="text" name="desc_filtro" class="form-control-padrao1-div_table" aria-describedby="basic-addon2">
@@ -44,7 +51,7 @@
                                     </div>
                                 </div>
                                 {!! Form::close() !!}
-                            </div>
+                            </div> --}}
                         </div>
                         <br>
 

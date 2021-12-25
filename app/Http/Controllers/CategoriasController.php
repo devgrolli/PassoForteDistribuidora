@@ -7,9 +7,14 @@ use App\Categoria;
 use App\Http\Requests\CategoriaRequest;
 
 class CategoriasController extends Controller{
-    public function index(){
-        $categorias = Categoria::orderBy('nome')->paginate(5);
-        return view('categorias.index', ['categorias' => $categorias]);
+    public function index(Request $filtro){
+        $filtragem = $filtro->get('desc_filtro');
+        if ($filtragem == null){
+            $categorias = Categoria::orderBy('nome')->paginate(10);
+        }else{
+            $categorias = Categoria::where('nome', 'ilike', '%'.$filtragem.'%')->orderBy('nome')->paginate(5);
+        } 
+        return view('categorias.index', ['categorias'=>$categorias]);
     }
 
     public function create(){

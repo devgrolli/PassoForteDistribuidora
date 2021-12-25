@@ -10,8 +10,13 @@ use App\Http\Requests\FornecedorRequest;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class FornecedoresController extends Controller{
-    public function index(){
-        $fornecedores = Fornecedor::orderBy('razao_social')->paginate(5);
+    public function index(Request $filtro){
+        $filtragem = $filtro->get('desc_filtro');
+        if ($filtragem == null){
+            $fornecedores = Fornecedor::orderBy('razao_social')->paginate(10);
+        }else{
+            $fornecedores = Fornecedor::where('razao_social', 'ilike', '%'.$filtragem.'%')->orderBy('razao_social')->paginate(5);
+        } 
         return view('fornecedores.index', ['fornecedores' => $fornecedores]);
     }
 
